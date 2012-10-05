@@ -3,6 +3,8 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Site\AdminBundle\Entity\Articles
@@ -28,10 +30,10 @@ class Articles
      */
     private $categoryId;
 
-    /**
-     * @var string $resume
-     *
-     * @ORM\Column(name="resume", type="text", nullable=false)
+     /**
+    * @var string $resume
+     * @ORM\Column(name="resume", type="text", length=60, nullable=false, unique=true)
+     * @Assert\NotBlank(message = "Résumé ne doit pas être vide")
      */
     private $resume;
 
@@ -80,7 +82,7 @@ class Articles
     /**
      * @var string $special
      *
-     * @ORM\Column(name="notes", type="integer", length=200, nullable=false)
+     * @ORM\Column(name="notes", type="string", length=200, nullable=false)
      */
     private $notes;
 

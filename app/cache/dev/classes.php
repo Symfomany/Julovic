@@ -504,6 +504,102 @@ abstract class AbstractProxy
     }
 }
 }
+
+namespace
+{
+
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/**
+ * SessionHandlerInterface
+ *
+ * Provides forward compatibility with PHP 5.4
+ *
+ * Extensive documentation can be found at php.net, see links:
+ *
+ * @see http://php.net/sessionhandlerinterface
+ * @see http://php.net/session.customhandler
+ * @see http://php.net/session-set-save-handler
+ *
+ * @author Drak <drak@zikula.org>
+ */
+interface SessionHandlerInterface
+{
+    /**
+     * Open session.
+     *
+     * @see http://php.net/sessionhandlerinterface.open
+     *
+     * @param string $savePath    Save path.
+     * @param string $sessionName Session Name.
+     *
+     * @throws \RuntimeException If something goes wrong starting the session.
+     *
+     * @return boolean
+     */
+    public function open($savePath, $sessionName);
+    /**
+     * Close session.
+     *
+     * @see http://php.net/sessionhandlerinterface.close
+     *
+     * @return boolean
+     */
+    public function close();
+    /**
+     * Read session.
+     *
+     * @see http://php.net/sessionhandlerinterface.read
+     *
+     * @throws \RuntimeException On fatal error but not "record not found".
+     *
+     * @return string String as stored in persistent storage or empty string in all other cases.
+     */
+    public function read($sessionId);
+    /**
+     * Commit session to storage.
+     *
+     * @see http://php.net/sessionhandlerinterface.write
+     *
+     * @param string $sessionId Session ID.
+     * @param string $data      Session serialized data to save.
+     *
+     * @return boolean
+     */
+    public function write($sessionId, $data);
+    /**
+     * Destroys this session.
+     *
+     * @see http://php.net/sessionhandlerinterface.destroy
+     *
+     * @param string $sessionId Session ID.
+     *
+     * @throws \RuntimeException On fatal error.
+     *
+     * @return boolean
+     */
+    public function destroy($sessionId);
+    /**
+     * Garbage collection for storage.
+     *
+     * @see http://php.net/sessionhandlerinterface.gc
+     *
+     * @param integer $lifetime Max lifetime in seconds to keep sessions stored.
+     *
+     * @throws \RuntimeException On fatal error.
+     *
+     * @return boolean
+     */
+    public function gc($lifetime);
+}
+
+}
  
 
 
@@ -3185,7 +3281,7 @@ class Request
     
     public function getSchemeAndHttpHost()
     {
-        return $this->getScheme().'://'.$this->getHttpHost();
+        return $this->getScheme().'://'.(('' != $auth = $this->getUserInfo()) ? $auth.'@' : '').$this->getHttpHost();
     }
 
     
@@ -3499,9 +3595,7 @@ class Request
     {
         $requestUri = '';
 
-        if ($this->headers->has('X_ORIGINAL_URL') && false !== stripos(PHP_OS, 'WIN')) {
-                        $requestUri = $this->headers->get('X_ORIGINAL_URL');
-        } elseif ($this->headers->has('X_REWRITE_URL') && false !== stripos(PHP_OS, 'WIN')) {
+        if ($this->headers->has('X_REWRITE_URL') && false !== stripos(PHP_OS, 'WIN')) {
                         $requestUri = $this->headers->get('X_REWRITE_URL');
         } elseif ($this->server->get('IIS_WasUrlRewritten') == '1' && $this->server->get('UNENCODED_URL') != '') {
                         $requestUri = $this->server->get('UNENCODED_URL');
@@ -3990,7 +4084,7 @@ class Response
     
     public function getDate()
     {
-        return $this->headers->getDate('Date', new \DateTime());
+        return $this->headers->getDate('Date');
     }
 
     
@@ -6458,7 +6552,7 @@ namespace
  */
 class Twig_Environment
 {
-    const VERSION = '1.10.1-DEV';
+    const VERSION = '1.9.2';
     protected $charset;
     protected $loader;
     protected $debug;
@@ -9463,7 +9557,7 @@ class LineFormatter extends NormalizerFormatter
             return json_encode($this->normalize($data), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
 
-        return str_replace('\\/', '/', json_encode($this->normalize($data)));
+        return stripslashes(json_encode($this->normalize($data)));
     }
 }
 }
@@ -10391,8 +10485,7 @@ class ControllerResolver extends BaseControllerResolver
             throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
         }
 
-        $injector = $this->createInjector($class);
-        $controller = call_user_func($injector, $this->container);
+        $controller = call_user_func($this->createInjector($class), $this->container);
 
         if ($controller instanceof ContainerAwareInterface) {
             $controller->setContainer($this->container);
@@ -10411,11 +10504,6 @@ class ControllerResolver extends BaseControllerResolver
             if (null === $metadata) {
                 $metadata = new ClassHierarchyMetadata();
                 $metadata->addClassMetadata(new ClassMetadata($class));
-            }
-
-                                                if (null !== $metadata->getOutsideClassMetadata()->id
-                    && 0 !== strpos($metadata->getOutsideClassMetadata()->id, '_jms_di_extra.unnamed.service')) {
-                return;
             }
 
             $this->prepareContainer($cache, $filename, $metadata, $class);

@@ -14,6 +14,7 @@ class ArticlesType extends AbstractType
             ->add('categoryId')
             ->add('resume')
             ->add('content')
+            ->add('notes')
             ->add('active');
         
     }

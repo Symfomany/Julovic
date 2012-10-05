@@ -7,9 +7,33 @@
 
 <h1>Articles edit</h1>
 
-<form action="{{ path('articles_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
+<form novalidate="novalidate" action="{{ path('articles_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+                
+                {{ form_errors(edit_form) }}
+    
+                {{ form_label(edit_form.categoryId) }}
+                {{ form_errors(edit_form.categoryId) }}
+                {{ form_widget(edit_form.categoryId) }}
+                
+                {{ form_label(edit_form.resume) }}
+                {{ form_errors(edit_form.resume) }}
+                {{ form_widget(edit_form.resume) }}
+                
+                {{ form_label(edit_form.content) }}
+                {{ form_errors(edit_form.content) }}
+                {{ form_widget(edit_form.content) }}
+                
+                {{ form_label(edit_form.notes) }}
+                {{ form_errors(edit_form.notes) }}
+                {{ form_widget(edit_form.notes, { 'attr': {'class': 'knobed'}}) }}
+                
+                {{ form_label(edit_form.active) }}
+                {{ form_errors(edit_form.active) }}
+                {{ form_widget(edit_form.active) }}  
+                
+                {{ form_rest(edit_form) }}
+                
+                <p>
         <button type="submit">Edit</button>
     </p>
 </form>

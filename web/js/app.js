@@ -37,20 +37,20 @@ $(function() {
     $("input:checkbox, input:radio, input:file").uniform();
                 
     $("#site_adminbundle_articlestype_special, .multipleselect, #site_adminbundle_articlestype_tag").select2();
-                
-    var select = $( "#site_adminbundle_articlestype_notes, .slider" );
-    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-        min: 1,
-        max: 5,
-        range: "min",
-        value: select[ 0 ].selectedIndex + 1,
-        slide: function( event, ui ) {
-            select[ 0 ].selectedIndex = ui.value - 1;
-        }
-    });
-    $( "#site_adminbundle_articlestype_notes, .slider" ).change(function() {
-        slider.slider( "value", this.selectedIndex + 1 );
-    });
+//                
+//    var select = $( ".slider" );
+//    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
+//        min: 1,
+//        max: 5,
+//        range: "min",
+//        value: select[ 0 ].selectedIndex + 1,
+//        slide: function( event, ui ) {
+//            select[ 0 ].selectedIndex = ui.value - 1;
+//        }
+//    });
+//    $( ".slider" ).change(function() {
+//        slider.slider( "value", this.selectedIndex + 1 );
+//    });
                 
     o = jQuery("#overscroll, .scrollbox").overscroll({
         wheelDirection :'vertical',
@@ -131,7 +131,7 @@ $(function() {
             progress: '#timer1'
         },
         prev: '#prev1',
-        next: '#next1',
+        next: '#next1'
     });
         
         
