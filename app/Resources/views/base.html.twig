@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Le styles -->
+                <link href="/css/reset.css" rel="stylesheet">
+                <link href="/css/bootstrap.css" rel="stylesheet">
+                <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+                <link href="/css/docs.css" rel="stylesheet">
+                <link href="/css/prettify.css" rel="stylesheet">
+                <link href="/css/main.css" rel="stylesheet">
+                <link href="/css/jHtmlArea.css" rel="stylesheet">
+                <link href="/css/dot-luv/jquery-ui-1.8.24.custom.css" rel="stylesheet">
+                <link href="/css/jquery.fancybox.css" rel="stylesheet">
+                <link href="/css/uniform.default.css" rel="stylesheet">
+                <link href="/css/select2.css" rel="stylesheet">
+                <link href="/css/fullcalendar.css" rel="stylesheet">
+                <link href="/css/tipsy.css" rel="stylesheet">
+       {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+            
+        {% block javascripts %}
+               <!-- Le javascript
+                    ================================================== -->
+                    <!-- Placed at the end of the document so the pages load faster -->
+                    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
+                    <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
+                    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+                    <script src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
+                    <script src="/js/jquery.easing.js"></script>
+                    <script src="/js/jquery.fancybox.pack.js"></script>
+                    <script src="/js/jquery-ui-1.8.24.custom.min.js"></script>
+                    <script src="/js/jhtml.js"></script>
+                    <script src="/js/jquery.uniform.min.js"></script>
+                    <script src="/js/select2.min.js"></script>
+                    <script src="/js/jquery.overscroll.min.js"></script>
+                    <script src="/js/modernizr.js"></script>
+                    <script src="/js/fullcalendar.min.js"></script>
+                    <script src="/js/jquery.tipsy.js"></script>
+                    <script src="/js/jquery.knob.js"></script>
+                    <script src="/js/jquery.carouFredSel.js"></script>
+                    <script src="/js/jquery.timer.js"></script>
+                    <script src="/js/jquery.scrollTo.js"></script>
+                  <!--[if lt IE 9]>
+                     <script type="text/javascript" src="/js/excanvas.js"></script>
+                 <![endif]-->
+                    
+                    
+                    
+<!--[if IE]>
+    <script type="text/javascript">
+    // <![CDATA[
+        $(document).ready(function(){
+        if(!Modernizr.input.placeholder){
+                $("input").each(
+                function(){
+                if($(this).val()=="" && $(this).attr("placeholder")!=""){
+                $(this).val($(this).attr("placeholder"));
+                $(this).focus(function(){
+                if($(this).val()==$(this).attr("placeholder")) $(this).val("");
+                });
+                $(this).blur(function(){
+                if($(this).val()=="") $(this).val($(this).attr("placeholder"));
+                });
+                }
+                });
+            }
+        });
+    // ]]>
+    </script>
+<![endif]-->
+       
+    </script>
+{% endblock %}
+    </body>
+</html>

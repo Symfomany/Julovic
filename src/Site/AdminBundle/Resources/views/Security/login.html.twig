@@ -1,0 +1,25 @@
+ {% extends 'SiteAdminBundle::layoutoff.html.twig' %}
+
+ {% block title %}Connexion Pro{% endblock %}
+ {% block body %}
+        {{ parent() }}
+        <div class="span9">
+            <div class="hero-unit">
+                        <h3>Connectez-vous </h3>
+                                {% if error %}
+                                            <div class="alert alert-block alert-error fade in"> 
+                                                    <span class="close"></span>
+                                                    {{ error.message|trans({}, 'AdminBundle') }} 
+                                            </div>      
+                                {% endif %}
+                            <legend>Formulaire de Login</legend>
+                                <form  action="{{ path('login_check') }}" method="post">
+                                    <label for="login">Login: </label><input required="required" id="login"  type="text" name="_username" value="{{ last_username }}" {% if last_username is empty %}placeholder="E-mail" {% endif %}>
+                                    <label for="mdp">Password: </label><input id="mdp" required="required" type="password" placeholder="Password" name="_password">
+                                        <label id="entrer" class="active"><input type="checkbox" name="_remember_me" checked="checked">Entrer directement la prochaine fois</label>
+                                        <input type="submit" name="login" value="Connexion" class="btn btn-primary btn-large">
+                                        </form>
+                            </fieldset>
+                        </div>
+                        </div>
+    {% endblock %}

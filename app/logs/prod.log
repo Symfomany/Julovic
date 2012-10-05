@@ -1,0 +1,2 @@
+[2012-10-02 20:26:14] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /" (uncaught exception) at C:\wamp\www\bo\vendor\symfony\symfony\src\Symfony\Component\HttpKernel\EventListener\RouterListener.php line 92 [] []
+[2012-10-03 19:11:43] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /" (uncaught exception) at C:\wamp\www\bo\app\cache\prod\classes.php line 5062 [] []

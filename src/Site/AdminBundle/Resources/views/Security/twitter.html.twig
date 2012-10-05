@@ -1,0 +1,510 @@
+{% extends 'SiteProBundle::layout.html.twig' %}
+
+ {% block body %}
+{% block content %}
+{{ parent() }}
+
+<ul class="breadcrumbs breadcrumb"><li><a href="/yii-bootstrap/">Home</a><span class="divider">/</span></li><li><a href="#">Library</a><span class="divider">/</span></li><li class="active">Data</li></ul>
+
+<div id="yw0">
+    <div class="alert alert-block alert-success fade in"><a class="close" data-dismiss="alert">×</a><strong>Well done!</strong> You successfully read this important alert message.</div>
+    <div class="alert alert-block alert-info fade in"><a class="close" data-dismiss="alert">×</a><strong>Heads up!</strong> This alert needs your attention, but it's not super important.</div>
+    <div class="alert alert-block alert-warning fade in"><a class="close" data-dismiss="alert">×</a><strong>Warning!</strong> Best check yo self, you're not looking too good.</div>
+    <div class="alert alert-block alert-error fade in"><a class="close" data-dismiss="alert">×</a><strong>Oh snap!</strong> Change a few things up and try submitting again.</div>
+</div>
+
+<div class="clear"></div>
+<h3>Test Bootsrap</h3>
+<div class="well" style="">
+    <h1>h1. Heading 1</h1>
+    <h2>h2. Heading 2</h2>
+    <h3>h3. Heading 3</h3>
+    <h4>h4. Heading 4</h4>
+    <h5>h5. Heading 5</h5>
+    <h6>h6. Heading 6</h6>
+</div>
+<h3>Tableau</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Element</th>
+            <th>Usage</th>
+            <th>Optional</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <code>&lt;strong&gt;</code>
+            </td>
+            <td>
+                For emphasizing a snippet of text with <strong>important</strong>
+            </td>
+            <td>
+                <span class="muted">None</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>&lt;em&gt;</code>
+            </td>
+            <td>
+                For emphasizing a snippet of text with <em>stress</em>
+            </td>
+            <td>
+                <span class="muted">None</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>&lt;abbr&gt;</code>
+            </td>
+            <td>
+                Wraps abbreviations and acronyms to show the expanded version on hover
+            </td>
+            <td>
+                <p>Include optional <code>title</code> attribute for expanded text</p>
+                Use <code>.initialism</code> class for uppercase abbreviations.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>&lt;address&gt;</code>
+            </td>
+            <td>
+                For contact information for its nearest ancestor or the entire body of work
+            </td>
+            <td>
+                Preserve formatting by ending all lines with <code>&lt;br&gt;</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="clear"></div>
+<h3>Help</h3>
+<p>
+    <span class="label label-info">Heads up!</span>
+    Horizontal description lists will truncate terms that are too long to fit in the left column fix <code>text-overflow</code>. In narrower viewports, they will change to the default stacked layout.
+</p>
+<h3>Block quote</h3>
+<pre>&lt;p&gt;Sample text here...&lt;/p&gt;</pre>
+<h3>Form</h3>
+<form class="well form-search">
+    <input type="text" class="input-medium search-query">
+    <button type="submit" class="btn">Search</button>
+</form>
+<button type="submit" class="btn">Submit</button>
+<button type="submit" class="btn">Search</button>
+<button type="submit" class="btn btn-primary">Save changes</button>
+<button class="btn btn-info" href="#">Info</button>
+<button class="btn btn-success" href="#">Success</button>
+<button class="btn btn-inverse" href="#">Inverse</button>
+<button class="btn btn-mini btn-primary">Primary action</button>
+<button class="btn btn-mini">Action</button>
+<button class="btn">Cancel</button>
+<p>
+        <a href="#" class="btn btn-large btn-primary disabled">Primary link</a>
+        <a href="#" class="btn btn-large disabled">Link</a>
+      </p>
+<div class="input-prepend">
+    <span class="add-on">@</span><input class="span2" id="prependedInput" size="16" type="text">
+</div>
+<div class="input-append">
+    <input class="span2" id="appendedInputButton" size="16" type="text"><button class="btn" type="button">Go!</button>
+</div>
+      <div class="row">
+    <div class="span3">
+      <ul class="the-icons">
+        <li><i class="icon-glass"></i> icon-glass</li>
+        <li><i class="icon-music"></i> icon-music</li>
+        <li><i class="icon-search"></i> icon-search</li>
+        <li><i class="icon-envelope"></i> icon-envelope</li>
+        <li><i class="icon-heart"></i> icon-heart</li>
+        <li><i class="icon-star"></i> icon-star</li>
+        <li><i class="icon-star-empty"></i> icon-star-empty</li>
+        <li><i class="icon-user"></i> icon-user</li>
+        <li><i class="icon-film"></i> icon-film</li>
+        <li><i class="icon-th-large"></i> icon-th-large</li>
+        <li><i class="icon-th"></i> icon-th</li>
+        <li><i class="icon-th-list"></i> icon-th-list</li>
+        <li><i class="icon-ok"></i> icon-ok</li>
+        <li><i class="icon-remove"></i> icon-remove</li>
+        <li><i class="icon-zoom-in"></i> icon-zoom-in</li>
+        <li><i class="icon-zoom-out"></i> icon-zoom-out</li>
+        <li><i class="icon-off"></i> icon-off</li>
+        <li><i class="icon-signal"></i> icon-signal</li>
+        <li><i class="icon-cog"></i> icon-cog</li>
+        <li><i class="icon-trash"></i> icon-trash</li>
+        <li><i class="icon-home"></i> icon-home</li>
+        <li><i class="icon-file"></i> icon-file</li>
+        <li><i class="icon-time"></i> icon-time</li>
+        <li><i class="icon-road"></i> icon-road</li>
+        <li><i class="icon-download-alt"></i> icon-download-alt</li>
+        <li><i class="icon-download"></i> icon-download</li>
+        <li><i class="icon-upload"></i> icon-upload</li>
+        <li><i class="icon-inbox"></i> icon-inbox</li>
+        <li><i class="icon-play-circle"></i> icon-play-circle</li>
+        <li><i class="icon-repeat"></i> icon-repeat</li>
+        <li><i class="icon-refresh"></i> icon-refresh</li>
+        <li><i class="icon-list-alt"></i> icon-list-alt</li>
+        <li><i class="icon-lock"></i> icon-lock</li>
+        <li><i class="icon-flag"></i> icon-flag</li>
+        <li><i class="icon-headphones"></i> icon-headphones</li>
+      </ul>
+    </div>
+    <div class="span3">
+      <ul class="the-icons">
+        <li><i class="icon-volume-off"></i> icon-volume-off</li>
+        <li><i class="icon-volume-down"></i> icon-volume-down</li>
+        <li><i class="icon-volume-up"></i> icon-volume-up</li>
+        <li><i class="icon-qrcode"></i> icon-qrcode</li>
+        <li><i class="icon-barcode"></i> icon-barcode</li>
+        <li><i class="icon-tag"></i> icon-tag</li>
+        <li><i class="icon-tags"></i> icon-tags</li>
+        <li><i class="icon-book"></i> icon-book</li>
+        <li><i class="icon-bookmark"></i> icon-bookmark</li>
+        <li><i class="icon-print"></i> icon-print</li>
+        <li><i class="icon-camera"></i> icon-camera</li>
+        <li><i class="icon-font"></i> icon-font</li>
+        <li><i class="icon-bold"></i> icon-bold</li>
+        <li><i class="icon-italic"></i> icon-italic</li>
+        <li><i class="icon-text-height"></i> icon-text-height</li>
+        <li><i class="icon-text-width"></i> icon-text-width</li>
+        <li><i class="icon-align-left"></i> icon-align-left</li>
+        <li><i class="icon-align-center"></i> icon-align-center</li>
+        <li><i class="icon-align-right"></i> icon-align-right</li>
+        <li><i class="icon-align-justify"></i> icon-align-justify</li>
+        <li><i class="icon-list"></i> icon-list</li>
+        <li><i class="icon-indent-left"></i> icon-indent-left</li>
+        <li><i class="icon-indent-right"></i> icon-indent-right</li>
+        <li><i class="icon-facetime-video"></i> icon-facetime-video</li>
+        <li><i class="icon-picture"></i> icon-picture</li>
+        <li><i class="icon-pencil"></i> icon-pencil</li>
+        <li><i class="icon-map-marker"></i> icon-map-marker</li>
+        <li><i class="icon-adjust"></i> icon-adjust</li>
+        <li><i class="icon-tint"></i> icon-tint</li>
+        <li><i class="icon-edit"></i> icon-edit</li>
+        <li><i class="icon-share"></i> icon-share</li>
+        <li><i class="icon-check"></i> icon-check</li>
+        <li><i class="icon-move"></i> icon-move</li>
+        <li><i class="icon-step-backward"></i> icon-step-backward</li>
+        <li><i class="icon-fast-backward"></i> icon-fast-backward</li>
+      </ul>
+    </div>
+    <div class="span3">
+      <ul class="the-icons">
+        <li><i class="icon-backward"></i> icon-backward</li>
+        <li><i class="icon-play"></i> icon-play</li>
+        <li><i class="icon-pause"></i> icon-pause</li>
+        <li><i class="icon-stop"></i> icon-stop</li>
+        <li><i class="icon-forward"></i> icon-forward</li>
+        <li><i class="icon-fast-forward"></i> icon-fast-forward</li>
+        <li><i class="icon-step-forward"></i> icon-step-forward</li>
+        <li><i class="icon-eject"></i> icon-eject</li>
+        <li><i class="icon-chevron-left"></i> icon-chevron-left</li>
+        <li><i class="icon-chevron-right"></i> icon-chevron-right</li>
+        <li><i class="icon-plus-sign"></i> icon-plus-sign</li>
+        <li><i class="icon-minus-sign"></i> icon-minus-sign</li>
+        <li><i class="icon-remove-sign"></i> icon-remove-sign</li>
+        <li><i class="icon-ok-sign"></i> icon-ok-sign</li>
+        <li><i class="icon-question-sign"></i> icon-question-sign</li>
+        <li><i class="icon-info-sign"></i> icon-info-sign</li>
+        <li><i class="icon-screenshot"></i> icon-screenshot</li>
+        <li><i class="icon-remove-circle"></i> icon-remove-circle</li>
+        <li><i class="icon-ok-circle"></i> icon-ok-circle</li>
+        <li><i class="icon-ban-circle"></i> icon-ban-circle</li>
+        <li><i class="icon-arrow-left"></i> icon-arrow-left</li>
+        <li><i class="icon-arrow-right"></i> icon-arrow-right</li>
+        <li><i class="icon-arrow-up"></i> icon-arrow-up</li>
+        <li><i class="icon-arrow-down"></i> icon-arrow-down</li>
+        <li><i class="icon-share-alt"></i> icon-share-alt</li>
+        <li><i class="icon-resize-full"></i> icon-resize-full</li>
+        <li><i class="icon-resize-small"></i> icon-resize-small</li>
+        <li><i class="icon-plus"></i> icon-plus</li>
+        <li><i class="icon-minus"></i> icon-minus</li>
+        <li><i class="icon-asterisk"></i> icon-asterisk</li>
+        <li><i class="icon-exclamation-sign"></i> icon-exclamation-sign</li>
+        <li><i class="icon-gift"></i> icon-gift</li>
+        <li><i class="icon-leaf"></i> icon-leaf</li>
+        <li><i class="icon-fire"></i> icon-fire</li>
+        <li><i class="icon-eye-open"></i> icon-eye-open</li>
+      </ul>
+    </div>
+    <div class="span3">
+      <ul class="the-icons">
+        <li><i class="icon-eye-close"></i> icon-eye-close</li>
+        <li><i class="icon-warning-sign"></i> icon-warning-sign</li>
+        <li><i class="icon-plane"></i> icon-plane</li>
+        <li><i class="icon-calendar"></i> icon-calendar</li>
+        <li><i class="icon-random"></i> icon-random</li>
+        <li><i class="icon-comment"></i> icon-comment</li>
+        <li><i class="icon-magnet"></i> icon-magnet</li>
+        <li><i class="icon-chevron-up"></i> icon-chevron-up</li>
+        <li><i class="icon-chevron-down"></i> icon-chevron-down</li>
+        <li><i class="icon-retweet"></i> icon-retweet</li>
+        <li><i class="icon-shopping-cart"></i> icon-shopping-cart</li>
+        <li><i class="icon-folder-close"></i> icon-folder-close</li>
+        <li><i class="icon-folder-open"></i> icon-folder-open</li>
+        <li><i class="icon-resize-vertical"></i> icon-resize-vertical</li>
+        <li><i class="icon-resize-horizontal"></i> icon-resize-horizontal</li>
+        <li><i class="icon-hdd"></i> icon-hdd</li>
+        <li><i class="icon-bullhorn"></i> icon-bullhorn</li>
+        <li><i class="icon-bell"></i> icon-bell</li>
+        <li><i class="icon-certificate"></i> icon-certificate</li>
+        <li><i class="icon-thumbs-up"></i> icon-thumbs-up</li>
+        <li><i class="icon-thumbs-down"></i> icon-thumbs-down</li>
+        <li><i class="icon-hand-right"></i> icon-hand-right</li>
+        <li><i class="icon-hand-left"></i> icon-hand-left</li>
+        <li><i class="icon-hand-up"></i> icon-hand-up</li>
+        <li><i class="icon-hand-down"></i> icon-hand-down</li>
+        <li><i class="icon-circle-arrow-right"></i> icon-circle-arrow-right</li>
+        <li><i class="icon-circle-arrow-left"></i> icon-circle-arrow-left</li>
+        <li><i class="icon-circle-arrow-up"></i> icon-circle-arrow-up</li>
+        <li><i class="icon-circle-arrow-down"></i> icon-circle-arrow-down</li>
+        <li><i class="icon-globe"></i> icon-globe</li>
+        <li><i class="icon-wrench"></i> icon-wrench</li>
+        <li><i class="icon-tasks"></i> icon-tasks</li>
+        <li><i class="icon-filter"></i> icon-filter</li>
+        <li><i class="icon-briefcase"></i> icon-briefcase</li>
+        <li><i class="icon-fullscreen"></i> icon-fullscreen</li>
+      </ul>
+    </div>
+  </div>
+      <div class="span4">
+      <div class="btn-toolbar" style="margin-bottom: 9px">
+        <div class="btn-group">
+          <a class="btn" href="#"><i class="icon-align-left"></i></a>
+          <a class="btn" href="#"><i class="icon-align-center"></i></a>
+          <a class="btn" href="#"><i class="icon-align-right"></i></a>
+          <a class="btn" href="#"><i class="icon-align-justify"></i></a>
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+            <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+            <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><i class="i"></i> Make admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>
+        <a class="btn" href="#"><i class="icon-refresh"></i> Refresh</a>
+        <a class="btn btn-success" href="#"><i class="icon-shopping-cart icon-white"></i> Checkout</a>
+        <a class="btn btn-danger" href="#"><i class="icon-trash icon-white"></i> Delete</a>
+      </p>
+      <p>
+        <a class="btn btn-large" href="#"><i class="icon-comment"></i> Comment</a>
+        <a class="btn btn-small" href="#"><i class="icon-cog"></i> Settings</a>
+        <a class="btn btn-small btn-info" href="#"><i class="icon-info-sign icon-white"></i> More Info</a>
+      </p>
+    </div>
+      <div class="span4">
+      <div class="well" style="padding: 8px 0;">
+        <ul class="nav nav-list">
+          <li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
+          <li><a href="#"><i class="icon-book"></i> Library</a></li>
+          <li><a href="#"><i class="icon-pencil"></i> Applications</a></li>
+          <li><a href="#"><i class="i"></i> Misc</a></li>
+        </ul>
+      </div> <!-- /well -->
+    </div>
+      <div class="input-prepend">
+              <span class="add-on"><i class="icon-envelope"></i></span><input class="span2" id="inputIcon" type="text">
+            </div>
+      <div class="btn-group" style="margin: 9px 0;">
+          <button class="btn">Left</button>
+          <button class="btn">Middle</button>
+          <button class="btn">Right</button>
+        </div>
+      <button class="btn btn-primary" data-toggle="button">Single Toggle</button>
+      <button id="fat-btn" data-loading-text="loading..." class="btn btn-primary">
+                    Loading State
+    </button>
+      <div class="btn-group" data-toggle="buttons-checkbox">
+                    <button class="btn btn-primary active">Left</button>
+                    <button class="btn btn-primary">Middle</button>
+                    <button class="btn btn-primary active">Right</button>
+    </div>
+    <div class="btn-group" data-toggle="buttons-radio">
+            <button class="btn btn-primary">Left</button>
+            <button class="btn btn-primary">Middle</button>
+            <button class="btn btn-primary active">Right</button>
+    </div>  
+      <div class="alert alert-info">
+            <strong>Heads up!</strong>
+            You can enable auto toggling of a button by using the <code>data-toggle</code> attribute.
+        </div>
+      <a href="#" class="btn btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">hover for popover</a>
+      <div class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+          </div>
+      
+      <div class="alert alert-block alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4 class="alert-heading">Oh snap! You got an error!</h4>
+            <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+            <p>
+              <a class="btn btn-danger" href="#">Take this action</a> <a class="btn" href="#">Or do this</a>
+            </p>
+          </div>
+      
+      <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  Collapsible Group Item #1
+                </a>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                  Collapsible Group Item #2
+                </a>
+              </div>
+              <div id="collapseTwo" class="accordion-body in collapse" style="height: auto; ">
+                <div class="accordion-inner">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                  Collapsible Group Item #3
+                </a>
+              </div>
+              <div id="collapseThree" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>First Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div class="item">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>Second Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div class="item">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>Third Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+          </div>
+      <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+<br />
+<br />
+<div class="navbar"><div class="navbar-inner"><div class="container"><a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a href="#" class="brand">Project name</a><div class="nav-collapse"><ul class="nav"><li class="active"><a href="#">Home</a></li><li class=""><a href="#">Link</a></li><li class=""><a href="#">Link</a></li><li class=""><a href="#">Link</a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <span class="caret"></span></a><ul class="dropdown-menu"><li class=""><a href="#">Action</a></li><li class=""><a href="#">Another action</a></li><li class=""><a href="#">Something else here</a></li><li class="divider"></li><li class="nav-header">NAV HEADER</li><li class=""><a href="#">Separated link</a></li><li class=""><a href="#">One more separated link</a></li></ul></li></ul><form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form><ul class="pull-right nav"><li class=""><a href="#">Link</a></li><li class="divider-vertical"></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <span class="caret"></span></a><ul class="dropdown-menu"><li class=""><a href="#">Action</a></li><li class=""><a href="#">Another action</a></li><li class=""><a href="#">Something else here</a></li><li class="divider"></li><li class=""><a href="#">Separated link</a></li></ul></li></ul></div></div></div></div>
+
+<div id="yw11" class="grid-view">
+<table class="items table table-striped table-bordered table-condensed">
+<thead>
+<tr>
+<th id="yw11_c0">#</th><th id="yw11_c1">First name</th><th id="yw11_c2">Last name</th><th id="yw11_c3">Language</th><th class="button-column" id="yw11_c4">&nbsp;</th></tr>
+<tr class="filters">
+<td><div class="filter-container"><input name="Person[id]" type="text"></div></td><td><div class="filter-container"><input name="Person[firstName]" type="text"></div></td><td><div class="filter-container"><input name="Person[lastName]" type="text"></div></td><td><div class="filter-container"><input name="Person[language]" type="text"></div></td><td>&nbsp;</td></tr>
+</thead>
+<tbody>
+<tr class="odd"><td style="width: 60px">1</td><td>Mark</td><td>Otto</td><td>CSS</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+<tr class="even"><td style="width: 60px">2</td><td>Jacob</td><td>Thornton</td><td>JavaScript</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+<tr class="odd"><td style="width: 60px">3</td><td>Stu</td><td>Dent</td><td>HTML</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+</tbody>
+</table><div class="keys" style="display:none" title="/yii-bootstrap/"><span>1</span><span>2</span><span>3</span></div>
+</div>
+
+
+<div id="yw9" class="grid-view">
+<table class="items table table-bordered">
+<thead>
+<tr>
+<th id="yw9_c0">#</th><th id="yw9_c1">First name</th><th id="yw9_c2">Last name</th><th id="yw9_c3">Language</th><th class="button-column" id="yw9_c4">&nbsp;</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td style="width: 60px">1</td><td>Mark</td><td>Otto</td><td>CSS</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+<tr class="even"><td style="width: 60px">2</td><td>Jacob</td><td>Thornton</td><td>JavaScript</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+<tr class="odd"><td style="width: 60px">3</td><td>Stu</td><td>Dent</td><td>HTML</td><td class="button-column"><a class="view" rel="tooltip" href="#" data-original-title="View"><i class="icon-eye-open"></i></a> <a class="update" rel="tooltip" href="#" data-original-title="Update"><i class="icon-pencil"></i></a> <a class="delete" rel="tooltip" href="#" data-original-title="Delete"><i class="icon-trash"></i></a></td></tr>
+</tbody>
+</table><div class="keys" style="display:none" title="/yii-bootstrap/"><span>1</span><span>2</span><span>3</span></div>
+</div>
+
+<div class="pagination"><ul class="" id="yw13"><li class="previous disabled"><a href="/yii-bootstrap/index.html">← Previous</a></li>
+<li class=" active"><a href="/yii-bootstrap/index.html">1</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=2">2</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=3">3</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=4">4</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=5">5</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=6">6</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=7">7</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=8">8</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=9">9</a></li>
+<li class=""><a href="/yii-bootstrap/index.html?page=10">10</a></li>
+<li class="next"><a href="/yii-bootstrap/index.html?page=2">Next →</a></li></ul></div>
+
+<p class="well">
+        Lorem ipsum dolor sit <a href="#" rel="tooltip" data-original-title="First tooltip">amet</a>,
+        consectetur adipiscing elit.
+        Fusce ut velit sem, id elementum elit. Quisque tincidunt magna in quam luctus a ultrices tellus luctus.
+        Pellentesque at tellus urna.
+        Ut congue, <a href="#" rel="tooltip" data-original-title="Another tooltip">nibh eu</a> interdum commodo,
+        ligula urna consequat tortor, at vehicula tellus est a orci.
+        Maecenas nec ligula sed ipsum posuere sollicitudin pretium ac sapien.
+        Sed odio dui, pretium eu pellentesque ac,
+        <a href="#" rel="tooltip" data-original-title="Yet another tooltip">tempor</a> sed sem.
+</p>
+
+<div class="well">
+    <a data-toggle="modal" class="btn btn-primary" href="#myModal">Click me</a>	</div>
+    <div class="well">
+    <a data-title="Heading" data-content="Content ..." rel="popover" class="btn btn-danger" data-original-title="">Hover me</a>	
+</div>
+
+<div class="alert alert-block alert-warning">
+		<strong>Note!</strong>
+		Because of a bug in the current version of Bootstrap tab-content fall below the tabs even when it shouldn't. This can be fixed by setting tab-content width to auto.
+	</div>
+
+<div class="subnav">
+    <ul class="nav nav-pills">
+      <li><a href="#global">Global styles</a></li>
+      <li><a href="#gridSystem">Grid system</a></li>
+      <li><a href="#fluidGridSystem">Fluid grid system</a></li>
+      <li><a href="#gridCustomization">Customizing</a></li>
+      <li><a href="#layouts">Layouts</a></li>
+      <li><a href="#responsive">Responsive design</a></li>
+    </ul>
+  </div>
+<br />
+<br />
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+       {% endblock %}

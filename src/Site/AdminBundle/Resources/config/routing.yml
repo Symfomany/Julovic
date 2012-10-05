@@ -1,0 +1,47 @@
+site_admin_homepage:
+    pattern:  /demo
+    defaults: { _controller: SiteAdminBundle:Default:index }
+
+login:
+  pattern: /login
+  defaults: { _controller: SiteAdminBundle:Security:login }
+
+login_check:
+  pattern: /login_check
+ 
+logout:
+  pattern: /logout  
+
+
+home:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Articles:index" }
+
+articles:
+    resource: "@SiteAdminBundle/Resources/config/routing/articles.yml"
+    prefix:   /articles
+    
+categories:
+    resource: "@SiteAdminBundle/Resources/config/routing/categories.yml"
+    prefix:   /categories
+    
+comments:
+    resource: "@SiteAdminBundle/Resources/config/routing/comments.yml"
+    prefix:   /comments
+    
+links:
+    resource: "@SiteAdminBundle/Resources/config/routing/links.yml"
+    prefix:   /links
+    
+medias:
+    resource: "@SiteAdminBundle/Resources/config/routing/medias.yml"
+    prefix:   /medias
+    
+tags:
+    resource: "@SiteAdminBundle/Resources/config/routing/tags.yml"
+    prefix:   /tags
+    
+users:
+    resource: "@SiteAdminBundle/Resources/config/routing/users.yml"
+    prefix:   /users
+    

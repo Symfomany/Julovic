@@ -1,0 +1,32 @@
+# Global strings
+layout:
+    logout: Déconnexion
+    login: Connexion
+    register: Enregistrer
+    logged_in_as: Connecté en tant que %username%
+
+security:
+    login:
+        username: "Nom d'utilisateur :"
+        password: "Mot de passe :"
+        remember_me: Se souvenir de moi
+        submit: Connexion    
+        The presented password is invalid. : Mot de passe invalide
+        Bad credentials: "Pseudo ou mot de passe incorect"
+        User account is locked. : "Votre compte n'est pas encore activé"
+        User account is disabled. : "Votre compte n'est pas encore activé"
+        User account has expired. : "Votre compte est exipré"
+        User credentials have expired. : "Vos droits ont expiré"
+
+#Custom generics files
+Bad credentials: Problème de droits
+Bad credentials: "Pseudo ou mot de passe incorect"
+Bad credentials: "Problème de droits"
+The presented password is invalid. : Le mot de pass est invalide
+User account is locked. : "Votre compte n'est pas encore activé"
+User account is disabled. : "Votre compte n'est pas encore activé"
+User account has expired. : "Votre compte est exipré"
+User credentials have expired. : "Vos droits ont expiré"
+'Bad credentials': 'Your translation'
+'The presented password is invalid.': 'Your translation'
+'The presented password cannot be empty.': 'Your translation'

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="index, follow, all" />
+        <meta name="Author" content="Extreme Sensio" />
+        <meta name="Language" content="en"/>
+        <meta name="Copyright" content="Sensio Labs" />
+        <meta name="Publisher" content="Sensio Labs" />
+        <meta name="Description" content="Symfony - Open-Source PHP web framework" />
+        <meta name="Keywords" content="symfony2, symfony, project, framework, php, php5, open-source, components, symphony, symfony framework, symfony tutorial" />
+        <link rel="search" type="application/opensearchdescription+xml" href="http://symfony.com/opensearch/documentation.xml" title="Symfony2 documentation" />
+        <link href="http://symfony.com/css/compiled/all.css?v=2" rel="stylesheet" type="text/css" media="all" />
+    </head>
+    <body>
+        <div id="content_wrapper" class="home">
+            <div id="sln"></div>
+            <div class="content">
+                <div>TODO LIST Of Symfony</div>
+                <pre class="php">
+                    <h1>Du FAT MEC!!!</h1>
+                    <h3>Zend est au service de Symfony2 pour nous simplifier la vie et c'est pour cela que l'on l'a autoloader</h3>
+                    Fonction Zend à Utiliser partout dans le Projet:
+                            <h4><i>Zend Date:</i></h4>
+                            <sub>Constantes: Zend_Date::DAY,Zend_Date::DAY_SHORT,Zend_Date::WEEKDAY,Zend_Date::DATE_LONG,Zend_Date::DATE_FULL,Zend_Date::WEEKDAY_NAME,Zend_Date::DAY_OF_YEAR...</sub>
+                            <ul>
+                                <li>get get(Zend_Date::HOUR) => get Hour</li>
+                                <li>compare(12, Zend_Date::HOUR), equals(14, Zend_Date::HOUR) => COMPARE ou EGALE HEURE</li>
+                            </ul>
+                            <p>Exemple concret:</p>
+                                $locale = new \Zend_Locale('fr_FR');
+                                \Zend_Date::setOptions(array('format_type' => 'php'));
+                                $date = new \Zend_Date(1234567890, false, $locale);
+                                // outputs something like 'February 16, 2007, 3:36 am'
+                                print $date->toString('F j, Y, g:i a');
+                                print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
+
+                                <h4><i>Zend Code Barre</i></h4>
+                                    <p>4 Params:
+                                    Le nom du format de code-barres (ex. "code39") (obligatoire)
+                                    Le nom du générateur de rendu (ex. "image") (obligatoire)
+                                    Les options de l'objet code-barres (un tableau ou un objet Zend_Config) (optionnel)
+                                    Les options du générateur de rendu (un tableau ou un objet Zend_Config) (optionnel)</p>
+                                    <h4>Traducteur Mesur : m. , km.</h4>
+                                    <p>
+                                            $mesure = 1234.7;
+                                            $unite = new Zend_Measure_Length((integer)$mesure,
+                                                                            Zend_Measure_Length::STANDARD);
+                                            echo $unite;
+                                            // affiche '1234 m' (mètres)
+                                            $unite = new Zend_Measure_Length($mesure, Zend_Measure_Length::STANDARD);
+                                            echo $unite; // affiche '1234.7 m' (mètres)
+                                            $unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+                                            $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+                                            $unite3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
+
+                                            print "Egalité : ".$unite2->compare($unite1);
+                                            // affiche "Egalité : 0"
+                                            print "Plus petit que : ".$unite2->compare($unite3);
+                                            // affiche "Plus petit que : -1"
+                                            print "Plus grand que : ".$unite3->compare($unite2);
+                                            // affiche "Plus grand que : 1"
+                                                
+                                            Type de Mesures: http://framework.zend.com/manual/fr/zend.measure.types.html
+                                    </p>
+                </pre>
+            </div>
+        </div>
+    </body>
+</html>
+

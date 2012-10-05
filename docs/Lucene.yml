@@ -1,0 +1,120 @@
+## YAML Template.
+
+Origine:
+    Zend_Search_Lucene est un portage de l’implémentation de référence en Java dans le langage PHP. 
+    Elle offre une compatibilité au niveau binaire avec les index crée avec Java.
+    Les valeurs de champs sont stockés optionnellement au sein de l’index. 
+    Ceci permet aux données originale du champ d’être récupérée pendant la recherche. 
+    C’est le seul moyen d’associer les résultats de recherche avec les données originales.
+    Il faut avoir à l’esprit que l’identifiant interne peut être modifié au cours d’une phase d’optimisation, cette variable ne peut donc servir à retrouver un enregistrement.
+
+Usage en web:
+    Ainsi, il n’est pas rare de voir dans les sites Web modernes un système d’indexation et une base de données, 
+    le système d’indexation permettra de faire les recherches, la base de données sera utilisé comme stockage de masse.
+    
+Indexage:
+  La taille de l’index influt sur les performances.
+  Il convient donc de mettre seulement les informations qui sont utiles pour les recherches, les autres pourront être récupérés dans le stockage de masse associé.
+
+Lucene:
+    Recherche par pertinence (Ranked searching) ;
+    Nombreux types de requêtes : phrase, booléen, astérisque, proximité, intervalle, etc ;
+    Recherche sur un champ spécifique (titre, auteur, etc).
+    
+Document et Field:
+    Zend_Search_Lucene travaille avec des documents comme objets de base pour l'indexation. 
+    Un document est représenté par la classe Zend_Search_Lucene_Document. 
+    Les objets de cette classe contiennent des instances de Zend_Search_Lucene_Field qui représentent les champs du document.
+    Il est important de noter que n'importe quelle information peut être ajoutée à l'index. 
+    Des informations propres à l'application ou des métadonnées peuvent être stockées dans le document, puis récupérées durant la recherche.
+    Il est de la responsabilité de votre application de gérer l'indexation. 
+    Cela signifie que les données peuvent être indexées depuis n'importe quelle source accessible par votre application. 
+    Par exemple, elles peuvent provenir du système de fichier, d'une base de données, d'un formulaire HTML, etc.
+    Chacune de ces méthodes (à l'exception de Zend_Search_Lucene_Field::Binary()) possède un paramètre optionnel $encoding servant à spécifier l'encodage de la chaîne entrée.
+
+Type:
+    Keyword: 
+      sont stockés ET indexés. Cela signifie qu'ils peuvent être aussi bien cherchés dans l'index qu'affichés dans les résultats de la recherche
+    UnIndexed:
+      Les champs UnIndexed (non-indexé) ne peuvent pas être utilisés dans la recherche.En revanche, ils peuvent être retournés dans les résultats.
+    Binary:
+      Les champs Binary (binaire) ne sont ni "tokenizés", ni indexés, mais ils sont stockés dans le but d'être retournés dans les résultats de recherche
+    Text:
+      Les champs Text (texte) sont stockés, indexés et "tokenizés".sont appropriés pour stocker des informations telles que sujets et titres sur lesquels on veut pouvoir effectuer des recherches, mais également les utiliser dans l'affichage des résultats.
+    UnStored:
+      Les champs UnStored sont "tokenizés" et indexés, mais pas stockés dans l'index. Il est recommandé d'utiliser ce type de champ pour indexer les textes conséquents
+
+Optilize:
+  L'augmentation du nombre de segments réduit la qualité de l'index, mais l'optimisation de l'index remédie à ce problème. L'optimisation a pour principale activité de fusionner plusieurs segments en un seul. Ce processus ne met pas à jour les segments. Il génère un nouveau segment plus gros et met à jour la liste des segments ('segments' file).
+
+Recherche:
+    Il y a deux manières de chercher dans un index. 
+    La première utilise le parseur de requête pour construire une requête à partir d'une chaîne de caractères.
+    La seconde consiste à créer vos propres requêtes par programme à l'aide de l'API Zend_Search_Lucene.
+    La méthode Zend_Search_Lucene::find() détermine automatiquement le type de données entrantes et utilise le parseur de requêtes ou construit un objet approprié à partir d''une donnée entrante de type chaîne de caractères.
+
+Algo:
+    Zend_Search_Lucene utilise le même algorithme de scoring que Java Lucene. 
+    Par défaut, tous les hits dans l'ensemble de résultats sont triés par score. 
+    Les hits avec le plus grand score viennent en premier, et les documents avec des hauts scores devraient mieux correspondre à la requête que ceux avec des scores moins élevés.
+    En gros, les hits qui contiennent le terme ou la phrase cherché plus fréquemment auront un score plus élevé.
+Indexation:
+  Les champs Keyword (mot-clé) sont stockés ET indexés.
+  Cela signifie qu'ils peuvent être aussi bien cherchés dans l'index qu'affichés dans les résultats de la recherche. 
+  Ils ne sont pas divisés en plusieurs mots par "tokenization". 
+  Les champs d'énumérations dans une base de donnée se transposent généralement assez bien en champs de type Keyword dans Zend_Search_Lucene.
+
+Tri du résultat:
+    Par défaut; tri par score.
+    Le nom d'un champ stocké par lequel on veut trier les résultats devrait être passé comme paramètre $sortField
+    $sortType peut être omis ou prendre l'une des valeurs suivantes : 
+    SORT_REGULAR (compare les éléments normalement- valeur par défaut), SORT_NUMERIC (compare les éléments comme des valeurs numériques), SORT_STRING (compare les éléments comme des chaînes de caractères).
+    $sortOrder peut être omis ou prendre l'une des valeurs suivantes : 
+    SORT_ASC (trie dans l'ordre croissant- valeur par défaut), SORT_DESC (trie dans l'ordre décroissant).
+    $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
+    ex: $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
+
+Mise en evidence des resultats:
+  highlightExtended
+  applyColour
+  
+Language de requete:
+    Termes: 
+        Une requête est décomposée en termes et opérateurs.
+        Il y a 3 types de termes : le termes simples, les phrases et les sous-requêtes.
+        Un terme simple est un simple mot, tel que "test" ou "hello".
+        Une phrase est un groupe de mots inclus dans des double guillemets, tel que "hello dolly".
+        Une sous-requête est une requête incluse dans des parenthèses, tel que "(hello dolly)".
+    Champs: 
+        Lucene supporte les champs de données. 
+        Lorsque vous effectuez une recherche, vous pouvez soit spécifier un champ, soit utiliser le champ par défaut. 
+        Le nom du champ dépend des données indexées et le champ par défaut est défini par les paramètres courants.
+
+  Champs:
+    Vous pouvez chercher dans des champs spécifiques en tapant le nom du champ suivi de ":", suivi du terme que vous cherchez.
+    Par exemple, prenons un index Lucene contenant deux champs -title et text- avec text comme champ par défaut. 
+    Si vous voulez trouver le document ayant pour titre "The Right Way" qui contient le text "don't go this way", vous pouvez entrer 
+    title:"The Right Way" AND text:go
+    ou
+    title:"Do it right" AND go
+    
+    Wildcards:
+      Lucene supporte les recherches avec joker sur un ou plusieurs caractères au sein des termes simples (mais pas dans les phrases).
+      Pour effectuez une recherche avec joker sur un seul caractère, utilisez le symbole "?".
+      Pour effectuez une recherche avec joker sur plusieurs caractères, utilisez le symbole "*".
+      Intervalle de Nom: title:{Aida TO Carmen}
+      Intervalle de Dates: mod_date:[20020101 TO 20030101]
+      Recherche flou: roam~ ou indiquer la similarité: roam~0.8
+      
+      
+Limitation:
+    Zend_Search_Lucene::setTermsPerQueryLimit($limit).
+  
+Recherche par proximité: 
+    Lucene permet de trouver des mots dans une phrase qui se trouvent à une certaine distance les uns des autres dans une chaîne.
+    Pour effectuer une recherche de proximité, utilisez le symbole tilde "~" à la fin de la phrase.
+    Par exemple pour retrouver "Zend" et "Framework" avec 10 mots entre eux dans un document, utilisez la recherche
+
+    tf(t in d) - Zend_Search_Lucene_Search_Similarity::tf($freq) - un facteur de score basé sur la fréquence d'un terme ou d'une phrase dans un document.
+    idf(t) - Zend_Search_Lucene_Search_Similarity::idf($input, $reader) - un facteur de score pour un terme simple de l'index spécifié.
+    getBoost(t.field in d) - le facteur d'impulsion pour le champ du terme.

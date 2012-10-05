@@ -1,0 +1,30 @@
+comments:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Comments:index" }
+
+comments_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Comments:show" }
+
+comments_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Comments:new" }
+
+comments_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Comments:create" }
+    requirements: { _method: post }
+
+comments_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Comments:edit" }
+
+comments_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Comments:update" }
+    requirements: { _method: post }
+
+comments_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Comments:delete" }
+    requirements: { _method: post }

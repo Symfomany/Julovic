@@ -1,0 +1,24 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+<h1>Comments creation</h1>
+
+<form action="{{ path('comments_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit" class="btn btn-primary btn-large">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('comments') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+ {% endblock %}

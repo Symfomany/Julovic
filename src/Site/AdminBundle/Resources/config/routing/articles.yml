@@ -1,0 +1,30 @@
+articles:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Articles:index" }
+
+articles_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Articles:show" }
+
+articles_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Articles:new" }
+
+articles_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Articles:create" }
+    requirements: { _method: post }
+
+articles_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Articles:edit" }
+
+articles_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Articles:update" }
+    requirements: { _method: post }
+
+articles_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Articles:delete" }
+    requirements: { _method: post }

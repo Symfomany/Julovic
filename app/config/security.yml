@@ -1,0 +1,75 @@
+#Secure Applications Bundles
+security:
+#  Factory Class of Mecanisme of Providers
+#    factories:
+#     - "%kernel.root_dir%/../src/Meetserious/SiteProBundle/Resources/config/security_factories.xml"
+    access_denied_url:  /access-denied
+  
+#  Mecanisms Algorithms of Encrypt
+    encoders:
+      admin:
+          class: Site\AdminBundle\Entity\Administrateurs
+          algorithm: sha512
+          encode-as-base64: true
+          iterations: 10
+
+#  Providers of Auth
+    providers:
+        chain_provider:
+          chain:
+            providers: [admin]
+        admin:
+          entity: { class: SiteAdminBundle:Administrateurs, property: email }  
+
+#  Firewalls of Bundles Exceptions          
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern:  ^/admin/login$
+            security: false
+        twitter:
+            pattern:  ^/admin/demo$
+            security: false              
+        lost_admin:
+            pattern:  ^/admin/lost$
+            security: false              
+
+#Bundle Admin
+        admin:
+            pattern:    ^/admin
+            security:   true
+            anonymous:  false
+            provider: admin
+            logout: 
+              path:   /admin/logout
+              target: /admin
+            form_login: 
+              success_handler:  my.success_handler
+              check_path: /admin/login_check
+              login_path: /admin/login
+#            remember_me:
+#                token_provider: admin
+#                key: 6dfstjut848fds256fhj5ssdfsd918f9h56dgh56gf2
+#                name: rememberme
+#                lifetime: 10800 #seconds
+#                path: /admin
+#                domain: /admin
+#                secure: false
+#                httponly: true
+#                always_remember_me: false
+#                remember_me_parameter: _remember_me
+              
+          
+#ACLs Control
+    access_control:
+         - { path: ^/admin, role: ROLE_ADMIN    }
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY    }
+
+#Credentials Rules
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+        ROLE_ADMIN: ROLE_USER
+        ROLE_USER: ROLE_USER

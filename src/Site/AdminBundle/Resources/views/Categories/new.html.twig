@@ -1,0 +1,25 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+
+<h1>Categories creation</h1>
+
+<form action="{{ path('categories_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit" class="btn btn-primary btn-large">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('categories') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+ {% endblock %}

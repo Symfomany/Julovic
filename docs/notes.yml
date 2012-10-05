@@ -1,0 +1,326 @@
+Meets:
+    State pay:
+        0 : Pas encore payé
+        1 : A payé
+        2 : Erreur de paiement
+
+OffersComments:
+  Active:
+    - 0: Refusé
+    - 1: Par défaut
+    - 2: Validé
+
+Offer:
+  State:
+    - 0: Pas encore validé
+    - 1: Validé
+    - 2: Refusé
+    
+Pictures:
+  thumbs:
+    - small: -small
+    - medium:  -medium
+    - large:  -large
+    
+Create Offer Declis:
+  inputs:
+    - offer_id: <input type="hidden" name="offer_id" value="{{ idoffer }}" />0
+    - offer_datebegin: <input type="hidden" name="offer_datebegin" value="2012-03-05" />
+    - offer_dateend: <input type="hidden" name="offer_dateend" value="2012-05-16" />
+    - offersdeclis[]: <input type="hidden" name="offersdeclis[]" value="2012-06-13 11:00:00/1/12" /> (annee-mois-jour heure:minute:seconde/nbgroup/reduction)
+    
+Algos:
+    -  Algos de matchage  lie 6 personnes et leurs attribue un rdv
+    -  Algos de Recupération =>  Use Case: Erreur de paiment (direcement appelé dans ce cas), Desistement (direcement appelé dans ce cas), Paye pas..
+    -  Meme chose que Matchage sauf  avec qq parms suplémentaires: $motif(desistement,errorpays, no_pay...), $datas_recherches,ids_exludes,likage
+    -  Algo de Validation => On verifie qu'il y ai bien 6 personnes au mm RDV ET que leurs state_pay est à 1. Si validation failed ALORS on fait intervenir l'algo de récupération.
+    
+Cinematique:
+      - Restaurant publie une offre et donc ses offres declis
+      - Nous on valide l'offre . Cela valide les offre declis + Cela génére les RDV en fonction des Déclis et leurs nb de grp tel que  nbRdv = nbdecli* nbgroup
+      - A l'état initial, des personnes tente de s'inscrire aux RDV en s'inscrivant aux OfferDeclis ce qui crée les Meets
+      - Algo Laps 1 : On match en même en temps que l'on block : 72h avant. et on envoie les mails aux 6 personnes prises pour payer et on modifie leur rdv_id (Algo de Matchage)
+      - Lorqu'une personne paye,  on change son etat de state paye à 1 et on verifie si tous les autres convive on un state_pay = 1 auquel cas, cela bascule le state de RDV à 1 et on envoie un mail à tous ceux qui n'ont pas été pris.. (Algos de Validation)
+      - Si une personne matché se retracte, on lance l'algo de récupération. Celui-ci rajoutera le nombre de personne manquante au rendez-vous.(Algos de Recupération)
+
+Structures:
+  Commands	Command/
+  Controllers	Controller/
+  Service Container Extensions	DependencyInjection/
+  Event Listeners	EventListener/
+  Configuration	Resources/config/
+  Web Resources	Resources/public/
+  Translation files	Resources/translations/
+  Templates	Resources/views/
+  Unit and Functional Tests	Tests/
+
+
+Assetic:
+    En dev: pas de dump et d'install (sauf au début)
+    En prod: install + dump a chaque fois
+    
+Formules :
+      G = 6*Prix normal*((1-R/100)-(C/100))
+      C = 30-R/5
+      Comission Spécial: Gain modifié et Commisions fixe
+      Ticket de caisse = prix normal * nombre de personne(6) * (1-R/100)
+      Produit = Ticket de caisse => au Membre
+      Charge = C => Restaurateur => Commission (C = 30-R/5)
+
+Lifecycle:
+    PrePersist: sauvegarde juste en persistance d'objet avant persist
+    PostPersist: sauvegarde juste en persistance d'objet après persist
+    PreUpdate: sauvegarde juste en persistance d'objet  juste avant flush
+    PostUpdate: sauvegarde juste en persistance d'objet après flush
+    
+  Persist / Flush => 1 Persist with object in doctrine 
+  Persist => Proxy Objects
+  Flush : dump ysql
+  
+Dans le dossier de Cache de Symfony2:
+  Global configuration
+  Translations
+  Assetic configuration
+  Doctrine proxies classes
+  Twig compiled templates
+
+Cleanage:
+    Controller:
+      use: juste ce qu'il nous fait
+      use: regrouper entre eux
+      HTTP: GET & POST : valeurs par défault tel que: $this->request->get('MaVar', 'default')
+      Methodes protected de Controller: metter en handler
+      Stocketr les responses en variable $response tel que:
+      $date = new \Datetime();
+      $date->modify('+600 seconds');
+      $response->setExpires($date);
+      $response->setMaxAge(600);
+      $response->setSharedMaxAge(600);
+      
+  Twig:
+      Ecrire du texte sous form: {{ mavar | trans({}, 'SiteProBundle') }}
+      
+  Entity:
+    Regrouper les get & set
+    Mettre le constructeur tout en haut: facile d'accès
+    Metter les lifecycles Method tout en bas
+    
+  Repository:
+    Description de la méthode
+    SQL au dessus de la méthode DQL
+    Signature + Contenu de la methode: valeur par défault
+    
+  Routes:
+    Routes de test: à mettre tout en bas
+
+Cas Précis du Noyau algorithmique:
+  - Le client crée une offre le Lundi 1er mai
+  - Mardi 2 Mai : On valide l'offre
+  - Jeudi 4 Mai => J+2: Elle est visible sur le site 2 jr après que les personnes ai le temps de visibilité
+  - Mecredi 17 Mai =>  J + 15:  du 4 Mai au 17 Mai => possibilité au visiteur d'adhérer à une offre
+ 
+Cas Modifications :
+      - H  => Title,Presentation,Prix, Reduc à la hausse, nbgroupe, heure => Possible entre 4 Mai er 17 Mai
+      - H+B => Le reste > 17 Mai
+
+Reservation:
+  - On bloque 48h avant la DateMeal pour reverser de notre banque jusqu'au restauranteur
+  -  **Attention** =>  possibilité de mettre une réduction fixe et exclusive ce qui passe par dessus l'algo
+
+Invoice: 
+  Type of Invoice:
+    - 1 :  Generation produit
+    - 2 : Generation charges
+  Notes:
+    - Pour chaque Meets des OffersDeclis, générer une facture
+    
+Methodes Universelles de Controller:
+   Processus:
+    - 1. Initialisation: récupère les services, on initiliaise les variables
+    - 2. Traitements:  If Is POST || GET (|Ajax) => Handler
+    - 3. Outpout: Render  de la methodes avec params
+   Form :
+      - Handler + Type
+  
+General:
+    Because using multiple connections makes harder to decide which one contains the entity
+    
+Caches:
+  1. A gateway cache, or reverse proxy(Varnish): The reverse proxy caches responses
+  2.  HTTP cache: Control headers via Controllers => HEADERS
+  3. HTTP expiration and validation: cached content is fresh => CONTENT
+  4. Edge Side Includes (ESI): Areas caches for Gateway Cache ==> TWIG
+
+Uploads:
+  state: 
+      0 inactif
+      1 Actif
+      2 En avant (photo de couverture)
+
+RDV :
+     1 group meets => 6 Meets => 1 RDV
+     Attendre le CRON qui passe pour changer l'état 
+     state :
+       0 : pas de groupe matché. Ex: Problème lors du paiement du coup le client passe à 0
+       1 : groupe matché
+       2 : groupe matché et facture généré
+
+Factures:
+  1. CRON: Tous les jours à minuits, on générere une tache CRON qui vérifie si il y a eu un RDV dans la journée 
+  
+Notifications:
+    Action:
+      Offer=>1, Declinaisons =>2, Avis=>3, 4=> Factures, Autre=>5
+    TypeAction:
+      1=>New, 2=>Edit, 3=>Delete
+    Champs d'actions:
+      - Commentaires ajouté
+      - Lorsqu'un groupe est matché
+      - Chaque fois que les Administrateurs interviennent sur son compte (Modifications, Ajout...)
+      - Chaque fois que les Administrateurs interviennent sur ses offres(Validation, Refus..)
+      - Chaque fois qu'un nouvelle facture est prête
+      - Modère une photo (son compte)
+    Cron:
+     1 fois par semaine
+      
+Best practices:
+    Use only alphanumeric characters and underscores;
+    Use a CamelCased name;
+    Use a descriptive and short name (no more than 2 words);
+    Prefix the name with the concatenation of the vendor (and optionally the category namespaces);
+    Suffix the name with Bundle.
+    Acme\Bundle\BlogBundle  =>	AcmeBlogBundle
+    Acme\Bundle\Social\BlogBundle =>	AcmeSocialBlogBundle
+    Acme\BlogBundle =>	AcmeBlogBundle
+
+Repositories:
+    Commands	Command/
+    Controllers	Controller/
+    Service Container Extensions	DependencyInjection/
+    Event Listeners	EventListener/
+    Configuration	Resources/config/
+    Web Resources	Resources/public/
+    Translation files	Resources/translations/
+    Templates	Resources/views/
+    Unit and Functional Tests	Tests/
+
+Tests Unitaire: 
+    FunctionTest namming
+    Règle de nommage class: CityTest
+    
+Naviguation/ Traversing in Crawler:
+    filter('h1.title')	Nodes that match the CSS selector
+    filterXpath('h1')	Nodes that match the XPath expression
+    eq(1)	Node for the specified index
+    first()	First node
+    last()	Last node
+    siblings()	Siblings
+    nextAll()	All following siblings
+    previousAll()	All preceding siblings
+    parents()	Returns the parent nodes
+    children()	Returns children nodes
+    reduce($lambda)	Nodes for which the callable does not return false
+    
+Form View:
+  set: setVar
+  has: hasVar
+  get: getVar
+  all: getVars
+  addChild: add
+  getChild: get
+  getChildren: all
+  removeChild: remove
+  hasChild: has
+  
+  Hour Meets:
+    FIND_IN_SET => ex: FIND_IN_SET('19', '22,21,'20')
+    Une fois matcher avec l'id RDV, setHour on remplace l'heure de proposition
+    
+
+  Tests Functionals Etapes: => dans Tests/Controller
+    Make a request; => faire une requete
+    Test the response; => Tester la réponse
+    Click on a link or submit a form => Cliquer sur la soumission
+    Test the response => Tester la réponse
+    Rinse and repeat. => Clear et Répéter
+    
+    Condition:
+      Pour exécuter vos tests fonctionnels, la classe WebTestCase amorce le noyau de votre application.
+      La méthode createClient() retourne un client, qui est comme un navigateur
+      La méthode request() (en savoir plus sur la méthode request() ) retourne un objet Crawler qui peut être utilisé pour sélectionner des éléments dans la réponse, cliquez sur les liens, et soumettre les formulaires.
+      Cliquez sur un lien d'abord en le sélectionnant avec le Crawler en utilisant soit une expression XPath ou un sélecteur CSS,puis utilisez le client de cliquer dessus.
+     
+Facebook:
+  You can specify the picture size you want with the type argument, which should be one of square (50x50), small (50 pixels wide, variable height), normal (100 pixels wide, variable height), and large (about 200 pixels wide, variable height):
+    
+Behaviors Doctrine Extensions:
+    - Tree - this extension automates the tree handling process and adds some tree specific functions on repository. (closure, nestedset or materialized path)
+    - Translatable - gives you a very handy solution for translating records into diferent languages. Easy to setup, easier to use.
+    - Sluggable - urlizes your specified fields into single unique slug
+    - Timestampable - updates date fields on create, update and even property change.
+    - Loggable - helps tracking changes and history of objects, also supports version managment.
+    - Sortable - makes any document or entity sortable
+    - Translator - explicit way to handle translations
+    - Softdeleteable - allows to implicitly remove records
+    
+Toujours protected attributes dans les controller DOCUMENTE stp:
+        /**
+          * Le Tableau du Controller
+          * @var array numbers 
+          */
+          protected  $numbers = Array();
+          
+Toujours faire remonter en methode de Controller les méthodes et les déclarer en Elts protected:
+      protected $em;
+      protected $user;
+      protected $request;
+      protected $response;
+      $request  = $this->getRequest();
+      $user = $this->container->get('security.context')->getToken()->getUser();
+      $em = $this->container->get('doctrine')->getEntityManager();
+      $request = $this->container->get('request');
+
+Pour Faire du Polymorphisme des comportement de Controller:
+  -Créer une classe abstraite qui hérite de Controller Class
+  
+Composer:
+  By default, these libraries are downloaded by running a php composer.phar install "downloader" binary. 
+  This composer.phar file is from a library called Composer and you can read more about installing it in the Installation chapter.
+  The composer.phar file reads from the composer.json file at the root of your project. 
+  This is an JSON-formatted file, which holds a list of each of the external packages you need, the version to be downloaded and more. 
+  The composer.phar file also reads from a composer.lock file, which allows you to pin each library to an exact version. 
+  In fact, if a composer.lock file exists, the versions inside will override those in composer.json. 
+  To upgrade your libraries to new versions, run php composer.phar update.
+  
+  The problem that Composer solves is this:
+    a) You have a project that depends on a number of libraries.
+    b) Some of those libraries depend on other libraries .
+    c) You declare the things you depend on
+    d) Composer finds out which versions of which packages need to be installed, and installs them (meaning it downloads them into your project).
+  
+  Composer prepare a file autoload in vendor:
+    require 'vendor/autoload.php';
+  
+  After installing the dependencies, Composer writes the list of the exact versions it installed into a composer.lock file. 
+  This locks the project to those specific versions.
+  
+Toujours après quand tu find:
+      // Toujours après quand tu Find():
+    if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Individuos entity.');
+            }
+
+Regles d'attributs de relations: ONE TO MANY avec un s et Many to One Sans S
+
+Composer quant à lui distingue l'aspect "package" et l'aspect "dépendances" ; en effet, n'importe quel code source peut avoir des dépendances sans forcément avoir un intérêt à être packagé. 
+Pour indiquer une liste de dépendances, il suffit de créer à la racine de votre projet un fichier <rayer pom.xml> <rayer deps> composer.json.
+Ce fichier contient une liste de librairies et versions.
+Composer va aller chercher ses librairies dans un repository, par défaut dans "Packagist", solution online open source de référencement de packages, mais il est tout à fait possible de l'utiliser pour vos besoins internes à l'aide de Satis (version standalone de packagist).
+Composer en plus de rechercher vos dépendances, de les télécharger et de les installer, est capable de vous créer un fichier de classloading compatible avec la psr-0 qui saura gérer le chargement de vos dépendances.
+
+Vus dans les tests unitaires:
+  $week instanceof \Datetime
+  
+  
+Commentaires de methodes:
+  Merci de mettre des comm sur le Repository et Controller décrivant ce qui fait

@@ -1,0 +1,19 @@
+
+    {% if error is defined %}
+        {% if error %}
+            <div class="error">Il y a des erreurs dans le formulaire</div>
+        {% endif %}
+    {% endif %}
+               
+    <form action="{{ path('lost') }}" method="post" {{ form_enctype(form) }}>
+                <div id="content">
+                        <h3>Clé égarée ?</h3>
+                        <p>Pas de problÃ¨mes, nous vous envoyons un double par email :</p>
+                        <input type="text" id="email" placeholder="VOTRE EMAIL">
+                        <a id="recevoir">Recevoir</a>
+                        <div id="ok">Et hop !</div>
+                </div>
+        {{ form_rest(form) }}        
+</form>
+
+

@@ -1,0 +1,12 @@
+Upgrade:
+  - Fusions de configuration entre config.yml et config_dev 
+  - Priorities in listeners have changed
+  - Parameters.ini -> parameters.yml
+  - DoctrineBundle a bougé de /Symfony à /Doctrine (voir AppKernel)
+  - Localisation (langues, fuseaux horaires) a bougé de Session à Requête
+  - getPathInfo(), getBaseUrl() and getBasePath() of Request ne sont pas entouré dune urldecode
+  -  locale urse n'est plus ctoské en session
+  -  Security => equals() est renommé en isEqualTo()
+  -  Firewall listener est après le Router listener . Donc les routes tel que login_check and /logout doivent être redefinis en routing.yml
+  -  Implements Form Build => buildForm(FormBuilder $builder, array $options) / buildForm(FormBuilderInterface $builder, array $options)
+  -  

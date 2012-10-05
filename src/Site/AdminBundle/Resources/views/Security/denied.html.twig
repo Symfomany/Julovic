@@ -1,0 +1,28 @@
+ {% extends 'SiteProBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<style>
+#content {
+    min-height: 383px;
+    padding-left: 10px;
+}
+</style>
+{% endblock %}
+
+
+ {% block body %}
+{% block content %}
+{{ parent() }}
+<div id="content">
+    <p>Accès Refusé. Veillez vous identifiez</p>
+</div>
+ {% endblock %}
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+ {% endblock %}
+
+
+

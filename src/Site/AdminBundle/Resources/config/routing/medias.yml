@@ -1,0 +1,30 @@
+medias:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Medias:index" }
+
+medias_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Medias:show" }
+
+medias_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Medias:new" }
+
+medias_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Medias:create" }
+    requirements: { _method: post }
+
+medias_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Medias:edit" }
+
+medias_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Medias:update" }
+    requirements: { _method: post }
+
+medias_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Medias:delete" }
+    requirements: { _method: post }

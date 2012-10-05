@@ -1,0 +1,30 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+<h1>Tags edit</h1>
+
+<form action="{{ path('tags_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit" class="btn btn-primary btn-large">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('tags') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('tags_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+        </form>
+    </li>
+</ul>
+ {% endblock %}

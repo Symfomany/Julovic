@@ -1,0 +1,29 @@
+{# GENERAL LAYOUT OF BUNDLE #}
+{% extends '::base_light.html.twig' %}
+
+{% block body%}
+            <div id="wrapper">
+                        {{ parent() }}
+                                {# Toolbar #}
+                            {% block flash_data_off %}
+                                {% if app.session.hasFlash('error') %} 
+                    <div class="alert alert-block alert-error fade in"> 
+                        <span class="close"></span>
+                                        {{ app.session.flash('error') }} 
+                    </div> 
+                                {% endif %}
+                                {% if app.session.hasFlash('success') %} 
+                    <div class="alert alert-block alert-success fade in"> 
+                        <span class="close"></span>
+                                        {{ app.session.flash('success') }} 
+                    </div> 
+                                {% endif %}
+                                {% if app.session.hasFlash('warning') %} 
+                    <div class="alert alert-block alert-warning fade in">
+                        <span class="close"></span>
+                                        {{ app.session.flash('warning') }} 
+                    </div> 
+                                {% endif %}
+                            {% endblock %}
+                </div>
+     {% endblock %}

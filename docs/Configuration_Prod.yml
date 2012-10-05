@@ -1,0 +1,128 @@
+## YAML Template.
+php.ini:
+  php_fileinfo
+  php_intl
+  php_pdo_mysql
+  php_mysqli
+  php_phar
+  php_gd2
+  php_apc
+  
+Apache:
+  rewrite_rule
+  mime_module
+  
+VHost:
+  NameVirtualHost www.meetseriousproreal.ju
+  <VirtualHost www.meetseriousproreal.ju> 
+  DocumentRoot C:/wamp/www/meetseriouspro_real/web
+  ServerName wwww.meetseriousproreal.ju
+  </VirtualHost>
+  
+PHP: ~ 
+
+Java; ~
+
+PEAR: 
+  - PHPUNIT
+  - Mathematiuqe fcts
+  
+.HTACCESS:
+    SetEnv TZ Europe/Paris
+    AddDefaultCharset UTF-8
+    SetEnv   LC_ALL  fr_FR.UTF-8
+    SetEnv   LC_TIME  fr_FR.UTF-8
+
+    # display no errs to user
+    php_flag display_startup_errors off
+    php_flag display_errors off
+    php_flag html_errors off
+    # log to file
+    php_flag log_errors on
+    php_value error_log /location/to/php_error.log
+
+    <Files PHP_errors.log>
+    Order allow,deny
+    Deny from all
+    Satisfy All
+    </Files>
+
+
+    <FilesMatch "\.(inc|tpl|h|ihtml|sql|ini|conf|class|bin|spd|themes|modules|exe|asa)$">
+        deny from all
+    </FilesMatch>
+
+    <IfModule mod_rewrite.c>
+        # URL rewriting module activation
+        RewriteEngine on
+        Options +FollowSymlinks
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ app.php [QSA,L]
+    </IfModule>
+
+
+    # ACTIVATION DE LA COMPRESSION DES PAGES
+    <IfModule mod_deflate.c>
+    SetOutputFilter DEFLATE
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+    # POUR LES NAVIGATEURS INCOMPATIBLES
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+    #PAS DE COMPRESSION POUR LES FORMATS NE LE NECESSITANT PAS
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+    </IfModule>
+
+    # GESTION DES DATES D'EXPIRATION POUR FAVORISER LE CACHE NAVIGATEUR
+    <IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 7200 seconds"
+    ExpiresByType image/jpg "access plus 2592000 seconds"
+    ExpiresByType image/jpeg "access plus 2592000 seconds"
+    ExpiresByType image/png "access plus 2592000 seconds"
+    ExpiresByType image/gif "access plus 2592000 seconds"
+    AddType image/x-icon .ico
+    ExpiresByType image/ico "access plus 2592000 seconds"
+    ExpiresByType image/icon "access plus 2592000 seconds"
+    ExpiresByType image/x-icon "access plus 2592000 seconds"
+    ExpiresByType text/css "access plus 2592000 seconds"
+    ExpiresByType text/javascript "access plus 2592000 seconds"
+    ExpiresByType text/html "access plus 7200 seconds"
+    ExpiresByType application/xhtml+xml "access plus 7200 seconds"
+    ExpiresByType application/javascript A259200
+    ExpiresByType application/x-javascript "access plus 2592000 seconds"
+    ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+    </IfModule>
+
+
+    # MISE EN CACHE DES FICHIERS NON DYNAMIQUES : IMAGES, CSS, JAVASCRIPT...
+    <IfModule mod_headers.c>
+    <FilesMatch "\\.(ico|jpe?g|JPE?G|png|gif|swf|css|gz)$">
+    Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    <FilesMatch "\\.(js)$">
+    Header set Cache-Control "max-age=2592000, private"
+    </FilesMatch>
+    <filesMatch "\\.(html|htm)$">
+    Header set Cache-Control "max-age=7200, public"
+    </filesMatch>
+
+    # DESACTIVATION DU CACHE POUR LES FICHIERS DYNAMIQUES
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+    Header unset Cache-Control
+    </FilesMatch>
+    </IfModule>
+
+    # SECURISATION DES ACCES AUX FICHIERS
+    <files .htaccess>
+    order allow,deny
+    deny from all
+    </files>
+    <FilesMatch "\.(inc|tpl|h|ihtml|sql|ini|conf|class|bin|spd|themes|modules|exe|asa)$">
+    deny from all
+    </FilesMatch>
+
+    # D�SACTIVATION DE LA SIGNATURE DU SERVEUR
+    ServerSignature Off

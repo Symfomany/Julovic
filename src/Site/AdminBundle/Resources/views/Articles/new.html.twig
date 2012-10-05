@@ -1,0 +1,25 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+ {% block body %}
+{{ parent() }}
+
+<h1>Articles creation</h1>
+        <form action="{{ path('articles_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+                <a class="fancybox" href="/images/1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+                    <img src="/images/1_s.jpg" alt="" class="img-polaroid" />
+                </a>
+                <p>
+                    <button type="submit" class="btn-primary btn-large">Create</button>
+                </p>
+            </form>
+
+            <ul class="record_actions">
+                <li>
+                    <a class="btn" href="{{ path('articles') }}">
+                        Back to the list
+                    </a>
+                </li>
+            </ul>
+ {% endblock %}

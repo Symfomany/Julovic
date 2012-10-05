@@ -1,0 +1,3007 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="index, follow, all" />
+        <meta name="Author" content="Extreme Sensio" />
+        <meta name="Language" content="en"/>
+        <meta name="Copyright" content="Sensio Labs" />
+        <meta name="Publisher" content="Sensio Labs" />
+        <meta name="Description" content="Symfony - Open-Source PHP web framework" />
+        <meta name="Keywords" content="symfony2, symfony, project, framework, php, php5, open-source, components, symphony, symfony framework, symfony tutorial" />
+        <link rel="search" type="application/opensearchdescription+xml" href="http://symfony.com/opensearch/documentation.xml" title="Symfony2 documentation" />
+        <link href="http://symfony.com/css/compiled/all.css?v=2" rel="stylesheet" type="text/css" media="all" />
+    </head>
+    <body>
+        <div id="content_wrapper" class="home">
+            <div id="sln"></div>
+            <div class="content">
+                <div>TODO LIST Of Symfony</div>
+                <pre class="php">
+
+<?php
+
+/* Maincontroller.php */
+// Control FirstTime
+$firstime = $this->container->get('session')->get('firstime');
+if ($firstime != "" && $firstime == true) {
+    $errors = null;
+    /* Create Medias */
+    $medias_files = new MediasHandler($this->nb_files, $this->container->get('security.context'));
+    for ($i = 0; $i < $this->nb_files; $i++) {
+        $media = new Medias();
+        $media->setIsRestaurant(true);
+        $media->setRestaurant($this->user);
+        $media->setDateCreated(new \Datetime('now'));
+        $this->user->addMedias($media);
+    }
+
+
+    $form = $this->container->get('form.factory')->create(new SuscribeExtendedType($this->container), $this->user);
+                    ->add('question', 'textarea', 
+                            array('attr' => array('rows' => 5, 'cols' => 60), 'required' => false))
+                    ->add('medias','collection', array(
+                            'type' => new MediasType(),
+                            'allow_add'    => true,
+                            'allow_delete' => true,
+                            'by_reference' => false))                    
+                    ->getForm();
+
+    /* Submission meta suscribe */
+    if ($this->request->getMethod() == 'POST') {
+        $form->bindRequest($this->getRequest());
+        $errors = $this->container->get('validator')->validate($form);
+        if ($form->isValid()) {
+            $datas_form = $form->getData();
+            $medias = $datas_form->getMedias();
+            if (!empty($medias)) {
+                foreach ($medias as $media) {
+                    $media->upload('restaurants');
+                }
+            }
+            $datas = $form->getData();
+            $question = $datas->getQuestion();
+            $picture = $datas->getPicture();
+            $this->user->setQuestion($question);
+            $this->user->setPicture($picture);
+            $this->em->persist($this->user);
+            $this->em->flush();
+            $this->container->get('session')->setFlash('success', 'Votre compte Ã  Ã©tÃ© modifiÃ©!');
+            $this->container->get('session')->remove('firsttime');
+            return $this->redirect($this->generateUrl('main'));
+        }
+    }
+    return $this->container->get('templating')->renderResponse('SiteProBundle:Main:index.html.twig', array('form' => $form->createView()));
+}
+
+Remarques dans Symfony 2:
+
+Command : use $this->getContainer()->get() ) ...extends ContainerAwareCommand
+Command: utilisation des  Syntaxe Heredoc
+<<<EOT
+The <info>fos:user:activate</info> command activates a user (so they will be able to log in):
+
+  <info>php app/console fos:user:activate matthieu</info>
+EOT
+
+Récap:
+$this->container->get('security.context'), $this->container->get('templating'), $this->container->get('form.factory')->renderResponse, $this->container->get('session'), 
+$this->container->get('router'),$this->get('mailer');
+
+Eviter les  public function __construct(ContainerInterface $container)
+
+Récup les Metas:
+$meta = $em->getClassMetadata(get_class($entity));
+$identifier = $meta->getSingleIdentifierFieldName();
+
+Get/Post obj: 
+$this->container->get('request')->request->get('username');
+
+Exactitude Syntaxe: if (null === $user) if (TRUE === $user),'POST' === $this->request->getMethod()
+
+Faire des entityManager en webservices ainsi que les Handler  pour les 
+ / $this->container->get('fos_user.user_manager')->updateUser($user);
+ $formHandler = $this->container->get('fos_user.resetting.form.handler');
+$process = $formHandler->process($user);
+ 
+ constante en controller tel que :
+     const SESSION_EMAIL = 'fos_user_send_resetting_email/email'; => static::SESSION_EMAIL)
+
+Utiliser les notfound tel que: 404!
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+
+			
+Methode Authentificate a User => set a token by new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+  protected function authenticateUser(UserInterface $user)
+    {
+        try {
+            $this->container->get('fos_user.user_checker')->checkPostAuth($user);
+        } catch (AccountStatusException $e) {
+             Don't authenticate locked, disabled or expired users
+            return;
+        }
+
+        $providerKey = $this->container->getParameter('fos_user.firewall_name');
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+        $this->container->get('security.context')->setToken($token);
+    }
+	
+	Use get form data like:
+	$this->form->getData(), $this->form['name']->getData()
+	
+	Constructeur typique utilisant les webservices:
+	
+	  public function __construct(Form $form, Request $request, UserManagerInterface $userManager)
+    {
+        $this->form = $form;
+        $this->request = $request;
+        $this->userManager = $userManager;
+    }
+	
+Voir FOSUserBundle pour le reseting de password
+
+Security Controller: obtenir le dernier username entrée si il est bon mais pas le mdp:
+ last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get(SecuityContext::LAST_USERNAME);
+
+Obtenir le security token CSRF en controller:
+$csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
+
+Get a Repository in manager ()Constructor example:
+   public function __construct(DocumentManager $dm, $class)
+    {
+        $this->dm = $dm;
+        $this->repository = $dm->getRepository($class);
+
+        $metadata = $dm->getClassMetadata($class);
+        $this->class = $metadata->name;
+    }
+	
+	
+	LifeCycle in Controller:
+	public function getSubscribedEvents()
+    {
+        return array(
+            Event::prePersist,
+            Event::preUpdate,
+        );
+    }
+
+    public function prePersist(LifecycleEventArgs $args)
+    {
+        $this->handleEvent($args);
+    }
+
+    public function preUpdate(LifecycleEventArgs $args)
+    {
+        $this->handleEvent($args);
+    }...
+	
+	Voir UserListener in FOSUserBundle...
+	
+	Services charger dans services.xml ou dans la methode load() de Extension un Bundle tel que:
+	    $container->setParameter('acme_hello.my_service_type', $config['my_type']);
+
+	Global variables dans services/ config:
+	kernel.name
+	kernel.environment
+	kernel.debug
+	kernel.root_dir
+	kernel.cache_dir
+	kernel.logs_dir
+	kernel.bundle_dirs
+	kernel.bundles
+	kernel.charset
+	
+	Couche de Sécurité à ajouter en routin pour les GET tel que:
+	 requirements:
+        annee:  \d{4}
+        format: html
+		
+	Api de Symfony Dispo sur:
+		http:api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html
+
+		Petite def du Lazy Loading:
+Doctrine utilise ce qu'on appelle le Lazy Loading, 
+chargement fainéant en français. 
+C'est-à-dire qu'il ne va charger les entités à l'autre bout de la relation que si vous voulez accéder à ces entités. 
+C'est donc pile au moment où vous faites <?php $article->getCommentaires() que Doctrine va charger les commentaires
+ (avec une nouvelle requête SQL donc) puis va vous les transmettre.
+
+targetEntity: il définit quelle est l'entité à l'autre bout de la relation, en utilisant son namespace complet.
+cascade: il définit quelles sont les opérations à répercuter sur cette entité à l'autre bout de la relation. 
+Par défaut, rien n'est répercuté. On n'a pas utilisé cet argument cascade dans l'exemple, 
+mais sachez qu'il s'utilise comme ceci :
+Persist : Cela permet de ne pas devoir faire plusieurs persist lors de nos manipulation. 
+Sans ce persist, pour enregistrer une nouvelle entité propriétaire et une nouvelle entité inverse, 
+il nous faut faire deux persist() : un pour chaque entité. 
+Avec cet argument persist, un seul persist() sur l'entité propriétaire est nécessaire, 
+ Dans notre exemple, si on supprime un Client alors l'Adresse est automatiquement supprimée 
+ remove: cela empêche d'avoir une Adresse orpheline.
+Il en existe deux autres, merge et detach, moins utilisés mais bien documenté : n'hésitez pas à aller voir la documentation.
+
+
+Many to Many:
+     * @ORM\ManyToMany(targetEntity="Namespace\Bundle\Entity\Groupe")
+J'ai mis Membre comme propriétaire de la relation. 
+C'est un choix que vous pouvez faire comme bon vous semble, ici. 
+Mais bon, récupérer les groupes d'un membre se fera assez souvent, alors que récupérer les membres d'un groupe, moins. 
+
+Et puis, pour récupérer les membres d'un groupe, on aura surement besoin de personnaliser la requête,
+donc on le fera de toute façon depuis le GroupeRepository.
+
+ un ArrayCollection dans le constructeur. Un ArrayCollection est un objet utilisé par Doctrine2, qui a toute les propriétés d'un tableau normal. 
+ Vous pouvez faire un foreach dessus, et le traiter comme n'importe quel tableau. 
+ Il dispose juste de quelques méthodes supplémentaires très pratique, que nous verrons.
+
+Problematique du Many To Many avec attributs: Il n'y a pas de moyen simple de gérer les attributs d'une relation avec Doctrine. Pour cela, il faut esquiver en créant simplement une entité intermédiaire qui va représenter la relation, appelons-la Commande_Produit. Et c'est dans cette entité que l'on mettra les attributs de relation, comme notre quantité. Ensuite il faut bien entendu mettre en relation cette entité intermédiaire avec les deux autres entités d'origine, Commande et Produit. Pour cela, il faut logiquement faire :
+
+Classe intermédiaire:
+class Commande_Produit
+{
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Namespace\Bundle\Entity\Commande")
+     */
+    private $commande;
+
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Namespace\Bundle\Entity\Produit")
+     */
+    private $produit;
+
+  On définit le getter et le setter pour Commande
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+    public function setCommande(\Namespace\Bundle\Entity\Commande $commande)
+    {
+        $this->commande = $commande;
+    }
+
+     On définit le getter et le setter pour Produit
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+    public function setProduit(\Namespace\Bundle\Entity\Produit $produit)
+    {
+        $this->produit = $produit;
+    }
+	
+}
+
+ Le mappedBy correspond lui à l'attribut de l'entité propriétaire
+ 
+ La méthode findBy() est un peu plus intéressante. Comme findAll() elle permet de retourner une liste d'entité, sauf qu'elle est capable d'effectuer un filtre pour ne retourner que les entités correspondant à un critère. 
+ Elle peut aussi trier les entités, et même n'en récupérer qu'un certain nombre 
+
+ L'EntityManager est accessible depuis un repository en utilisant l'attribut "_em" : $this->_em
+ 
+ addselect sur un join:    $qb = $this->createQueryBuilder('a')
+               ->join('a.commentaires', 'c')
+               ->addSelect('c');
+			   
+On  peut mettre des règles de validation sur n'importe quel objet, qui n'est pas forcément entité.
+			   
+$form->isValid()  ==   $liste_erreurs = $validator->validate($article);
+
+un getter est une méthode qui commence le plus souvent par "get", mais qui peut également commencer par "is"
+      
+      /**
+	 * @Assert\True()
+	 */
+	public function isArticleValid()
+	{
+		return false;
+	}
+	Nommer le getter "is + le nom d'un attribut" 
+	Validateur personnaliser sur un champ d'attribut etranger
+
+	   /**
+     * @Assert\Valid()
+     */
+    private $b;
+   
+   Callback General: @Assert\Callback(methods={"contenuValide"})
+   public function contenuValide(ExecutionContext $context){} => $context->addViolation('Contenu invalide car il contient un mot interdit.', array(), null);
+
+   Privilege des ParamConverter: Pas de voirAction($id) mais plutot privilégier le public function voirAction( Article $article )
+
+
+ Génération de pdf
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/pdf');
+                
+        $html = $this->container->get('templating')->renderResponse('SiteProBundle:Main:coucou.html.twig');
+        $response->setStatusCode(200); 
+        $response->headers->set('Content-Type', 'application/pdf'); 
+        $response->headers->set('Content-Disposition', sprintf('attachment;filename="%s.pdf"', "meeeokos")); 
+        $response->headers->set('Content-Type', 'application/force-download');
+        $response->setContent($html->getContent());
+        
+        return $this->container->get('io_tcpdf')->quick_pdf($response->getContent(), 'facture.pdf', 'D');
+load 
+         $factures_dir = $this->container->get('request')->server->get('DOCUMENT_ROOT') . '/uploads/factures/'.$user->getId();
+        
+         Création du dossier s'il n'existe pas
+        if(!is_dir($factures_dir))
+            mkdir ($factures_dir);
+        
+         Note pour Julien le dieu :
+         la variable "factures_dir" m'affiche : /Applications/MAMP/htdocs/uploads/factures/116 alors qu'elle devrait m'afficher le chemin jusqu'à web
+         Sinon j'ai fait des tests pour créer le dossier du l'id_restaurateur dans factures s'il n'existait pas. J'ai changer les paramètres pour le zip pour éviter d'avoir toute la structure
+         et j'ai fait plusieurs essais pour vois si tout fonctionnait correctement. T'aurai du me voir, j'étais trop content :D
+
+         Zip all archives
+        $zip = new \ZipArchive();
+        
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/pdf');
+                
+        $html = $this->container->get('templating')->renderResponse('SiteProBundle:Main:coucou.html.twig');
+        $response->setStatusCode(200); 
+        $response->headers->set('Content-Type', 'application/pdf'); 
+        $response->headers->set('Content-Disposition', sprintf('attachment;filename="%s.pdf"', "meeeokos")); 
+        $response->headers->set('Content-Type', 'application/force-download');
+        $response->setContent($html->getContent());
+        
+        $nom = 'facture_'.md5( uniqid()).'.pdf';
+        
+         Création du pdf
+        $this->container->get('io_tcpdf')->quick_pdf($response->getContent(), $factures_dir.'/'.$nom, 'F');
+        
+        $invoice = new Invoice();
+        $invoice->setRestaurant($user);
+        $invoice->setFilename($nom);
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $em->persist($invoice);
+        $em->flush();
+        if ($zip->open( $this->container->get('request')->server->get('DOCUMENT_ROOT').'/uploads/factures/'.$user->getId().'/Zip.zip', \ZipArchive::CREATE) === true) {
+           return true;
+
+        $factures_path = $this->container->get('request')->server->get('DOCUMENT_ROOT') . '/uploads/factures/'.$user->getId().'/'.$nom;
+        
+        if($nom){
+         Ajout d’un fichier.
+            if(!$zip->addFile($factures_path, $nom))
+                    echo 'Impossible d&#039;ajouter &quot;'.$nom.'&quot;.<br/>';
+        }
+
+         Et on referme l'archive.
+            $zip->close();
+        } else {
+            echo 'Impossible d&#039;ouvrir &quot;Zip.zip<br/>';
+         Traitement des erreurs avec un switch(), par exemple.
+        }
+        ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Voici ce qu'il faut insérer pour ne pas oublier:
+
+    Add: ajouter des bouts de requete:
+
+ example6: how to define: "SELECT u FROM User u WHERE u.id = ? ORDER BY u.name ASC" using QueryBuilder string support
+$qb->add('select', 'u')
+   ->add('from', 'User u')
+   ->add('where', 'u.id = ?1')
+   ->add('orderBy', 'u.name ASC');
+
+
+Add where 1..100
+
+ ->add('from', 'User u')
+   ->add('where', 'u.id = ?1')
+   ->add('orderBy', 'u.name ASC');
+   ->setParameter(1, 100);  Sets ?1 to 100
+
+
+Avec identifiant:
+
+ ->add('where', 'u.id = :identifier')
+   ->add('orderBy', 'u.name ASC');
+   ->setParameter('identifier', 100); /
+
+
+Get Parameters :
+
+ See example above
+$params = qb->getParameters(array(1, 2));
+ Equivalent to
+$param  = array($qb->getParameter(1), $qb->getParameter(2));
+
+
+Use Expr():
+
+ example8: QueryBuilder port of: "SELECT u FROM User u WHERE u.id = ? OR u.nickname LIKE ? ORDER BY u.surname DESC" using Expr class
+$qb->add('select', $qb->expr()->select('u'))
+   ->add('from', $qb->expr()->from('User', 'u'))
+   ->add('where', $qb->expr()->orx(
+       $qb->expr()->eq('u.id', '?1'),
+       $qb->expr()->like('u.nickname', '?2')
+   ))
+   ->add('orderBy', $qb->expr()->orderBy('u.surname', 'ASC'));
+
+
+Serializer une entité est trop peu recommandé:
+
+ Si vous avez l'intention de sérialiser (et unserialize) cas d'entités qui détiennent encore des références à des objets proxy que vous pouvez rencontrer des problèmes avec les propriétés privées en raison de limitations techniques.
+
+Rappel des types sous Doctrine:
+
+    string: Type that maps an SQL VARCHAR to a PHP string.
+    integer: Type that maps an SQL INT to a PHP integer.
+    smallint: Type that maps a database SMALLINT to a PHP integer.
+    bigint: Type that maps a database BIGINT to a PHP string.
+    boolean: Type that maps an SQL boolean to a PHP boolean.
+    decimal: Type that maps an SQL DECIMAL to a PHP double.
+    date: Type that maps an SQL DATETIME to a PHP DateTime object.
+    time: Type that maps an SQL TIME to a PHP DateTime object.
+    datetime: Type that maps an SQL DATETIME/TIMESTAMP to a PHP DateTime object.
+    text: Type that maps an SQL CLOB to a PHP string.
+    object: Type that maps a SQL CLOB to a PHP object using serialize() and unserialize()
+    array: Type that maps a SQL CLOB to a PHP object using serialize() and unserialize()
+    float: Type that maps a SQL Float (Double Precision) to a PHP double. IMPORTANT: Works only with locale settings that use decimal points as separator.
+
+Rapel Column:
+
+    type: (optional, defaults to ‘string’) The mapping type to use for the column.
+    name: (optional, defaults to field name) The name of the column in the database.
+    length: (optional, default 255) The length of the column in the database. (Applies only if a string-valued column is used).
+    unique: (optional, default FALSE) Whether the column is a unique key.
+    nullable: (optional, default FALSE) Whether the database column is nullable.
+    precision: (optional, default 0) The precision for a decimal (exact numeric) column. (Applies only if a decimal column is used.)
+    scale: (optional, default 0) The scale for a decimal (exact numeric) column. (Applies only if a decimal column is used.)
+
+
+
+Id avec Autoincrémente:
+
+ @Id @Column(type="integer") */
+
+
+
+    AUTO (default): Tells Doctrine to pick the strategy that is preferred by the used database platform. The preferred strategies are IDENTITY for MySQL, SQLite and MsSQL and SEQUENCE for Oracle and PostgreSQL. This strategy provides full portability.
+    SEQUENCE: Tells Doctrine to use a database sequence for ID generation. This strategy does currently not provide full portability. Sequences are supported by Oracle and PostgreSql.
+    IDENTITY: Tells Doctrine to use special identity columns in the database that generate a value on insertion of a row. This strategy does currently not provide full portability and is supported by the following platforms: MySQL/SQLite (AUTO_INCREMENT), MSSQL (IDENTITY) and PostgreSQL (SERIAL).
+    TABLE: Tells Doctrine to use a separate table for ID generation. This strategy provides full portability. *This strategy is not yet implemented!*
+    NONE: Tells Doctrine that the identifiers are assigned (and thus generated) by your code. The assignment must take place before a new entity is passed to EntityManager#persist. NONE is the same as leaving off the @GeneratedValue entirely.
+
+
+
+
+
+Quoted reserved words:
+
+/** @Column(name="`number`", type="integer") */
+
+
+
+Unidirectional association: pas de mappedBy. Bidirectionnal: mappedby + inversedby => ils vont ensemble
+
+    /**
+     * @OneToOne(targetEntity="Shipping")
+     * @JoinColumn(name="shipping_id", referencedColumnName="id")
+     */
+    private $shipping;
+
+
+
+Manytoone unidrectionnelle
+
+  /**
+     * @ManyToOne(targetEntity="Address")
+     * @JoinColumn(name="address_id", referencedColumnName="id")
+     */
+    private $address;
+
+
+
+Ordering Collection:
+
+  /**
+     * @ManyToMany(targetEntity="Group")
+     * @OrderBy({"name" = "ASC"})
+     */
+    private $groups;
+
+
+
+
+Mapped Superclass:
+
+/** @Entity */
+class EntitySubClass extends MappedSuperclassBase
+{
+
+
+
+Single Table Inheritance:
+
+/**
+ * @Entity
+ * @InheritanceType("SINGLE_TABLE")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"person" = "Person", "employee" = "Employee"})
+ */
+class Person
+{
+     ...
+}
+
+/**
+ * @Entity
+ */
+class Employee extends Person
+{
+     ...
+}
+
+
+
+This strategy inherently requires multiple JOIN operations to perform just about any query which can have a negative impact on performance, especially with large tables and/or large hierarchies. 
+
+
+New find of Doctrine:
+
+$article = $entityManager->find('CMS\Article', 1234);
+
+
+
+Example Test Lazy Loading:
+
+ Lazy Loading Proxies pass instanceof tests:
+if ($article->getAuthor() instanceof User) {
+     a User Proxy is a generated "UserProxy" class
+}
+
+
+
+ Article::$comments passes instanceof tests for the Collection interface
+ But it will NOT pass for the ArrayCollection interface
+if ($article->getComments() instanceof \Doctrine\Common\Collections\Collection) {
+    echo "This will always be true!";
+}
+
+
+
+Détacher une entité des opérations cascades en persist:
+
+$em->detach($entity);
+
+
+
+Merger (inverse de detacher) les entité entre elle:
+
+$detachedEntity = unserialize($serializedEntity);  some detached entity
+$entity = $em->merge($detachedEntity);
+
+
+
+
+Simple conditions: findall avec filtre:
+
+ All users that are 20 years old
+$users = $em->getRepository('MyProject\Domain\User')->findBy(array('age' => 20));
+
+ All users that are 20 years old and have a surname of 'Miller'
+$users = $em->getRepository('MyProject\Domain\User')->findBy(array('age' => 20, 'surname' => 'Miller'));
+
+ A single user by its nickname
+$user = $em->getRepository('MyProject\Domain\User')->findOneBy(array('nickname' => 'romanb'));
+
+
+
+Lazy Loading Contains Object:
+
+$user->getFavorites()->contains($favoriteComment);  TRUE
+$favoriteComment->getUserFavorites()->contains($user);  FALSE
+
+
+
+Transitive Persistence:
+
+    persist : Cascades persist operations to the associated entities.
+    remove : Cascades remove operations to the associated entities.
+    merge : Cascades merge operations to the associated entities.
+    detach : Cascades detach operations to the associated entities.
+    all : Cascades persist, remove, merge and detach operations to associated entities.
+
+
+Transaction Implicite:
+
+$user = new User;
+$user->setName('George');
+$em->persist($user);
+$em->flush();
+
+
+Transaction Explicite:
+
+$em->getConnection()->beginTransaction();  suspend auto-commit
+try {
+    ... do some work
+    $user = new User;
+    $user->setName('George');
+    $em->persist($user);
+    $em->flush();
+    $em->getConnection()->commit();
+} catch (Exception $e) {
+    $em->getConnection()->rollback();
+    $em->close();
+    throw $e;
+}
+
+
+
+Events Manager: (http:docs.doctrine-project.org/projects/doctrine-orm/en/2.0.x/reference/events.html)
+
+Voir EventManager et SuscriberEvents
+
+1.<?php
+
+$evm = new EventManager();
+
+
+2. Constructor:
+
+public function __construct($evm)
+    {
+        $evm->addEventListener(array(self::preFoo, self::postFoo), $this);
+    }
+
+
+
+Puis, on dispatch:
+
+$evm->dispatchEvent(EventTest::preFoo);
+$evm->dispatchEvent(EventTest::postFoo);
+
+
+
+Liste des Lifecycle:
+
+
+    preRemove - The preRemove event occurs for a given entity before the respective EntityManager remove operation for that entity is executed. It is not called for a DQL DELETE statement.
+    postRemove - The postRemove event occurs for an entity after the entity has been deleted. It will be invoked after the database delete operations. It is not called for a DQL DELETE statement.
+    prePersist - The prePersist event occurs for a given entity before the respective EntityManager persist operation for that entity is executed.
+    postPersist - The postPersist event occurs for an entity after the entity has been made persistent. It will be invoked after the database insert operations. Generated primary key values are available in the postPersist event.
+    preUpdate - The preUpdate event occurs before the database update operations to entity data. It is not called for a DQL UPDATE statement.
+    postUpdate - The postUpdate event occurs after the database update operations to entity data. It is not called for a DQL UPDATE statement.
+    postLoad - The postLoad event occurs for an entity after the entity has been loaded into the current EntityManager from the database or after the refresh operation has been applied to it.
+    loadClassMetadata - The loadClassMetadata event occurs after the mapping metadata for a class has been loaded from a mapping source (annotations/xml/yaml).
+    onFlush - The onFlush event occurs after the change-sets of all managed entities are computed. This event is not a lifecycle callback.
+
+
+
+
+Batch Opération: utiliser clear():
+
+$batchSize = 20;
+for ($i = 1; $i <= 10000; ++$i) {
+    $user = new CmsUser;
+    $user->setStatus('user');
+    $user->setUsername('user' . $i);
+    $user->setName('Mr.Smith-' . $i);
+    $em->persist($user);
+    if (($i % $batchSize) == 0) {
+        $em->flush();
+        $em->clear();  Detaches all objects from Doctrine!
+    }
+
+
+
+
+DQL full example:
+
+http:docs.doctrine-project.org/projects/doctrine-orm/en/2.0.x/reference/dql-doctrine-query-language.html
+
+
+
+->getResult() ->fetchone <> getResults() -> fetchall
+
+
+$query = $em->createQuery('SELECT COUNT(u.id) FROM Entities\User u');
+$count = $query->getSingleScalarResult();
+
+
+
+Count Dictinct:
+
+$query = $em->createQuery('SELECT COUNT(DISTINCT u.name) FROM CmsUser');
+$users = $query->getResult();  array of ForumUser objects
+
+
+
+
+Arithmetic Ecritures:
+
+$query = $em->createQuery('SELECT u FROM CmsUser u WHERE ((u.id + 5000) * u.id + 3) < 10000000');
+$users = $query->getResult();  array of ForumUser objects
+
+
+
+Join avec restriction WITH:
+
+$query = $em->createQuery("SELECT u FROM CmsUser u LEFT JOIN u.articles a WITH a.topic LIKE '%foo%'");
+$users = $query->getResult();
+
+
+
+In Expression:
+
+$query = $em->createQuery('SELECT u FROM CmsUser u WHERE u.id IN (1, 2)');
+$users = $query->getResult();
+
+$query = $em->createQuery('SELECT u FROM CmsUser u WHERE u.id NOT IN (1)');
+$users = $query->getResult();
+
+
+
+Concat several fields:
+
+$query = $em->createQuery('SELECT CONCAT(u.id, u.name) FROM CmsUser u WHERE u.id = ?1');
+$query->setParameter(1, 321);
+$idUsernames = $query->getResult();
+
+
+
+Qui n'ont pas de relation / associations:
+
+$query = $em->createQuery('SELECT u FROM CmsUser u WHERE u.phonenumbers IS EMPTY');
+$users = $query->getResult();
+
+
+Qui ont plus d'une association:
+
+$query = $em->createQuery('SELECT u FROM CmsUser u WHERE SIZE(u.phonenumbers) > 1');
+$users = $query->getResult();
+
+
+
+Ceux qui sont dans un group (ManytoOne ) : relation inversion:
+
+$query = $em->createQuery('SELECT u.id FROM CmsUser u WHERE :groupId MEMBER OF u.groups');
+$query->setParameter('groupId', $group);
+$ids = $query->getResult();
+
+
+
+Apres un update de entity class : use clear:
+
+te. It is recommended to call EntityManager#clear() and retrieve new instances of any affected entity.
+
+Marchye avec SELECT, WHERE, HAVING:
+
+    ABS(arithmetic_expression)
+    CONCAT(str1, str2)
+    CURRENT_DATE() - Return the current date
+    CURRENT_TIME() - Returns the current time
+    CURRENT_TIMESTAMP() - Returns a timestamp of the current date and time.
+    LENGTH(str) - Returns the length of the given string
+    LOCATE(needle, haystack [, offset]) - Locate the first occurrence of the substring in the string.
+    LOWER(str) - returns the string lowercased.
+    MOD(a, b) - Return a MOD b.
+    SIZE(collection) - Return the number of elements in the specified collection
+    SQRT(q) - Return the square-root of q.
+    SUBSTRING(str, start [, length]) - Return substring of given string.
+    TRIM([LEADING | TRAILING | BOTH] [‘trchar’ FROM] str) - Trim the string by the given trim char, defaults to whitespaces.
+    UPPER(str) - Return the upper-case of the given string.
+        Send email partial views
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('send@example.com')
+        ->setTo('recipient@example.com')
+        ->setBody($this->renderView('HelloBundle:Hello:email.txt.twig', array('name' => $name)))
+    ;
+    $this->get('mailer')->send($message);
+
+    return $this->render(...);
+        Request API
+        
+        / l'URI demandée (par ex. /about) sans les paramètres de requête
+$request->getPathInfo();
+
+ Récupérer les variables GET et POST respectivement
+$request->query->get('foo');
+$request->request->get('bar', 'valeur par defaut si bar n existe pas');
+
+ Récupérer la variable SERVER
+$request->server->get('HTTP_HOST');
+
+ Récupérer une instance d'un objet UploadedFile identifié par foo
+$request->files->get('foo');
+
+ Récupérer la valeur d'un COOKIE
+$request->cookies->get('PHPSESSID');
+
+ Récupérer le header d'une requête HTTP, avec des clés normalisées, en minusucule
+$request->headers->get('host');
+$request->headers->get('content_type');
+
+$request->getMethod();     GET, POST, PUT, DELETE, HEAD
+$request->getLanguages();  Un tableau des languages que le client accepte
+Errors 500 et 400:
+    
+$response = new Response('Not Found', 404);
+} catch (Exception $e) {
+    $response = new Response('An error occurred', 500);
+
+public function boot()
+{
+   $em = $this->container->get('doctrine.orm.entity_manager');
+   $evm = $em->getEventManager();
+    Timestampable
+   $evm->addEventSubscriber(new \Gedmo\Timestampable\TimestampableListener());
+}
+thx master
+mets stp en comm:
+a mettre ds le XXXBundle.php
+Voici qq pistes de Dev. sur lequelle on pourrait s'y pencher:
+
+    Ajout d'une restaurant / visiteur: Geoloc => Verifier fct d'attribution a une ville si okay et la mettre en @postPersist'siret' => "#[0-9]{14}#",'code_postal' => "#^[0-9]{2} ?[0-9]{3}$#"
+    Vérifier state media sur la modération + l'inscrire en YAML pr le code
+    Geoloc fiable par IP: Module PEAR ou PECLE dispo sur Maxmind:  http:www.maxmind.com/app/php
+    Geoloc d'un restaurant / offre / user: utiliser Cela va nous servir de maniere UNIVERSEL et fxt ainsi en DQL : GEO(longA,lattA,longB, lattB) qui calcul la distance entre  : génial:  points
+    Fcts MODELpour: 
+    1/ GEOREST() get id restaurant le plus proche en fct de coordonnées (valable pour le choix des offre ainsi que la proximité)
+    2/ TAUXATTR(User $user1, User $user2)
+    3/ postPersist : catégorifier les menus : entree plat dessert / Boisson Apero en bg selon le nombre d'occurence (fréquence) fer mots clefs
+    Methode is More 15 jr() sur entity offerdecli
+    Persistence des objets pour la prévisualisation
+    http:www.lexik.fr/blog/symfony/doctrine2/geolocalisation-ou-comment-creer-ses-propres-fonctions-dql-avec-doctrine2-1624  a fomule se trouve ici:   
+    ((ACOS(SIN(43.61 * PI() / 180) * SIN(latitude * PI() / 180) + COS(43.61 * PI() / 180) * COS(latitude * PI() / 180) * COS((3.87 - longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515 * 1.609344) . Voici sa procédure SQL:
+
+DROP FUNCTION IF EXISTS get_distance_metres|
+
+CREATE FUNCTION get_distance_metres (lat1 DOUBLE, lng1 DOUBLE, lat2 DOUBLE, lng2 DOUBLE) RETURNS DOUBLE
+BEGIN
+DECLARE rlo1 DOUBLE;
+DECLARE rla1 DOUBLE;
+DECLARE rlo2 DOUBLE;
+DECLARE rla2 DOUBLE;
+DECLARE dlo DOUBLE;
+DECLARE dla DOUBLE;
+DECLARE a DOUBLE;
+
+SET rlo1 = RADIANS(lng1);
+SET rla1 = RADIANS(lat1);
+SET rlo2 = RADIANS(lng2);
+SET rla2 = RADIANS(lat2);
+SET dlo = (rlo2 – rlo1) / 2;
+SET dla = (rla2 – rla1) / 2;
+SET a = SIN(dla) * SIN(dla) + COS(rla1) * COS(rla2) * SIN(dlo) * SIN(dlo);
+RETURN (6378137 * 2 * ATAN2(SQRT(a), SQRT(1 – a)));
+END|
+
+Remarques première sur algo: 
+
+A dissocier:
+
+    le caractère qualitatif( distance la plus proche, age le plus près... => valeurs théoriques) 
+    le caractère quantitatif (nb de likes, age des like, distance des likes => valeurs pratiques et limitées => Mathématiques discrètes sur les stats
+
+
+En fonction du temps f(t) => Mathématiques continu avec des valeurs illimitées :  études de fct => nn pris en charge en V1. En v2: time passé sur un profil mis à jr en bdd pour calcul d'affinités plus avancé.
+
+C'est toute la différente entre caractères quantitatif continu et quantitatif discret
+
+    Idée Algo pour connaitre les personnes par défaut les plus adaptées pour toi: 
+    A) Ce qui reste prio, c'est le like bidirectionnelle, puis le like unidirectionnelle
+    A) On récupère les couples de coordonnées de la liste de 10 Users ordonnées par age Where l'age du user +/- VARIANCE
+    B) On récupère les coordonées pr chacun  par distance
+
+Idées première a rajouter dans le brouillon:
+
+SELECT id_users
+FROM users u 
+
+INNER JOIN city c
+ON c.id = u.city_id
+
+INNER JOIN meets m
+ON m.user_id = u.id
+
+WHERE u.age = VARIANCE
+ORDER BY GEO(c.long, c.lat), Age calcul distance
+LIMIT 15 
+
+Ou...
+
+Zipcode avec un  LIKE '75%' puis ordonner by zipcode => PX etre coupler avec l'ECART-TYPE et BETWEEN (ZIPCODE - ECART TYPE , ZIPCODE + ECART TYPE)
+Ou jouer avec ROUND() quand a laproximation du zicopde avec une precision de XX.XXXX => 4 chiffres après la virgule
+
+Et...
+
+Algo premier: Nous devons au final avoir 2 users avec leurs tableaux de Users . De manière simplissime, nous pouvons par similitude mathématique celui qui a le plus de points communs avec lautre. (le couple (A B)  qui inner le mieux ;)) 
+
+
+Cette algo devra chaque jour tournée en Background et devrai stocker les ids les plus propice .
+
+Je souhaite au final avoir pr un user donné avoir un couple de Users les plus proches(like, geographiquement, age) tel que Ux = { 156,12,6546,52,1515,456}
+pour préparer derrière la théorie des graphes selon des points spaciaux.
+
+
+Rappel:
+
+Hausse:
+- Augmenter une réduction
+- Ajouter un nouveau service ou jour
+- Augmenter le nombre de groupes recevables sur un service
+- Prolonger le nombre de semaines de disponibilité de son offre
+Ces modifications sont prises en compte immédiatement, sans modération de notre part, 
+Tous les RDV ayant lieu à compter de H+72.
+ 
+Baisse: Ou pour arreter totalement
+- Baisser une réduction
+- Changer un horaire (d'un service)
+- Supprimer un service ou un jour
+- Réduire le nombre de groupes recevables sur un service
+-> Moins de 15: Modification / Supression Impossible sur OfferDecli
+-> Si l'offre expire dans 15 jours ou plus, ceci est pris en compte immédiatement mais n'affecte que les RDV ayant lieu à compter de J+16 (car on a un tableau de RDV à la disposition des membres sur une période allant jusqu'à J+15)
+
+Les offres expirées restent affichées mais distinctement des offres disponibles et en cours de vérification et le partenaire peut alors y accéder.
+Il peut ainsi la reproposée telle quelle ou bien opérer des modifications uniquement sur le tableau de disponibilité hebdomadaire (laissé tel qu'il était avant expiration de l'offre) avant de la reproposée mais cette fois elle est automatiquement publiée sans modération de notre part. S'il souhaite modifier autre chose que ça dans une offre expirée (à savoir nature de la prestation, mets au choix, activité, photos et prix normal), il le peut mais dans ce cas la ré proposition refera l'objet d'une modération.
+
+
+A ajouter de tte Urgence^^:
+http:www.macalester.edu/~hutchinson/book/book.html
+
+http:www.misfu.com/Telechargement/mathdis.pdf
+
+
+Ici John Conhor,
+Vous êtes la resistance.
+
+Pour Lduo , notre seigneur qui est sur terre
+        
+$container->get('request')->server->get('DOCUMENT_ROOT');  Donne le chemin vers le dossier de départ (ex: MAMP ou WAMP)
+ in controller:
+$this->getRequest()->server->get('DOCUMENT_ROOT');
+Else (your urls look like this - localhost/path/to/Symfony/web/app.php:
+
+$container()->get('request')->getBasePath();  Donne le chemin vers le dossier web /
+ in controller:
+$this->getRequest()->getBasePath();
+$this->get('kernel')->getRootDir();
+http:www.craftitonline.com/2011/07/symfony2-base-path-and-root-path/
+Controller: 
+$lang = $lang ? : $this->container->getParameter('locale');
+$translation = $email->getTranslation($lang);   Puis reutilisation de translation
+Templating:
+{{ 'lexik_mailer.email.list' | trans({}, 'LexikMailerBundle') }}
+Form Template Inheritance in translation
+        {% block generic_label %}
+{% spaceless %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' control-label'}) %}
+    {% if required %}
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' label-required'}) %}
+    {% endif %}
+    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+        {{ label|trans({}) }}
+        {% if required %}
+            <span class="required" title="{{ 'required-field' | trans }}">*</span>
+        {% endif %}
+    </label>
+{% endspaceless %}
+{% endblock %}{# empty Twig template #}
+Le Tree Builder = config.yaml mais a la difference c'est qu'il hierarchise les block de conf 
+et permet à des Bundle Tier de modifier / ajouter des configs  dans config.yml...Advice: "using indentation and the fluent notation, 
+it is possible to reflect the real structure of the configuration values" 
+
+$rootNode
+    ->children()
+        ->booleanNode('auto_connect')
+            ->defaultTrue()
+        ->end()
+        ->scalarNode('default_connection')
+            ->defaultValue('default')
+        ->end()
+    ->end();
+       Node Array: 
+$rootNode
+    ->arrayNode('connection')
+        ->scalarNode('driver')->end()
+        ->scalarNode('host')->end()
+        ->scalarNode('username')->end()
+        ->scalarNode('password')->end()
+    ->end();
+  Exemple avec Prototype (type):
+$rootNode
+    ->arrayNode('parameters')
+    ->isRequired()
+    ->requiresAtLeastOneElement()
+    ->prototype('array')
+    ->useAttributeAsKey('name')
+    ->children()
+    ->scalarNode('name')->isRequired()->end()
+    ->scalarNode('value')->isRequired()->end()
+ifTrue()
+ifString()
+ifNull()
+ifArray()
+ifInArray()
+ifNotInArray()
+txnUnset()
+Fct Compare:
+if ($a->getCreatedAt() === $b->getCreatedAt()) {
+            return 0;
+        }
+return $a->getCreatedAt() < $b->getCreatedAt() ? -1 : 1;
+return arguments: return $this->ancestors ? explode('/', $this->ancestors) : array();
+Syntax preg_match =>  !preg_match('#^'.$config->requirements.'$#xs', $param)
+Return Reponse with header: return new Response($content, 200, array('content-type' => 'application/pdf'));
+    Return Classical:
+        $class = is_object($objectOrClass) ? get_class($objectOrClass) : (string) $objectOrClass;
+        The ReflectionMethod class reports information about a method.
+
+Suffix et prefix d'un mot:
+    $pos = strpos($logicalImageName, ':');
+    $bundleName = substr($logicalImageName, 0, $pos);
+    $imageName = substr($logicalImageName, $pos + 1);'
+
+Classical return: return isset($this->table[count($this->table)-1]) ? $this->table[count($this->table)-1] : $this->value;
+
+Finder manipulation file :
+$finder = new Symfony\Component\Finder\Finder;
+$finder->files()
+    ->name('*.php')
+    ->in(__DIR__ . '/../lib')
+    ->in(__DIR__ . '/../tests');
+
+use Symfony\Component\Finder\Finder;
+
+$finder = new Finder();
+$finder->files()->in(__DIR__);
+
+foreach ($finder as $file) {
+     Print the absolute path
+    print $file->getRealpath()."\n";
+     Print the relative path to the file, omitting the filename
+    print $file->getRelativePath()."\n";
+     Print the relative path to the file
+    print $file->getRelativePathname()."\n";
+}
+
+ return ($i % 2) == 0;
+
+Heritage d'un bundle par rapport à un autre: confi XXXBundle.php
+     public function getParent()
+    {
+        return 'FOSUserBundle';
+    }
+Puis en methode de controller
+ $response = parent::registerAction();
+
+         do custom stuff
+
+        return $response;
+        
+pr la connexion
+multibase
+jai un conférencier symfo
+qui me recommande
+You can use a single connection and make cross-db joins using @Table(name="dbname.table")
+
+
+Avantages de l'Api Rest sous SF2:
+- Architecture client/serveur
+- Stateless, jamais une API rest ne doit se souvenir du client (cookies...)
+- Cachable
+- On peut la découper en couches (par exemple, on doit pouvoir rajouter varnish sans souci)
+- Interface uniforme
+?>         
+
+Geolocalisation
+
+//cURL geocode
+            foreach ($restaurants as $key => $restaurant) {
+                $session = $this->getRequest()->getSession();
+                $geoloc_restaurant = $session->get('geoloc'.$restaurant->getId());
+                if (empty($geoloc_restaurant)) {
+                    $a = urlencode($restaurant->getAdresse());
+                    $geocodeURL = "http://maps.googleapis.com/maps/api/geocode/json?address=" . $a . "&sensor=false&language=fr&region=FR";
+                    $ch = @curl_init($geocodeURL);
+                    @curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $geoloc = @curl_exec($ch);
+                    $httpCode = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    $session->set('geoloc'.$restaurant->getId(), $geoloc);
+                    curl_close($ch);
+                } 
+                $geoloc = $geoloc_restaurant;
+                //Json Decode
+                $geocode = @json_decode($geoloc);
+                if (!empty($geocode->results)) {
+                    $localisation['id'] = $restaurant->getId();
+                    $localisation['restaurant_nom'] = $restaurant->getNom();
+                    $localisation['restaurant_adresse'] = $restaurant->getAdresse();
+                    $localisation['restaurant_tel'] = $restaurant->getTel();
+                    $localisation['restaurant_email'] = $restaurant->getEmail();
+                    $localisation['lat'] = $geocode->results[0]->geometry->location->lat;
+                    $localisation['lng'] = $geocode->results[0]->geometry->location->lng;
+                    $localisation_tab[] = array('id' => $localisation['id'],
+                        'nom' => $localisation['restaurant_nom'],
+                        'adresse' => $localisation['restaurant_adresse'], 
+                        'tel' => $localisation['restaurant_tel'], 
+                        'email' => $localisation['restaurant_email'], 
+                        'lat' => $localisation['lat'],
+                        'lng' => $localisation['lng']);
+                }
+                
+            }
+
+            $data = $request->request->get($form_coord->getName());
+            =>get datas  withou object $form binded request <> $form->getData()
+
+
+                $data = $request->request->get($form_coord->getName());
+                // create a collection of constraints
+//                $collectionConstraint = new Collection(array(
+//                            'email' => new Email(array('message' => 'e-mail invalide'), new NotBlank(array('message' => 'e-mail ne peut être vide'))),
+//                            'nom' => array(new MinLength(array('limit' => 3, 'message' => 'Le nom doit faire au minumum 3 caractère')), new NotBlank(array('message' => 'Le nom ne peut pas être vide'))),
+//                            'prenom' => array(new MinLength(array('limit' => 3, 'message' => 'Le prenom doit faire au minumum 3 caractère')), new NotBlank(array('message' => 'Le prenom ne peut pas être vide'))),
+//                            'tel' => new Regex(array('pattern' => '/^0[1-68]([-. ]?[0-9]{2}){4}$/', 'message' => 'Le tel est invalide')),
+//                            'rib' => new Regex(array('pattern' => '/^([0-9]{4}[ ]?){4}([0-9]{5})$/', 'message' => 'Le rib est invalide')),
+//                            'siret' => new Regex(array('pattern' => '/^([0-9]{3}[ ]?){3}$/', 'message' => 'Le siret est invalide')),
+//                            'tva_intra' => new Regex(array('pattern' => '/^FR|fr([0-9]{11})$/', 'message' => 'La tvaintra est invalide')),
+//                        ));
+
+//                $errorList = $this->container->get('validator')->validateValue($data, $collectionConstraint);
+
+Formules de geoloc : reduis avec le RADIANS:
+$formule="(6366*acos(cos(radians($latitude))*cos(radians(`lat`))*cos(radians(`lon`) -radians($longitude))+sin(radians($latitude))*sin(radians(`lat`))))";
+
+En Mysql: order by : le plus pre de moi:
+$sql="SELECT ville,$formule AS dist FROM ville WHERE $formule<='$_GET[distance]' ORDER by dist ASC";
+
+Attention: Le calcul ne tient pas compte de l'altitude, qui, dans certains endroits peut influer sur les distances
+La formule a été simplifiée au maximum par souci de simplicité et d'efficacité.
+La distance est "à vol d'oiseau" et non pas une distance routière
+La localisation latitude/longitude d'une ville repose sur un point (généralement la mairie de la ville en question),
+ donc la distance ne commence pas à la sortie de la ville mais du centre de la ville.
+ Ainsi, par exemple, pour Paris cela ne sert à rien de vouloir localiser les villes à 5km...
+
+php app/console router:debug nom_route
+
+php app/console nomcomm --help ==>
+
+php app/console doctrine:generate:entities SiteProBundle:Offers ==> Generate  
+
+php app/console assets:install web ==>
+Permet de copier les ressource publiques de tous les bundles installés (situées dans NomDuBundle/Resources/public) dans le répertoire web, où elles seront accessibles publiquement. En français, ça veut dire rendre accessible à tous les ressources de développement que vous utilisez. 
+
+php app/console assetic:dump => Meme chose que assetic install
+
+En tete HTTP:
+
+HTTP/1.1 200 OK
+Date: Fri, 30 Oct 1998 13:19:41 GMT
+Server: Apache/1.3.3 (Unix)
+Cache-Control: max-age=3600 must-revalidate   ==>  $response->setMaxAge(600); $response->setSharedMaxAge(600);$response->headers->addCacheControlDirective('must-revalidate', true);
+Expires: Fri, 30 Oct 1998 14:19:41 GMT ==>  $response->setExpire(600);
+Last-Modified: Mon, 29 Jun 1998 02:28:12 GMT
+ETag: "3e86-410-3596fbbc"
+Content-Length: 1040
+Content-Type: text/html
+
+$response->setPublic(); ==> Partie Commune all users
+$response->setPrivate(); ==> Partie Privée  single user
+
+Stocketr les responses en variable $response tel que:
+$date = new \Datetime();
+$date->modify('+600 seconds');
+$response->setExpires($date);
+$response->setMaxAge(600);
+$response->setSharedMaxAge(600);
+
+Date en Français:
+$locale = new \Zend_Locale('fr_FR');
+\Zend_Date::setOptions(array('format_type' => 'php'));
+$date = new \Zend_Date(1234567890, false, $locale);
+
+// outputs something like 'February 16, 2007, 3:36 am'
+print $date->toString('F j, Y, g:i a');
+
+print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
+
+/*************************************************************************************************************************************/
+//get Long Latt grandes villes
+ print_r (\Zend_Date_Cities::city('Paris'));
+$mylocation = array('latitude' => 41.5, 'longitude' => 13.2446); //inversé
+
+
+Gé,érer Code Barre 1D:
+        // Seul le texte à écrire est obligatoire
+       // Seul le texte à écrire est obligatoire
+        $barcodeOptions = array('text' => 'LUDO LE GENIE');
+        // Pas d'options requises
+        $rendererOptions = array();
+        // Tracé du code-barres dans une nouvelle image
+        $imageResource = \Zend_Barcode::draw(
+            'code39', 'image', $barcodeOptions, $rendererOptions
+        );
+        // Tracé du code-barres dans une nouvelle image,
+        // envoi des entêtes et de l'image
+        \Zend_Barcode::factory(
+            'code39', 'image', $barcodeOptions, $rendererOptions
+        )->render();
+
+
+        Zend Lucène:
+
+        Zend_Search_Lucene est un moteur de recherche de contenus principalement textuels écrit entièrement en PHP 5. 
+        Comme il stocke ses index sur le système de fichiers et qu'il ne requiert pas de base de données, 
+        il peut offrir des fonctionnalités de recherche à presque n'importe quel site écrit en PHP. 
+            Zend_Search_Lucene dispose des caractéristiques suivantes :
+                "Ranked searching" - les meilleurs résultats sont retournés en premier.
+                Plusieurs puissants types de requêtes : phrase, booléen, joker (wildcard), proximité, intervalle et bien d'autres.
+                Recherche par champ spécifique (p. ex. titre, auteur, contenus)
+
+Use QRCode Generation:
+ QRcode::png('some othertext 1234'); en controller:
+Supports QR Code versions (size) 1-40
+Numeric, Alphanumeric, 8-bit and Kanji encoding. (Kanji encoding was not fully tested, if you are japan-encoding enabled you can contribute by verifing it :) )
+Implemented purely in PHP, no external dependencies except GD2
+Exports to PNG, JPEG images, also exports as bit-table
+TCPDF 2-D barcode API integration
+Easy to configure
+Data cache for calculation speed-up
+Provided merge tool helps deploy library as a one big dependency-less file, simple to "include and do not wory"
+Debug data dump, error logging, time benchmarking
+100% Open Source, LGPL Licensed
+
+$factory = new MetadataFactory($driver);
+$metadata = $factory->getMetadataForClass('MyNamespace\MyObject');
+
+
+
+/**
+* @ORM\Id
+* @ORM\GeneratedValue(strategy="AUTO")
+* @ORM\ManyToOne(targetEntity="Proetco\UserBundle\Entity\Utilisateur", inversedBy="entreprises", cascade={"persist"})
+*/
+protected $utilisateur;
+==> Pourquoi mettre generatedValue à auto, une clé étrangère ne doit pas être auto-incrémenté.
+
+
+List des Exceptions:
+    RuntimeException: Kernel exception
+    UnexpectedTypeException: Mauvais Format
+    InvalidArgumentException: Invalide Argument in function
+    InvalidCsrfTokenException: Mauvais CSRF
+    NotFoundHttpException: 404 not found
+    UsernameNotFoundException: User not found 
+    UnsupportedUserException: user non auth
+    AuthenticationException: Auth Exception
+    
+Components Standalone:
+  - Universal Class Loader : use Symfony\Fondation\UniversalClassLoader: Namespaces/Prefixes/ 
+  - Event Dispatcher : 
+  - Ouput Escaper:
+  - YAML: Yaml loader => load(.yml), 
+  - XMLLoader
+  - OutputEscaper: escape()
+  - RequestHandler: createfromglobals,pathinfo,preferedlanguage,isXmlHttpRequet,
+  - Routing: match != generate 
+  - Console:  writeln() , interact(),$this->dialog->ask(), $input->setArgument(),
+  - Dependency Injection Container
+  - Request Handler
+  - Templating
+
+
+Buzz Bundle Library
+Geocoder Bundle
+BundleGeocoder Bundle
+
+Rappel:
+Generer getter setter: Créer un atribut: -> php app/console doctrine:generate:entities SiteBundle:Users
+
+Install PHPUnit:
+Forcing:
+sudo pear install --force phpunit/PHPUnit_MockObject
+sudo pear install --alldeps --force phpunit/phpunit
+
+First, install PEAR.
+
+sudo apt-get install php-pear
+Next, tell PEAR to update its own channel.
+
+sudo pear channel-update pear.php.net
+Then, tell PEAR to upgrade itself to the newest version.
+
+sudo pear upgrade-all
+You should now have the newest version of PEAR installed.
+
+To install PHPUnit, let PEAR know where to find PHPUnit.
+
+sudo pear channel-discover pear.phpunit.de
+Then install PHPUnit. (the -a makes sure all dependency packages are also installed)
+sudo pear install -a phpunit/PHPUnit
+pear install --alldeps phpunit/PHPUnit
+
+
+Test Fonctionnelle:
+
+//Chargerd es données
+$form = $crawler->selectButton('submit')->form();
+// set some values
+$form['name'] = 'Lucas';
+
+$form['form_name[subject]'] = 'Hey there!';
+// submit the form
+$crawler = $client->submit($form);
+
+// selectioner et cliquer un lien
+$link = $crawler->selectLink('Go elsewhere...')->link();
+$crawler = $client->click($link);
+
+
+//Submit a form
+$form = $crawler->selectButton('validate')->form();
+$crawler = $client->submit($form, array('name' = > 'Fabien'));
+
+// Naviguer
+$client->back();
+$client->forward();
+$client->reload();
+
+// Clears all cookies and the history
+$client->restart();
+
+Chaque test - qu'il s'agisse d'un test unitaire ou d'un test fonctionnel - est une classe PHP qui devrait vivre dans les tests / sous-répertoire de vos paquets.
+ Si vous suivez cette règle, vous pouvez exécuter tous les tests de votre application avec la commande suivante:
+phpunit -c app/
+L'option -c indique PHPUnit pour regarder dans le app/répertoire pour un fichier de configuration.
+ Si vous êtes curieux de connaître les options de PHPUnit, extrayez le fichier app/phpunit.xml.dist.
+
+phpunit -c app src/Acme/DemoBundle/Tests/Utility/
+Executer tt les test dun rep
+phpunit -c app src/Acme/DemoBundle/Tests/Utility/CalculatorTest.php
+phpunit -c app src/Acme/DemoBundle/
+Executer des tests du bundle 
+
+ $serializer = $this->container->get('serializer');
+$reports = $serializer->serialize($user, 'json');
+
+Facebook Connect:
+
+
+
+        $facebook = new \Facebook(array('appId' => $this->container->getParameter('facebookAppId'), 'secret' => $this->container->getParameter('facebookAppSecret'), 'cookie' => true,));
+        if ($facebook->getUser()) {
+
+             On récupère la session Facebook de l'utilisateur
+            $session = $facebook->api('/me');
+
+            $me = null;
+
+ On teste si la session existe
+            if ($session) {
+                try {
+                     On récupère l'UID de l'utilisateur Facebook courant
+                    $uid = $facebook->getUser();
+                     On récupère les infos de base de l'utilisateur
+                    $me = $facebook->api('/me');
+                } catch (FacebookApiException $e) {
+
+                     S'il y'a un problème lors de la récup, perte de session entre temps, suppression des autorisations...
+                     On récupère l'URL sur laquelle on devra rediriger l'utilisateur pour le réidentifier sur l'application
+                    $loginUrl = $facebook->getLoginUrl(
+                            array(
+                                'canvas' => 1,
+                                'fbconnect' => 0,
+                                'req_perms' => array('publish_stream', 'user_about_me', 'user_photos', 'user_events', 'user_activities', 'email')
+                            )
+                    );
+                     On le redirige en JS (header PHP pas possible)
+                    echo "<script type='text/javascript'>top.location.href = '" . $loginUrl . "';</script>";
+                    exit();
+                }
+            } else {
+                 Si l'utilisateur n'a pas de session
+                 On récupère l'URL sur laquelle on devra rediriger l'utilisateur pour le réidentifier sur l'application
+                $loginUrl = $facebook->getLoginUrl(
+                        array(
+                            'canvas' => 1,
+                            'fbconnect' => 0
+                        )
+                );
+                 On le redirige en JS (header PHP pas possible)
+                echo "<script type='text/javascript'>top.location.href = '" . $loginUrl . "';</script>";
+                exit();
+            }
+        }
+
+
+        $media = new Medias();
+        $media->setLegend('ok sa va');
+        $em->persist($media);
+         
+          $this->container->get('session')->set('idMedia', $media);
+          $retrieve = $this->container->get('session')->get('idMedia');
+            
+         exit(Debug::dump($retrieve));
+
+         exit(Debug::dump($em->getUnitOfWork()->getentityInsertions()));
+
+
+Assert useful:
+
+// Assert that there is more than one h2 tag with the class "subtitle"
+$this->assertGreaterThan(0, $crawler->filter('h2.subtitle')->count());
+
+// Assert that there are exactly 4 h2 tags on the page
+$this->assertCount(4, $crawler->filter('h2'));
+
+// Assert that the "Content-Type" header is "application/json"
+$this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));
+
+// Assert that the response content matches a regexp.
+$this->assertRegExp('/foo/', $client->getResponse()->getContent());
+
+// Assert that the response status code is 2xx
+$this->assertTrue($client->getResponse()->isSuccessful());
+// Assert that the response status code is 404
+$this->assertTrue($client->getResponse()->isNotFound());
+// Assert a specific 200 status code
+$this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+// Assert that the response is a redirect to /demo/contact
+$this->assertTrue($client->getResponse()->isRedirect('/demo/contact'));
+// or simply check that the response is a redirect to any URL
+$this->assertTrue($client->getResponse()->isRedirect());
+
+
+//Get Profile of 
+// Check that the profiler is enabled
+if ($profile = $client->getProfile()) {
+    // check the number of requests
+    $this->assertLessThan(10, $profile->getCollector('db')->getQueryCount());
+    // check the time spent in the framework
+    $this->assertLessThan(0.5, $profile->getCollector('timer')->getTime());
+}
+
+        100 => 'Continue', 
+        101 => 'Switching Protocols', 
+        200 => 'OK', 
+        201 => 'Created', 
+        202 => 'Accepted', 
+        203 => 'Non-Authoritative Information', 
+        204 => 'No Content', 
+        205 => 'Reset Content', 
+        206 => 'Partial Content', 
+        300 => 'Multiple Choices', 
+        301 => 'Moved Permanently', 
+        302 => 'Found', 
+        303 => 'See Other', 
+        304 => 'Not Modified', 
+        305 => 'Use Proxy', 
+        307 => 'Temporary Redirect', 
+        400 => 'Bad Request', 
+        401 => 'Unauthorized', 
+        402 => 'Payment Required', 
+        403 => 'Forbidden', 
+        404 => 'Not Found', 
+        405 => 'Method Not Allowed', 
+        406 => 'Not Acceptable', 
+        407 => 'Proxy Authentication Required', 
+        408 => 'Request Timeout', 
+        409 => 'Conflict', 
+        410 => 'Gone', 
+        411 => 'Length Required', 
+        412 => 'Precondition Failed', 
+        413 => 'Request Entity Too Large', 
+        414 => 'Request-URI Too Long', 
+        415 => 'Unsupported Media Type', 
+        416 => 'Requested Range Not Satisfiable', 
+        417 => 'Expectation Failed', 
+        418 => 'I\'m a teapot', 
+        500 => 'Internal Server Error', 
+        501 => 'Not Implemented', 
+        502 => 'Bad Gateway', 
+        503 => 'Service Unavailable', 
+        504 => 'Gateway Timeout', 
+        505 => 'HTTP Version Not Supported', 
+List of components:
+BrowserKit
+ClassLoader
+Console
+CssSelector
+DependencyInjection
+DomCrawler
+EventDispatcher
+Finder
+HttpFoundation
+HttpKernel
+Locale
+Process
+Routing
+Templating
+Translation
+Validator
+Yaml
+
+
+//        $request = $client->getRequest();
+//        $response = $client->getResponse();
+//        $crawler = $client->getCrawler();
+//        $profiler = $client->getProfile();
+//        $collectors = $profiler->getCollectors();
+//        $contentresp =  $client->getResponse()->getContent();
+//get Collectors of Datas Profiler
+//        $profiler->getCollectors()
+//        get exception of collectors
+//        $collectors['exception']
+// select many options from a "multiple" select or checkboxes
+//        $form['registration[interests]']->select(array('symfony', 'cookies'));
+
+
+Build View in Form
+public function buildView(FormView $view, FormInterface $form)
+{
+    $view->set('currentRating', $form->getAttribute('currentRating'));
+    $view->set('identifier', $form->getAttribute('identifier'));
+}
+// FormView
+$view->addChild($child); // or $view[] = $child
+$view->getChild('childName'); // or $view['childName']
+$view->set('foo', 'bar');
+$view->get('foo');
+$view->all(); // or $view->getVars()
+
+public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+{
+    // This add the variable "label" into the form.
+    $view->addVars(array( 'label' => 'Form legend' ));
+}
+
+Adding "help" messages
+
+user in twig:
+{{ form.get('value').id }}
+
+Add help message:
+{% use 'form_div_layout.html.twig' with field_widget as base_field_widget %}
+
+{% block field_widget %}
+    {{ block('base_field_widget') }}
+
+    {% if help is defined %}
+        <span class="help">{{ help }}</span>
+    {% endif %}
+{% endblock %}
+
+Ne pas oublier getForm() tu peux adder dans le Controller ou autre des champs
+Ne pas oublier le toArray() en Collection ou bien même en getData() du Form $form->getData()->toArray()
+Use Datetime::creatFromFormat() plutot que Datetime => DateTime::createFromFormat("d/m/Y", $dateString);
+
+Form Processing:
+- Form identifier : get('form.factory') // puis getInstance('form.id')
+- setData() : Service Object
+-  bindRequest : Calls Setter
+-  getRender() => Contien les variables de vues et méthodes
+- 
+
+In fact, Symfony 2 defines a list of events in the kernel:
+onCoreRequest Event
+onCoreController Event
+onCoreView Event
+onCoreResponse Event
+onCoreException Event
+
+
+Bonne pratique sur le controller: mettre u  notfound des le debut
+public function classAction($contentDocument)
+if (!$contentDocument) {
+            throw new NotFoundHttpException('Content not found');
+        }
+
+Vus en CMS:
+$response = new Response($data);
+$response->headers->set('Content-Type', 'image/jpeg');
+$response->setPublic();
+
+$date = new \DateTime();
+$date->setTimestamp(time() + 332640000);
+$response->setExpires($date);
+$response->setMaxAge(332640000);
+
+return $response;
+
+$query->setFirstResults(25);
+$query->setMaxResults(25);
+=> 25 premiers resultats
+
+// example3: retrieve the associated EntityManager
+$em = $qb->getEntityManager();
+// example4: retrieve the DQL string of what was defined in QueryBuilder
+$dql = $qb->getDql();
+// example5: retrieve the associated Query object with the processed DQL
+$q = $qb->getQuery();
+
+
+ $qb->setMaxResults(1)->setFirstResult(1)->getQuery()->execute();
+
+Possibility query parameter number:
+   ->add('where', 'u.id = ?1')
+   ->add('orderBy', 'u.name ASC');
+   ->setParameter(1, 100);
+
+Get Parameters:
+// See example above
+$params = $qb->getParameters(array(1, 2));
+// Equivalent to
+$param  = array($qb->getParameter(1), $qb->getParameter(2));
+
+// get Hint Query 
+$query->setQueryHint('foo', 'bar');
+$query->useResultCache('my_cache_id');
+
+// get 
+$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, 'DoctrineExtensions\Query\MysqlWalker');
+$query->setHint("mysqlWalker.sqlNoCache", true);
+
+// Execute Query
+$result = $query->getResult();
+$single = $query->getSingleResult();
+$array = $query->getArrayResult();
+$scalar = $query->getScalarResult();
+$singleScalar = $query->getSingleScalarResult();
+
+// example7: how to define: SELECT u FROM User u WHERE u.id = ? ORDER BY u.name ASC using QueryBuilder using Expr\* instances
+=> Abstract  query parser
+$qb->add('select', new Expr\Select(array('u')))
+        ->add('from', new Expr\From('User', 'u'))
+        ->add('where', new Expr\Comparison('u.id', '=', '?1'))
+        ->add('orderBy', new Expr\OrderBy('u.name', 'ASC'));
+
+// example8: QueryBuilder port of: "SELECT u FROM User u WHERE u.id = ? OR u.nickname LIKE ? ORDER BY u.surname DESC" using Expr class
+$qb->add('select', new Expr\Select(array('u')))
+        ->add('from', new Expr\From('User', 'u'))
+        ->add('where', $qb->expr()->orX(
+            $qb->expr()->eq('u.id', '?1'),
+            $qb->expr()->like('u.nickname', '?2')
+        ))
+      ->add('orderBy', new Expr\OrderBy('u.name', 'ASC'));
+
+// example8: QueryBuilder port of: "SELECT u FROM User u WHERE u.id = ?1 OR u.nickname LIKE ?2 ORDER BY u.surname DESC" using QueryBuilder helper methods
+$qb->select(array('u')) // string 'u' is converted to array internally
+   ->from('User', 'u')
+   ->where($qb->expr()->orX(
+       $qb->expr()->eq('u.id', '?1'),
+       $qb->expr()->like('u.nickname', '?2')
+   ))
+   ->orderBy('u.surname', 'ASC'));
+
+Bonne pratique:
+Si je veux un resultat et après un autrre en Doctrine: Clone existing:
+$qb   = $em->getRepository('Meetserious\SiteProBundle\Entity\Offers')->createQueryBuilder('u');
+$qb2  = clone $qb;
+$contents   = $qb->setMaxResults(1)->setFirstResult(1)->getQuery()->execute();
+$count      = $qb2->select('count(u.id)')->getQuery()->execute();
+exit(Debug::dump($count));
+
+Other Technique responses cached:
+    $response = $this->render('OdinoBlogBundle:Default:conferences.html.twig', array(
+            'title'       => 'Alessandro Nadalin\'s talks',
+            'description' => 'Talks and slides from Alessandro Nadalin.',
+            'keywords'    => 'alessandro nadalin, odino, dnsee, php',
+        ));
+        $response->setPublic();
+        $response->setSharedMaxAge(86400);
+        $response->setMaxAge(86400);
+
+Functions:
+Si jai ça alors tu me retourne cela sinon tu me retourne cela (Avec une conditions ss traitement antécédant);
+ return ($page >= 0) ? $page : 0;
+
+Laisser le cache d'une autre action faire: => standalone true
+{% render 'OdinoBlogBundle:Blog:menu' with {}, {'standalone': true} %}
+
+Route avec pah params
+{{ path('content', { 'id': content.id, 'slug': content.slug }) }}
+
+
+| localizeddate('full', 'none') }}
+Avec PHP _INTL Module activé: install php5-intl
+
+Tronquer avec le mot respecté (non avec les charactères) et la fin gérer
+Rappel de Truncate Twig:
+{{ chaine | truncate(longueur, preserve, fin) }}
+
+Modification de la chaine en Twig SI la condition:
+{% set maChaine = "Si vous cherchez un expert symfony2, ne cherchez plus, devenez le." %}
+
+
+To Use KNP Paginator:
+ $query = $repository->createQueryBuilder('p')
+                ->select(array('p', 'pc'))
+                ->leftJoin('p.category', 'pc')
+                ->orderBy('p.id', 'DESC')
+                ->getQuery();
+                
+        $adapter = $this->get('knp_paginator.adapter');
+        $adapter->setQuery($query);
+        $adapter->setDistinct(true);
+
+        $paginator = new Paginator($adapter);
+        $paginator->setCurrentPageNumber($this->get('request')->query->get('page', 1));
+        $paginator->setItemCountPerPage(15);
+        $paginator->setPageRange(5);
+
+        return a Response Code:
+        $response = new Response($this->get('club_api.encode')->encode($res), 403);
+        $response = new Response($this->get('club_api.encode')->encode($res), 404);
+
+    Changing Hours in datetime:
+    $date = ($date == null) ? new \DateTime() : new \DateTime($date);
+    $start = clone $date;
+    $end = clone $date;
+    $start->setTime(23,59,59);
+    $end->setTime(0,0,0);
+
+    Other Way to Find:
+    $em = $this->getDoctrine()->getEntityManager();
+    $event = $em->find('ClubEventBundle:Event', $id);
+
+    Retourne null si rien
+        $attend = $em->getRepository('SiteProBundle:Offers')->findOneBy(array(
+            'restaurant' => 743,
+            'blabla' => 123
+            ));
+
+
+    Geo IP CURL:
+function geoip($ip = "127.0.0.1"){
+    
+    if($ip == "127.0.0.1"){$ip = $_SERVER["REMOTE_ADDR"];}//if no IP specified use your own
+
+    $ch = curl_init();//faster than file_get_contents()
+    curl_setopt($ch, CURLOPT_URL,'http://www.geoplugin.net/php.gp?ip='.$ip);//fetch data from geoplugin.net
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    $curl = curl_exec($ch);
+    curl_close($ch);
+    
+    $geoip = unserialize($curl);
+    return $geoip["geoplugin_countryName"]." ".$geoip["geoplugin_city"];//return country and city
+}
+
+    Tri part +  limite
+    $checkins = $em->getRepository('ClubCheckinBundle:Checkin')->findBy(
+        array(),
+        array('id' => 'DESC'),
+        50
+        );
+
+    Date Begin / End:
+    $start = ($start == null) ? new \DateTime(date('Y-m-d 00:00:00')) : new \DateTime($start.' 00:00:00');
+    $end = ($end == null) ? new \DateTime(date('Y-m-d 23:59:59', strtotime('+7 day'))) : new \DateTime($end.' 23:59:59');
+
+    A toute collection, il y a:
+    ->toArray() : convertis un objet en tableau
+
+    Kernel in ContainerAware:
+    $kernel = $this->container->get('kernel');
+    
+    Twig Si un minimum : count(X) >0:
+    {% if not majors|length %}
+        <ul class="symfony_list">
+            <li><a href="{{ url }}">Configure your Symfony Application online</a></li>
+        </p>
+    {% endif %}
+    
+    
+    Charger des routes par rapport au Controller dans le routing:
+    ClubTournamentBundle:
+    resource: "@ClubTournamentBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+    Toujours protected attributes dans les controller DOCUMENTE stp:
+    /**
+        * Le Tableau du Controller
+        * @var array numbers 
+        */
+        protected  $numbers = Array();
+
+        
+        Methodes to camelize & underscore :
+        
+    /**
+     * Camelize a string
+     *
+     * @param string $string The string
+     */
+    protected function camelize($string)
+    {
+        return preg_replace_callback('/(^|_|\.)+(.)/', function ($match) { return ('.' === $match[1] ? '_' : '').strtoupper($match[2]); }, $string);
+    }
+    /**
+     * Undescored a string
+     *
+     * @param string $string The string
+     */
+    protected function underscore($string)
+    {
+        return strtolower(preg_replace(array('/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'), array('\\1_\\2', '\\1_\\2'), strtr($string, '_', '.')));
+    }
+    
+    To Override le système de Controller => Vallable pour JSON Services:
+    -Il faut faire une classe abstraite 
+    
+    
+    public static function slugize($text)
+    {
+        $text = preg_replace('/\W+/', '-', $text);
+        $text = strtolower(trim($text, '-'));
+
+        return $text;
+    }
+    
+    Tests fonctionnels:
+        $this->assertNotEmpty($response->getContent());
+        $this->assertNotEquals(self::NO_TIPS, $response->getContent());
+        
+   Session:     
+    // Clear the session for removing the old requests
+        $session->clear();
+    
+   Autocomplete Action:
+   
+   
+    /**
+     * AutoComplete Action
+     *
+     * @Route("/auto", name="autocomplete")
+     *
+     */
+    public function autocompleteAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $this->getRequest()->query->get('term');
+        $entities = $em->getRepository('AcmeParqueBundle:Especies')->search($query);
+        foreach ($entities as $entity) {
+            $array[] = $entity->getNombrecomun();
+        }
+        $response = new Response();
+        $object = json_encode($array);
+        $response->setContent($object);
+    }
+    
+// Get the request string in searchAction
+        $this->request = $request;
+        $query = preg_replace('(\W)', '', trim($this->request->query->get('query')));
+
+//Delete Form:
+$deleteForm = $this->createDeleteForm($id);
+
+// Toujours après quand tu Find():
+if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Individuos entity.');
+        }
+
+Fonctions statiques pour définir une "Boite à outil" de fonctions qui ne change pas et ne sont pas dynamique:
+
+
+To Use a file static:
+use Symfony\Component\Finder\Finder;
+ $iterator = Finder::create()
+                ->in(__DIR__.'/../Resources/fixtures')
+                ->name('*.xml');
+                
+$files = iterator_to_array($iterator);
+
+
+Redurect vers une URL:
+$this->redirect($this->generateUrl('individuos_edit', array('id' => $id)));
+
+To Search in AJAX:
+    /**
+     * Find/Show an Especie entity.
+     *
+     * @Route("/search", name="individuos_showby", defaults={"_format"="json"})
+     * @Template("AcmeParqueBundle:Main:index.html.twig")
+     */
+    public function searchAction(Request $request)
+    {
+        // Get the request string
+        $this->request = $request;
+        $query = preg_replace('(\W)', '', trim($this->request->query->get('query')));
+
+        // Make the query
+        $em = $this->getDoctrine()->getEntityManager();
+        $repos = $em->getRepository('AcmeParqueBundle:Individuos')->findAll();
+
+        foreach ($repos as $entity) {
+            $array[] = array('nombre' => $entity->getEspecie()->getNombreComun(), 'lat' => $entity->getLatitude(), 'lon' => $entity->getLongitude());
+        }
+        //JSON
+        $response = new Response();
+        $object = json_encode($array);
+
+        // return response
+        $response->setContent($object);
+        return $response;
+
+    }
+    
+    A builder Form Simple:
+    
+     $builder->add('title', 'text', array('label' => 'Post Tile'));
+        $builder->add('image', 'textarea', array('label' => 'Image', 'required' => false));
+        $builder->add('video', 'textarea', array('label' => 'Video', 'required' => false));
+        $builder->add('link', 'text', array('label' => 'link', 'required' => false));
+        $builder->add('body', 'textarea');
+        $builder->add('type', 'choice', array('expanded' => true,
+            'choices' => array('post' => 'Post', 'image' => 'Images', 'video' => 'Video', 'link' => 'Link')));
+        $builder->add('tagString', 'text', array('label' => 'Post Tags'));
+        $builder->add('userid', 'hidden');
+        $builder->add('description', 'textarea', array('label' => 'Post Description'));
+        $builder->add('keywords', 'textarea', array('label' => 'Post Keywords'));
+    
+    
+Twig Filter:
+<li>{{ avi.content| raw}}</li>
+Variable non échappée
+
+Zend Lucene:
+    "Ranked searching" - les meilleurs résultats sont retournés en premier.
+    Plusieurs puissants types de requêtes : phrase, booléen, joker (wildcard), proximité, intervalle et bien d'autres.
+    Recherche par champ spécifique (p. ex. titre, auteur, contenus)
+    
+Zend_Search_Lucene travaille avec des documents comme objets de base pour l'indexation. 
+Un document est divisé en champs possédant un nom et du contenu dans lequel on pourra chercher.
+
+        1.: Include "Zend/Loader.php": include
+        2. Zend_Loader::registerAutoload(); autloader
+        3. Create a new Document to load fields :  new Zend_Search_Lucene_Document();, $doc->addField(Zend_Search_Lucene_Field::Keyword('doctype', 'autogenerated'));
+        4. Requete chargé en Zend Lucene et resultats retournées
+
+        Type de Champs Zend Lucene:
+
+        Les champs Keyword :
+        Les champs Keyword (mot-clé) sont stockés ET indexés.
+        Cela signifie qu'ils peuvent être aussi bien cherchés dans l'index qu'affichés dans les résultats de la recherche.
+        Ils ne sont pas divisés en plusieurs mots par "tokenization". 
+        Les champs d'énumérations dans une base de donnée se transposent généralement assez bien en champs de type Keyword dans Zend_Search_Lucene.
+
+        Les champs UnIndexed:
+        Ne  peuvent pas être utilisés dans la recherche. 
+        En revanche, ils peuvent être retournés dans les résultats. 
+        Des timestamps de base de données, des clés primaires, des chemins de fichiers et d'autres identifiants externes sont autant de bons exemples d'utilisation des champs de type UnIndexed.
+
+        Les champs Binary :
+        Les champs Binary (binaire) ne sont ni "tokenizés", ni indexés, mais ils sont stockés dans le but d'être retournés dans les résultats de recherche. 
+        Ils peuvent être utilisés pour stocker n'importe quelle donnée encodée en chaîne binaire, telle qu'une icône par exemple.
+
+        Les champs Text :
+        Les champs Text (texte) sont stockés, indexés et "tokenizés".
+        Les champs de type Text sont appropriés pour stocker des informations telles que sujets et titres sur lesquels on veut pouvoir effectuer des recherches, mais également les utiliser dans l'affichage des résultats.
+
+        Les champs UnStored:
+        Les champs UnStored sont "tokenizés" et indexés, mais pas stockés dans l'index. 
+        Il est recommandé d'utiliser ce type de champ pour indexer les textes conséquents.
+        Stocker des données implique la création d'index plus volumineux sur le disque. 
+        Donc si vous disposez de données sur lesquelles vous voulez uniquement effectuer des recherches sans nécessairement afficher ces données dans les résultats, utilisez un champ de type UnStored. 
+        Le type UnStored est pratique lorsque vous utilisez un index Zend_Search_Lucene en combinaison avec une base de données relationnelle.
+        Vous pouvez indexer des gros champs de données dans des champs de type UnStored et les extraire de la base de données relationnelle en utilisant un champ séparé en tant qu'identifiant.
+
+Notion de Facette sous Elastica:
+Une facette permet d’ajouter des informations à un résultat de recherche. Imaginez un site marchand. 
+
+Vous cherchez un ou plusieurs mots, par exemple : rasoir.
+Le site vous fournit une liste des éléments correspondants et en général ajoute des informations pour vous aider à affiner votre recherche.
+Par exemple, le nom des fabricants de ces produits avec le nombre d’objets trouvés pour les 10 principaux fabricants. 
+Dans notre cas, on pourrait avoir par exemple :
+Tous (134)
+Philips (35)
+Braun (21)
+Calor (12)
+Ce résultat qui décore notre résultat de recherche se nomme une facette.
+Il existe différents types de facettes. Celle dont nous venons de parler est une facette de type TERMS, c’est à dire qu’Elastic Search va renvoyer la distribution des 10 principaux termes trouvés pour une propriété donnée des documents par rapport à une requête.
+Autres facettes:
+        les facettes RANGE : pour donner une distribution sur un intervale de valeurs. Par exemple, pour reprendre notre exemple de site marchand, vous pouvez utiliser la facette RANGE pour donner la distribution des prix pour les intervales de 0 à 10 €, de 10 à 20 €, de 20 à 50 € et au delà de 50 €.
+        les facettes DATE HISTOGRAM : pour donner un comptage avec un axe X des temps (période à décider : jour, mois, année, …). 
+        Par exemple, le nombre de vente par mois pour un produit donné.
+
+Use JAVA Environment:
+Tu dois définir les variables suivantes dans les paramètres avancés du système : (remplace "jdk1.6.0_18" par le nom/la version de ton propre JDK) 
+
+- PATH => C:\Program Files\Java\jdk1.6.0_18\bin  
+- CLASSPATH => C:\Program Files\Java\jdk1.6.0_18\lib\tools.jar 
+- JAVA_HOME => C:\Program Files\Java\jdk1.6.0_18 
+
+Download ES from the web site (http://www.elasticsearch.org/download)
+Uncompress the archive
+Run bin/elasticsearch from the command line. If you're on a Windows machine, use the .bat file in the bin/ directory.
+
+buildView() - Cette méthode est utilisée pour définir toutes les variables supplémentaires dont vous aurez besoin lors du rendu de votre domaine dans un modèle. Par exemple, dans ChoiceType, une variable multiple est défini et utilisé dans le modèle pour définir (ou pas encore défini) l'attribut multiple sur le champ de sélection. Voir Création d'un modèle pour le champ pour plus de détails.
+
+Doctrine 2 :
+        @DiscriminatorColumn: Cette annotation est une annotation requise pour la super classe la plus haute d'une hiérarchie d'héritage. Il
+        précise les détails de la colonne qui enregistre le nom de la classe, où l'entité est réellement instancié ainsi.
+        Cela marche avec name: Le nom de colonne du discriminateur. Ce nom est également utilisé lors de l'hydratation Array
+        comme clé pour spécifier le nom de classe.
+        @DiscriminatorMap : MM chose mais pour plusieurs attributs d'une entité à discriminer en héritage
+        @Index: Indexifie les colonnes
+        @InheritanceType: Table à hériter : hérite de...
+        @JoinTable:  Si non préciser il prend en consideraion @JoinColumn. Attributs avec: name, joinColumns:, inverseJoinColumns:
+        @OrderBy: A preciser dans une relation OneToany ou ManyToOne: ORDER BY pour Collection
+
+
+Généralités:
+    Doctrine2:
+        Une entité est un objet léger persistant dans le domaine objet.
+        Le constructeur d'une entité est toujours invoqué quand on cré une instance d'une entité: "new".
+        Attention: Sérialisation des entités peut être problématique et n'est pas vraiment recommandé,
+        L'API EntityManager est utilisé pour gérer la persistance de vos objets et d'interroger des objets persistants.
+        Entité Manager:
+            Une EntityManager et les sous-tendent UnitOfWork emploient une stratégie appelée «transactionnelle
+            écriture-behind» qui retarde l'exécution d'instructions SQL dans le but de les exécuter de la manière la plus
+            efficace et de les exécuter à la fin d'une transaction.utilise un UnitOfWork,Vous n'avez généralement pas interagir directement avec un UnitOfWork mais avec
+            l'EntityManager.
+        Les type de champs sont:
+            string : Type qui mappe un SQL VARCHAR à une chaîne de PHP.
+            integer : Type qui mappe un INT SQL à un nombre entier de PHP.
+            smallint : Type qui mappe une base de données SMALLINT à un nombre entier de PHP.
+            bigint : Type qui mappe une base de données BIGINT à une chaîne de PHP.
+            boolean : Type qui mappe un booléen SQL pour un booléen PHP.
+            decimal : Type qui mappe un DECIMAL SQL à un double PHP.
+            date : Type qui mappe un DATETIME SQL à un objet DateTime de PHP.
+            time : Type qui mappe un HEURE SQL à un objet DateTime de PHP.
+            datetime : Type qui mappe un DATETIME SQL / TIMESTAMP à un objet DateTime de PHP.
+            text : Type qui mappe un SQL CLOB à une chaîne de PHP.
+            object : type que les cartes les types SQL CLOB sur un objet PHP serialize() et unserialize()
+            array : type que les cartes les types SQL CLOB sur un objet PHP serialize() et unserialize()
+            float : Type qui mappe une Float SQL (double précision) à un double PHP. IMPORTANT: Fonctionne
+            
+            Tous les types Date supposent que vous êtes exclusivement sur le même fuseau horaire par défaut définies
+            par date_default_timezone_set() ou par le date.timezone de configuration php.ini. Travailler avec les
+            fuseaux horaires différents provoquera des troubles et des comportements inattendus.
+            
+Doctrine2 Annotation pour les column de type décimal:
+            precision : (facultatif, défaut 0) La précision d'une décimale de la colonne (numérique exact). (S'applique
+            seulement si une colonne décimale est utilisée.)
+            scale : (facultatif, défaut 0) L'échelle d'une décimale (exacte numérique) de la colonne. (S'applique
+            seulement si une colonne décimale est utilisée.)
+
+    Type de stratégie de Generate Value:
+            AUTO (par défaut): indique la Doctrine de choisir la stratégie qui est préféré par la plate-forme de bases
+            de données utilisées. Les stratégies privilégiées sont l'identité de MySQL, SQLite et MSSQL et SEQUENCE
+            pour Oracle et PostgreSQL. Cette stratégie offre une portabilité totale.
+            SEQUENCE: Indique Doctrine à utiliser une séquence de bases de données pour la génération d'identité.
+            Cette stratégie ne prévoit pas actuellement la portabilité complète. 
+            IDENTITY: Indique Doctrine à utiliser les colonnes d'identité spéciale dans la base de données qui
+            génèrent une valeur sur l'insertion d'une ligne
+            TABLE: Indique Doctrine à utiliser un tableau distinct pour la production d'identité. Cette stratégie offre
+            une portabilité totale. Cette stratégie n'est pas encore implémenté!
+            NONE: Indique Doctrine que les identifiants sont affectés (et donc généré) par votre code. La cession
+            doit avoir lieu avant une nouvelle entité est passée à EntityManager#persist. NONE est le même que
+            celui de quitter l'arrêt GeneratedValue @entièrement.
+            
+            Pour de type SEQUENCE, qqs oprimisations à prévoir à savoir:
+            
+            /**
+                * @Id
+                * @GeneratedValue(strategy="SEQUENCE")
+                * @SequenceGenerator(sequenceName="tablename_seq", initialValue=1, allocationSize=100)
+                */
+            allocationSize est une fonctionnalité puissante pour optimiser la performance INSERT de Doctrine.
+            allocationSize spécifie de combien les valeurs de la séquence sont incrémentés à chaque fois que la valeur
+            suivante est récupérée. Si cela est plus grand que 1 (un) Doctrine peut générer des valeurs identifiant en
+            amont des entités allocationSizes. Dans l'exemple ci-dessus avec allocationSize=100 Doctrine2 n'aurait
+            besoin que d'accéder à la séquence une seule fois pour générer les identifiants de 100 nouvelles entités.
+            
+            Echapement des mots clefs dans doctrine:
+                    /** @Column(name="`number`", type="integer") */
+                    private $number;
+
+        Regle Generale: Pour Update et Delete, la manière la plus performante et optimisé reste d'utiliser le DQL.         
+        Si toutefois tu utilise des OBJETS pour les batch UPDATE/DELETE: Une solution alternative pour les mises à jour de masse est d'utiliser Query#iterate() qui facilite les
+        itérerations étape par étape des résultats de requête par étape au lieu de charger le résultat entier en
+        mémoire à la fois. 
+        
+        Attention, la maniere la plus performante d'updater un objet reste le dql tel que:
+        $q = $em->createQuery('update MyProject\Model\Manager m set m.salary = m.salary * 0.9');
+        $numUpdated = $q->execute();
+
+        Pour les actions en batch, ne pas oublier clear() pour l'optimsation de performance:
+                    $batchSize = 20;
+                    $i = 0;
+                    $q = $em->createQuery('select u from MyProject\Model\User u');
+                    $iterableResult = $q->iterate();
+                    foreach($iterableResult AS $row) {
+                    $user = $row[0];
+                    $user->increaseCredit();
+                    $user->calculateNewBonuses();
+                    if (($i % $batchSize) == 0) {
+                    $em->flush(); // Executes all updates.
+                    $em->clear(); // Detaches all objects from Doctrine!
+                    }
+                    ++$i;
+                    }
+        Meme chose que pour l'update: la manière la plus optimisé reste  le DQL:
+                $q = $em->createQuery('delete from MyProject\Model\Manager m where m.salary > 100000');
+                $numDeleted = $q->execute();
+        En batch, cela nous donne:
+                $batchSize = 20;
+                $i = 0;
+                $q = $em->createQuery('select u from MyProject\Model\User u');
+                $iterableResult = $q->iterate();
+                while (($row = $iterableResult->next()) !== false) {
+                $em->remove($row[0]);
+                if (($i % $batchSize) == 0) {
+                $em->flush(); // Executes all deletions.
+                $em->clear(); // Detaches all objects from Doctrine!
+                }
+                ++$i;
+                }
+
+        Delete en masse avec iterate:
+            $batchSize = 20;
+            $i = 0;
+            $q = $em->createQuery('select u from MyProject\Model\User u');
+            $iterableResult = $q->iterate();
+            while (($row = $iterableResult->next()) !== false) {
+            $em->remove($row[0]);
+            if (($i % $batchSize) == 0) {
+            $em->flush(); // Executes all deletions.
+            $em->clear(); // Detaches all objects from Doctrine!
+            }
+            ++$i;
+            }
+            
+            Bonnes pratiques:
+            - Ne pas utiliser des propriétés publiques sur les entités: seuls des pretected: La raison en est simple, chaque fois que vous accédez à une propriété publique d'un
+                objet proxy qui n'a pas encore été initialisé la valeur de retour sera nulle.
+            -  Limiter les relations tant que possibles
+            -  Imposer une direction de traversée (éviter les associations bidirectionnelles si possible)
+            -  Éliminer les associations non essentiels
+            - Utiliser les événements judicieusement
+            - Utilisez judicieusement les cascades: bien le penser au départ
+            - Initialiser des collections dans le constructeur : $this->addresses = new ArrayCollection;
+            - Limiter les flush dès que possible
+        
+            Pour Doctrine Cache, il existe différent type de cache:
+             - APC: \Doctrine\Common\Cache\ApcCache();
+             - Memcache: \Doctrine\Common\Cache\MemcacheCache();
+             - XCcahe: \Doctrine\Common\Cache\XcacheCache();
+             - Array Cache: \Doctrine\Common\Cache\ArrayCache(); => LE PLUS POPULAIRE SANS DRIVERS
+             
+             Exemple:
+             $array = array(
+            'key1' => 'value1',
+            'key2' => 'value2'
+            );
+            $cacheDriver->save('my_array', $array);
+            
+            
+            Method save() take 3 arguments:
+                    - $id - l'identifiant du cache
+                    - $data - Le cache d'entrée / de données.
+                    - $lifeT ime - La durée de vie. Si! = False, définit une durée de vie spécifique pour cette entrée de cache (=
+                    null> Durée de vie infinie).
+            
+            Verifie si du cache existe: => par Key Exist: ID du Cache
+                if ($cacheDriver->contains('cache_id')) {
+                        echo 'cache exists';
+                } else {
+                        echo 'cache does not exist';
+                }
+            
+            Get entries by ID Key Cache
+                 $array = $cacheDriver->fetch('my_array');
+            Delete = Fetch
+                    $cacheDriver->delete('my_array'); //by ID Key Cache
+            
+            L'implémentation d'une interface de cache permet :
+            Doctrine\Common\Cache\AbstractCache:
+                fetch($id) - Récupère une entrée à partir du cache.
+                contains($id) - test si une entrée existe dans le cache.
+                save($id, $data, $lifeTime = false) - Met les données dans le cache.
+                delete($id) - Supprime une entrée de cache.
+
+            Déclarer les variables globales pour TWIG:
+            config.yml:
+            twig:
+                globals:
+                    maVariableTwig: %maVariable%
+            Pour le récupérer en Controller:
+                    $maVariable = $this->container->getParameter('maVariable');
+            Pour le récupérer en TWIG
+                    <p> Ma variable: {{ maVariableTwig }}</p>
+
+        Exemple de Lazy Loading:
+            Cela fonctionne en utilisant le schéma de chargement retardé. Au lieu de le passer comme une instance
+            réelle : Author et une collection Doctrine de commentaires, il sera créer des instances de proxy. Seulement si
+            vous accédez à ces proxy pour la première fois, ils passeront par l'EntityManager et loaderont l'état dans la
+            base de données.Ce processus de chargement retardé se passe dans les coulisses.
+            
+        Pour le PERSIST:
+            Si X est une nouvelle entité, il devient gérés. L'entité X seront entrées dans la base comme un résultat
+            de l'opération de vidage.
+            Si X est une entité préexistante gérée, elle est ignorée par l'opération persistent. Cependant, l'opération
+            n'est persistant en cascade pour les entités référencées par X, si les relations de X à ces autres entités
+            sont mappée avec cascade=PERSIST ou cascade=ALL (voir «Persistance transitive»).
+            Si X est une entité supprimée, elle sera gérée.
+            Si X est une entité indépendante ( détachée ), une exception sera levée par un flush.
+            Remove() supprime l'entité du stockage ds EM
+            
+        Pour le REMOVE:
+            Si X est une nouvelle entité, il est ignoré par l'opération de suppression. Toutefois, l'opération de
+            suppression n'est pas en cascade pour les entités référencées par X, si la relation de X à ces autres
+            entités est mappée avec cascade=REMOVE ou cascade=ALL. (Voir «Persistance transitive»)
+            Si X est une entité gérée, l'opération de suppression des causes de devenir enlevé. L'opération de
+            suppression n'est en cascade pour les entités référencées par X, si les relations de X à ces autres entités
+            est mappée avec cascade=REMOVE ou cascade=ALL (voir «Persistance transitive»).
+            Si X est une entité indépendante, une InvalidArgumentException sera levée.
+            Si X est une entité supprimée, elle est ignorée par l'opération de suppression.
+            Une entité X retiré sera retirée de la base de données à la suite de l'opération de vidage.
+            
+        Pour le DETACH:
+            Si X est une entité gérée, l'opération de détachement lui fait se détacher. L'opération de détachement est
+            en cascade à des entités référencées par X, si les relations de X à ces autres entités est mappée avec
+            cascade = détacher ou cascade = ALL (voir «Persistance transitive»). Les entités qui précédemment
+            référencé X continuera de faire référence X.
+            Si X est une nouvelle entité ou détaché, il est ignoré par l'opération de détachement.
+            Si X est une entité supprimée, l'opération de détachement est en cascade à des entités référencées par
+            X, si les relations de X à ces autres entités est mappée avec cascade = détacher ou cascade = ALL (voir
+            «Persistance transitive»). Les entités qui précédemment référencé X continuera de faire référence X.
+       
+        Pour le MERGE:
+            Si X est une entité indépendante, l'état de X est copié sur une entité X pré-existante par exemple réussi
+            de la même identité.
+            Si X est une nouvelle instance d'entité, une nouvelle copie gérée X »sera créé et l'état de X est copié sur
+            cet exemple réussi.
+            Si X est une instance d'entité supprimée, une InvalidArgumentException sera levée.
+            Si X est une entité gérée, elle est ignorée par l'opération de fusion, cependant, l'opération de fusion est
+            montés en cascade pour les entités référencées par des relations de X si ces relations ont été
+            cartographiés avec la cascade élément de valeur MERGE ou ALL (voir «Persistance transitive») .
+            Pour toutes les entités Y référencées par des relations de X ayant la valeur de l'élément fusion en
+            cascade ou ALL, Y est fusionnée récursivement comme Y '. Pour tous Y tels référencés par X, X 'est fixé
+            pour faire référence à Y '. (Notez que si X est géré alors X est le même objet que X '.)
+            Si X est une entité fusionnée à X ', avec une référence à une autre entité Y, où cascade=MERGE ou
+            cascade=ALL n'est pas spécifié, alors la navigation de la même association de X' donne une référence à
+            un objet Y géré "avec le même que l'identité persistante Y.
+    
+    La taille d'une UnitOfWork se réfère principalement au nombre des entités gérées à un point précis dans
+    le temps.
+    Le coute de Flush() dépend de:
+        - La taille de l'actuelle UnitOfWork EntityManager est.
+        - La configuration du suivi des modifications
+        
+    Get Size of UnitOfWork : $UowSize = $em->getUnitOfWork()->size ();
+    Attention, Manipuler directement une UnitOfWork n'est pas recommandée.
+            
+    Eager(chargement immedia) != Lazy(chargement retardé): chanrger en dur les associations: ils seront automatiquement chargés avec l'entité interrogée et donc
+    immédiatement disponible pour votre application      
+
+    DQL: La méthode la plus puissante et flexible pour interroger les objets persistants est la Doctrine Query
+    Language, un langage de requête objet. DQL vous permet d'interroger des objets persistants en langage
+    bjets. DQL comprend les classes, les champs, les successions et les associations. DQL est syntaxiquement
+    très similaire à l'instruction SQL familière mais elle n'est pas SQL.
+
+    Native Requete SQL:
+    Comme une alternative à DQL ou comme solution de repli pour des instructions SQL spéciale requêtes natives
+    peuvent être utilisés. Les requêtes natives sont construits en utilisant une requête SQL artisanal et un
+    resultSetMapping qui décrit comment le jeu de résultats SQL doit être transformé par la doctrine. Plus
+    d'informations sur les requêtes natives peuvent être trouvées dans le chapitre Doctrine query.
+          
+    Ne pas oublier ds le remove() de Doctrine
+    Si une entité est enlevée d'une collection, l'association est enlevée, et non l'entité elle-même. Une
+    collection d'entités représente toujours que l'association d'entités contenant, et non pas l'entité ellemême.
+    Collection-évaluées champs persistants doivent être des instances de l'interface
+    Doctrine\Common\Collections\Collection
+          
+    Toujours 2 manières de remover un elements d'association:
+    // Remove by Elements
+        $user->getComments()->removeElement($comment);
+        $comment->setAuthor(null);
+        //OR Remove by Key
+        $user->getComments()->remove($ithComment);
+        $comment->setAuthor(null);
+        Lorsque vous travaillez avec des collections, gardez à l'esprit qu'une collection est essentiellement une carte
+        ordonnée (comme un tableau PHP). C'est pourquoi l'opération remove accepte un index/clef.
+        removeElement est une méthode distincte qui a O(n) la complexité en utilisant array_search, où n est la
+        taille de la carte.
+        
+        Utilisation de clear() dans une Collection:
+            Vous pouvez également effacer le contenu d'une collection en utilisant Collections::clear(). Vous devez être
+            conscient que l'utilisation de cette méthode peut conduire à une base de données optimisée. Supprimer ou
+            mettre à jour pendant l'opération de flush qui ne sont pas conscients des entités qui ont été ré-ajoutée à la
+            collection.
+
+        Ne pas oublier les déclaration de ArrayCollection, les déclaration de Array() ainsi que les attributs de mééthodes
+        
+        Limit avec les requetes en Repository: ==>Bonne sntax:
+        
+        $qb = $this->createQueryBuilder('c')
+        ->select('c')
+        ->addOrderBy('c.id', 'DESC');
+        if (false === is_null($limit))
+            $qb->setMaxResults($limit);
+        
+        Sugify Method:
+        public function slugify($text)
+        {
+            // replace non letter or digits by -
+            $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
+            // trim
+            $text = trim($text, '-');
+            // transliterate
+            if (function_exists('iconv'))
+            {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+            }
+            // lowercase
+            $text = strtolower($text);
+            // remove unwanted characters
+            $text = preg_replace('#[^-\w]+#', '', $text);
+            if (empty($text))
+            conve rte d by We b2PDFC onve rt.com
+            {
+            return 'n-a';
+            }
+            return $text;
+        }
+        
+        Différnce enre les env de developpement:
+            Le rôle de ces environnements est inclus dans leur nom. Lorsque l’on développe une application, il est utile
+            d’avoir la barre de débug à l’acran afin d’avoir des erreurs et des exceptions détaillées, alors qu’en production
+            on ne veut rien de tout cela. En fait, afficher ces informations serait même une faille de sécurité car de
+            nombreux détails relatifs au comportement interne de l’application et du serveur seraient disponibles. En
+            production, il serait plus judicieux d’afficher des pages d’erreur personnalisées avec des messages simples,
+            tout en stockant discrètement les messages d’erreurs dans un fichier log. Il peut également être utile
+            d’activer le cache afin que l’application tourne au maximum de ses capacités. En débug, l’activer serait un
+            véritable cauchemar car il faudrait vider le cache à chaque modification ou presque, ce qui fait au final perdre
+            plus de temps qu’il n’en fait gagner et peut être source d’erreurs.
+        
+        $kernel = new AppKernel('dev', true); => Démarre Symfony2 par le Controller de façade
+        
+        Assetic Implement: 
+            Assetic se charge de 2 aspects de la gestion des fichiers externes, les assets tels que images, feuilles de
+            style ou fichiers JavaScript, et les filtres qui peuvent être appliqués sur ces assets. Ces filtres permettent de
+            réaliser des tâches utiles tel que la minification des fichiers CSS ou JavaScript, ou bien passer les fichiers
+            CoffeeScript à travers un compilateur, et comibiner les assets ensemble afin de réduire le nombre de requêtes
+            HTTP faites vers le serveur.
+        
+        Assets:Utiliser le Debug False pour voir quel fichier utiliser
+            Use CSS Bloc Asset:
+                {% block stylesheets %}
+                {{ parent () }}
+                {% stylesheets
+                '@BloggerBlogBundle/Resources/public/css/blog.css'
+                '@BloggerBlogBundle/Resources/public/css/sidebar.css'
+                debug=false
+                %}
+                <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+                {% endstylesheets %}
+                {% endblock %}
+        
+            Use JS Bloc Asset:
+               {% javascripts
+                    '@BloggerBlogBundle/Resources/public/js/*'
+                    %}
+                    <script type="text/javascript" src="{{ asset_url }}"></script>
+                    {% endjavascripts %}
+
+            Pour les Validations de Form, possibilité de les figés ds les FormType en Dynamique:
+            $builder->add('name', 'text', array(
+                'validation_constraint' => new NotBlank(),
+            ));
+            //Propriétés Entierement Customizables
+            $builder->add('name', 'text', array(
+                'constraints' => new NotBlank(array('groups' => 'Custom')),
+            ));
+            //Meme en Array de Validations:
+            $builder->add('name', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new MinLength(3),
+                ),
+            ));
+            
+        Rappel de validation de juste une entrée:
+        $emailConstraint = new Email();
+            // all constraint "options" can be set this way
+            $emailConstraint->message = 'Invalid email address';
+            // use the validator to validate the value
+            $errorList = $this->get('validator')->validateValue($email, $emailConstraint);
+            if (count($errorList) == 0) {
+            // this IS a valid email address, do something
+            } else {
+            // this is *not* a valid email address
+            $errorMessage = $errorList[0]->getMessage()
+            // do something with the error
+            }
+            
+        Association Extra-Lazy:
+            Avec Doctrine 2.1 une fonctionnalité appelée Extra Lazy est introduite pour les associations. Les
+            associations sont marquées comme Lazy par défaut, ce qui signifie que la collection entière d'une
+            association existe la première fois de son accès. Si vous marquez une association comme Extra Lazy de
+            méthodes suivantes, les collections peuvent être appelés sans déclencher une charge complète de la
+            collection:
+            Collection#contains($entity)
+            Collection#count()
+            Collection#slice($offset, $length = null)
+            Noter:
+            /**
+                * @ManyToMany(targetEntity="CmsUser", mappedBy="groups", fetch="EXTRA_LAZY")
+                */
+                public $users;
+                    
+        Les Test unitaires s'appliuqment PRINCIPALEMENT à l'Entité et à son Repository.
+        Les test unitaires peuvent se faire également sous les Fcts de Twig:
+        
+        Exemple: ==> Test de l'entité pour la fct slugify:
+        public function testSlugify()
+        {
+            $blog = new Blog();
+            $this->assertEquals('hello-world', $blog->slugify('Hello World'));
+            $this->assertEquals('a day with symfony2', $blog->slugify('A Day With Symfony2'));
+        }
+        
+        Exemple: => Test du filtre testCreatedAgo
+        // src/Blogger/BlogBundle/Tests/Twig/Extensions/BloggerBlogExtensionTest.php
+                namespace Blogger\BlogBundle\Tests\Twig\Extensions;
+                use Blogger\BlogBundle\Twig\Extensions\BloggerBlogExtension;
+                class BloggerBlogExtensionTest extends \PHPUnit_Framework_TestCase
+                {
+                    public function testCreatedAgo()
+                    {
+                        $blog = new BloggerBlogExtension();
+                        $this->assertEquals("0 seconds ago", $blog->createdAgo(new \DateTime()));
+                        $this->assertEquals("34 seconds ago", $blog->createdAgo($this->getDateTime(-34)));
+                        $this->assertEquals("1 minute ago", $blog->createdAgo($this->getDateTime(-60)));
+                        $this->assertEquals("2 minutes ago", $blog->createdAgo($this->getDateTime(-120)));
+                        $this->assertEquals("1 hour ago", $blog->createdAgo($this->getDateTime(-3600)));
+                        $this->assertEquals("1 hour ago", $blog->createdAgo($this->getDateTime(-3601)));
+                        $this->assertEquals("2 hours ago", $blog->createdAgo($this->getDateTime(-7200)));
+                        // Cannot create time in the future
+                        $this->setExpectedException('\Exception');
+                            $blog->createdAgo($this->getDateTime(60));
+                    }
+                    protected function getDateTime($delta)
+                    {
+                        return new \DateTime(date("Y-m-d H:i:s", time()+$delta));
+                    }
+                }
+        
+                UnitOfWork: Doctrine est une banque de données du mappeur qui tente d'atteindre la persistance-ignorance (PI).
+                PHP dans une base de données relationnelle qui ne sont pas
+                nécessairement sur la base de données du tout. Une question naturelle serait désormais, «Comment Doctrine
+                détecte des objets qui ont changé?".
+
+                QQ Def de FormType:
+                buildForm() - Chaque type de champ est une méthode buildForm, qui est l'endroit où vous configurez et
+                construisez n'importe quel domaine et champ. Remarquez que c'est la même méthode que vous utilisez
+                pour configurer vos formulaires, et il fonctionne de la même façon ici.
+                buildView() - Cette méthode est utilisée pour définir toutes les variables supplémentaires dont vous
+                aurez besoin lors du rendu de votre domaine dans un modèle. Par exemple, dans ChoiceType, une variable
+                conve rte d by We b2PDFC onve rt.com
+                multiple est défini et utilisé dans le modèle pour définir (ou pas encore défini) l'attribut multiple sur le
+                champ de sélection. Voir Création d'un modèle pour le champ pour plus de détails.
+                getDefaultOptions() - Celle-ci définit les options de votre type de formulaire qui peuvent être utilisés
+                dans buildForm() et buildView(). Il y a beaucoup d'options communes à tous les domaines (voir FieldType
+                ), mais vous pouvez créer d'autres dont vous avez besoin ici.
+                
+                ElasticaBundle:
+                 - RestFull
+                 - NoSQL
+                 - JSON Based
+                 - Genereate Schema
+                 
+                 Get EM:
+                use Doctrine\Common\Persistence\ManagerRegistry; => EM
+                Utiliser le ManagerRegistry pour : getConnection(), getDefaultEntityManagerName(), getEntityManager(string $name = null),getEntityManagers(),
+                getRepository(string $entityName, string $entityManagerName = null)
+                
+                Data serialize Doctrine:
+                Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector => serialize(), unserialize()
+                
+                Form
+                Symfony\Bridge\Doctrine\Form\ChoiceList\EntityChoiceList => getChoices()
+                 
+                In FormType:
+                buildView(FormView $view, FormInterface $form)
+                Builds the form view.       
+                
+                createBuilder(string $name, FormFactoryInterface $factory, array $options)
+                Returns a builder for the current type.
+
+                getAllowedOptionValues(array $options)
+                Returns the allowed option values for each option (if any).
+                
+                
+                Method avec  FOSRestBundle:
+                public function listGroupsAction(){
+                $em = $this->getDoctrine()->getEntityManager()->getRepository('myGroupingBundle:Group');    
+                $groups= $em->findAllGroups();
+
+                $view = View::create()  
+                    ->setStatusCode(200); 
+                    if ('html' === $this->getRequest()->getRequestFormat()){
+                        $view->setData(array('groups' => $groups));
+                    }else{
+                        $view->setData($groups);  
+                    }
+                    $view->setTemplate('myGroupingBundle:group:list.html.twig');
+
+                    return $this->get('fos_rest.view_handler')->handle($view);  
+                }
+                
+        Get URL in Controller:
+        $uri = $this->generateUrl(
+                        'admin_testimonial', 
+                        array('id' => $testimonial->getId())
+            );
+
+        Sur Chaque Vues:
+        {% block title %}Miguel Perez &bull; {{ post.title }}{% endblock %}
+        {% block description %}{{ post.description }}{% endblock %}
+        {% block keywords %}{{ post.keywords }}{% endblock %}
+
+        Override Bundle:
+            use Symfony\Component\HttpKernel\Bundle\Bundle;
+            class AcmeUserBundle extends Bundle
+            {
+                public function getParent()
+                {
+                    return 'FOSUserBundle';
+                }
+            }
+        
+        Override Controller of Bundle (comme PDF, etc..):
+            use Symfony\Component\HttpKernel\Bundle\Bundle;
+            class RegistrationController extends BaseController
+            {
+                public function registerAction()
+                {
+                    $response = parent::registerAction();
+                    return $response;
+                }
+            }
+            
+        Overriding Resources: Templates, Routing, Validation, etc:
+            The overriding of resources only works when you refer to resources with the @FosUserBundle/Resources/config/routing/security.xml method.
+            If you refer to resources without using the @BundleName shortcut, they can't be overridden in this way.
+       
+        View:
+            app/Resources/AcmeBlogBundle/views/layout.html.twig
+            src/Acme/BlogBundle/Resources/views/layout.html.twig
+        
+        Accéder à l'Entité Manager dans le Form:
+             public function buildForm(FormBuilder $builder, array $options)
+            {  $entityManager = $options['em']; }
+        
+    Methode OfferTest:
+                /**
+     *  Load Revenus in Dashboard
+     */
+    public function loadDashbordOffersRevenus() {
+//        $query = $this->createQueryBuilder('u')
+//            ->leftJoin('u.offersDeclinaisons', 'v')
+//            ->where('u.state = :state')
+//            ->andWhere('v.active = :active')
+//            ->andWhere('v.dateMeal >= :datemeal')
+//            ->setParameter('state', '4')
+//            ->setParameter('active', '1')
+//            ->setParameter('datemeal', new \DateTime('-2days'))
+//            ->orderBy('v.dateMeal', 'ASC');
+        // Return result in Single Scalar Result
+        return $query->getQuery()->get();
+
+        // Return result in Array Populated
+    }
+    
+    loadAvisByUser => Methodes Sale
+    
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+        // move takes the target directory and then the target filename to move to
+//        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        // compute a random name and try to guess the extension (more secure)
+//            $extension = $file->guessExtension();
+//            if (!$extension) {
+//                // extension cannot be guessed
+//                $extension = 'bin';
+//            }
+//            $extension = $this->file->guessExtension() == null ? $this->file->getExtension() : $this->file->guessExtension();
+
+
+    /**
+     * Validates ad addition form. It's called by Callback validator.
+     * @access public
+     * @param $context Symfony\Component\Validator\ExecutionContext Currenct context.
+     * @return void
+     */
+//  public function validAdd(ExecutionContext $context)
+//  {
+//       $medias = $this->getMedias();
+//            $propertyPath = $context->getPropertyPath() . '.medias';
+//            $context->setPropertyPath($propertyPath);
+//            $context->addViolation('Tu as mis salope!', array(), null);
+//  }
+//   /**
+//   * Form constraints.
+//   */
+//  public static function loadValidatorMetadata(ClassMetadata $metadata)
+//  {
+//    // for do simple, we don't use constraints on fields loaded statically
+////    $metadata->addConstraint(new Callback(array('methods' => array('validAdd'))));
+//  } 
+   
+
+Exemple Ajax de test:
+         if($request->isXmlHttpRequest()){ }
+        <script>
+        $(".loading").hide();
+        $("#form_recherche").submit(function(){ 
+            $(".loading").show();
+            var motcle = $("#acteurrecherche_motcle").val();
+            var DATA = 'motcle=' + motcle;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('myapp_acteur_rechercher')}}",
+                data: DATA,
+                cache: false,
+                success: function(data){
+                $('#resultats_recherche').html(data);
+                $(".loading").hide();
+                }
+            });    
+            return false;
+        });
+        </script>
+
+        
+        $calendar = new CalendarLoad();
+        $week = $request->query->get('week', date('d-m-Y'));
+
+        $datetime = new \Datetime($week);
+        $day_of_week = $datetime->format('N');
+        if ($day_of_week == 1) {
+            $week = $datetime;
+        } else {
+            $week = new \DateTime('last monday midnight  ' . $week);
+        }
+
+        $prevMonday = new \Datetime('last monday midnight ' . $week->format('Y-m-d'));
+        $nextMonday = new \Datetime('next monday midnight ' . $week->format('Y-m-d'));
+
+        $declis = Array();
+        
+        Get Referer:
+         // on tente de rediriger vers la page d'origine
+    $url = $this->container->get('request')->headers->get('referer');
+    if(empty($url)) {
+        $url = $this->container->get('router')->generate('myapp_accueil');
+    }
+    return new RedirectResponse($url);
+    
+    use Symfony\Component\Serializer\Serializer,
+    Symfony\Component\Serializer\Encoder\JsonEncoder,
+    Symfony\Component\Serializer\Encoder\XmlEncoder;
+
+$serializer = new Serializer(array(
+    new FooNormalizer,
+    new BarNormalizer
+  ), array(
+    'ajax_json' => new JsonEncoder(),
+    'api_xml' => new XmlEncoder()
+  ));
+    
+  
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new 
+JsonEncoder()));
+$json = $serializer->serialize($entity, 'json');
+
+$serializer->serialize($obj, 'xml')
+$serializer->decode($data, 'xml')
+$serializer->denormalize($data, 'Class', 'xml')
+
+$serializer = $this->container->get('serializer');
+$reports = $serializer->serialize($doctrineobject, 'json');
+return new Response($doctrineobject);
+
+
+with php 5.4
+implements JsonSerializable
+public function jsonSerialize()
+   {
+       return array(
+           'name' => $this->name,
+           'login'=> $this->login,
+       );
+   }
+
+   Charger un YAML en interne:
+    $configuration = new Configuration();
+    $config = $this->processConfiguration($configuration, $configs);
+    $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+    $loader->load('services.xml');
+
+Charger un Yaml en externe:
+use Symfony \Component\Yaml\Yaml
+
+$config = Yaml::parse('machin.yml')
+or
+$config = Yaml::dump($config) for transform a array in YAML
+print_r($config)
+    
+//  Update composer 
+composer self-update && composer update nothing && composer install --profile
+
+//  FileSystem Component rewrite php file handle
+$fs = new Symfony\Component\Filesystem\Filesystem();
+$fs->mkdir(array($cache1, $cache2));
+$fs->touch($cache1.'/routing.php');
+$fs->copy(
+            $cache1.'/routing.php',
+            $cache2.'/routing.old'
+        )
+$fs->remove($cache1)
+
+// Process : execute a process function with Timeline
+
+use Symfony\Component\Process\Process;
+$process = new Process('ls -lsa');
+$process->setTimeout(3600);
+$process->run();
+if (!$process->isSuccessful()) {
+    throw new RuntimeException($process->getErrorOutput());
+}
+print $process->getOutput();
+//IN 2.1:
+use Symfony\Component\Process\ProcessBuilder;
+
+$builder = new ProcessBuilder(array('ls', '-lsa'));
+$builder->getProcess()->run();
+
+Charger un XML externes:
+    $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+    $loader->load('services.xml');
+
+Charger un fichier avec FileLocator:
+    use Symfony\Component\Config\FileLocator;
+    $configDirectories = array(__DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'config');
+    $locator = new FileLocator($configDirectories);
+    $yamlUserFiles = $locator->locate('users.yml', null, false);    
+    
+Update a composer: php composer.phar update     
+
+Attention au rewrite de twig: Regle:
+/Resources/NamespaceNomduBundle/views/FormFlow/sdfiidf.html.twig
+
+Dans services.xml: trop de services mis en clair: les séparé:
+    ...Extension:
+         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('form_flow.xml');
+        $loader->load('twig.xml');
+    Puis les séparer...
+                
+    
+* buildForm() => Each field type has a buildForm method, which is where you configure and build any field(s). Notice that this is the same method you use to setup your forms, and it works the same here.
+* buildView() => This method is used to set any extra variables you'll need when rendering your field in a template. For example, in ChoiceType, a multiple variable is set and used in the template to set (or not set) the multiple attribute on the select field. See Creating a Template for the Field for more details.
+* setDefaultOptions() => This defines options for your form type that can be used in buildForm() and buildView(). There are a lot of options common to all fields (see form Field Type), but you can create any others that you need here.
+    
+New in Twig: Import the blocks by adding a use tag in the template where you're rendering the form:
+{% use 'form_div_layout.html.twig' with integer_widget as base_integer_widget %}
+Très interressant pour import des block et faire de l'héritage mutliple
+with / as => renomer en alias pour éviter les conflits
+
+
+Faire appel à un block dans un autre block:
+ {% block ok %}
+        {{ block('autre_block') }}
+{% endblock %}
+
+Très interessant : pour accéder à une valeur en twig passé:
+    {# Dans un template twig, où form est un FormView #}
+    {{ form.get('value').id }}
+    {# Même chose pour une boucle sur une collection d'items de formulaire #}
+    {% for obj in form.objCollection %}
+        {{ obj.get('value').id }}
+    {% endfor %}
+
+<div id="page">Gérer mes offres</div>
+	</div>
+	<footer id="footer">
+		<nav id="nav">
+			<ul class="left">
+				<li>
+					<a>Réceptionner mes clients</a>
+				</li>
+				<li>
+					<a>Gérer mes offres</a>
+				</li>
+				<li>
+					<a>Mes revenus</a>
+				</li>
+				<li>
+					<a>Les avis (0)</a>
+				</li>
+			</ul>
+			<ul class="right">
+				<li>
+					<a>Mes infos</a>
+				</li>
+				<li>
+					<a>Aide</a>
+				</li>
+                                
+                                => Menu doit etre includer
+    
+     {#<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
+        <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
+        <script type="text/javascript">
+        {# $("div").live( 'pagehide', function (event, ui) {
+            $.mobile.urlHistory.stack = [];
+            $.mobile.urlstack = [];
+            $( '.ui-page' ).not( '.ui-page-active' ).remove();
+            var $this = $(this);  
+                if ($this.attr('ID') !== undefined && $this.attr('data-cache') !== undefined && $this.attr('data-cache') == "never") {  
+                var page = $this.attr('ID');  
+                $(document.getElementById(page)).remove();  
+                }  
+        });           
+    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=fr&region=FR"></script>
+    <script type="text/javascript" src="http://gmap3.net/js/gmap3-4.1-min.js"></script>#}   
+    
+            
+    {#<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/black-tie/jquery-ui.css" type="text/css" />#}
+        {# 
+                         '@SiteProBundle/Resources/public/css/bootstrap.min.css' 
+                        '@SiteProBundle/Resources/public/css/bootstrap-responsive.min.css' 
+                        '@SiteProBundle/Resources/public/css/bootstrap-yii.css' 
+        #}
+          {# <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/docs.css" type="text/css" media="screen" /> #}
+
+    {#<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://tablesorter.com/addons/pager/jquery.tablesorter.pager.js"></script> 
+En tete du Layout:
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<title>{% block title %} Miguel Perez {% endblock %}</title>
+<meta name="description" content="{% block description%}Miguel Perez Back-End developer residing in the New York area.{% endblock %}">
+<meta name="keywords" content="{% block keywords%}Miguel Perez, PHP, Symfony2, Web Developer, New york, Back-End Devepoer, New York{% endblock %}">
+<meta name="geo.region" content="US-NY" />
+<meta name="geo.placename" content="New York" />
+<meta name="geo.position" content="40.714353;-74.005973" />
+<meta name="ICBM" content="40.714353, -74.005973" />
+</head>
+
+
+Afin de tester la bonne configuration de doctrine dans un environnement de production : php app/console doctrine:ensure-production-settings --env=prod
+
+
+Persistance: Un objet peut etre modifié même après sa persistance:
+ne pas oublier que quand tu get un objet, tu n'est pas obliger de le persister car il est déja dans le Unit Of Work:
+ $em = $this->container->get('doctrine.orm.entity_manager');
+        $obj = $em->getRepository('AlphaBetaBundle:Villes')->findOneByNomVille('Abidjan');
+        $ville = $obj;
+        $ville->setNomVille('Yaounda');
+        $em->flush();
+
+
+
+A PHP callable is a PHP variable that can be used by the call_user_func() function and returns true when passed to the is_callable() function. It can be a \Closure instance, an object implementing an __invoke method (which is what closures are in fact), a string representing a function, or an array representing an object method or a class method.
+
+exemple:
+Un « callable » PHP qui sera notifié lorsqu'un évènement qu'il écoute est lancé ;
+
+ array($listener, 'onFooAction')
+=> appel onFooAction avec $listener
+
+
+
+Petite def du Dispatcher que j'aime bien:
+The dispatcher is the central object of the event dispatcher system. In general, a single dispatcher is created, which maintains a registry of listeners. When an event is dispatched via the dispatcher, it notifies all listeners registered with that event.
+
+Exemple sous FormFlow Bundle:
+if ($this->eventDispatcher->hasListeners(FormFlowEvents::PRE_BIND)) {
+            $event = new PreBindEvent($this);
+            $this->eventDispatcher->dispatch(FormFlowEvents::PRE_BIND, $event);
+        }
+
+Tous les LifeCycles stocké dans une classe parent tel que:
+const PRE_BIND = 'flow.pre_bind';
+const POST_BIND_REQUEST = 'flow.post_bind_request';
+const POST_BIND_SAVED_DATA = 'flow.post_bind_saved_data';
+const POST_VALIDATE = 'flow.post_validate';
+
+
+Très intéressant pour savoir ce qui se passe derrière l'Event enregistrer en services:
+
+http://symfony.com/doc/2.0/components/event_dispatcher/introduction.html
+
+1. Create a Static Events Class pour les modele au Events => common events can be centralized
+2.  Create an event object qui étende le modèle de classe
+3.  implémentation du Dispatcher qui notifie tous les écouteurs d'un évenement donné: the name of the event to dispatch and the Event instance to pass to each listener of that even.
+4. ..
+
+Voila une très belle page:
+http://symfony.com/fr/doc/current/components/event_dispatcher/introduction.html
+
+Déroulement:
+1. Un listener ou écouteur en français (objet PHP) informe un objet répartiteur central qu'il souhaite écouter l'évènement kernel.response ;
+2. A un moment donné, le noyau Symfony2 dit à l'objet répartiteur de « répartir » (« dispatch » en anglais) l'évènement kernel.response, en passant avec lui un objet Event qui a accès à l'objet Response ;
+3. Le répartiteur notifie (c-a-d appelle une méthode) tous les « listeners » de l'évènement kernel.response, autorisant chacun d'entre eux à effectuer des modifications sur l'objet Response.
+
+Lorsqu'un évènement est réparti, il est identifié par un nom unique (par exemple : kernel.response), que plusieurs « listeners » peuvent écouter. Une instance de Event est aussi créée et passée à tous les « listeners ». Comme vous le verrez plus tard, l'objet Event lui-même contient souvent des données à propos de l'évènement qui est réparti.
+
+1er etape:
+
+Pour tirer parti d'un évènement existant, vous avez besoin de connecter un « listener » au répartiteur afin qu'il soit notifié lorsque l'évènement est réparti. Un appel à la méthode addListener() du répartiteur associe n'importe quel « callable » PHP valide à un évènement:
+
+2eme etape:
+
+Une fois qu'un « listener » est enregistré dans le répartiteur, il attend que l'évènement soit notifié.
+
+3eme etape:
+
+La méthode dispatch() notifie tous les « listeners » de l'évènement donné.
+
+Au final:
+
+Maintenant, tout « listener » de l'évènement store.order va recevoir le FilterOrderEvent et avoir accès à l'objet Order via la méthode getOrder:
+
+// la commande est d'une façon ou d'une autre créée ou récupérée
+$order = new Order();
+// ...
+
+// crée le FilterOrderEvent et le répartit
+$event = new FilterOrderEvent($order);
+$dispatcher->dispatch(StoreEvents::STORE_ORDER, $event);
+
+Constructeur:
+Utiliser l'injection via le constructeur propose plusieurs avantages :
+Si la dépendance est une condition requise et que la classe ne peut pas fonctionner sans elle, alors l'injecter via le constructeur permet de s'assurer que la dépendance sera présente lorsque la classe sera utilisée puisque la classe ne peut pas être construite sans elle.
+Le constructeur est appelé seulement une fois lorsque l'objet est créé, donc vous pouvez être sûr que la dépendance ne changera pas pendant la durée de vie de l'objet.
+Ces avantages signifient que l'injection via constructeur n'est pas envisageable pour travailler avec des dépendances optionnelles. Ce type d'injection est aussi plus difficile à utiliser avec les hiérarchies de classe : si une classe utilise l'injection via le constructeur, alors l'étendre et surcharger le constructeur devient problématique.
+
+
+Mutateur:
+Une autre façon d'écouter des évènements est via un souscripteur d'évènement.
+Un souscripteur d'évènement est une classe PHP qui est capable de dire au répartiteur exactement à quels évènements elle souhaite s'inscrire.
+ Elle implémente l'interface EventSubscriberInterface, qui requiert une unique méthode nommée getSubscribedEvents
+. Prenez l'exemple suivant d'un souscripteur qui s'inscrit aux évènements kernel.response et store.order
+
+
+Cette fois les avantages sont :
+L'injection par mutateur fonctionne bien avec les dépendances optionnelles. Si vous n'avez pas besoin de la dépendance, alors n'appelez pas le mutateur, tout simplement ;
+Vous pouvez appeler le mutateur plusieurs fois. Cela est particulièrement utile si la méthode ajoute la dépendance dans une collection. Vous pouvez ainsi avoir un nombre variable de dépendances.
+Les inconvénients d'une injection par mutateur sont :
+Le mutateur peut encore être appelé après la construction donc vous ne pouvez pas être sûr que la dépendance n'ait pas été remplacée pendant la durée de vie de l'objet (excepté si vous ajoutez une vérification explicite dans la méthode mutateur qui contrôle s'il n'a pas déjà été appelé) ;
+Vous ne pouvez pas être sûr que le mutateur sera appelé et vous devez ajouter des contrôles qui vérifient que toute dépendance requise est injectée.
+
+
+                </pre>
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,156 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+
+<h1>Users</h1>
+
+<table class="table" class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Cityid</th>
+            <td>{{ entity.cityId }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ entity.gender }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ entity.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ entity.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>Tel</th>
+            <td>{{ entity.tel }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ entity.password }}</td>
+        </tr>
+        <tr>
+            <th>Dob</th>
+            <td>{{ entity.dob|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Optin</th>
+            <td>{{ entity.optin }}</td>
+        </tr>
+        <tr>
+            <th>Ip</th>
+            <td>{{ entity.ip }}</td>
+        </tr>
+        <tr>
+            <th>Salt</th>
+            <td>{{ entity.salt }}</td>
+        </tr>
+        <tr>
+            <th>Token</th>
+            <td>{{ entity.token }}</td>
+        </tr>
+        <tr>
+            <th>Don</th>
+            <td>{{ entity.don }}</td>
+        </tr>
+        <tr>
+            <th>Q1</th>
+            <td>{{ entity.q1 }}</td>
+        </tr>
+        <tr>
+            <th>Q2</th>
+            <td>{{ entity.q2 }}</td>
+        </tr>
+        <tr>
+            <th>Q3</th>
+            <td>{{ entity.q3 }}</td>
+        </tr>
+        <tr>
+            <th>Q4</th>
+            <td>{{ entity.q4 }}</td>
+        </tr>
+        <tr>
+            <th>Picture</th>
+            <td>{{ entity.picture }}</td>
+        </tr>
+        <tr>
+            <th>Updatedat</th>
+            <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Createdat</th>
+            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Dateauth</th>
+            <td>{{ entity.dateAuth|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Counterupdated</th>
+            <td>{{ entity.counterUpdated }}</td>
+        </tr>
+        <tr>
+            <th>Counterfailed</th>
+            <td>{{ entity.counterFailed }}</td>
+        </tr>
+        <tr>
+            <th>Enabled</th>
+            <td>{{ entity.enabled }}</td>
+        </tr>
+        <tr>
+            <th>Accountnonlocked</th>
+            <td>{{ entity.accountnonlocked }}</td>
+        </tr>
+        <tr>
+            <th>Accountnonexpired</th>
+            <td>{{ entity.accountnonexpired }}</td>
+        </tr>
+        <tr>
+            <th>Slug</th>
+            <td>{{ entity.slug }}</td>
+        </tr>
+        <tr>
+            <th>Fid</th>
+            <td>{{ entity.fid }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('users') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('users_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('users_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+        </form>
+    </li>
+</ul>
+
+
+ {% endblock %}

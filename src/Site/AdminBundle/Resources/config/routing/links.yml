@@ -1,0 +1,30 @@
+links:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Links:index" }
+
+links_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Links:show" }
+
+links_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Links:new" }
+
+links_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Links:create" }
+    requirements: { _method: post }
+
+links_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Links:edit" }
+
+links_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Links:update" }
+    requirements: { _method: post }
+
+links_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Links:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,22 @@
+Security:
+  login_path:
+    Redirection de l'utilisateur si il tente d'accéder à une partie qui n'est pas la sienne. Cette Url doit etre accéssible en security false pour ne pas créer une boucle de redirection
+  check_path:
+    Url ou le form de login doit etre soumis pour controlle avec les Firewalls
+  use_forward:
+    Au lieu detre redirigé vers le form de connexion, foward vers ce dernier
+  username_parameter:
+    le nom du champ donné pour username
+  password_parameter:
+    Idem sauf pour le password
+  post_only:
+    Envoi en POST au form de connexion
+    
+  Redirection après Login:
+    always use default target path : toujours rediriger vers le feault target Path
+    default_target_path: URL de Redirection
+    target_path_parameter: Cible 
+    use_referer : utiliser le referer ou pas
+    
+  
+  

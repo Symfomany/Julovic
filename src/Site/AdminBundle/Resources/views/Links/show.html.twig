@@ -1,0 +1,53 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+<h1>Links</h1>
+
+<table class="table" class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th>Link</th>
+            <td>{{ entity.link }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Datecreated</th>
+            <td>{{ entity.dateCreated }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('links') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('links_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('links_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+        </form>
+    </li>
+</ul>
+ {% endblock %}

@@ -1,0 +1,102 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block body %}
+{{ parent() }}
+
+<h1>Users list</h1>
+
+<table class="table" class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cityid</th>
+            <th>Gender</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Description</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th>Password</th>
+            <th>Dob</th>
+            <th>Optin</th>
+            <th>Ip</th>
+            <th>Salt</th>
+            <th>Token</th>
+            <th>Don</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+            <th>Picture</th>
+            <th>Updatedat</th>
+            <th>Createdat</th>
+            <th>Dateauth</th>
+            <th>Counterupdated</th>
+            <th>Counterfailed</th>
+            <th>Enabled</th>
+            <th>Accountnonlocked</th>
+            <th>Accountnonexpired</th>
+            <th>Slug</th>
+            <th>Fid</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('users_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.cityId }}</td>
+            <td>{{ entity.gender }}</td>
+            <td>{{ entity.firstname }}</td>
+            <td>{{ entity.lastname }}</td>
+            <td>{{ entity.description }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.tel }}</td>
+            <td>{{ entity.password }}</td>
+            <td>{% if entity.dob %}{{ entity.dob|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.optin }}</td>
+            <td>{{ entity.ip }}</td>
+            <td>{{ entity.salt }}</td>
+            <td>{{ entity.token }}</td>
+            <td>{{ entity.don }}</td>
+            <td>{{ entity.q1 }}</td>
+            <td>{{ entity.q2 }}</td>
+            <td>{{ entity.q3 }}</td>
+            <td>{{ entity.q4 }}</td>
+            <td>{{ entity.picture }}</td>
+            <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.dateAuth %}{{ entity.dateAuth|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.counterUpdated }}</td>
+            <td>{{ entity.counterFailed }}</td>
+            <td>{{ entity.enabled }}</td>
+            <td>{{ entity.accountnonlocked }}</td>
+            <td>{{ entity.accountnonexpired }}</td>
+            <td>{{ entity.slug }}</td>
+            <td>{{ entity.fid }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('users_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('users_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('users_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+ {% endblock %}
+

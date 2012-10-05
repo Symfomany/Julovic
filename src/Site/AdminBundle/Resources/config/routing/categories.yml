@@ -1,0 +1,30 @@
+categories:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Categories:index" }
+
+categories_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Categories:show" }
+
+categories_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Categories:new" }
+
+categories_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Categories:create" }
+    requirements: { _method: post }
+
+categories_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Categories:edit" }
+
+categories_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Categories:update" }
+    requirements: { _method: post }
+
+categories_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Categories:delete" }
+    requirements: { _method: post }

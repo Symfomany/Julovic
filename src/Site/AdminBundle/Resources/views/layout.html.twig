@@ -1,0 +1,136 @@
+{# GENERAL LAYOUT OF BUNDLE #}
+{% extends '::base.html.twig' %}
+
+        {% block body%}
+<div id="wrapper">
+            {{ parent() }}
+                     {# Toolbar #}
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="./index.html">Administration</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="">
+                                <a href="./index.html">Accueil</a>
+                            </li>
+                            <li class="active">
+                                <a href="">Page 1</a>
+                            </li>
+                            <li class="">
+                                <a href="">Page 2</a>
+                            </li>
+                            <li class="">
+                                <a href="">Page 3</a>
+                            </li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                        </ul>
+                            <p class="navbar-text pull-right">
+                                {% if app.user.firstname is defined %}
+                                                Bonjour <b>{{ app.user.firstname|title|default('Prénom') }} {{ app.user.lastname|title|default('Nom') }}</b>
+                                                <a id="logout" href="{{ path('logout') }}">Deconnexion</a> <br />
+                                    {% endif %}
+                                </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                    {# Bar Primaire #}
+        <div id="primary_nav">
+            <div class="navbar navbar-inverse" style="position: static;">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".subnav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="#">Title</a>
+                        <div class="nav-collapse subnav-collapse">
+                            <ul class="nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Link</a></li>
+                                <li><a href="#">Link</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li class="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="navbar-search pull-left" action="">
+                                <input type="text" class="search-query span2" placeholder="Search">
+                            </form>
+                            <ul class="nav pull-right">
+                                <li><a href="#">Link</a></li>
+                                <li class="divider-vertical"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.nav-collapse -->
+                    </div>
+                </div><!-- /navbar-inner -->
+            </div>
+        </div>
+
+                {% block flash_data_off %}
+                    {% if app.session.hasFlash('error') %} 
+        <div class="alert alert-block alert-error fade in"> 
+            <span class="close"></span>
+                            {{ app.session.flash('error') }} 
+        </div> 
+                    {% endif %}
+                    {% if app.session.hasFlash('success') %} 
+        <div class="alert alert-block alert-success fade in"> 
+            <span class="close"></span>
+                            {{ app.session.flash('success') }} 
+        </div> 
+                    {% endif %}
+                    {% if app.session.hasFlash('warning') %} 
+        <div class="alert alert-block alert-warning fade in">
+            <span class="close"></span>
+                            {{ app.session.flash('warning') }} 
+        </div> 
+                    {% endif %}
+                  {% endblock %}
+    </div>
+     {% endblock %}
+              {% block footer %}
+    <div id="footer">
+    </div>
+            {% endblock %}
+       {% block javascripts %}
+             {{ parent() }}
+    <script src="{{ asset('/js/app.js') }}"  type="text/javascript"></script>
+       {% endblock %}
