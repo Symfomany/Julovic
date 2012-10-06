@@ -211,7 +211,7 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         
 
         <div class=\"clearfix\"></div>
-        
+        <div class=\"container-fluid\">
         ";
         // line 72
         echo "            ";
@@ -298,6 +298,7 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         $this->displayBlock('flash_data_off', $context, $blocks);
         // line 170
         echo "                    </div>
+                </div>
             ";
     }
 
@@ -356,15 +357,15 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         echo "                                ";
     }
 
-    // line 172
+    // line 173
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 173
+        // line 174
         echo "             ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
              <script src=\"";
-        // line 174
+        // line 175
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/app.js"), "html", null, true);
         echo "\"  type=\"text/javascript\"></script>
        ";
@@ -382,6 +383,6 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  366 => 174,  361 => 173,  358 => 172,  354 => 169,  348 => 166,  342 => 164,  336 => 161,  330 => 159,  324 => 156,  318 => 154,  312 => 151,  306 => 149,  303 => 148,  298 => 170,  296 => 148,  245 => 99,  215 => 72,  202 => 60,  188 => 59,  184 => 57,  180 => 55,  169 => 52,  162 => 51,  158 => 50,  155 => 49,  153 => 48,  140 => 47,  130 => 46,  122 => 43,  115 => 42,  107 => 39,  100 => 38,  97 => 37,  80 => 36,  72 => 31,  63 => 24,  55 => 22,  53 => 21,  38 => 8,  34 => 6,  31 => 5,  28 => 4,);
+        return array (  367 => 175,  362 => 174,  359 => 173,  355 => 169,  349 => 166,  343 => 164,  337 => 161,  331 => 159,  325 => 156,  319 => 154,  313 => 151,  307 => 149,  304 => 148,  298 => 170,  296 => 148,  245 => 99,  215 => 72,  202 => 60,  188 => 59,  184 => 57,  180 => 55,  169 => 52,  162 => 51,  158 => 50,  155 => 49,  153 => 48,  140 => 47,  130 => 46,  122 => 43,  115 => 42,  107 => 39,  100 => 38,  97 => 37,  80 => 36,  72 => 31,  63 => 24,  55 => 22,  53 => 21,  38 => 8,  34 => 6,  31 => 5,  28 => 4,);
     }
 }
