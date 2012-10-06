@@ -17,4 +17,16 @@ Open Source Project -- License MIT
     php app/console doctrine:generate:entities AdminBundle
 - Generate CRUD modules:
     php app/console generate:doctrine:crud --entity=AdminBundle:Articles --format=yml --with-write --no-interaction
+- Configure your routes in AdminBundle:config.yml
 - Enjoy with your virtualhost :) 
+
+
+================================
+
+Notices:
+
+ - Not use app.php un URI to access production environment
+ - Remove Configurator route for production
+ - Use APC for Production
+ - Links in top menu are configurable in config.yml
+ - Route for Dashboard called by "Home"

@@ -1,5 +1,5 @@
 {
-    "hash": "871ca732d39c832f0b78012cc83cec2e",
+    "hash": "061fa941fdb39c9f6b76cf538f3bd41c",
     "packages": [
         {
             "name": "doctrine/common",
@@ -56,7 +56,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -76,19 +76,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal",
-                "reference": "fdc866a37959e43620e4f7ec519dc7dd8e30fc5b"
+                "reference": "e00ce93926c37d7cab0368694715ff913804780c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/zipball/fdc866a37959e43620e4f7ec519dc7dd8e30fc5b",
-                "reference": "fdc866a37959e43620e4f7ec519dc7dd8e30fc5b",
+                "url": "https://github.com/doctrine/dbal/zipball/e00ce93926c37d7cab0368694715ff913804780c",
+                "reference": "e00ce93926c37d7cab0368694715ff913804780c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "1348120597",
+            "time": "1349466076",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -140,12 +140,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/DoctrineBundle.git",
-                "reference": "db818ceec46d05fed4f944b957f82a4ab5197e27"
+                "reference": "e69a6fd75fa3979e35b7004e6da6e9aea3765997"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineBundle/zipball/db818ceec46d05fed4f944b957f82a4ab5197e27",
-                "reference": "db818ceec46d05fed4f944b957f82a4ab5197e27",
+                "url": "https://github.com/doctrine/DoctrineBundle/zipball/e69a6fd75fa3979e35b7004e6da6e9aea3765997",
+                "reference": "e69a6fd75fa3979e35b7004e6da6e9aea3765997",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "1348828243",
+            "time": "1349273376",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -207,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/doctrine2.git",
-                "reference": "ea2b28857830720460a345c80c6e7d3f6adae93a"
+                "reference": "564ec1ee2a6a439312ee9105a2a076af7c992e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/doctrine2/zipball/ea2b28857830720460a345c80c6e7d3f6adae93a",
-                "reference": "ea2b28857830720460a345c80c6e7d3f6adae93a",
+                "url": "https://github.com/doctrine/doctrine2/zipball/564ec1ee2a6a439312ee9105a2a076af7c992e5b",
+                "reference": "564ec1ee2a6a439312ee9105a2a076af7c992e5b",
                 "shasum": ""
             },
             "require": {
@@ -224,7 +224,7 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "1348121015",
+            "time": "1349472005",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -406,7 +406,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -512,7 +512,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -701,19 +701,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioFrameworkExtraBundle",
-                "reference": "86a68df44eb50a64042d05a3f09548d2c21d4456"
+                "reference": "bf2ea090d602e02b975d1bf1d8ffca8f02ef8bdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/zipball/86a68df44eb50a64042d05a3f09548d2c21d4456",
-                "reference": "86a68df44eb50a64042d05a3f09548d2c21d4456",
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/zipball/bf2ea090d602e02b975d1bf1d8ffca8f02ef8bdb",
+                "reference": "bf2ea090d602e02b975d1bf1d8ffca8f02ef8bdb",
                 "shasum": ""
             },
             "require": {
                 "symfony/framework-bundle": "2.1.*",
                 "doctrine/common": ">=2.1,<2.4-dev"
             },
-            "time": "1348064274",
+            "time": "1349361259",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1017,12 +1017,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "566ad10f675ae39a7260b99bd1da1c5e986cef69"
+                "reference": "8062031a0a5143086f2ff864925dada9614f2ead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/zipball/566ad10f675ae39a7260b99bd1da1c5e986cef69",
-                "reference": "566ad10f675ae39a7260b99bd1da1c5e986cef69",
+                "url": "https://github.com/symfony/symfony/zipball/8062031a0a5143086f2ff864925dada9614f2ead",
+                "reference": "8062031a0a5143086f2ff864925dada9614f2ead",
                 "shasum": ""
             },
             "require": {
@@ -1071,7 +1071,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "dev-master"
             },
-            "time": "1349203503",
+            "time": "1349381694",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1157,18 +1157,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "120cde3fa54c31047edf1cd003752ca119dec9a8"
+                "reference": "5d7baaf767ec3b8f6599738e7c98bde6c25cf7c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/120cde3fa54c31047edf1cd003752ca119dec9a8",
-                "reference": "120cde3fa54c31047edf1cd003752ca119dec9a8",
+                "url": "https://github.com/fabpot/Twig/zipball/5d7baaf767ec3b8f6599738e7c98bde6c25cf7c1",
+                "reference": "5d7baaf767ec3b8f6599738e7c98bde6c25cf7c1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1348936415",
+            "time": "1349508092",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1199,6 +1199,46 @@
             "keywords": [
                 "templating"
             ]
+        },
+        {
+            "name": "whiteoctober/breadcrumbs-bundle",
+            "version": "2.1.x-dev",
+            "target-dir": "WhiteOctober/BreadcrumbsBundle",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/whiteoctober/BreadcrumbsBundle.git",
+                "reference": "67ed84215d05bff1d4de22ce16e09bc0a0ae9b40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/whiteoctober/BreadcrumbsBundle/zipball/67ed84215d05bff1d4de22ce16e09bc0a0ae9b40",
+                "reference": "67ed84215d05bff1d4de22ce16e09bc0a0ae9b40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "2.*,<2.2"
+            },
+            "time": "1345904937",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\BreadcrumbsBundle": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "Rich Sage",
+                    "email": "rich.sage@gmail.com",
+                    "homepage": "http://www.richsage.co.uk/"
+                }
+            ],
+            "description": "A small breadcrumbs bundle for Symfony2",
+            "homepage": "https://github.com/whiteoctober/BreadcrumbsBundle",
+            "keywords": [
+                "breadcrumbs"
+            ]
         }
     ],
     "packages-dev": null,
@@ -1206,7 +1246,7 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "whiteoctober/breadcrumbs-bundle": 20
+    }
 }

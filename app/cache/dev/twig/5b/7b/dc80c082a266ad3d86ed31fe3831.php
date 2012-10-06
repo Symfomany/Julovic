@@ -38,9 +38,9 @@ class __TwigTemplate_5b7bdc80c082a266ad3d86ed31fe3831 extends Twig_Template
         echo "        ";
         $this->displayParentBlock("body", $context, $blocks);
         echo "
-        <div class=\"span9\">
-            <div class=\"hero-unit\">
-                        <h3>Connectez-vous </h3>
+ <p></p>
+ <p></p>
+        <div class=\"well\">
                                 ";
         // line 9
         if ($this->getContext($context, "error")) {
@@ -55,7 +55,7 @@ class __TwigTemplate_5b7bdc80c082a266ad3d86ed31fe3831 extends Twig_Template
                                 ";
         }
         // line 15
-        echo "                            <legend>Formulaire de Login</legend>
+        echo "                            <legend>Authentification</legend>
                                 <form  action=\"";
         // line 16
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("login_check"), "html", null, true);
@@ -69,12 +69,11 @@ class __TwigTemplate_5b7bdc80c082a266ad3d86ed31fe3831 extends Twig_Template
         }
         echo ">
                                     <label for=\"mdp\">Password: </label><input id=\"mdp\" required=\"required\" type=\"password\" placeholder=\"Password\" name=\"_password\">
-                                        <label id=\"entrer\" class=\"active\"><input type=\"checkbox\" name=\"_remember_me\" checked=\"checked\">Entrer directement la prochaine fois</label>
+                                        <label id=\"entrer\" class=\"active\"><input type=\"checkbox\" name=\"_remember_me\" checked=\"checked\">Se souvenir de moi</label>
                                         <input type=\"submit\" name=\"login\" value=\"Connexion\" class=\"btn btn-primary btn-large\">
                                         </form>
                             </fieldset>
-                        </div>
-                        </div>
+        </div>
     ";
     }
 

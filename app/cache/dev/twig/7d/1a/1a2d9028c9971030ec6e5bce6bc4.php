@@ -25,13 +25,28 @@ class __TwigTemplate_7d1a1a2d9028c9971030ec6e5bce6bc4 extends Twig_Template
         // line 3
         echo "<script type=\"text/javascript\">/*<![CDATA[*/
     (function () {
+        ";
+        // line 5
+        if (("top" == $this->getContext($context, "position"))) {
+            // line 6
+            echo "            var sfwdt = document.getElementById('sfwdt";
+            echo twig_escape_filter($this->env, $this->getContext($context, "token"), "html", null, true);
+            echo "');
+            document.body.insertBefore(
+                document.body.removeChild(sfwdt),
+                document.body.firstChild
+            );
+        ";
+        }
+        // line 12
+        echo "
         Sfjs.load(
             'sfwdt";
-        // line 6
+        // line 14
         echo twig_escape_filter($this->env, $this->getContext($context, "token"), "html", null, true);
         echo "',
             '";
-        // line 7
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_wdt", array("token" => $this->getContext($context, "token"))), "html", null, true);
         echo "',
             function(xhr, el) {
@@ -40,7 +55,7 @@ class __TwigTemplate_7d1a1a2d9028c9971030ec6e5bce6bc4 extends Twig_Template
             function(xhr) {
                 if (xhr.status !== 0) {
                     confirm('An error occurred while loading the web debug toolbar (' + xhr.status + ': ' + xhr.statusText + ').\\n\\nDo you want to open the profiler?') && (window.location = '";
-        // line 13
+        // line 21
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_profiler", array("token" => $this->getContext($context, "token"))), "html", null, true);
         echo "');
                 }
@@ -63,6 +78,6 @@ class __TwigTemplate_7d1a1a2d9028c9971030ec6e5bce6bc4 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  29 => 6,  24 => 3,  22 => 2,  17 => 1,  82 => 22,  79 => 21,  62 => 7,  53 => 5,  47 => 32,  42 => 13,  31 => 6,  21 => 1,  87 => 27,  81 => 24,  74 => 19,  68 => 18,  61 => 15,  55 => 12,  48 => 9,  45 => 21,  40 => 19,  37 => 8,  30 => 5,  63 => 17,  59 => 6,  56 => 15,  50 => 12,  46 => 10,  44 => 9,  36 => 5,  33 => 7,  27 => 5,);
+        return array (  57 => 21,  28 => 5,  24 => 3,  22 => 2,  17 => 1,  82 => 22,  79 => 21,  62 => 7,  53 => 5,  47 => 32,  42 => 20,  31 => 6,  21 => 1,  87 => 27,  81 => 24,  74 => 19,  68 => 18,  61 => 15,  55 => 12,  48 => 15,  45 => 21,  40 => 12,  37 => 8,  30 => 6,  63 => 17,  59 => 6,  56 => 15,  50 => 12,  46 => 10,  44 => 14,  36 => 5,  33 => 16,  27 => 5,);
     }
 }

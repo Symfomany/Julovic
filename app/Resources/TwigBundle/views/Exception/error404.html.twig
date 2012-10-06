@@ -1,0 +1,22 @@
+   
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+ {% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        {{ parent() }}
+          {% block menu %} 
+          {% endblock %}
+            <div id="content">
+                <h1>Ta pas est introuvable :)</h1>
+                <p>Page à designer <3</p>
+                  <img src="http://edensky.e.d.pic.centerblog.net/o/fbedef1a.jpg" id="il_fi" height="300" width="300" style="padding-right: 8px; padding-top: 8px; padding-bottom: 8px; ">
+            </div>
+    {% endblock %}
+    {% block footer %}
+        {{ parent() }}
+      
+    {% endblock %}
+ {% endblock %}

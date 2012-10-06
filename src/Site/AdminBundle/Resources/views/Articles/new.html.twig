@@ -5,8 +5,12 @@
 {{ parent() }}
 
 <h1>Articles creation</h1>
-        <form action="{{ path('articles_create') }}" method="post" {{ form_enctype(form) }}>
+
+
+<form novalidate="novalidate" action="{{ path('articles_create') }}" method="post" {{ form_enctype(form) }}>
                 
+                {{ form_errors(form) }}
+    
                 {{ form_label(form.categoryId) }}
                 {{ form_errors(form.categoryId) }}
                 {{ form_widget(form.categoryId) }}
@@ -25,13 +29,14 @@
                 
                 {{ form_label(form.active) }}
                 {{ form_errors(form.active) }}
-                {{ form_widget(form.active) }}
+                {{ form_widget(form.active) }}  
+                
+                {{ form_rest(form) }}
                 
                 <p>
                     <button type="submit" class="btn-primary btn-large">Create</button>
                 </p>
-            </form>
-
+</form>
             <ul class="record_actions">
                 <li>
                     <a class="btn" href="{{ path('articles') }}">

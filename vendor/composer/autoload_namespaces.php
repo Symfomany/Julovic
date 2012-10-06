@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WhiteOctober\\BreadcrumbsBundle' => $vendorDir . '/whiteoctober/breadcrumbs-bundle/',
     'Twig_Extensions_' => $vendorDir . '/twig/extensions/lib/',
     'Twig_' => $vendorDir . '/twig/twig/lib/',
     'Symfony\\Bundle\\SwiftmailerBundle' => $vendorDir . '/symfony/swiftmailer-bundle/',

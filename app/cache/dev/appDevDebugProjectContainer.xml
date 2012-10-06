@@ -20,6 +20,7 @@
       <parameter key="JMSDiExtraBundle">JMS\DiExtraBundle\JMSDiExtraBundle</parameter>
       <parameter key="JMSSecurityExtraBundle">JMS\SecurityExtraBundle\JMSSecurityExtraBundle</parameter>
       <parameter key="SiteAdminBundle">Site\AdminBundle\SiteAdminBundle</parameter>
+      <parameter key="WhiteOctoberBreadcrumbsBundle">WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -41,6 +42,13 @@
     <parameter key="secret">40883bff372c0554b1017107629556b4e6</parameter>
     <parameter key="database_path">null</parameter>
     <parameter key="email_administrateur">zuzu38080@gmail.com</parameter>
+    <parameter key="topmenu" type="collection">
+      <parameter>Home</parameter>
+      <parameter>Articles</parameter>
+      <parameter>Categories</parameter>
+      <parameter>Liens</parameter>
+      <parameter>Pages</parameter>
+    </parameter>
     <parameter key="my.success_handler.class">
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
@@ -319,6 +327,7 @@
     <parameter key="monolog.handler.debug.class">Symfony\Bridge\Monolog\Handler\DebugHandler</parameter>
     <parameter key="monolog.handler.swift_mailer.class">Monolog\Handler\SwiftMailerHandler</parameter>
     <parameter key="monolog.handler.native_mailer.class">Monolog\Handler\NativeMailerHandler</parameter>
+    <parameter key="monolog.handler.socket.class">Monolog\Handler\SocketHandler</parameter>
     <parameter key="monolog.handler.fingers_crossed.class">Monolog\Handler\FingersCrossedHandler</parameter>
     <parameter key="monolog.handler.fingers_crossed.error_level_activation_strategy.class">Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy</parameter>
     <parameter key="monolog.handlers_to_channels" type="collection">
@@ -352,6 +361,7 @@
     <parameter key="swiftmailer.spool.enabled">true</parameter>
     <parameter key="swiftmailer.sender_address">null</parameter>
     <parameter key="swiftmailer.single_address">null</parameter>
+    <parameter key="swiftmailer.delivery_whitelist" type="collection"/>
     <parameter key="assetic.asset_factory.class">Symfony\Bundle\AsseticBundle\Factory\AssetFactory</parameter>
     <parameter key="assetic.asset_manager.class">Assetic\Factory\LazyAssetManager</parameter>
     <parameter key="assetic.asset_manager_cache_warmer.class">Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer</parameter>
@@ -383,6 +393,17 @@
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
+    <parameter key="assetic.filter.yui_css.class">Assetic\Filter\Yui\CssCompressorFilter</parameter>
+    <parameter key="assetic.filter.yui_css.java">C:\Windows\system32\java.EXE</parameter>
+    <parameter key="assetic.filter.yui_css.jar">C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar</parameter>
+    <parameter key="assetic.filter.yui_css.charset">UTF-8</parameter>
+    <parameter key="assetic.filter.yui_js.class">Assetic\Filter\Yui\JsCompressorFilter</parameter>
+    <parameter key="assetic.filter.yui_js.java">C:\Windows\system32\java.EXE</parameter>
+    <parameter key="assetic.filter.yui_js.jar">C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar</parameter>
+    <parameter key="assetic.filter.yui_js.charset">UTF-8</parameter>
+    <parameter key="assetic.filter.yui_js.nomunge">null</parameter>
+    <parameter key="assetic.filter.yui_js.preserve_semi">null</parameter>
+    <parameter key="assetic.filter.yui_js.disable_optimizations">null</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="assetic.controller.class">Symfony\Bundle\AsseticBundle\Controller\AsseticController</parameter>
     <parameter key="assetic.routing_loader.class">Symfony\Bundle\AsseticBundle\Routing\AsseticLoader</parameter>
@@ -393,7 +414,7 @@
     <parameter key="doctrine.dbal.logger.profiling.class">Doctrine\DBAL\Logging\DebugStack</parameter>
     <parameter key="doctrine.dbal.logger.class">Symfony\Bridge\Doctrine\Logger\DbalLogger</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
-    <parameter key="doctrine.data_collector.class">Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector</parameter>
+    <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
     <parameter key="doctrine.dbal.connection_factory.class">Doctrine\Bundle\DoctrineBundle\ConnectionFactory</parameter>
     <parameter key="doctrine.dbal.events.mysql_session_init.class">Doctrine\DBAL\Event\Listeners\MysqlSessionInit</parameter>
@@ -470,8 +491,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager_507004cf01788.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -1749,7 +1770,7 @@
       </call>
       <call method="add">
         <argument type="service">
-          <service class="Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector" public="false">
+          <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
             <tag name="data_collector" template="DoctrineBundle:Collector:db" id="db"/>
             <argument type="service" id="doctrine"/>
             <call method="addLogger">
@@ -1947,6 +1968,7 @@
                       <argument key="logout_url">templating.helper.logout_url</argument>
                       <argument key="security">templating.helper.security</argument>
                       <argument key="assetic">assetic.helper.dynamic</argument>
+                      <argument key="breadcrumbs">white_october_breadcrumbs.helper</argument>
                     </argument>
                   </call>
                 </service>
@@ -2440,7 +2462,53 @@
         </argument>
       </call>
       <call method="addExtension">
+        <argument type="service" id="white_october_breadcrumbs.twig"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.acme.demo"/>
+      </call>
+      <call method="addGlobal">
+        <argument>topmenu</argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="label">Home</argument>
+            <argument key="routing">home</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Articles</argument>
+            <argument key="routing">articles</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Categories</argument>
+            <argument key="routing">categories</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Liens</argument>
+            <argument key="routing">links</argument>
+            <argument key="subrouting" type="collection">
+              <argument type="collection">
+                <argument key="label">Categories</argument>
+                <argument key="routing">categories</argument>
+              </argument>
+              <argument type="collection">
+                <argument key="label">Liens</argument>
+                <argument key="routing">links</argument>
+              </argument>
+              <argument type="collection">
+                <argument key="label">Medias</argument>
+                <argument key="routing">medias</argument>
+              </argument>
+            </argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Medias</argument>
+            <argument key="routing">medias</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Tags</argument>
+            <argument key="routing">tags</argument>
+          </argument>
+        </argument>
       </call>
     </service>
     <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
@@ -2482,6 +2550,8 @@
       <argument type="service" id="service_container"/>
       <argument type="collection">
         <argument key="cssrewrite">assetic.filter.cssrewrite</argument>
+        <argument key="yui_css">assetic.filter.yui_css</argument>
+        <argument key="yui_js">assetic.filter.yui_js</argument>
       </argument>
     </service>
     <service id="assetic.asset_manager" class="Assetic\Factory\LazyAssetManager">
@@ -2541,6 +2611,31 @@
     </service>
     <service id="assetic.filter.cssrewrite" class="Assetic\Filter\CssRewriteFilter">
       <tag name="assetic.filter" alias="cssrewrite"/>
+    </service>
+    <service id="assetic.filter.yui_css" class="Assetic\Filter\Yui\CssCompressorFilter">
+      <tag name="assetic.filter" alias="yui_css"/>
+      <argument>C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar</argument>
+      <argument>C:\Windows\system32\java.EXE</argument>
+      <call method="setCharset">
+        <argument>UTF-8</argument>
+      </call>
+    </service>
+    <service id="assetic.filter.yui_js" class="Assetic\Filter\Yui\JsCompressorFilter">
+      <tag name="assetic.filter" alias="yui_js"/>
+      <argument>C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar</argument>
+      <argument>C:\Windows\system32\java.EXE</argument>
+      <call method="setCharset">
+        <argument>UTF-8</argument>
+      </call>
+      <call method="setNomunge">
+        <argument>null</argument>
+      </call>
+      <call method="setPreserveSemi">
+        <argument>null</argument>
+      </call>
+      <call method="setDisableOptimizations">
+        <argument>null</argument>
+      </call>
     </service>
     <service id="assetic.controller" class="Symfony\Bundle\AsseticBundle\Controller\AsseticController" scope="prototype">
       <argument type="service" id="request"/>
@@ -2632,8 +2727,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager_507004cf01788.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2819,6 +2914,16 @@
       <call method="setIncludeInterfaces">
         <argument>true</argument>
       </call>
+    </service>
+    <service id="white_october_breadcrumbs" class="WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs"/>
+    <service id="white_october_breadcrumbs.helper" class="WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper">
+      <tag name="templating.helper" alias="breadcrumbs"/>
+      <argument type="service" id="templating"/>
+      <argument type="service" id="white_october_breadcrumbs"/>
+    </service>
+    <service id="white_october_breadcrumbs.twig" class="WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
       <tag name="twig.extension"/>

@@ -95,6 +95,10 @@ class ArticlesController extends Controller
      */
     public function editAction($id)
     {
+            $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Example with parameter injected into translation "user.profile"
+         $breadcrumbs->addItem('Test', 'http://www.google.com', array("%user%" => 'ok'));
+    
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('SiteAdminBundle:Articles')->find($id);
@@ -105,6 +109,7 @@ class ArticlesController extends Controller
 
         $editForm = $this->createForm(new ArticlesType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
+
 
         return $this->render('SiteAdminBundle:Articles:edit.html.twig', array(
             'entity'      => $entity,

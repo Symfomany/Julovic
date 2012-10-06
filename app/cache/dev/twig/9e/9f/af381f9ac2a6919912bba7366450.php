@@ -90,7 +90,9 @@ class __TwigTemplate_9e9faf381f9ac2a6919912bba7366450 extends Twig_Template
                         <a href=\"";
             // line 36
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">show</a>
+            echo "\">show ";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
+            echo "</a>
                     </li>
                     <li>
                         <a href=\"";
@@ -135,6 +137,6 @@ class __TwigTemplate_9e9faf381f9ac2a6919912bba7366450 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  115 => 50,  108 => 45,  96 => 39,  90 => 36,  83 => 32,  79 => 31,  75 => 30,  71 => 29,  67 => 28,  63 => 27,  57 => 26,  54 => 25,  50 => 24,  29 => 6,  26 => 5,);
+        return array (  117 => 50,  110 => 45,  98 => 39,  90 => 36,  83 => 32,  79 => 31,  75 => 30,  71 => 29,  67 => 28,  63 => 27,  57 => 26,  54 => 25,  50 => 24,  29 => 6,  26 => 5,);
     }
 }

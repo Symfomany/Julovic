@@ -1,2 +1,18 @@
 parameters:
     email_administrateur: zuzu38080@gmail.com
+    topmenu:
+      - Home
+      - Articles
+      - Categories
+      - Liens
+      - Pages
+      
+twig:
+    globals:
+        topmenu:
+          - {label: 'Home', routing: 'home' }
+          - {label: 'Articles', routing: 'articles'}
+          - {label: 'Categories', routing: 'categories' }
+          - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
+          - {label: 'Medias', routing: 'medias' }
+          - {label: 'Tags', routing: 'tags' }

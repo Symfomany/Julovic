@@ -154,7 +154,7 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
 
                 // articles_show
-                if (preg_match('#^/admin/articles/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/admin/articles/show') && preg_match('#^/admin/articles/show/(?<id>[^/]+)$#s', $pathinfo, $matches)) {
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::showAction',)), array('_route' => 'articles_show'));
                 }
 
@@ -175,12 +175,12 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_articles_create:
 
                 // articles_edit
-                if (preg_match('#^/admin/articles/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/admin/articles/edit') && preg_match('#^/admin/articles/edit/(?<id>[^/]+)$#s', $pathinfo, $matches)) {
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::editAction',)), array('_route' => 'articles_edit'));
                 }
 
                 // articles_update
-                if (preg_match('#^/admin/articles/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/admin/articles/update') && preg_match('#^/admin/articles/update/(?<id>[^/]+)$#s', $pathinfo, $matches)) {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_articles_update;
@@ -191,7 +191,7 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 not_articles_update:
 
                 // articles_delete
-                if (preg_match('#^/admin/articles/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                if (0 === strpos($pathinfo, '/admin/articles/delete') && preg_match('#^/admin/articles/delete/(?<id>[^/]+)$#s', $pathinfo, $matches)) {
                     if ($this->context->getMethod() != 'POST') {
                         $allow[] = 'POST';
                         goto not_articles_delete;

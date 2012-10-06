@@ -1,0 +1,19 @@
+{% extends 'AdmineBundle::layout.html.twig' %}
+
+ {% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock %}
+    {% block content %}
+        {{ parent() }}
+          {% block menu %} 
+          {% endblock %}
+            <div id="content">
+                <h2>Oups^^ Petite erreur serveur : <span class="red">{{ status_code }} {{ status_text }}".</span></h2>
+            </div>
+    {% endblock %}
+    {% block footer %}
+        {{ parent() }}
+      
+    {% endblock %}
+ {% endblock %}

@@ -33,7 +33,7 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('articles_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('articles_show', { 'id': entity.id }) }}">show {{ entity.id  }}</a>
                     </li>
                     <li>
                         <a href="{{ path('articles_edit', { 'id': entity.id }) }}">edit</a>

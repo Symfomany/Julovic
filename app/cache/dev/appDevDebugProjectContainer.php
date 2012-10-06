@@ -106,6 +106,43 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'assetic.filter.yui_css' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Filter\Yui\CssCompressorFilter A Assetic\Filter\Yui\CssCompressorFilter instance.
+     */
+    protected function getAssetic_Filter_YuiCssService()
+    {
+        $this->services['assetic.filter.yui_css'] = $instance = new \Assetic\Filter\Yui\CssCompressorFilter('C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar', 'C:\\Windows\\system32\\java.EXE');
+
+        $instance->setCharset('UTF-8');
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'assetic.filter.yui_js' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Filter\Yui\JsCompressorFilter A Assetic\Filter\Yui\JsCompressorFilter instance.
+     */
+    protected function getAssetic_Filter_YuiJsService()
+    {
+        $this->services['assetic.filter.yui_js'] = $instance = new \Assetic\Filter\Yui\JsCompressorFilter('C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar', 'C:\\Windows\\system32\\java.EXE');
+
+        $instance->setCharset('UTF-8');
+        $instance->setNomunge(NULL);
+        $instance->setPreserveSemi(NULL);
+        $instance->setDisableOptimizations(NULL);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'assetic.filter_manager' service.
      *
      * This service is shared.
@@ -115,7 +152,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_FilterManagerService()
     {
-        return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array('cssrewrite' => 'assetic.filter.cssrewrite'));
+        return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array('cssrewrite' => 'assetic.filter.cssrewrite', 'yui_css' => 'assetic.filter.yui_css', 'yui_js' => 'assetic.filter.yui_js'));
     }
 
     /**
@@ -266,11 +303,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager.php';
+        require_once 'C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager_507004cf01788.php';
 
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_92054f23d133cfa08ec78379242ca875');
@@ -300,7 +337,7 @@ class appDevDebugProjectContainer extends Container
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
 
     /**
@@ -1257,7 +1294,7 @@ class appDevDebugProjectContainer extends Container
         $d = new \Symfony\Component\HttpKernel\DataCollector\EventDataCollector();
         $d->setEventDispatcher($this->get('event_dispatcher'));
 
-        $e = new \Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector($this->get('doctrine'));
+        $e = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
         $e->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
 
         $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/wamp/www/julovic/Julovic/app/cache/dev/profiler', '', '', 86400), $a);
@@ -1988,7 +2025,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = new \Symfony\Bundle\FrameworkBundle\Templating\PhpEngine($this->get('templating.name_parser'), $this, $this->get('templating.loader'), $this->get('templating.globals'));
         $a->setCharset('UTF-8');
-        $a->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.dynamic'));
+        $a->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.dynamic', 'breadcrumbs' => 'white_october_breadcrumbs.helper'));
 
         return $this->services['templating.helper.form'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper(new \Symfony\Component\Form\FormRenderer(new \Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine($a, array(0 => 'FrameworkBundle:Form')), $this->get('form.csrf_provider')));
     }
@@ -2562,7 +2599,9 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig', 1 => 'SiteAdminBundle:Form:error.html.twig')), $this->get('form.csrf_provider'))));
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default')));
+        $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
+        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags')));
 
         return $instance;
     }
@@ -2650,6 +2689,45 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'white_october_breadcrumbs' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs A WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs instance.
+     */
+    protected function getWhiteOctoberBreadcrumbsService()
+    {
+        return $this->services['white_october_breadcrumbs'] = new \WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs();
+    }
+
+    /**
+     * Gets the 'white_october_breadcrumbs.helper' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper A WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper instance.
+     */
+    protected function getWhiteOctoberBreadcrumbs_HelperService()
+    {
+        return $this->services['white_october_breadcrumbs.helper'] = new \WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper($this->get('templating'), $this->get('white_october_breadcrumbs'));
+    }
+
+    /**
+     * Gets the 'white_october_breadcrumbs.twig' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension A WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension instance.
+     */
+    protected function getWhiteOctoberBreadcrumbs_TwigService()
+    {
+        return $this->services['white_october_breadcrumbs.twig'] = new \WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension($this);
+    }
+
+    /**
      * Gets the database_connection service alias.
      *
      * @return stdClass An instance of the doctrine.dbal.default_connection service
@@ -2682,7 +2760,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3061,6 +3139,7 @@ class appDevDebugProjectContainer extends Container
                 'JMSDiExtraBundle' => 'JMS\\DiExtraBundle\\JMSDiExtraBundle',
                 'JMSSecurityExtraBundle' => 'JMS\\SecurityExtraBundle\\JMSSecurityExtraBundle',
                 'SiteAdminBundle' => 'Site\\AdminBundle\\SiteAdminBundle',
+                'WhiteOctoberBreadcrumbsBundle' => 'WhiteOctober\\BreadcrumbsBundle\\WhiteOctoberBreadcrumbsBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3082,6 +3161,13 @@ class appDevDebugProjectContainer extends Container
             'secret' => '40883bff372c0554b1017107629556b4e6',
             'database_path' => NULL,
             'email_administrateur' => 'zuzu38080@gmail.com',
+            'topmenu' => array(
+                0 => 'Home',
+                1 => 'Articles',
+                2 => 'Categories',
+                3 => 'Liens',
+                4 => 'Pages',
+            ),
             'my.success_handler.class' => '
             Site\\AdminBundle\\Authentication\\AuthenticationHandler
         ',
@@ -3364,6 +3450,7 @@ class appDevDebugProjectContainer extends Container
             'monolog.handler.debug.class' => 'Symfony\\Bridge\\Monolog\\Handler\\DebugHandler',
             'monolog.handler.swift_mailer.class' => 'Monolog\\Handler\\SwiftMailerHandler',
             'monolog.handler.native_mailer.class' => 'Monolog\\Handler\\NativeMailerHandler',
+            'monolog.handler.socket.class' => 'Monolog\\Handler\\SocketHandler',
             'monolog.handler.fingers_crossed.class' => 'Monolog\\Handler\\FingersCrossedHandler',
             'monolog.handler.fingers_crossed.error_level_activation_strategy.class' => 'Monolog\\Handler\\FingersCrossed\\ErrorLevelActivationStrategy',
             'monolog.handlers_to_channels' => array(
@@ -3397,6 +3484,9 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.spool.enabled' => true,
             'swiftmailer.sender_address' => NULL,
             'swiftmailer.single_address' => NULL,
+            'swiftmailer.delivery_whitelist' => array(
+
+            ),
             'assetic.asset_factory.class' => 'Symfony\\Bundle\\AsseticBundle\\Factory\\AssetFactory',
             'assetic.asset_manager.class' => 'Assetic\\Factory\\LazyAssetManager',
             'assetic.asset_manager_cache_warmer.class' => 'Symfony\\Bundle\\AsseticBundle\\CacheWarmer\\AssetManagerCacheWarmer',
@@ -3434,6 +3524,17 @@ class appDevDebugProjectContainer extends Container
             'assetic.ruby.bin' => '/usr/bin/ruby',
             'assetic.sass.bin' => '/usr/bin/sass',
             'assetic.filter.cssrewrite.class' => 'Assetic\\Filter\\CssRewriteFilter',
+            'assetic.filter.yui_css.class' => 'Assetic\\Filter\\Yui\\CssCompressorFilter',
+            'assetic.filter.yui_css.java' => 'C:\\Windows\\system32\\java.EXE',
+            'assetic.filter.yui_css.jar' => 'C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar',
+            'assetic.filter.yui_css.charset' => 'UTF-8',
+            'assetic.filter.yui_js.class' => 'Assetic\\Filter\\Yui\\JsCompressorFilter',
+            'assetic.filter.yui_js.java' => 'C:\\Windows\\system32\\java.EXE',
+            'assetic.filter.yui_js.jar' => 'C:/wamp/www/julovic/Julovic/app/Resources/java/yuicompressor.jar',
+            'assetic.filter.yui_js.charset' => 'UTF-8',
+            'assetic.filter.yui_js.nomunge' => NULL,
+            'assetic.filter.yui_js.preserve_semi' => NULL,
+            'assetic.filter.yui_js.disable_optimizations' => NULL,
             'assetic.twig_extension.functions' => array(
 
             ),
@@ -3446,7 +3547,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack',
             'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger',
             'doctrine.dbal.configuration.class' => 'Doctrine\\DBAL\\Configuration',
-            'doctrine.data_collector.class' => 'Symfony\\Bridge\\Doctrine\\DataCollector\\DoctrineDataCollector',
+            'doctrine.data_collector.class' => 'Doctrine\\Bundle\\DoctrineBundle\\DataCollector\\DoctrineDataCollector',
             'doctrine.dbal.connection.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager',
             'doctrine.dbal.connection_factory.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ConnectionFactory',
             'doctrine.dbal.events.mysql_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\MysqlSessionInit',
@@ -3529,8 +3630,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EM506f66f7b9a57_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/julovic/Julovic/app/cache/dev/jms_diextra/doctrine/EntityManager_507004cf01788.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager507004cf01788_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
