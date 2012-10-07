@@ -40,39 +40,53 @@ class __TwigTemplate_5b7bdc80c082a266ad3d86ed31fe3831 extends Twig_Template
         echo "
  <p></p>
  <p></p>
+    <div class=\"span6 center\">
         <div class=\"well\">
-                                ";
-        // line 9
+                        ";
+        // line 10
         if ($this->getContext($context, "error")) {
-            // line 10
-            echo "                                            <div class=\"alert alert-block alert-error fade in\"> 
-                                                    <span class=\"close\"></span>
-                                                    ";
-            // line 12
+            // line 11
+            echo "                                    <div class=\"alert alert-block alert-error fade in\"> 
+                                            <span class=\"close\"></span>
+                                            ";
+            // line 13
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans($this->getAttribute($this->getContext($context, "error"), "message"), array(), "AdminBundle"), "html", null, true);
             echo " 
-                                            </div>      
-                                ";
+                                    </div>      
+                        ";
         }
-        // line 15
-        echo "                            <legend>Authentification</legend>
-                                <form  action=\"";
         // line 16
+        echo "                            <legend>Authentification</legend>
+                                <form  class=\"form-horizontal\" action=\"";
+        // line 17
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("login_check"), "html", null, true);
         echo "\" method=\"post\">
-                                    <label for=\"login\">Login: </label><input required=\"required\" id=\"login\"  type=\"text\" name=\"_username\" value=\"";
-        // line 17
+                                    <div class=\"control-group\">
+                                        <label class=\"control-label\" for=\"login\">Login: </label>
+                                        <div class=\"controls\">
+                                            <input required=\"required\" id=\"login\"  type=\"text\" name=\"_username\" value=\"";
+        // line 21
         echo twig_escape_filter($this->env, $this->getContext($context, "last_username"), "html", null, true);
         echo "\" ";
         if (twig_test_empty($this->getContext($context, "last_username"))) {
             echo "placeholder=\"E-mail\" ";
         }
         echo ">
-                                    <label for=\"mdp\">Password: </label><input id=\"mdp\" required=\"required\" type=\"password\" placeholder=\"Password\" name=\"_password\">
-                                        <label id=\"entrer\" class=\"active\"><input type=\"checkbox\" name=\"_remember_me\" checked=\"checked\">Se souvenir de moi</label>
-                                        <input type=\"submit\" name=\"login\" value=\"Connexion\" class=\"btn btn-primary btn-large\">
-                                        </form>
+                                        </div>
+                                    </div>
+                                    <div class=\"control-group\">
+                                        <label class=\"control-label\" for=\"mdp\">Password: </label>
+                                        <div class=\"controls\">
+                                             <input id=\"mdp\" required=\"required\" type=\"password\" placeholder=\"Password\" name=\"_password\">
+                                             <p></p>
+                                             <label id=\"entrer\" class=\"active\"><input type=\"checkbox\" name=\"_remember_me\" checked=\"checked\">Se souvenir de moi</label>
+                                              <p></p>
+                                             <input type=\"submit\" name=\"login\" value=\"Connexion\" class=\"btn btn-primary btn-large\">
+                                        </div>
+                                    </div>
+                                    </form>
                             </fieldset>
+            </div>
         </div>
     ";
     }
@@ -89,6 +103,6 @@ class __TwigTemplate_5b7bdc80c082a266ad3d86ed31fe3831 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  63 => 17,  59 => 16,  56 => 15,  50 => 12,  46 => 10,  44 => 9,  36 => 5,  33 => 4,  27 => 3,);
+        return array (  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 10,  36 => 5,  33 => 4,  27 => 3,);
     }
 }

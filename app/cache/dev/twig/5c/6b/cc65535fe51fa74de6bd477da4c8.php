@@ -74,11 +74,25 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("logout"), "html", null, true);
         echo "\"><i class=\"icon-off\"></i>Deconnexion</a> <br /></li>
                             </ul>
-                    </div>
+                </div>
+            <div class=\"btn-group pull-right\" id=\"another_links\">
+                    <a class=\"btn btn-inverse dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
+                        Actions Rapides
+                        <span class=\"caret\"></span>
+                    </a>
+                    <ul class=\"right dropdown-menu\">
+                        <li><a href=\"#\">Action</a></li>
+                        <li><a href=\"#\">Another action</a></li>
+                        <li><a href=\"#\">Something else here</a></li>
+                        <li class=\"divider\"></li>
+                        <li><a href=\"#\">Separated link</a></li>
+                    </ul>
             </div>
+            </div>
+                  
             <ul class=\"nav\">
               ";
-        // line 36
+        // line 50
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "topmenu"));
         $context['loop'] = array(
@@ -95,17 +109,17 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["param"]) {
-            // line 37
+            // line 51
             echo "                                ";
             if ($this->getAttribute($this->getContext($context, "loop"), "first")) {
-                // line 38
+                // line 52
                 echo "                                <li class=\"";
                 if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "param"), "routing"))) {
                     echo "active";
                 }
                 echo "\">
                                     <a href=\"";
-                // line 39
+                // line 53
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "param"), "routing")), "html", null, true);
                 echo "\">";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "param"), "label"), "html", null, true);
@@ -113,14 +127,14 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                                 </li>                                 
                                 ";
             } elseif ($this->getAttribute($this->getContext($context, "loop"), "last")) {
-                // line 42
+                // line 56
                 echo "                                <li class=\"";
                 if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "param"), "routing"))) {
                     echo "active";
                 }
                 echo "\">
                                     <a href=\"";
-                // line 43
+                // line 57
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "param"), "routing")), "html", null, true);
                 echo "\">";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "param"), "label"), "html", null, true);
@@ -128,7 +142,7 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                                 </li>                                 
                                 ";
             } else {
-                // line 46
+                // line 60
                 echo "                                <li class=\"";
                 if ($this->getAttribute($this->getContext($context, "param", true), "subrouting", array(), "any", true, true)) {
                     echo "dropdown ";
@@ -138,7 +152,7 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                 }
                 echo "\">
                                     <a ";
-                // line 47
+                // line 61
                 if ($this->getAttribute($this->getContext($context, "param", true), "subrouting", array(), "any", true, true)) {
                     echo "class=\"dropdown-toggle\" data-toggle=\"dropdown\" ";
                 }
@@ -151,23 +165,23 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                 }
                 echo "</a>
                                     ";
-                // line 48
+                // line 62
                 if ($this->getAttribute($this->getContext($context, "param", true), "subrouting", array(), "any", true, true)) {
-                    // line 49
+                    // line 63
                     echo "                                    <ul class=\"dropdown-menu\">
                                         ";
-                    // line 50
+                    // line 64
                     $context['_parent'] = (array) $context;
                     $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "param"), "subrouting"));
                     foreach ($context['_seq'] as $context["_key"] => $context["subroute"]) {
-                        // line 51
+                        // line 65
                         echo "                                           <li class=\"";
                         if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "subroute"), "routing"))) {
                             echo "active";
                         }
                         echo "\">
                                                 <a href=\"";
-                        // line 52
+                        // line 66
                         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "subroute"), "routing")), "html", null, true);
                         echo "\">";
                         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "subroute"), "label"), "html", null, true);
@@ -178,15 +192,15 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['subroute'], $context['_parent'], $context['loop']);
                     $context = array_merge($_parent, array_intersect_key($context, $_parent));
-                    // line 55
+                    // line 69
                     echo "                                    </ul>
                                     ";
                 }
-                // line 57
+                // line 71
                 echo "                                </li>                                 
                                 ";
             }
-            // line 59
+            // line 73
             echo "                            ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -200,20 +214,16 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['param'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 60
+        // line 74
         echo "            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>        
-        
-        
-        
-
-        <div class=\"clearfix\"></div>
-        <div class=\"container-fluid\">
+    <div class=\"clearfix\"></div>
+    <div class=\"container-fluid\">
         ";
-        // line 72
+        // line 82
         echo "            ";
         echo $this->env->getExtension('breadcrumbs')->renderBreadcrumbs();
         echo "
@@ -243,7 +253,7 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
         
     <div class=\"span12\">
         ";
-        // line 99
+        // line 109
         echo "        <div id=\"primary_nav\">
             <div class=\"navbar\" style=\"position: static;\">
                 <div class=\"navbar-inner\">
@@ -294,77 +304,77 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
                 </div><!-- /navbar-inner -->
             </div>
         ";
-        // line 148
+        // line 158
         $this->displayBlock('flash_data_off', $context, $blocks);
-        // line 170
+        // line 180
         echo "                    </div>
             ";
     }
 
-    // line 148
+    // line 158
     public function block_flash_data_off($context, array $blocks = array())
     {
-        // line 149
+        // line 159
         echo "            ";
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "notice"), "method")) {
             echo " 
                         <div class=\"alert alert-block alert-info fade in\"> 
                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
-            // line 151
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "notice"), "method"), "html", null, true);
-            echo " 
-                        </div> 
-                                    ";
-        }
-        // line 154
-        echo "                                    ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "error"), "method")) {
-            echo " 
-                        <div class=\"alert alert-block alert-error fade in\"> 
-                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
-            // line 156
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "error"), "method"), "html", null, true);
-            echo " 
-                        </div> 
-                                    ";
-        }
-        // line 159
-        echo "                                    ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "success"), "method")) {
-            echo " 
-                        <div class=\"alert alert-block alert-success fade in\"> 
-                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
             // line 161
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "success"), "method"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "notice"), "method"), "html", null, true);
             echo " 
                         </div> 
                                     ";
         }
         // line 164
         echo "                                    ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "warning"), "method")) {
+        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "error"), "method")) {
             echo " 
-                        <div class=\"alert alert-block alert-warning fade in\">
+                        <div class=\"alert alert-block alert-error fade in\"> 
                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
             // line 166
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "warning"), "method"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "error"), "method"), "html", null, true);
             echo " 
                         </div> 
                                     ";
         }
         // line 169
+        echo "                                    ";
+        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "success"), "method")) {
+            echo " 
+                        <div class=\"alert alert-block alert-success fade in\"> 
+                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
+            // line 171
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "success"), "method"), "html", null, true);
+            echo " 
+                        </div> 
+                                    ";
+        }
+        // line 174
+        echo "                                    ";
+        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "warning"), "method")) {
+            echo " 
+                        <div class=\"alert alert-block alert-warning fade in\">
+                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>                            ";
+            // line 176
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "warning"), "method"), "html", null, true);
+            echo " 
+                        </div> 
+                                    ";
+        }
+        // line 179
         echo "                                ";
     }
 
-    // line 172
+    // line 182
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 173
+        // line 183
         echo "             ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
              <script src=\"";
-        // line 174
+        // line 184
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/app.js"), "html", null, true);
         echo "\"  type=\"text/javascript\"></script>
        ";
@@ -382,6 +392,6 @@ class __TwigTemplate_5c6bcc65535fe51fa74de6bd477da4c8 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  366 => 174,  361 => 173,  358 => 172,  354 => 169,  348 => 166,  342 => 164,  336 => 161,  330 => 159,  324 => 156,  318 => 154,  312 => 151,  306 => 149,  303 => 148,  298 => 170,  296 => 148,  245 => 99,  215 => 72,  202 => 60,  188 => 59,  184 => 57,  180 => 55,  169 => 52,  162 => 51,  158 => 50,  155 => 49,  153 => 48,  140 => 47,  130 => 46,  122 => 43,  115 => 42,  107 => 39,  100 => 38,  97 => 37,  80 => 36,  72 => 31,  63 => 24,  55 => 22,  53 => 21,  38 => 8,  34 => 6,  31 => 5,  28 => 4,);
+        return array (  376 => 184,  371 => 183,  368 => 182,  364 => 179,  358 => 176,  352 => 174,  346 => 171,  340 => 169,  334 => 166,  328 => 164,  322 => 161,  316 => 159,  313 => 158,  308 => 180,  306 => 158,  255 => 109,  225 => 82,  216 => 74,  202 => 73,  198 => 71,  194 => 69,  183 => 66,  176 => 65,  172 => 64,  169 => 63,  167 => 62,  154 => 61,  144 => 60,  136 => 57,  129 => 56,  121 => 53,  114 => 52,  111 => 51,  94 => 50,  72 => 31,  63 => 24,  55 => 22,  53 => 21,  38 => 8,  34 => 6,  31 => 5,  28 => 4,);
     }
 }

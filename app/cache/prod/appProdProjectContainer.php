@@ -78,7 +78,7 @@ class appProdProjectContainer extends Container
     }
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/julovic/Julovic/app/cache/prod/jms_diextra/doctrine/EntityManager_50700224e912b.php';
+        require_once 'C:/wamp/www/julovic/Julovic/app/cache/prod/jms_diextra/doctrine/EntityManager_5071f95e0bb5a.php';
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_c3c899141904da5768ff783a1d28d870');
         $b = new \Doctrine\Common\Cache\ArrayCache();
@@ -101,7 +101,7 @@ class appProdProjectContainer extends Container
         $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50700224e912b_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5071f95e0bb5a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
     protected function getDoctrine_Orm_DefaultManagerConfiguratorService()
     {
@@ -618,7 +618,7 @@ class appProdProjectContainer extends Container
     {
         $a = new \Symfony\Bundle\FrameworkBundle\Templating\PhpEngine($this->get('templating.name_parser'), $this, $this->get('templating.loader'), $this->get('templating.globals'));
         $a->setCharset('UTF-8');
-        $a->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.static'));
+        $a->setHelpers(array('slots' => 'templating.helper.slots', 'assets' => 'templating.helper.assets', 'request' => 'templating.helper.request', 'session' => 'templating.helper.session', 'router' => 'templating.helper.router', 'actions' => 'templating.helper.actions', 'code' => 'templating.helper.code', 'translator' => 'templating.helper.translator', 'form' => 'templating.helper.form', 'logout_url' => 'templating.helper.logout_url', 'security' => 'templating.helper.security', 'assetic' => 'assetic.helper.static', 'breadcrumbs' => 'white_october_breadcrumbs.helper'));
         return $this->services['templating.helper.form'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper(new \Symfony\Component\Form\FormRenderer(new \Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine($a, array(0 => 'FrameworkBundle:Form')), $this->get('form.csrf_provider')));
     }
     protected function getTemplating_Helper_LogoutUrlService()
@@ -873,6 +873,7 @@ class appProdProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig', 1 => 'SiteAdminBundle:Form:error.html.twig')), $this->get('form.csrf_provider'))));
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), false, array(), array(), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
+        $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags')));
         return $instance;
     }
@@ -897,6 +898,18 @@ class appProdProjectContainer extends Container
     protected function getValidatorService()
     {
         return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')), array(0 => $this->get('doctrine.orm.validator_initializer')));
+    }
+    protected function getWhiteOctoberBreadcrumbsService()
+    {
+        return $this->services['white_october_breadcrumbs'] = new \WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs();
+    }
+    protected function getWhiteOctoberBreadcrumbs_HelperService()
+    {
+        return $this->services['white_october_breadcrumbs.helper'] = new \WhiteOctober\BreadcrumbsBundle\Templating\Helper\BreadcrumbsHelper($this->get('templating'), $this->get('white_october_breadcrumbs'));
+    }
+    protected function getWhiteOctoberBreadcrumbs_TwigService()
+    {
+        return $this->services['white_october_breadcrumbs.twig'] = new \WhiteOctober\BreadcrumbsBundle\Twig\Extension\BreadcrumbsExtension($this);
     }
     protected function getDatabaseConnectionService()
     {
@@ -1015,6 +1028,7 @@ class appProdProjectContainer extends Container
                 'JMSDiExtraBundle' => 'JMS\\DiExtraBundle\\JMSDiExtraBundle',
                 'JMSSecurityExtraBundle' => 'JMS\\SecurityExtraBundle\\JMSSecurityExtraBundle',
                 'SiteAdminBundle' => 'Site\\AdminBundle\\SiteAdminBundle',
+                'WhiteOctoberBreadcrumbsBundle' => 'WhiteOctober\\BreadcrumbsBundle\\WhiteOctoberBreadcrumbsBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appProdProjectContainer',
@@ -1463,8 +1477,8 @@ class appProdProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/julovic/Julovic/app/cache/prod/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/julovic/Julovic/app/cache/prod/jms_diextra/doctrine/EntityManager_50700224e912b.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50700224e912b_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/julovic/Julovic/app/cache/prod/jms_diextra/doctrine/EntityManager_5071f95e0bb5a.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5071f95e0bb5a_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
             ),
             'security.access.method_interceptor.class' => 'JMS\\SecurityExtraBundle\\Security\\Authorization\\Interception\\MethodSecurityInterceptor',

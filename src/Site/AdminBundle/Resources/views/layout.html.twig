@@ -30,8 +30,22 @@
                                 <li class="divider"></li>
                                 <li> <a id="logout" href="{{ path('logout') }}"><i class="icon-off"></i>Deconnexion</a> <br /></li>
                             </ul>
-                    </div>
+                </div>
+            <div class="btn-group pull-right" id="another_links">
+                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                        Actions Rapides
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="right dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
             </div>
+            </div>
+                  
             <ul class="nav">
               {% for param in topmenu %}
                                 {% if loop.first %}
@@ -62,12 +76,8 @@
         </div>
       </div>
     </div>        
-        
-        
-        
-
-        <div class="clearfix"></div>
-        <div class="container-fluid">
+    <div class="clearfix"></div>
+    <div class="container-fluid">
         {# Breadscrumb #}
             {{ wo_render_breadcrumbs() }}
         
