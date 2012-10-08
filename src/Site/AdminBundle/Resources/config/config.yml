@@ -6,6 +6,23 @@ parameters:
       - Categories
       - Liens
       - Pages
+    sidebar_entities:
+       Articles:
+            field: 'title'
+            orderBy: 'title'
+            orderWay: 'Desc'
+            limit: 5
+       Categories:
+            field: 'title'
+            orderBy: 'title'
+            orderWay: 'Desc'
+            limit: 5
+       Medias:
+            field: 'picture'
+            orderBy: 'dateCreated'
+            orderWay: 'Desc'
+            limit: 5
+     
       
     Search:
        entity_1: ['champ1','champ2','champ1']
@@ -18,5 +35,13 @@ twig:
           - {label: 'Articles', routing: 'articles'}
           - {label: 'Categories', routing: 'categories' }
           - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
-          - {label: 'Medias', routing: 'medias' }
+          - {label: 'Medias', routing: 'medias'  }
           - {label: 'Tags', routing: 'tags' }
+        fastactions:
+          - {'label': 'Nouvel Article', routing: 'articles_new' }
+          - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
+          - {'label': 'Nouveau Link', routing: 'links_new' }
+        sidebar:
+          - {'label': 'Nouvel Article', routing: 'articles_new' }
+          - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
+          - {'label': 'Nouveau Link', routing: 'links_new' }

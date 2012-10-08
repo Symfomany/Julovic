@@ -235,9 +235,19 @@ div.jHtmlArea .ToolBar ul li a.custom_disk_button
 div.jHtmlArea { border: solid 1px #ccc; }
 #another_links{
     position: absolute;
-    right: 212px;
-    top: 0px;
+    margin-left: 200px;
+    margin-top: -40px;
 }
-#sidebar_left{
+#sidebar_context{
+margin-top: 20px;
+}
+#top_search{
+margin-right: 171px;
+margin-top: 0px;
+}
+#content{
+    margin-top: 20px;
+}
+/*#sidebar_left{
     margin-top: 21px;
-}
+}*/

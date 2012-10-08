@@ -49,6 +49,26 @@
       <parameter>Liens</parameter>
       <parameter>Pages</parameter>
     </parameter>
+    <parameter key="sidebar_entities" type="collection">
+      <parameter key="Articles" type="collection">
+        <parameter key="field">title</parameter>
+        <parameter key="orderBy">title</parameter>
+        <parameter key="orderWay">Desc</parameter>
+        <parameter key="limit">5</parameter>
+      </parameter>
+      <parameter key="Categories" type="collection">
+        <parameter key="field">title</parameter>
+        <parameter key="orderBy">title</parameter>
+        <parameter key="orderWay">Desc</parameter>
+        <parameter key="limit">5</parameter>
+      </parameter>
+      <parameter key="Medias" type="collection">
+        <parameter key="field">picture</parameter>
+        <parameter key="orderBy">dateCreated</parameter>
+        <parameter key="orderWay">Desc</parameter>
+        <parameter key="limit">5</parameter>
+      </parameter>
+    </parameter>
     <parameter key="search" type="collection">
       <parameter key="entity_1" type="collection">
         <parameter>champ1</parameter>
@@ -503,8 +523,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -2522,6 +2542,40 @@
           </argument>
         </argument>
       </call>
+      <call method="addGlobal">
+        <argument>fastactions</argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="label">Nouvel Article</argument>
+            <argument key="routing">articles_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouvel Catégorie</argument>
+            <argument key="routing">categories_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouveau Link</argument>
+            <argument key="routing">links_new</argument>
+          </argument>
+        </argument>
+      </call>
+      <call method="addGlobal">
+        <argument>sidebar</argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="label">Nouvel Article</argument>
+            <argument key="routing">articles_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouvel Catégorie</argument>
+            <argument key="routing">categories_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouveau Link</argument>
+            <argument key="routing">links_new</argument>
+          </argument>
+        </argument>
+      </call>
     </service>
     <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
       <argument type="service" id="templating.locator"/>
@@ -2739,8 +2793,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>

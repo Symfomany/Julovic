@@ -1,0 +1,26 @@
+ {% block flash_data_off %}
+                {% if app.session.hasFlash('notice') %} 
+                <div class="alert alert-block alert-info fade in"> 
+                    <button type="button" class="close" data-dismiss="alert">×</button>                        
+                     {{ app.session.flash('notice') }} 
+                </div> 
+                {% endif %}
+                {% if app.session.hasFlash('error') %} 
+                <div class="alert alert-block alert-error fade in"> 
+                    <button type="button" class="close" data-dismiss="alert">×</button>                          
+                {{ app.session.flash('error') }} 
+                </div> 
+                {% endif %}
+                {% if app.session.hasFlash('success') %} 
+                <div class="alert alert-block alert-success fade in"> 
+                    <button type="button" class="close" data-dismiss="alert">×</button>                          
+                 {{ app.session.flash('success') }} 
+                </div> 
+                {% endif %}
+                {% if app.session.hasFlash('warning') %} 
+                <div class="alert alert-block alert-warning fade in">
+                    <button type="button" class="close" data-dismiss="alert">×</button>                           
+                  {{ app.session.flash('warning') }} 
+                </div> 
+                {% endif %}
+    {% endblock %}

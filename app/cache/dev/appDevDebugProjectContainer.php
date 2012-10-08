@@ -303,11 +303,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php';
 
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
@@ -337,7 +337,7 @@ class appDevDebugProjectContainer extends Container
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
 
     /**
@@ -2602,6 +2602,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
         $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags')));
+        $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
+        $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
 
         return $instance;
     }
@@ -2760,7 +2762,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3167,6 +3169,26 @@ class appDevDebugProjectContainer extends Container
                 2 => 'Categories',
                 3 => 'Liens',
                 4 => 'Pages',
+            ),
+            'sidebar_entities' => array(
+                'Articles' => array(
+                    'field' => 'title',
+                    'orderBy' => 'title',
+                    'orderWay' => 'Desc',
+                    'limit' => 5,
+                ),
+                'Categories' => array(
+                    'field' => 'title',
+                    'orderBy' => 'title',
+                    'orderWay' => 'Desc',
+                    'limit' => 5,
+                ),
+                'Medias' => array(
+                    'field' => 'picture',
+                    'orderBy' => 'dateCreated',
+                    'orderWay' => 'Desc',
+                    'limit' => 5,
+                ),
             ),
             'search' => array(
                 'entity_1' => array(
@@ -3642,8 +3664,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

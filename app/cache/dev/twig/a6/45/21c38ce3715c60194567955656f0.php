@@ -1,0 +1,112 @@
+<?php
+
+/* TwigBundle:Exception:trace.html.twig */
+class __TwigTemplate_a64521c38ce3715c60194567955656f0 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        if ($this->getAttribute($this->getContext($context, "trace"), "function")) {
+            // line 2
+            echo "    at
+    <strong>
+        <abbr title=\"";
+            // line 4
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "trace"), "class"), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "trace"), "short_class"), "html", null, true);
+            echo "</abbr>
+        ";
+            // line 5
+            echo twig_escape_filter($this->env, ($this->getAttribute($this->getContext($context, "trace"), "type") . $this->getAttribute($this->getContext($context, "trace"), "function")), "html", null, true);
+            echo "
+    </strong>
+    (";
+            // line 7
+            echo $this->env->getExtension('code')->formatArgs($this->getAttribute($this->getContext($context, "trace"), "args"));
+            echo ")
+";
+        }
+        // line 9
+        echo "
+";
+        // line 10
+        if (((($this->getAttribute((isset($context["trace"]) ? $context["trace"] : null), "file", array(), "any", true, true) && $this->getAttribute($this->getContext($context, "trace"), "file")) && $this->getAttribute((isset($context["trace"]) ? $context["trace"] : null), "line", array(), "any", true, true)) && $this->getAttribute($this->getContext($context, "trace"), "line"))) {
+            // line 11
+            echo "    ";
+            echo (($this->getAttribute($this->getContext($context, "trace"), "function")) ? ("<br />") : (""));
+            echo "
+    in ";
+            // line 12
+            echo $this->env->getExtension('code')->formatFile($this->getAttribute($this->getContext($context, "trace"), "file"), $this->getAttribute($this->getContext($context, "trace"), "line"));
+            echo "&nbsp;
+    ";
+            // line 13
+            ob_start();
+            // line 14
+            echo "    <a href=\"#\" onclick=\"toggle('trace_";
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "'); switchIcons('icon_";
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "_open', 'icon_";
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "_close'); return false;\">
+        <img class=\"toggle\" id=\"icon_";
+            // line 15
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "_close\" alt=\"-\" src=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/framework/images/blue_picto_less.gif"), "html", null, true);
+            echo "\" style=\"visibility: ";
+            echo (((0 == $this->getContext($context, "i"))) ? ("display") : ("hidden"));
+            echo "\" />
+        <img class=\"toggle\" id=\"icon_";
+            // line 16
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "_open\" alt=\"+\" src=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/framework/images/blue_picto_more.gif"), "html", null, true);
+            echo "\" style=\"visibility: ";
+            echo (((0 == $this->getContext($context, "i"))) ? ("hidden") : ("display"));
+            echo "; margin-left: -18px\" />
+    </a>
+    ";
+            echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
+            // line 19
+            echo "    <div id=\"trace_";
+            echo twig_escape_filter($this->env, (($this->getContext($context, "prefix") . "_") . $this->getContext($context, "i")), "html", null, true);
+            echo "\" style=\"display: ";
+            echo (((0 == $this->getContext($context, "i"))) ? ("block") : ("none"));
+            echo "\" class=\"trace\">
+        ";
+            // line 20
+            echo $this->env->getExtension('code')->fileExcerpt($this->getAttribute($this->getContext($context, "trace"), "file"), $this->getAttribute($this->getContext($context, "trace"), "line"));
+            echo "
+    </div>
+";
+        }
+    }
+
+    public function getTemplateName()
+    {
+        return "TwigBundle:Exception:trace.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  89 => 20,  72 => 16,  64 => 15,  42 => 10,  39 => 9,  23 => 4,  104 => 24,  97 => 22,  95 => 21,  82 => 19,  78 => 17,  71 => 14,  67 => 12,  57 => 9,  49 => 12,  40 => 7,  25 => 4,  22 => 3,  20 => 2,  223 => 95,  214 => 89,  210 => 87,  203 => 83,  199 => 82,  192 => 78,  189 => 77,  184 => 75,  178 => 71,  176 => 70,  170 => 66,  161 => 62,  157 => 60,  155 => 59,  152 => 58,  145 => 54,  141 => 53,  136 => 50,  134 => 49,  130 => 47,  128 => 46,  125 => 45,  119 => 44,  116 => 43,  102 => 35,  98 => 33,  93 => 30,  76 => 27,  73 => 26,  69 => 25,  61 => 23,  58 => 22,  56 => 21,  17 => 1,  59 => 12,  46 => 18,  37 => 8,  33 => 7,  29 => 5,  24 => 6,  19 => 2,  44 => 11,  41 => 7,  30 => 4,  27 => 3,  342 => 137,  337 => 136,  334 => 135,  330 => 133,  324 => 130,  318 => 128,  312 => 125,  306 => 123,  300 => 120,  294 => 118,  288 => 115,  282 => 113,  279 => 112,  275 => 134,  273 => 112,  243 => 86,  234 => 78,  220 => 77,  216 => 75,  212 => 73,  201 => 70,  194 => 79,  190 => 68,  187 => 76,  185 => 66,  172 => 65,  162 => 64,  154 => 61,  147 => 60,  139 => 57,  132 => 56,  129 => 55,  112 => 42,  103 => 47,  92 => 20,  88 => 19,  75 => 16,  63 => 24,  55 => 14,  53 => 13,  38 => 6,  34 => 7,  31 => 5,  28 => 4,);
+    }
+}

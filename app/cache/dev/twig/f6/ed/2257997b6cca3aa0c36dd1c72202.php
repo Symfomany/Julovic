@@ -24,43 +24,44 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
 <html>
     <head>
         <meta charset=\"UTF-8\" />
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
         <title>";
-        // line 5
+        // line 6
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         ";
-        // line 6
+        // line 7
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 22
+        // line 23
         echo "        <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
         echo "\" />
     </head>
     <body>
         ";
-        // line 25
-        $this->displayBlock('body', $context, $blocks);
         // line 26
+        $this->displayBlock('body', $context, $blocks);
+        // line 27
         echo "            
         ";
-        // line 27
+        // line 28
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 95
+        // line 96
         echo "    </body>
 </html>
 ";
     }
 
-    // line 5
+    // line 6
     public function block_title($context, array $blocks = array())
     {
         echo "Welcome!";
     }
 
-    // line 6
+    // line 7
     public function block_stylesheets($context, array $blocks = array())
     {
-        // line 7
+        // line 8
         echo "            <!-- Le styles -->
                 <link href=\"/css/reset.css\" rel=\"stylesheet\">
                 <link href=\"/css/bootstrap.css\" rel=\"stylesheet\">
@@ -78,15 +79,15 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
        ";
     }
 
-    // line 25
+    // line 26
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 27
+    // line 28
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 28
+        // line 29
         echo "               <!-- Le javascript
                     ================================================== -->
                     <!-- Placed at the end of the document so the pages load faster -->
@@ -168,6 +169,6 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  88 => 28,  85 => 27,  80 => 25,  62 => 7,  59 => 6,  47 => 95,  45 => 27,  42 => 26,  40 => 25,  33 => 22,  27 => 5,  21 => 1,  376 => 184,  371 => 183,  368 => 182,  364 => 179,  358 => 176,  352 => 174,  346 => 171,  340 => 169,  334 => 166,  328 => 164,  322 => 161,  316 => 159,  313 => 158,  308 => 180,  306 => 158,  255 => 109,  225 => 82,  216 => 74,  202 => 73,  198 => 71,  194 => 69,  183 => 66,  176 => 65,  172 => 64,  169 => 63,  167 => 62,  154 => 61,  144 => 60,  136 => 57,  129 => 56,  121 => 53,  114 => 52,  111 => 51,  94 => 50,  72 => 31,  55 => 22,  53 => 5,  38 => 8,  34 => 6,  31 => 6,  28 => 4,  117 => 50,  110 => 45,  98 => 39,  90 => 36,  83 => 32,  79 => 31,  75 => 30,  71 => 29,  67 => 28,  63 => 24,  57 => 26,  54 => 25,  50 => 24,  29 => 6,  26 => 5,);
+        return array (  89 => 29,  86 => 28,  81 => 26,  63 => 8,  60 => 7,  48 => 96,  46 => 28,  43 => 27,  41 => 26,  34 => 23,  32 => 7,  21 => 1,  378 => 186,  373 => 185,  370 => 184,  366 => 181,  360 => 178,  354 => 176,  348 => 173,  342 => 171,  336 => 168,  330 => 166,  324 => 163,  318 => 161,  315 => 160,  310 => 182,  308 => 160,  255 => 109,  225 => 82,  217 => 75,  203 => 74,  199 => 72,  195 => 70,  184 => 67,  177 => 66,  173 => 65,  170 => 64,  168 => 63,  155 => 62,  145 => 61,  137 => 58,  130 => 57,  122 => 54,  115 => 53,  112 => 52,  95 => 51,  73 => 32,  64 => 25,  56 => 23,  54 => 6,  39 => 9,  35 => 7,  31 => 5,  28 => 6,);
     }
 }

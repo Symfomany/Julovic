@@ -1,0 +1,75 @@
+{# Toolbar #}
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/">Administration</a>
+                    <div class="nav-collapse collapse">
+                        <div class="navbar-text pull-right">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> 
+                            {% if app.user.firstname is defined %}
+                                        Bonjour <b>{{ app.user.firstname|title|default('Prénom') }} {{ app.user.lastname|title|default('Nom') }}</b>
+                            {% endif %}
+                                    </a>
+                                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                      <form class="navbar-search pull-left" action="" id="top_search">
+                                        <input type="text" class="search-query span2" placeholder="Recherchez">
+                                    </form>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="icon-pencil"></i> Editer</a></li>
+                                        <li><a href="#"><i class="icon-wrench"></i> Parametres</a></li>
+                                        <li><a href="#"><i class="icon-user"></i> Preference</a></li>
+                                        <li class="divider"></li>
+                                        <li> <a id="logout" href="{{ path('logout') }}"><i class="icon-off"></i>Deconnexion</a> <br /></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group pull-right" id="another_links">
+                                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Actions Rapides
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="right dropdown-menu">
+                                         {% for subroute in fastactions %}
+                                                <li><a href="{{ path(subroute.routing) }}">{{ subroute.label}}</a></li>
+                                        {% endfor %}
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <ul class="nav">
+              {% for param in topmenu %}
+                                {% if loop.first %}
+                                    <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
+                                        <a href="{{ path(param.routing) }}">{{ param.label }}</a>
+                                    </li>                                 
+                                {% elseif loop.last %}
+                                    <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
+                                        <a href="{{ path(param.routing) }}">{{ param.label }}</a>
+                                    </li>                                 
+                                {% else %}
+                                    <li class="{% if param.subrouting is defined %}dropdown {% endif %}{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
+                                        <a {% if param.subrouting is defined %}class="dropdown-toggle" data-toggle="dropdown" {% endif %} href="{{ path(param.routing) }}">{{ param.label }}{% if param.subrouting is defined %}<b class="caret"></b>{% endif %}</a>
+                                    {% if param.subrouting is defined %}
+                                        <ul class="dropdown-menu">
+                                        {% for subroute in param.subrouting %}
+                                                <li class="{% if app.request.attributes.get('_route') == subroute.routing %}active{% endif %}">
+                                                    <a href="{{ path(subroute.routing) }}">{{ subroute.label }}</a>
+                                                </li>  
+                                        {% endfor %}
+                                            </ul>
+                                    {% endif %}
+                                        </li>                                 
+                                {% endif %}
+                            {% endfor %}
+                                    </ul>
+                                </div><!--/.nav-collapse -->
+                            </div>
+                        </div>
+                    </div>

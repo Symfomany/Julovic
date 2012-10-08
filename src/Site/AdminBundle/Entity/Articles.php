@@ -31,6 +31,12 @@ class Articles
     private $categoryId;
 
      /**
+    * @var string $title;
+     * @ORM\Column(name="title", type="text", length=60, nullable=false, unique=true)
+     */
+    private $title;
+
+     /**
     * @var string $resume
      * @ORM\Column(name="resume", type="text", length=60, nullable=false, unique=true)
      * @Assert\NotBlank(message = "Résumé ne doit pas être vide")
@@ -66,7 +72,7 @@ class Articles
     private $active;
 
     /**
-     * @var string $active
+     * @var string $type
      *
      * @ORM\Column(name="type", type="string", length=200, nullable=false)
      */
@@ -303,5 +309,28 @@ class Articles
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Articles
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }
