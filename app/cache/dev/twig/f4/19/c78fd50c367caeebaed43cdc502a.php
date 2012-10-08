@@ -32,28 +32,98 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
         echo "
 
 <h1>Articles creation</h1>
-        <form action=\"";
-        // line 8
+
+
+<form novalidate=\"novalidate\" action=\"";
+        // line 10
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_create"), "html", null, true);
         echo "\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'enctype');
         echo ">
-    ";
-        // line 9
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'widget');
+                
+                ";
+        // line 12
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'errors');
         echo "
-                <a class=\"fancybox\" href=\"/images/1_b.jpg\" data-fancybox-group=\"gallery\" title=\"Lorem ipsum dolor sit amet\">
-                    <img src=\"/images/1_s.jpg\" alt=\"\" class=\"img-polaroid\" />
-                </a>
+    
+                ";
+        // line 14
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "categoryId"), 'label');
+        echo "
+                ";
+        // line 15
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "categoryId"), 'errors');
+        echo "
+                ";
+        // line 16
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "categoryId"), 'widget');
+        echo "
+                
+                ";
+        // line 18
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "resume"), 'label');
+        echo "
+                ";
+        // line 19
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "resume"), 'errors');
+        echo "
+                ";
+        // line 20
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "resume"), 'widget');
+        echo "
+                
+                ";
+        // line 22
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "content"), 'label');
+        echo "
+                ";
+        // line 23
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "content"), 'errors');
+        echo "
+                ";
+        // line 24
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "content"), 'widget');
+        echo "
+                
+                ";
+        // line 26
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "notes"), 'label');
+        echo "
+                ";
+        // line 27
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "notes"), 'errors');
+        echo "
+                ";
+        // line 28
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "notes"), 'widget', array("attr" => array("class" => "knobed")));
+        echo "
+                
+                ";
+        // line 30
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'label');
+        echo "
+                ";
+        // line 31
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'errors');
+        echo "
+                ";
+        // line 32
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'widget');
+        echo "  
+                
+                ";
+        // line 34
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'rest');
+        echo "
+                
                 <p>
                     <button type=\"submit\" class=\"btn-primary btn-large\">Create</button>
                 </p>
-            </form>
-
+</form>
             <ul class=\"record_actions\">
                 <li>
                     <a class=\"btn\" href=\"";
-        // line 20
+        // line 42
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
                         Back to the list
@@ -75,6 +145,6 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  55 => 20,  41 => 9,  35 => 8,  29 => 5,  26 => 4,);
+        return array (  125 => 42,  114 => 34,  109 => 32,  105 => 31,  101 => 30,  96 => 28,  92 => 27,  88 => 26,  83 => 24,  79 => 23,  75 => 22,  70 => 20,  66 => 19,  62 => 18,  57 => 16,  53 => 15,  49 => 14,  44 => 12,  37 => 10,  29 => 5,  26 => 4,);
     }
 }

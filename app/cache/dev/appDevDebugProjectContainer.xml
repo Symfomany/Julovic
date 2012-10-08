@@ -49,6 +49,18 @@
       <parameter>Liens</parameter>
       <parameter>Pages</parameter>
     </parameter>
+    <parameter key="search" type="collection">
+      <parameter key="entity_1" type="collection">
+        <parameter>champ1</parameter>
+        <parameter>champ2</parameter>
+        <parameter>champ1</parameter>
+      </parameter>
+      <parameter key="entity_2" type="collection">
+        <parameter>champ1</parameter>
+        <parameter>champ2</parameter>
+        <parameter>champ3</parameter>
+      </parameter>
+    </parameter>
     <parameter key="my.success_handler.class">
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
@@ -491,8 +503,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072c64065d6c.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5072c64065d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -2727,8 +2739,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5072c64065d6c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072c64065d6c.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager5072cc2d2b72c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5072cc2d2b72c.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
