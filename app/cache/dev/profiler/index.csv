@@ -7,3 +7,8 @@
 5071fa6d7dc91,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/,1349646957,
 5071fa6fccbee,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/categories/,1349646959,
 5071fa7268db4,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/,1349646962,
+5072c652e3034,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin,1349699154,
+5072c65629720,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/login,1349699158,
+5072c65e6e9ab,127.0.0.1,POST,http://www.bo.ju/app_dev.php/admin/login_check,1349699166,
+5072c660154a2,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/,1349699168,
+5072c665b0b32,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/,1349699173,
