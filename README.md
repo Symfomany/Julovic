@@ -56,7 +56,7 @@ People can pick and choose the right approaches for their CMS without having to 
 
 <h2>Features</h2>:
 
- - Dashboard
+ * Dashboard
 
 ================================
 <h2>Documentation</h2>
