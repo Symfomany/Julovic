@@ -45,3 +45,11 @@ users:
     resource: "@SiteAdminBundle/Resources/config/routing/users.yml"
     prefix:   /users
     
+divers:
+    resource: "@SiteAdminBundle/Resources/config/routing/divers.yml"
+    prefix:   /
+    
+parametres:
+    resource: "@SiteAdminBundle/Resources/config/routing/parametres.yml"
+    prefix:   /parametres
+    

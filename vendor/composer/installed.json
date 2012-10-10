@@ -1259,5 +1259,282 @@
         "keywords": [
             "breadcrumbs"
         ]
+    },
+    {
+        "name": "knplabs/knp-components",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/KnpLabs/knp-components",
+            "reference": "99ea408dc2a7c3616e688ffe67e3248ece69ff0e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/KnpLabs/knp-components/zipball/99ea408dc2a7c3616e688ffe67e3248ece69ff0e",
+            "reference": "99ea408dc2a7c3616e688ffe67e3248ece69ff0e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-06-15 06:31:08",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Knp\\Component": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "KnpLabs Team",
+                "homepage": "http://knplabs.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://github.com/KnpLabs/knp-components/contributors"
+            }
+        ],
+        "description": "Knplabs component library",
+        "homepage": "http://github.com/KnpLabs/knp-components",
+        "keywords": [
+            "pager",
+            "components",
+            "knp",
+            "knplabs",
+            "paginator"
+        ]
+    },
+    {
+        "name": "knplabs/knp-paginator-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Knp/Bundle/PaginatorBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/KnpLabs/KnpPaginatorBundle",
+            "reference": "de439d2816fe984dbe0c438fd4d0d7c67748c5ff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/KnpLabs/KnpPaginatorBundle/zipball/de439d2816fe984dbe0c438fd4d0d7c67748c5ff",
+            "reference": "de439d2816fe984dbe0c438fd4d0d7c67748c5ff",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/framework-bundle": "2.*,<2.2",
+            "knplabs/knp-components": ">=1.1",
+            "twig/twig": ">=1.5"
+        },
+        "time": "2012-07-30 12:35:56",
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Knp\\Bundle\\PaginatorBundle": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "KnpLabs Team",
+                "homepage": "http://knplabs.com"
+            },
+            {
+                "name": "Symfony2 Community",
+                "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
+            }
+        ],
+        "description": "Paginator bundle for Symfony2 to automate pagination and simplify sorting and other features",
+        "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
+        "keywords": [
+            "Symfony2",
+            "pager",
+            "knp",
+            "knplabs",
+            "paginator",
+            "pagination",
+            "bundle"
+        ]
+    },
+    {
+        "name": "gedmo/doctrine-extensions",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
+            "reference": "0add69ccb0cb22e3216c30166805ae27615cb8f0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/l3pp4rd/DoctrineExtensions/zipball/0add69ccb0cb22e3216c30166805ae27615cb8f0",
+            "reference": "0add69ccb0cb22e3216c30166805ae27615cb8f0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "doctrine/common": ">=2.2,<2.5-dev"
+        },
+        "suggest": {
+            "doctrine/orm": ">=2.1",
+            "doctrine/mongodb-odm": "*"
+        },
+        "time": "2012-10-04 11:25:11",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.3.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Gedmo": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gediminas Morkevicius",
+                "email": "gediminas.morkevicius@gmail"
+            }
+        ],
+        "description": "Doctrine2 behavioral extensions",
+        "homepage": "http://gediminasm.org/",
+        "keywords": [
+            "tree",
+            "behaviors",
+            "doctrine2",
+            "extensions",
+            "gedmo",
+            "sluggable",
+            "loggable",
+            "translatable",
+            "nestedset",
+            "sortable",
+            "timestampable"
+        ]
+    },
+    {
+        "name": "stof/doctrine-extensions-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Stof/DoctrineExtensionsBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stof/StofDoctrineExtensionsBundle",
+            "reference": "773b37310ca244570032541be3c8ab27b814a83f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/stof/StofDoctrineExtensionsBundle/zipball/773b37310ca244570032541be3c8ab27b814a83f",
+            "reference": "773b37310ca244570032541be3c8ab27b814a83f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/framework-bundle": "2.1.*",
+            "gedmo/doctrine-extensions": ">=2.3-dev"
+        },
+        "suggest": {
+            "doctrine/doctrine-bundle": "*",
+            "doctrine/mongodb-odm-bundle": "2.1.*"
+        },
+        "time": "2012-10-01 10:03:55",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Stof\\DoctrineExtensionsBundle": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christophe Coevoet",
+                "email": "stof@notk.org"
+            }
+        ],
+        "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
+        "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+        "keywords": [
+            "tree",
+            "behaviors",
+            "doctrine2",
+            "extensions",
+            "gedmo",
+            "sluggable",
+            "loggable",
+            "translatable",
+            "nestedset",
+            "sortable",
+            "timestampable"
+        ]
+    },
+    {
+        "name": "craue/formflow-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Craue/FormFlowBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/craue/CraueFormFlowBundle",
+            "reference": "961a181c116085a3baa67c4270428e448ad15b94"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/craue/CraueFormFlowBundle/zipball/961a181c116085a3baa67c4270428e448ad15b94",
+            "reference": "961a181c116085a3baa67c4270428e448ad15b94",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/framework-bundle": ">=2.1-dev,<2.3-dev",
+            "symfony/form": ">=2.1-dev,<2.3-dev"
+        },
+        "time": "2012-09-11 08:17:00",
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Craue\\FormFlowBundle": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christian Raue",
+                "email": "christian.raue@gmail.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://github.com/craue/CraueFormFlowBundle/contributors"
+            }
+        ],
+        "description": "Multi-step forms for your Symfony2 project.",
+        "homepage": "https://github.com/craue/CraueFormFlowBundle",
+        "keywords": [
+            "Symfony2",
+            "form"
+        ]
     }
 ]

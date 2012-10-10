@@ -96,14 +96,10 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
      */
     private $email;
 
-      /**
+    /**
      * @var string $password
-     * @Assert\NotBlank(message = "Mot de passe ne doit pas être vide")
-     * @Assert\MinLength(
-     *     limit=8,
-     *     message="Votre mot de passe  doit comporter {{ limit }} charactères."
-     * )
-     * @ORM\Column(name="password", type="string", length=255)
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
 

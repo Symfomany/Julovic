@@ -4,7 +4,7 @@ namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Site\AdminBundle\Entity\Articles
@@ -14,6 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Articles
 {
+    
+    public function __construct(){
+        
+    }
+    
     /**
      * @var integer $id
      *
@@ -23,16 +28,9 @@ class Articles
      */
     private $id;
 
-    /**
-     * @var integer $categoryId
-     *
-     * @ORM\Column(name="category_id", type="integer", nullable=false)
-     */
-    private $categoryId;
-
      /**
     * @var string $title;
-     * @ORM\Column(name="title", type="text", length=60, nullable=false, unique=true)
+     * @ORM\Column(name="title", type="string", length=200, nullable=false, unique=true)
      */
     private $title;
 
@@ -60,9 +58,18 @@ class Articles
     /**
      * @var string $dateCreated
      *
-     * @ORM\Column(name="date_created", type="string", length=200, nullable=false)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="date_created", type="datetime", length=200, nullable=false)
      */
     private $dateCreated;
+
+  /**
+     * @var datetime $dateUpdated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="date_updated", type="datetime", length=200, nullable=false)
+     */
+    private $dateUpdated;
 
     /**
      * @var string $active
@@ -92,8 +99,21 @@ class Articles
      */
     private $notes;
 
+    
+     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column( length=128, unique=true)
+     */
+    private $slug;
 
-
+        
+    /**
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="articles")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     */
+    protected $category;
+    
+    
     /**
      * Get id
      *
@@ -110,9 +130,9 @@ class Articles
      * @param integer $categoryId
      * @return Articles
      */
-    public function setCategoryId($categoryId)
+    public function setCategory($categoryId)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $categoryId;
     
         return $this;
     }
@@ -122,9 +142,9 @@ class Articles
      *
      * @return integer 
      */
-    public function getCategoryId()
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
     /**
@@ -332,5 +352,28 @@ class Articles
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Articles
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -7,15 +7,15 @@
 
 <h1>Articles</h1>
 
-<table class="record_properties">
+<table class="record_properties table table-striped">
     <tbody>
         <tr>
             <th>Id</th>
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Categoryid</th>
-            <td>{{ entity.categoryId }}</td>
+            <th>Category</th>
+            <td>{{ entity.category }}</td>
         </tr>
         <tr>
             <th>Resume</th>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th>Datecreated</th>
-            <td>{{ entity.dateCreated }}</td>
+            <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
         </tr>
         <tr>
             <th>Active</th>
@@ -43,18 +43,18 @@
 <ul class="record_actions">
     <li>
         <a href="{{ path('articles') }}">
-            Back to the list
+            <i class="icon-share-alt"></i> Back to the list
         </a>
     </li>
     <li>
         <a href="{{ path('articles_edit', { 'id': entity.id }) }}">
-            Edit
+            edit
         </a>
     </li>
     <li>
         <form action="{{ path('articles_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" class="btn">Delete</button>
         </form>
     </li>
 </ul>

@@ -1,0 +1,17 @@
+parametres:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Parametres:index" }
+
+parametres_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Parametres:show" }
+
+parametres_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Parametres:edit" }
+
+parametres_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Parametres:update" }
+    requirements: { _method: post }
+

@@ -1,0 +1,61 @@
+Articles:
+    type: entity
+    table: articles
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        categoryId:
+            type: integer
+            unsigned: false
+            nullable: true
+            column: category_id
+        type:
+            type: string
+            length: 60
+            fixed: false
+            nullable: true
+        title:
+            type: string
+            length: 200
+            fixed: false
+            nullable: false
+        resume:
+            type: text
+            nullable: true
+        content:
+            type: text
+            nullable: true
+        tag:
+            type: string
+            length: 400
+            fixed: false
+            nullable: true
+        active:
+            type: boolean
+            nullable: true
+        special:
+            type: boolean
+            nullable: true
+        notes:
+            type: integer
+            unsigned: false
+            nullable: true
+        slug:
+            type: string
+            length: 120
+            fixed: false
+            nullable: true
+        dateUpdated:
+            type: datetime
+            nullable: false
+            column: date_updated
+        dateCreated:
+            type: datetime
+            nullable: true
+            column: date_created
+    lifecycleCallbacks: {  }

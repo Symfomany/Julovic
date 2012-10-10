@@ -1,11 +1,5 @@
 parameters:
     email_administrateur: zuzu38080@gmail.com
-    topmenu:
-      - Home
-      - Articles
-      - Categories
-      - Liens
-      - Pages
     sidebar_entities:
        Articles:
             field: 'title'
@@ -23,10 +17,12 @@ parameters:
             orderWay: 'Desc'
             limit: 5
      
-      
-    Search:
-       entity_1: ['champ1','champ2','champ1']
-       entity_2: ['champ1','champ2','champ3']
+    SearchQuery: >
+            SELECT a FROM SiteAdminBundle:Articles a
+            LEFT JOIN  a.category c
+            WHERE a.title = :title
+            OR  c.title = :titleb
+            ORDER BY a.title ASC
       
 twig:
     globals:
@@ -37,6 +33,7 @@ twig:
           - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
           - {label: 'Medias', routing: 'medias'  }
           - {label: 'Tags', routing: 'tags' }
+          - {label: 'Paramètres', routing: 'parametres' }
         fastactions:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
@@ -45,3 +42,8 @@ twig:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
           - {'label': 'Nouveau Link', routing: 'links_new' }
+          
+#Padam87SearchBundle:
+#        resource: "@Padam87SearchBundle/Controller/"
+#        type:     annotation
+#        prefix:   /

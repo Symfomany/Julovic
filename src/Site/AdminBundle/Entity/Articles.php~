@@ -3,8 +3,6 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Site\AdminBundle\Entity\Articles
@@ -26,288 +24,86 @@ class Articles
     /**
      * @var integer $categoryId
      *
-     * @ORM\Column(name="category_id", type="integer", nullable=false)
+     * @ORM\Column(name="category_id", type="integer", nullable=true)
      */
     private $categoryId;
 
-     /**
-    * @var string $title;
-     * @ORM\Column(name="title", type="text", length=60, nullable=false, unique=true)
+    /**
+     * @var string $type
+     *
+     * @ORM\Column(name="type", type="string", length=60, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=200, nullable=false)
      */
     private $title;
 
-     /**
-    * @var string $resume
-     * @ORM\Column(name="resume", type="text", length=60, nullable=false, unique=true)
-     * @Assert\NotBlank(message = "Résumé ne doit pas être vide")
+    /**
+     * @var string $resume
+     *
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
 
     /**
      * @var string $content
      *
-     * @ORM\Column(name="content", type="text", nullable=false)
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 
     /**
      * @var string $tag
      *
-     * @ORM\Column(name="tag", type="string", length=400, nullable=false)
+     * @ORM\Column(name="tag", type="string", length=400, nullable=true)
      */
     private $tag;
 
     /**
-     * @var string $dateCreated
+     * @var boolean $active
      *
-     * @ORM\Column(name="date_created", type="string", length=200, nullable=false)
-     */
-    private $dateCreated;
-
-    /**
-     * @var string $active
-     *
-     * @ORM\Column(name="active", type="boolean", length=200, nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
     private $active;
 
     /**
-     * @var string $type
+     * @var boolean $special
      *
-     * @ORM\Column(name="type", type="string", length=200, nullable=false)
-     */
-    private $type;
-
-    /**
-     * @var string $special
-     *
-     * @ORM\Column(name="special", type="boolean", length=200, nullable=false)
+     * @ORM\Column(name="special", type="boolean", nullable=true)
      */
     private $special;
 
     /**
-     * @var string $special
+     * @var integer $notes
      *
-     * @ORM\Column(name="notes", type="string", length=200, nullable=false)
+     * @ORM\Column(name="notes", type="integer", nullable=true)
      */
     private $notes;
 
-
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=120, nullable=true)
+     */
+    private $slug;
 
     /**
-     * Get id
+     * @var \DateTime $dateUpdated
      *
-     * @return integer 
+     * @ORM\Column(name="date_updated", type="datetime", nullable=false)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $dateUpdated;
 
     /**
-     * Set categoryId
+     * @var \DateTime $dateCreated
      *
-     * @param integer $categoryId
-     * @return Articles
+     * @ORM\Column(name="date_created", type="datetime", nullable=true)
      */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
-    
-        return $this;
-    }
+    private $dateCreated;
 
-    /**
-     * Get categoryId
-     *
-     * @return integer 
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
 
-    /**
-     * Set resume
-     *
-     * @param string $resume
-     * @return Articles
-     */
-    public function setResume($resume)
-    {
-        $this->resume = $resume;
-    
-        return $this;
-    }
-
-    /**
-     * Get resume
-     *
-     * @return string 
-     */
-    public function getResume()
-    {
-        return $this->resume;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Articles
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set tag
-     *
-     * @param string $tag
-     * @return Articles
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-    
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string 
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
-     * Set dateCreated
-     *
-     * @param string $dateCreated
-     * @return Articles
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateCreated
-     *
-     * @return string 
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
-    }
-
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     * @return Articles
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
-    
-        return $this;
-    }
-
-    /**
-     * Get active
-     *
-     * @return boolean 
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Articles
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set special
-     *
-     * @param boolean $special
-     * @return Articles
-     */
-    public function setSpecial($special)
-    {
-        $this->special = $special;
-    
-        return $this;
-    }
-
-    /**
-     * Get special
-     *
-     * @return boolean 
-     */
-    public function getSpecial()
-    {
-        return $this->special;
-    }
-
-    /**
-     * Set notes
-     *
-     * @param integer $notes
-     * @return Articles
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
-    
-        return $this;
-    }
-
-    /**
-     * Get notes
-     *
-     * @return integer 
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
 }

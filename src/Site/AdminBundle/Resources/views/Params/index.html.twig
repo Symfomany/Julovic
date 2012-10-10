@@ -1,0 +1,29 @@
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+ {% block content %}
+{{ parent() }}
+
+<h1>Parametres</h1>
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Principal</a></li>
+    <li><a href="#tab2" data-toggle="tab">Serveur</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+     
+        <form  action="{{ path('parametres') }}" method="post" {{ form_enctype(form) }}>
+
+               {{ form_errors(form) }}
+            
+        </form
+        
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p>Howdy, I'm in Section 2.</p>
+    </div>
+  </div>
+</div>
+
+ {% endblock %}

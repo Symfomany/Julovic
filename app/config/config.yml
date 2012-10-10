@@ -1,11 +1,13 @@
+# All Imports
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: '@SiteAdminBundle/Resources/config/config.yml' }  
     - { resource: '@SiteAdminBundle/Resources/config/services.xml' }  
 
+# Frameworks Settings
 framework:
-    esi:             ~
+#    esi:             ~
     translator:      { fallback: %locale% }
     secret:          %secret%
     router:
@@ -48,17 +50,60 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
-        charset:  UTF8
+      default_connection: default 
+      connections:
+        default:
+          driver:   %database_driver%
+          host:     %database_host%
+          port:     %database_port%
+          dbname:   %database_name%
+          user:     %database_user%
+          password: %database_password%
+          charset:  UTF8
 
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    SiteAdminBundle : ~
+                    gedmo_translatable:
+                        type: annotation
+                        prefix: Gedmo\Translatable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_translator:
+                        type: annotation
+                        prefix: Gedmo\Translator\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                        alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_loggable:
+                        type: annotation
+                        prefix: Gedmo\Loggable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                        alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_tree:
+                        type: annotation
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+
+stof_doctrine_extensions: 
+    orm: 
+      default: 
+          sluggable:    true
+          timestampable: true   
+#stof_doctrine_extensions:
+#    default_locale: fr_FR
+#    orm:
+#        default:
+#            softdeleteable: ~
+#            sluggable: ~
+#            timestampable: true # not needed: listeners are not enabled by default
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -68,11 +113,33 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
     
-    
 # Services Twig
 services:
-#   Ajoute un tag â€œdebugâ€� qui affiche le context courant du template
    twig.extension.debug:
        class: Twig_Extensions_Extension_Debug
        tags:
            - { name: twig.extension }    
+   twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }
+   twig.extension.text:
+     class: Twig_Extensions_Extension_Text
+     tags:
+         - { name: twig.extension }
+   project.twig.extension:
+        class: Site\AdminBundle\Extension\Twig\MyTwigExtension
+        tags:
+            -  { name: twig.extension }         
+
+           
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: SiteAdminBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: SiteAdminBundle:Pagination:sortable_link.html.twig # sort link template

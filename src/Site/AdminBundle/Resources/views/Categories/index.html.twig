@@ -7,7 +7,9 @@
 
 <h1>Categories list</h1>
 
-<table class="table" class="records_list">
+{% include 'SiteAdminBundle:Slot:filter.html.twig' %}
+
+<table class="table table-striped" class="records_list">
     <thead>
         <tr>
             <th>Id</th>
@@ -27,22 +29,38 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('categories_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('categories_show', { 'id': entity.id }) }}"><i class="icon-search"></i>show</a>
                     </li>
                     <li>
-                        <a href="{{ path('categories_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('categories_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> edit</a>
                     </li>
                 </ul>
             </td>
         </tr>
+        {% else %}
+        <tr>
+                <div class="alert">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Warning!</strong> Aucun résultat.
+                </div>
+       </tr>
     {% endfor %}
     </tbody>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Datecreated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 </table>
 
 <ul>
     <li>
         <a href="{{ path('categories_new') }}">
-            Create a new entry
+          <i class="icon-pencil"></i> Create a new entry
         </a>
     </li>
 </ul>

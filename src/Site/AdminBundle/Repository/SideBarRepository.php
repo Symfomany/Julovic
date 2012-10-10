@@ -16,8 +16,6 @@ class SideBarRepository extends EntityRepository
 
     public function getSidebar($params =  Array())
     {
-        
-            
         $query = $this->createQueryBuilder('u');
         
         $query->select();

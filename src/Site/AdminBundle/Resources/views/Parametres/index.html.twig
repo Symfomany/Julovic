@@ -1,0 +1,66 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block content %}
+{{ parent() }}
+
+<h1>Paramètres du sites</h1>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Principal</a></li>
+    <li><a href="#tab2" data-toggle="tab">Serveur</a></li>
+    <li><a href="#tab3" data-toggle="tab">Administrateurs</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+<table class="records_list table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom du site</th>
+            <th>URL du site</th>
+            <th>Nom de l'administrateur</th>
+            <th>Email de l'administrateur</th>
+            <th>Ville de l'administrateur</th>
+            <th>Tel de l'administrateur</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('parametres_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.nomSite }}</td>
+            <td>{{ entity.urlSite }}</td>
+            <td>{{ entity.nomAdmin }}</td>
+            <td>{{ entity.emailAdmin }}</td>
+            <td>{{ entity.villeAdmin }}</td>
+            <td>{{ entity.telAdmin }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('parametres_show', { 'id': entity.id }) }}"><i class="icon-search"></i>show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('parametres_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p>Configuration Serveur</p>
+    </div>
+    <div class="tab-pane" id="tab3">
+      
+    </div>
+  </div>
+</div>
+
+
+
+ {% endblock %}

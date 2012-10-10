@@ -1,0 +1,30 @@
+administrateurs:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:index" }
+
+administrateurs_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:show" }
+
+administrateurs_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:new" }
+
+administrateurs_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:create" }
+    requirements: { _method: post }
+
+administrateurs_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:edit" }
+
+administrateurs_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:update" }
+    requirements: { _method: post }
+
+administrateurs_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:delete" }
+    requirements: { _method: post }

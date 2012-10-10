@@ -1,4 +1,36 @@
+
 $(function() {
+    
+    jQuery.expr[':'].contains = function(a, i, m) {
+    var rExps=[
+        {re: /[\xC0-\xC6]/g, ch: "A"},
+        {re: /[\xE0-\xE6]/g, ch: "a"},
+        {re: /[\xC8-\xCB]/g, ch: "E"},
+        {re: /[\xE8-\xEB]/g, ch: "e"},
+        {re: /[\xCC-\xCF]/g, ch: "I"},
+        {re: /[\xEC-\xEF]/g, ch: "i"},
+        {re: /[\xD2-\xD6]/g, ch: "O"},
+        {re: /[\xF2-\xF6]/g, ch: "o"},
+        {re: /[\xD9-\xDC]/g, ch: "U"},
+        {re: /[\xF9-\xFC]/g, ch: "u"},
+        {re: /[\xC7-\xE7]/g, ch: "c"},
+        {re: /[\xD1]/g, ch: "N"},
+        {re: /[\xF1]/g, ch: "n"}
+    ];
+
+    var element = $(a).text();
+    var search  = m[3];
+
+    $.each(rExps, function() {
+         element    = element.replace(this.re, this.ch);
+         search     = search.replace(this.re, this.ch);
+    });
+
+    return element.toUpperCase()
+        .indexOf(search.toUpperCase()) >= 0;
+};
+    
+    
     /* French initialisation for the jQuery UI date picker plugin. */
     /* Written by Keith Wood (kbwood{at}iinet.com.au) and Stéphane Nahmani (sholby@sholby.net). */
     jQuery(function($){
@@ -29,9 +61,33 @@ $(function() {
         changeMonth: true,
         changeYear: true
     });
+    
     $('.fancybox').fancybox({
         openEffect	: 'elastic',
         closeEffect	: 'elastic'
+    });
+    
+     var minlength = 3;
+    $('.filter_input').keyup(function(){
+        var that = this;
+        value = $(this).val();
+         if (value.length >= minlength ) {
+             $(".table-striped tr").not(":contains('"+value+"')").hide();
+         }
+         else{
+             $(".table-striped tr").show();
+         }
+    });
+    
+    $('.reset_input').click(function(){
+        $('.filter_input').val('');
+         $(".table-striped tr").show();
+    });
+    
+    $('.timepicker').timepicker({
+        // Options
+        timeSeparator: ':',           // The character to use to separate hours and minutes. (default: ':')
+        showLeadingZero: true
     });
                 
     $("input:checkbox, input:radio, input:file").uniform();

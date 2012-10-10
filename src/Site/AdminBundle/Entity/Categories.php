@@ -3,6 +3,8 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Site\AdminBundle\Entity\Categories
@@ -12,6 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categories
 {
+    
+        /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * @var integer $id
      *
@@ -43,6 +53,19 @@ class Categories
     private $dateCreated;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy="category", cascade={"persist", "remove"},orphanRemoval=true)
+     */
+    protected $articles;
+        
+     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column( length=128, unique=true)
+     */
+    private $slug;
+    
+    
+    
 
     /**
      * Get id
@@ -122,4 +145,68 @@ class Categories
     {
         return $this->dateCreated;
     }
+
+    
+    /**
+     * Add articles
+     *
+     * @param Site\AdminBundle\Entity\Articles $articles
+     * @return Categories
+     */
+    public function addArticle(\Site\AdminBundle\Entity\Articles $articles)
+    {
+        $this->articles[] = $articles;
+    
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param Site\AdminBundle\Entity\Articles $articles
+     */
+    public function removeArticle(\Site\AdminBundle\Entity\Articles $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+    
+       /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Articles
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    
+        
+    public function __toString(){
+        return $this->getSlug();
+        
+    }
+
 }

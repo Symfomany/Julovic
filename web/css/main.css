@@ -1,3 +1,62 @@
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    font-size: 12px;
+}
+#filter_box {
+}
+#filter_box .reset_input{
+    margin-bottom: 12px;
+}
+#filter_box label{
+    float: left;
+margin-right: 8px;
+padding-top: 5px;
+}
+h1{
+    background: transparent url('../images/bandeau_title.png') no-repeat 1px 11px;
+    width: 750px;
+    height: 47px;
+    color: white;
+    font-size: 15px;
+    padding: 6px;
+    padding-left: 11px;
+    text-shadow: 1px 1px #222, 1px 1px #222;
+}
+a {
+    color: #149BDF;
+    text-decoration: none;
+    outline: none;
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-property: color;
+    -moz-transition-duration: 0.5s;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+td ul{
+
+}
+td ul li{
+    width: 64px;
+}
+.table thead th{
+    color: #222;
+    text-decoration: none;
+    outline: none;
+    -webkit-transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-property: color;
+    -moz-transition-duration: 0.5s;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+.table thead th{
+
+}
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th, .table th, .table td {
+    min-width: 58px;
+    font-size: 12px;
+}
+
 #demo_skins_dark{
     width:200px;
     height:100px;
@@ -234,20 +293,37 @@ div.jHtmlArea .ToolBar ul li a.custom_disk_button
 
 div.jHtmlArea { border: solid 1px #ccc; }
 #another_links{
-    position: absolute;
-    margin-left: 200px;
-    margin-top: -40px;
+position: absolute;
+margin-left: -166px;
+margin-top: -40px;
 }
 #sidebar_context{
-margin-top: 20px;
+    margin-top: 20px;
 }
 #top_search{
-margin-right: 171px;
-margin-top: 0px;
+margin-left: -378px;
+margin-top: -42px;
+position: absolute;
 }
 #content{
     margin-top: 20px;
 }
+
+.pagination ul > li.current > a{
+    background-color: whiteSmoke;
+}
+.pagination {
+    margin-left: 583px;
+}
+.breadcrumb {
+   margin-top: 15px;
+}
+.navbar-search .search-query{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
 /*#sidebar_left{
     margin-top: 21px;
 }*/

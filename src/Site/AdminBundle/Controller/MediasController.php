@@ -20,12 +20,19 @@ class MediasController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+       $em = $this->get('doctrine.orm.entity_manager'); 
+       $dql = "SELECT a FROM SiteAdminBundle:Medias a";
+       $query = $em->createQuery($dql);
+        $paginator = $this->get('knp_paginator'); 
+        $pagination = $paginator->paginate( $query, $this->get('request')->query->get('page',1), 5);  //page number/, 10/limit per page/ );
 
-        $entities = $em->getRepository('SiteAdminBundle:Medias')->findAll();
+// parameters to template return compact('pagination');
+        
+//        $em = $this->getDoctrine()->getManager();
+//        $entities = $em->getRepository('SiteAdminBundle:Medias')->findAll();
 
         return $this->render('SiteAdminBundle:Medias:index.html.twig', array(
-            'entities' => $entities,
+            'pagination' => $pagination,
         ));
     }
 

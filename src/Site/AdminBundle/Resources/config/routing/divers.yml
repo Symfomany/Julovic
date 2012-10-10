@@ -1,0 +1,7 @@
+search_query:
+    pattern:  /search
+    defaults: { _controller: "SiteAdminBundle:Slot:search" }
+    requirements: { _method: post }
+
+    
+

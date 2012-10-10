@@ -18,7 +18,11 @@
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
-        "whiteoctober/breadcrumbs-bundle": "2.1.x-dev"
+        "whiteoctober/breadcrumbs-bundle": "2.1.x-dev",
+         "knplabs/knp-paginator-bundle": "dev-master",
+          "gedmo/doctrine-extensions": ">=2.3-dev",
+          "stof/doctrine-extensions-bundle": "dev-master",
+          "craue/formflow-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

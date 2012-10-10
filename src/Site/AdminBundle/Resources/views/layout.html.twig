@@ -3,14 +3,17 @@
 
         {% block body%}
             {{ parent() }}
-                     {% render 'SiteAdminBundle:Slot:topmenu' %}
+                {# Toolbar #}
+                    {% include "SiteAdminBundle:Slot:topmenu.html.twig" %}
                     <div class="container-fluid">
                             {# Breadscrumb #}
+                            <div id="breadscrumb">
                                 {{ wo_render_breadcrumbs() }}
+                            </div>
                             <div class="span3" id="sidebar_context">
                                 {% render 'SiteAdminBundle:Slot:sidebar' %}
                             </div>
-                            <div class="span9" id="content">
+                            <div class="span10" id="content">
                                         {% render 'SiteAdminBundle:Slot:flashdatas' %}
                         {% block content %}
                         {% endblock %}

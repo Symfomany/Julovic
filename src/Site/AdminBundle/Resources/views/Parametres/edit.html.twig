@@ -1,0 +1,18 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block content %}
+{{ parent() }}
+
+<h1>Parametres edit</h1>
+
+<form action="{{ path('parametres_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button class="btn-primary btn-large" type="submit">Edit</button>
+    </p>
+</form>
+
+ {% endblock %}
+

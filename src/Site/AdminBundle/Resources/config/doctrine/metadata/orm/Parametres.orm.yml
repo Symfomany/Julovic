@@ -1,0 +1,65 @@
+Parametres:
+    type: entity
+    table: parametres
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        nomSite:
+            type: string
+            length: 120
+            fixed: false
+            nullable: false
+            column: nom_site
+        administrateursId:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: administrateurs_id
+        nomAdmin:
+            type: string
+            length: 120
+            fixed: false
+            nullable: false
+            column: nom_admin
+        emailAdmin:
+            type: string
+            length: 120
+            fixed: false
+            nullable: false
+            column: email_admin
+        adresseAdmin:
+            type: string
+            length: 150
+            fixed: false
+            nullable: false
+            column: adresse_admin
+        villeAdmin:
+            type: string
+            length: 150
+            fixed: false
+            nullable: false
+            column: ville_admin
+        cpAdmin:
+            type: string
+            length: 150
+            fixed: false
+            nullable: false
+            column: cp_admin
+        telAdmin:
+            type: string
+            length: 120
+            fixed: false
+            nullable: false
+            column: tel_admin
+        portAdmin:
+            type: string
+            length: 120
+            fixed: false
+            nullable: false
+            column: port_admin
+    lifecycleCallbacks: {  }

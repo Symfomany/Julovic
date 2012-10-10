@@ -1,13 +1,13 @@
-
  {% extends 'SiteAdminBundle::layout.html.twig' %}
-
 
  {% block content %}
 {{ parent() }}
 
 <h1>Comments list</h1>
 
-<table class="table" class="records_list">
+{% include 'SiteAdminBundle:Slot:filter.html.twig' %}
+
+<table class="table table-striped" class="records_list">
     <thead>
         <tr>
             <th>Id</th>
@@ -27,10 +27,10 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('comments_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('comments_show', { 'id': entity.id }) }}"><i class="icon-search"></i>show</a>
                     </li>
                     <li>
-                        <a href="{{ path('comments_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('comments_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> edit</a>
                     </li>
                 </ul>
             </td>
@@ -42,7 +42,7 @@
 <ul>
     <li>
         <a href="{{ path('comments_new') }}">
-            Create a new entry
+           <i class="icon-pencil"></i> Create a new entry
         </a>
     </li>
 </ul>

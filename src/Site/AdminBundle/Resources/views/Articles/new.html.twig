@@ -7,13 +7,17 @@
 <h1>Articles creation</h1>
 
 
-<form novalidate="novalidate" action="{{ path('articles_create') }}" method="post" {{ form_enctype(form) }}>
+<form  action="{{ path('articles_create') }}" method="post" {{ form_enctype(form) }}>
                 
                 {{ form_errors(form) }}
     
-                {{ form_label(form.categoryId) }}
-                {{ form_errors(form.categoryId) }}
-                {{ form_widget(form.categoryId) }}
+                {{ form_label(form.category) }}
+                {{ form_errors(form.category) }}
+                {{ form_widget(form.category) }}
+                
+                {{ form_label(form.title) }}
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title, { 'attr' : { 'class' : 'input-xxlarge' }}) }}<p class="help-inline"><span class="label label-info">Help!</span> Test alpha</p>
                 
                 {{ form_label(form.resume) }}
                 {{ form_errors(form.resume) }}
@@ -40,7 +44,7 @@
             <ul class="record_actions">
                 <li>
                     <a class="btn" href="{{ path('articles') }}">
-                        Back to the list
+                        <i class="icon-share-alt"></i> Back to the list
                     </a>
                 </li>
             </ul>

@@ -1,0 +1,86 @@
+Administrateurs:
+    type: entity
+    table: administrateurs
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        firstname:
+            type: string
+            length: 20
+            fixed: false
+            nullable: true
+        lastname:
+            type: string
+            length: 30
+            fixed: false
+            nullable: true
+        picture:
+            type: string
+            length: 40
+            fixed: false
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        email:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        password:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        optin:
+            type: boolean
+            nullable: true
+        ip:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+        salt:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        token:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        dateAuth:
+            type: datetime
+            nullable: true
+            column: date_auth
+        enabled:
+            type: boolean
+            nullable: false
+        accountnonlocked:
+            type: boolean
+            nullable: false
+            column: accountNonLocked
+        accountnonexpired:
+            type: boolean
+            nullable: false
+            column: accountNonExpired
+        slug:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+    lifecycleCallbacks: {  }

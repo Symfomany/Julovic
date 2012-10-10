@@ -2,6 +2,8 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+date_default_timezone_set('Europe/Paris');
+
 $loader = require __DIR__.'/../vendor/autoload.php';
 
 // intl
@@ -10,6 +12,8 @@ if (!function_exists('intl_get_error_code')) {
 
     $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
 }
+
+
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 

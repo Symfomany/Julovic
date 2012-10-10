@@ -1,0 +1,130 @@
+Users:
+    type: entity
+    table: users
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        cityId:
+            type: integer
+            unsigned: false
+            nullable: true
+            column: city_id
+        gender:
+            type: boolean
+            nullable: true
+        firstname:
+            type: string
+            length: 20
+            fixed: false
+            nullable: true
+        lastname:
+            type: string
+            length: 30
+            fixed: false
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        email:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        tel:
+            type: string
+            length: 12
+            fixed: false
+            nullable: true
+        password:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        dob:
+            type: date
+            nullable: true
+        optin:
+            type: boolean
+            nullable: true
+        ip:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+        salt:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        token:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+        don:
+            type: float
+            nullable: true
+        q1:
+            type: text
+            nullable: true
+        q2:
+            type: text
+            nullable: true
+        q3:
+            type: text
+            nullable: true
+        q4:
+            type: text
+            nullable: true
+        picture:
+            type: string
+            length: 120
+            fixed: false
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+        createdAt:
+            type: datetime
+            nullable: true
+            column: created_at
+        dateAuth:
+            type: datetime
+            nullable: true
+            column: date_auth
+        counterUpdated:
+            type: boolean
+            nullable: true
+            column: counter_updated
+        counterFailed:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: counter_failed
+        enabled:
+            type: boolean
+            nullable: false
+        accountnonlocked:
+            type: boolean
+            nullable: false
+            column: accountNonLocked
+        accountnonexpired:
+            type: boolean
+            nullable: false
+            column: accountNonExpired
+        slug:
+            type: string
+            length: 255
+            fixed: false
+            nullable: true
+        fid:
+            type: integer
+            unsigned: false
+            nullable: true
+    lifecycleCallbacks: {  }

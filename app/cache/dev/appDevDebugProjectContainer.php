@@ -287,14 +287,26 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Dbal_DefaultConnectionService()
     {
-        $a = new \Doctrine\DBAL\Logging\LoggerChain();
-        $a->addLogger(new \Symfony\Bridge\Doctrine\Logger\DbalLogger($this->get('monolog.logger.doctrine'), $this->get('debug.stopwatch')));
-        $a->addLogger($this->get('doctrine.dbal.logger.profiling.default'));
+        $a = $this->get('annotation_reader');
 
-        $b = new \Doctrine\DBAL\Configuration();
-        $b->setSQLLogger($a);
+        $b = new \Doctrine\DBAL\Logging\LoggerChain();
+        $b->addLogger(new \Symfony\Bridge\Doctrine\Logger\DbalLogger($this->get('monolog.logger.doctrine'), $this->get('debug.stopwatch')));
+        $b->addLogger($this->get('doctrine.dbal.logger.profiling.default'));
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'test', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        $c = new \Doctrine\DBAL\Configuration();
+        $c->setSQLLogger($b);
+
+        $d = new \Gedmo\Timestampable\TimestampableListener();
+        $d->setAnnotationReader($a);
+
+        $e = new \Gedmo\Sluggable\SluggableListener();
+        $e->setAnnotationReader($a);
+
+        $f = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
+        $f->addEventSubscriber($d);
+        $f->addEventSubscriber($e);
+
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'test', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $c, $f, array());
     }
 
     /**
@@ -303,14 +315,13 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php';
 
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
@@ -318,26 +329,35 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity')), 'Site\\AdminBundle\\Entity');
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(true);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity', 1 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Translatable\\Entity', 2 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Translator\\Entity', 3 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Loggable\\Entity', 4 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Tree\\Entity'));
 
-        $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
-        $this->get('doctrine.orm.default_manager_configurator')->configure($f);
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'Site\\AdminBundle\\Entity');
+        $f->addDriver($e, 'Gedmo\\Translatable\\Entity');
+        $f->addDriver($e, 'Gedmo\\Translator\\Entity');
+        $f->addDriver($e, 'Gedmo\\Loggable\\Entity');
+        $f->addDriver($e, 'Gedmo\\Tree\\Entity');
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity', 'GedmoTranslatable' => 'Gedmo\\Translatable\\Entity', 'GedmoTranslator' => 'Gedmo\\Translator\\Entity', 'GedmoLoggable' => 'Gedmo\\Loggable\\Entity', 'GedmoTree' => 'Gedmo\\Tree\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(false);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
+        $this->get('doctrine.orm.default_manager_configurator')->configure($h);
+
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -380,32 +400,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'esi' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Component\HttpKernel\HttpCache\Esi A Symfony\Component\HttpKernel\HttpCache\Esi instance.
-     */
-    protected function getEsiService()
-    {
-        return $this->services['esi'] = new \Symfony\Component\HttpKernel\HttpCache\Esi();
-    }
-
-    /**
-     * Gets the 'esi_listener' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Component\HttpKernel\EventListener\EsiListener A Symfony\Component\HttpKernel\EventListener\EsiListener instance.
-     */
-    protected function getEsiListenerService()
-    {
-        return $this->services['esi_listener'] = new \Symfony\Component\HttpKernel\EventListener\EsiListener($this->get('esi'));
-    }
-
-    /**
      * Gets the 'event_dispatcher' service.
      *
      * This service is shared.
@@ -417,6 +411,10 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['event_dispatcher'] = $instance = new \Symfony\Component\HttpKernel\Debug\ContainerAwareTraceableEventDispatcher($this, $this->get('debug.stopwatch'), $this->get('monolog.logger.event'));
 
+        $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.paginate', 1 => 'before'), 0);
+        $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.paginate', 1 => 'pagination'), 0);
+        $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.sortable', 1 => 'before'), 1);
+        $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'pagination'), 1);
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'security.firewall', 1 => 'onKernelRequest'), 8);
         $instance->addListenerService('kernel.response', array(0 => 'security.rememberme.response_listener', 1 => 'onKernelResponse'), 0);
@@ -427,12 +425,12 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('kernel.controller', array(0 => 'sensio_framework_extra.view.listener', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.view', array(0 => 'sensio_framework_extra.view.listener', 1 => 'onKernelView'), 0);
         $instance->addListenerService('kernel.response', array(0 => 'sensio_framework_extra.cache.listener', 1 => 'onKernelResponse'), 0);
+        $instance->addListenerService('kernel.request', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'acme.demo.listener', 1 => 'onKernelController'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('session_listener', 'Symfony\\Bundle\\FrameworkBundle\\EventListener\\SessionListener');
-        $instance->addSubscriberService('esi_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\EsiListener');
         $instance->addSubscriberService('profiler_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener');
         $instance->addSubscriberService('data_collector.request', 'Symfony\\Component\\HttpKernel\\DataCollector\\RequestDataCollector');
         $instance->addSubscriberService('router_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener');
@@ -1059,6 +1057,70 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'knp_paginator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Knp\Component\Pager\Paginator A Knp\Component\Pager\Paginator instance.
+     */
+    protected function getKnpPaginatorService()
+    {
+        $this->services['knp_paginator'] = $instance = new \Knp\Component\Pager\Paginator($this->get('event_dispatcher'));
+
+        $instance->setDefaultPaginatorOptions(array('pageParameterName' => 'page', 'sortFieldParameterName' => 'sort', 'sortDirectionParameterName' => 'direction', 'distinct' => true));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.paginate' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber A Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_PaginateService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('knp_paginator.subscriber.paginate', 'request');
+        }
+
+        return $this->services['knp_paginator.subscriber.paginate'] = $this->scopedServices['request']['knp_paginator.subscriber.paginate'] = new \Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber();
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.sliding_pagination' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber A Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_SlidingPaginationService()
+    {
+        return $this->services['knp_paginator.subscriber.sliding_pagination'] = new \Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber($this->get('templating'), $this->get('templating.helper.router'), $this->get('translator.default'), array('defaultPaginationTemplate' => 'SiteAdminBundle:Pagination:sliding.html.twig', 'defaultSortableTemplate' => 'SiteAdminBundle:Pagination:sortable_link.html.twig', 'defaultPageRange' => 5));
+    }
+
+    /**
+     * Gets the 'knp_paginator.subscriber.sortable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber A Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber instance.
+     */
+    protected function getKnpPaginator_Subscriber_SortableService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('knp_paginator.subscriber.sortable', 'request');
+        }
+
+        return $this->services['knp_paginator.subscriber.sortable'] = $this->scopedServices['request']['knp_paginator.subscriber.sortable'] = new \Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber();
+    }
+
+    /**
      * Gets the 'locale_listener' service.
      *
      * This service is shared.
@@ -1325,6 +1387,19 @@ class appDevDebugProjectContainer extends Container
     protected function getProfilerListenerService()
     {
         return $this->services['profiler_listener'] = new \Symfony\Component\HttpKernel\EventListener\ProfilerListener($this->get('profiler'), NULL, false, false);
+    }
+
+    /**
+     * Gets the 'project.twig.extension' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Site\AdminBundle\Extension\Twig\MyTwigExtension A Site\AdminBundle\Extension\Twig\MyTwigExtension instance.
+     */
+    protected function getProject_Twig_ExtensionService()
+    {
+        return $this->services['project.twig.extension'] = new \Site\AdminBundle\Extension\Twig\MyTwigExtension();
     }
 
     /**
@@ -2589,6 +2664,9 @@ class appDevDebugProjectContainer extends Container
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController::showAction', 'cache' => 'C:/wamp/www/bo/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
 
         $instance->addExtension($this->get('twig.extension.debug'));
+        $instance->addExtension($this->get('twig.extension.intl'));
+        $instance->addExtension($this->get('twig.extension.text'));
+        $instance->addExtension($this->get('project.twig.extension'));
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($this->get('security.context')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator.default')));
@@ -2601,7 +2679,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default')));
         $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
-        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags')));
+        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags'), 6 => array('label' => 'Paramètres', 'routing' => 'parametres')));
         $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
         $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
 
@@ -2632,6 +2710,32 @@ class appDevDebugProjectContainer extends Container
     protected function getTwig_Extension_DebugService()
     {
         return $this->services['twig.extension.debug'] = new \Twig_Extensions_Extension_Debug();
+    }
+
+    /**
+     * Gets the 'twig.extension.intl' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Twig_Extensions_Extension_Intl A Twig_Extensions_Extension_Intl instance.
+     */
+    protected function getTwig_Extension_IntlService()
+    {
+        return $this->services['twig.extension.intl'] = new \Twig_Extensions_Extension_Intl();
+    }
+
+    /**
+     * Gets the 'twig.extension.text' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Twig_Extensions_Extension_Text A Twig_Extensions_Extension_Text instance.
+     */
+    protected function getTwig_Extension_TextService()
+    {
+        return $this->services['twig.extension.text'] = new \Twig_Extensions_Extension_Text();
     }
 
     /**
@@ -2762,7 +2866,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3142,6 +3246,8 @@ class appDevDebugProjectContainer extends Container
                 'JMSSecurityExtraBundle' => 'JMS\\SecurityExtraBundle\\JMSSecurityExtraBundle',
                 'SiteAdminBundle' => 'Site\\AdminBundle\\SiteAdminBundle',
                 'WhiteOctoberBreadcrumbsBundle' => 'WhiteOctober\\BreadcrumbsBundle\\WhiteOctoberBreadcrumbsBundle',
+                'KnpPaginatorBundle' => 'Knp\\Bundle\\PaginatorBundle\\KnpPaginatorBundle',
+                'StofDoctrineExtensionsBundle' => 'Stof\\DoctrineExtensionsBundle\\StofDoctrineExtensionsBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3163,13 +3269,6 @@ class appDevDebugProjectContainer extends Container
             'secret' => '40883bff372c0554b1017107629556b4e6',
             'database_path' => NULL,
             'email_administrateur' => 'zuzu38080@gmail.com',
-            'topmenu' => array(
-                0 => 'Home',
-                1 => 'Articles',
-                2 => 'Categories',
-                3 => 'Liens',
-                4 => 'Pages',
-            ),
             'sidebar_entities' => array(
                 'Articles' => array(
                     'field' => 'title',
@@ -3190,18 +3289,8 @@ class appDevDebugProjectContainer extends Container
                     'limit' => 5,
                 ),
             ),
-            'search' => array(
-                'entity_1' => array(
-                    0 => 'champ1',
-                    1 => 'champ2',
-                    2 => 'champ1',
-                ),
-                'entity_2' => array(
-                    0 => 'champ1',
-                    1 => 'champ2',
-                    2 => 'champ3',
-                ),
-            ),
+            'searchquery' => 'SELECT a FROM SiteAdminBundle:Articles a LEFT JOIN  a.category c WHERE a.title = :title OR  c.title = :titleb ORDER BY a.title ASC
+',
             'my.success_handler.class' => '
             Site\\AdminBundle\\Authentication\\AuthenticationHandler
         ',
@@ -3284,8 +3373,6 @@ class appDevDebugProjectContainer extends Container
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
             ),
-            'esi.class' => 'Symfony\\Component\\HttpKernel\\HttpCache\\Esi',
-            'esi_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\EsiListener',
             'profiler.class' => 'Symfony\\Component\\HttpKernel\\Profiler\\Profiler',
             'profiler_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener',
             'data_collector.config.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\ConfigDataCollector',
@@ -3632,7 +3719,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.listeners.resolve_target_entity.class' => 'Doctrine\\ORM\\Tools\\ResolveTargetEntityListener',
             'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy',
             'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy',
-            'doctrine.orm.auto_generate_proxy_classes' => true,
+            'doctrine.orm.auto_generate_proxy_classes' => false,
             'doctrine.orm.proxy_dir' => 'C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies',
             'doctrine.orm.proxy_namespace' => 'Proxies',
             'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser',
@@ -3664,8 +3751,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50734e13ede7a.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50734e13ede7a_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
@@ -3690,6 +3777,22 @@ class appDevDebugProjectContainer extends Container
             'security.authenticated_voter.disabled' => false,
             'security.role_voter.disabled' => false,
             'security.acl_voter.disabled' => false,
+            'knp_paginator.class' => 'Knp\\Component\\Pager\\Paginator',
+            'knp_paginator.template.pagination' => 'SiteAdminBundle:Pagination:sliding.html.twig',
+            'knp_paginator.template.sortable' => 'SiteAdminBundle:Pagination:sortable_link.html.twig',
+            'knp_paginator.page_range' => 5,
+            'stof_doctrine_extensions.event_listener.locale.class' => 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
+            'stof_doctrine_extensions.event_listener.logger.class' => 'Stof\\DoctrineExtensionsBundle\\EventListener\\LoggerListener',
+            'stof_doctrine_extensions.default_locale' => 'en',
+            'stof_doctrine_extensions.translation_fallback' => false,
+            'stof_doctrine_extensions.persist_default_translation' => false,
+            'stof_doctrine_extensions.listener.translatable.class' => 'Gedmo\\Translatable\\TranslatableListener',
+            'stof_doctrine_extensions.listener.timestampable.class' => 'Gedmo\\Timestampable\\TimestampableListener',
+            'stof_doctrine_extensions.listener.sluggable.class' => 'Gedmo\\Sluggable\\SluggableListener',
+            'stof_doctrine_extensions.listener.tree.class' => 'Gedmo\\Tree\\TreeListener',
+            'stof_doctrine_extensions.listener.loggable.class' => 'Gedmo\\Loggable\\LoggableListener',
+            'stof_doctrine_extensions.listener.sortable.class' => 'Gedmo\\Sortable\\SortableListener',
+            'stof_doctrine_extensions.listener.softdeleteable.class' => 'Gedmo\\SoftDeleteable\\SoftDeleteableListener',
             'web_profiler.debug_toolbar.class' => 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener',
             'web_profiler.debug_toolbar.intercept_redirects' => false,
             'web_profiler.debug_toolbar.mode' => 2,

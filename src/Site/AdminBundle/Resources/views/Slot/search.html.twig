@@ -1,0 +1,6 @@
+
+<form class="navbar-search pull-left" action="{{  path('search_query') }}" id="top_search" method="post">
+            {{ form_errors(form.search) }}
+            {{ form_widget(form.search , { 'attr': {'class': 'search-query span2',  'value' :  app.request.query.get('search')}}) }}
+            {{ form_rest(form) }}
+</form>

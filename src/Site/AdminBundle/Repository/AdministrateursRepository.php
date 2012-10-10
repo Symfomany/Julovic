@@ -14,7 +14,6 @@ use Doctrine\ORM\NoResultException;
 class AdministrateursRepository extends EntityRepository
 {
 
-
     public function loadUserByUsername($username)
     {
         $q = $this
