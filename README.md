@@ -1,3 +1,5 @@
+<h2>Julovic 1.2</h2>
+
 CMF By Juju &amp; Lulu
 Open Source Project -- License MIT
 2012-2013
@@ -56,7 +58,16 @@ People can pick and choose the right approaches for their CMS without having to 
 
 <h2>Features</h2>:
 
- - Dashboard
+  * Dashboard multi views
+  * AST Functions Custom
+  * Console Lines Classes
+  * Custom Validator Constraints
+  * Datafixtures for ORM
+  * QRCode Package loaded
+  * MultiStep Form loaded
+  * Imagine Manipulation Images
+  * Breadscrumb library
+
 
 ================================
 <h2>Documentation</h2>
