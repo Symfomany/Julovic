@@ -11,14 +11,20 @@ class MediasType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('offerId')
-            ->add('restaurantId')
             ->add('legend')
-            ->add('picture')
+            ->add('file', 'file', array(
+                    'label' => 'Photo',
+                    'required' => false,
+                    "attr" => array(
+                        "accept" => "image/*",
+                    )))
             ->add('state')
-            ->add('dateCreated')
-            ->add('dateUpdated')
-        ;
+            ->add('file', 'file', array(
+                    'label' => 'Photo',
+                    'required' => false,
+                    "attr" => array(
+                        "accept" => "image/*",
+                        )));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

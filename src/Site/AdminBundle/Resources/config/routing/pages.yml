@@ -1,0 +1,30 @@
+pages:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Pages:index" }
+
+pages_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Pages:show" }
+
+pages_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Pages:new" }
+
+pages_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Pages:create" }
+    requirements: { _method: post }
+
+pages_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Pages:edit" }
+
+pages_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Pages:update" }
+    requirements: { _method: post }
+
+pages_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Pages:delete" }
+    requirements: { _method: post }

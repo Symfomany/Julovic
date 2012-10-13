@@ -200,6 +200,47 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'craue.form.flow' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Craue\FormFlowBundle\Form\FormFlow A Craue\FormFlowBundle\Form\FormFlow instance.
+     */
+    protected function getCraue_Form_FlowService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('craue.form.flow', 'request');
+        }
+
+        $this->services['craue.form.flow'] = $this->scopedServices['request']['craue.form.flow'] = $instance = new \Craue\FormFlowBundle\Form\FormFlow();
+
+        $instance->setFormFactory($this->get('form.factory'));
+        $instance->setRequest($this->get('request'));
+        $instance->setStorage($this->get('craue.form.flow.storage'));
+        $instance->setEventDispatcher($this->get('event_dispatcher'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'craue.form.flow.storage' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Craue\FormFlowBundle\Storage\SessionStorage A Craue\FormFlowBundle\Storage\SessionStorage instance.
+     */
+    protected function getCraue_Form_Flow_StorageService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('craue.form.flow.storage', 'request');
+        }
+
+        return $this->services['craue.form.flow.storage'] = $this->scopedServices['request']['craue.form.flow.storage'] = new \Craue\FormFlowBundle\Storage\SessionStorage($this->get('session'));
+    }
+
+    /**
      * Gets the 'data_collector.request' service.
      *
      * This service is shared.
@@ -315,13 +356,14 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php';
 
-        $a = $this->get('annotation_reader');
+        $a = new \Doctrine\Common\Cache\ArrayCache();
+        $a->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
@@ -329,35 +371,26 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
-        $d = new \Doctrine\Common\Cache\ArrayCache();
-        $d->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
+        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity')), 'Site\\AdminBundle\\Entity');
 
-        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity', 1 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Translatable\\Entity', 2 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Translator\\Entity', 3 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Loggable\\Entity', 4 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Tree\\Entity'));
+        $e = new \Doctrine\ORM\Configuration();
+        $e->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity'));
+        $e->setMetadataCacheImpl($a);
+        $e->setQueryCacheImpl($b);
+        $e->setResultCacheImpl($c);
+        $e->setMetadataDriverImpl($d);
+        $e->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
+        $e->setProxyNamespace('Proxies');
+        $e->setAutoGenerateProxyClasses(false);
+        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
 
-        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $f->addDriver($e, 'Site\\AdminBundle\\Entity');
-        $f->addDriver($e, 'Gedmo\\Translatable\\Entity');
-        $f->addDriver($e, 'Gedmo\\Translator\\Entity');
-        $f->addDriver($e, 'Gedmo\\Loggable\\Entity');
-        $f->addDriver($e, 'Gedmo\\Tree\\Entity');
+        $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
+        $this->get('doctrine.orm.default_manager_configurator')->configure($f);
 
-        $g = new \Doctrine\ORM\Configuration();
-        $g->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity', 'GedmoTranslatable' => 'Gedmo\\Translatable\\Entity', 'GedmoTranslator' => 'Gedmo\\Translator\\Entity', 'GedmoLoggable' => 'Gedmo\\Loggable\\Entity', 'GedmoTree' => 'Gedmo\\Tree\\Entity'));
-        $g->setMetadataCacheImpl($b);
-        $g->setQueryCacheImpl($c);
-        $g->setResultCacheImpl($d);
-        $g->setMetadataDriverImpl($f);
-        $g->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
-        $g->setProxyNamespace('Proxies');
-        $g->setAutoGenerateProxyClasses(false);
-        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
-
-        $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
-        $this->get('doctrine.orm.default_manager_configurator')->configure($h);
-
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
 
     /**
@@ -415,6 +448,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.paginate', 1 => 'pagination'), 0);
         $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.sortable', 1 => 'before'), 1);
         $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'pagination'), 1);
+        $instance->addListenerService('kernel.request', array(0 => 'notificationlistener', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'security.firewall', 1 => 'onKernelRequest'), 8);
         $instance->addListenerService('kernel.response', array(0 => 'security.rememberme.response_listener', 1 => 'onKernelResponse'), 0);
@@ -962,6 +996,32 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'fos_js_routing.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\JsRoutingBundle\Controller\Controller A FOS\JsRoutingBundle\Controller\Controller instance.
+     */
+    protected function getFosJsRouting_ControllerService()
+    {
+        return $this->services['fos_js_routing.controller'] = new \FOS\JsRoutingBundle\Controller\Controller(new \Symfony\Component\Serializer\Serializer(array(0 => new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer()), array('json' => new \Symfony\Component\Serializer\Encoder\JsonEncoder())), $this->get('fos_js_routing.extractor'), 'C:/wamp/www/bo/app/cache/dev', true);
+    }
+
+    /**
+     * Gets the 'fos_js_routing.extractor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor A FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor instance.
+     */
+    protected function getFosJsRouting_ExtractorService()
+    {
+        return $this->services['fos_js_routing.extractor'] = new \FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor($this->get('router'), array());
+    }
+
+    /**
      * Gets the 'http_kernel' service.
      *
      * This service is shared.
@@ -1338,6 +1398,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'notificationlistener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Site\AdminBundle\Listener\NotificationsListener A Site\AdminBundle\Listener\NotificationsListener instance.
+     */
+    protected function getNotificationlistenerService()
+    {
+        return $this->services['notificationlistener'] = new \Site\AdminBundle\Listener\NotificationsListener('');
+    }
+
+    /**
      * Gets the 'profiler' service.
      *
      * This service is shared.
@@ -1356,7 +1429,7 @@ class appDevDebugProjectContainer extends Container
         $d = new \Symfony\Component\HttpKernel\DataCollector\EventDataCollector();
         $d->setEventDispatcher($this->get('event_dispatcher'));
 
-        $e = new \Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector($this->get('doctrine'));
+        $e = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
         $e->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
 
         $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/wamp/www/bo/app/cache/dev/profiler', '', '', 86400), $a);
@@ -2647,6 +2720,15 @@ class appDevDebugProjectContainer extends Container
         $instance->addResource('xlf', 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle/Resources/translations\\messages.fr.xlf', 'fr', 'messages');
         $instance->addResource('yml', 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle/Resources/translations\\messages.fr.yml', 'fr', 'messages');
         $instance->addResource('xliff', 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle/Resources/translations\\validators.fr.xliff', 'fr', 'validators');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.de.yml', 'de', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.en.yml', 'en', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.es.yml', 'es', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.fr.yml', 'fr', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.nl.yml', 'nl', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.pl.yml', 'pl', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.ru.yml', 'ru', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.uk.yml', 'uk', 'CraueFormFlowBundle');
+        $instance->addResource('yml', 'C:\\wamp\\www\\bo\\vendor\\craue\\formflow-bundle\\Craue\\FormFlowBundle/Resources/translations\\CraueFormFlowBundle.zh.yml', 'zh', 'CraueFormFlowBundle');
 
         return $instance;
     }
@@ -2678,9 +2760,10 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig', 1 => 'SiteAdminBundle:Form:error.html.twig')), $this->get('form.csrf_provider'))));
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default')));
         $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
+        $instance->addExtension($this->get('twig.extension.craue_formflow'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
-        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Tags', 'routing' => 'tags'), 6 => array('label' => 'Paramètres', 'routing' => 'parametres')));
-        $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
+        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Commentaires', 'routing' => 'comments'), 6 => array('label' => 'Pages', 'routing' => 'pages'), 7 => array('label' => 'Tags', 'routing' => 'tags'), 8 => array('label' => 'Paramètres', 'routing' => 'parametres')));
+        $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new'), 3 => array('label' => 'Nouvelle Page', 'routing' => 'pages_new'), 4 => array('label' => 'Nouveau Media', 'routing' => 'medias_new')));
         $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
 
         return $instance;
@@ -2697,6 +2780,19 @@ class appDevDebugProjectContainer extends Container
     protected function getTwig_ExceptionListenerService()
     {
         return $this->services['twig.exception_listener'] = new \Symfony\Component\HttpKernel\EventListener\ExceptionListener('Symfony\\Bundle\\TwigBundle\\Controller\\ExceptionController::showAction', $this->get('monolog.logger.request'));
+    }
+
+    /**
+     * Gets the 'twig.extension.craue_formflow' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Craue\FormFlowBundle\Twig\Extension\FormFlowExtension A Craue\FormFlowBundle\Twig\Extension\FormFlowExtension instance.
+     */
+    protected function getTwig_Extension_CraueFormflowService()
+    {
+        return $this->services['twig.extension.craue_formflow'] = new \Craue\FormFlowBundle\Twig\Extension\FormFlowExtension();
     }
 
     /**
@@ -2866,7 +2962,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3248,6 +3344,9 @@ class appDevDebugProjectContainer extends Container
                 'WhiteOctoberBreadcrumbsBundle' => 'WhiteOctober\\BreadcrumbsBundle\\WhiteOctoberBreadcrumbsBundle',
                 'KnpPaginatorBundle' => 'Knp\\Bundle\\PaginatorBundle\\KnpPaginatorBundle',
                 'StofDoctrineExtensionsBundle' => 'Stof\\DoctrineExtensionsBundle\\StofDoctrineExtensionsBundle',
+                'CraueFormFlowBundle' => 'Craue\\FormFlowBundle\\CraueFormFlowBundle',
+                'FOSJsRoutingBundle' => 'FOS\\JsRoutingBundle\\FOSJsRoutingBundle',
+                'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3291,6 +3390,11 @@ class appDevDebugProjectContainer extends Container
             ),
             'searchquery' => 'SELECT a FROM SiteAdminBundle:Articles a LEFT JOIN  a.category c WHERE a.title = :title OR  c.title = :titleb ORDER BY a.title ASC
 ',
+            'searchajaxquery' => array(
+                0 => 'SELECT a.title FROM SiteAdminBundle:Articles a WHERE a.title LIKE  ?1  ORDER BY a.title ASC',
+                1 => 'SELECT a.title FROM SiteAdminBundle:Categories a WHERE a.title LIKE  ?1  ORDER BY a.title ASC',
+                2 => 'SELECT a.legend AS title FROM SiteAdminBundle:Medias a WHERE a.legend LIKE  ?1  ORDER BY a.legend ASC',
+            ),
             'my.success_handler.class' => '
             Site\\AdminBundle\\Authentication\\AuthenticationHandler
         ',
@@ -3668,7 +3772,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack',
             'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger',
             'doctrine.dbal.configuration.class' => 'Doctrine\\DBAL\\Configuration',
-            'doctrine.data_collector.class' => 'Symfony\\Bridge\\Doctrine\\DataCollector\\DoctrineDataCollector',
+            'doctrine.data_collector.class' => 'Doctrine\\Bundle\\DoctrineBundle\\DataCollector\\DoctrineDataCollector',
             'doctrine.dbal.connection.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager',
             'doctrine.dbal.connection_factory.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ConnectionFactory',
             'doctrine.dbal.events.mysql_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\MysqlSessionInit',
@@ -3751,8 +3855,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
@@ -3793,6 +3897,11 @@ class appDevDebugProjectContainer extends Container
             'stof_doctrine_extensions.listener.loggable.class' => 'Gedmo\\Loggable\\LoggableListener',
             'stof_doctrine_extensions.listener.sortable.class' => 'Gedmo\\Sortable\\SortableListener',
             'stof_doctrine_extensions.listener.softdeleteable.class' => 'Gedmo\\SoftDeleteable\\SoftDeleteableListener',
+            'craue.form.flow.class' => 'Craue\\FormFlowBundle\\Form\\FormFlow',
+            'craue.form.flow.storage.class' => 'Craue\\FormFlowBundle\\Storage\\SessionStorage',
+            'craue_twig_extensions.formflow.class' => 'Craue\\FormFlowBundle\\Twig\\Extension\\FormFlowExtension',
+            'fos_js_routing.extractor.class' => 'FOS\\JsRoutingBundle\\Extractor\\ExposedRoutesExtractor',
+            'fos_js_routing.controller.class' => 'FOS\\JsRoutingBundle\\Controller\\Controller',
             'web_profiler.debug_toolbar.class' => 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener',
             'web_profiler.debug_toolbar.intercept_redirects' => false,
             'web_profiler.debug_toolbar.mode' => 2,

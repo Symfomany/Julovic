@@ -3,6 +3,9 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Site\AdminBundle\Entity\Links
@@ -12,6 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Links
 {
+    
+    public function __construct(){
+        $this->dateCreated = new \Datetime('now');
+    }
+    
     /**
      * @var integer $id
      *
@@ -23,21 +31,21 @@ class Links
 
     /**
      * @var string $title
-     *
+     * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="title", type="string", length=250, nullable=false)
      */
     private $title;
 
     /**
      * @var string $link
-     *
+     * @Assert\NotBlank(message = "Lien ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="link", type="string", length=250, nullable=false)
      */
     private $link;
 
     /**
      * @var string $description
-     *
+     * @Assert\NotBlank(message = "Description ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
@@ -45,7 +53,7 @@ class Links
     /**
      * @var integer $dateCreated
      *
-     * @ORM\Column(name="date_created", type="integer", nullable=false)
+     * @ORM\Column(name="date_created", type="datetime", nullable=false)
      */
     private $dateCreated;
 

@@ -3,6 +3,8 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * Site\AdminBundle\Entity\Tags
@@ -10,8 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tags")
  * @ORM\Entity
  */
-class Tags
-{
+class Tags {
+
+    public function __construct() {
+        $this->dateCreated = new \Datetime('now');
+    }
+
     /**
      * @var integer $id
      *
@@ -42,15 +48,12 @@ class Tags
      */
     private $dateCreated;
 
-
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -60,10 +63,9 @@ class Tags
      * @param integer $categoryId
      * @return Tags
      */
-    public function setCategoryId($categoryId)
-    {
+    public function setCategoryId($categoryId) {
         $this->categoryId = $categoryId;
-    
+
         return $this;
     }
 
@@ -72,8 +74,7 @@ class Tags
      *
      * @return integer 
      */
-    public function getCategoryId()
-    {
+    public function getCategoryId() {
         return $this->categoryId;
     }
 
@@ -83,10 +84,9 @@ class Tags
      * @param string $tag
      * @return Tags
      */
-    public function setTag($tag)
-    {
+    public function setTag($tag) {
         $this->tag = $tag;
-    
+
         return $this;
     }
 
@@ -95,8 +95,7 @@ class Tags
      *
      * @return string 
      */
-    public function getTag()
-    {
+    public function getTag() {
         return $this->tag;
     }
 
@@ -106,10 +105,9 @@ class Tags
      * @param \DateTime $dateCreated
      * @return Tags
      */
-    public function setDateCreated($dateCreated)
-    {
+    public function setDateCreated($dateCreated) {
         $this->dateCreated = $dateCreated;
-    
+
         return $this;
     }
 
@@ -118,8 +116,8 @@ class Tags
      *
      * @return \DateTime 
      */
-    public function getDateCreated()
-    {
+    public function getDateCreated() {
         return $this->dateCreated;
     }
+
 }

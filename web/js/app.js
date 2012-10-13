@@ -1,48 +1,99 @@
-
+                
 $(function() {
     
     jQuery.expr[':'].contains = function(a, i, m) {
-    var rExps=[
-        {re: /[\xC0-\xC6]/g, ch: "A"},
-        {re: /[\xE0-\xE6]/g, ch: "a"},
-        {re: /[\xC8-\xCB]/g, ch: "E"},
-        {re: /[\xE8-\xEB]/g, ch: "e"},
-        {re: /[\xCC-\xCF]/g, ch: "I"},
-        {re: /[\xEC-\xEF]/g, ch: "i"},
-        {re: /[\xD2-\xD6]/g, ch: "O"},
-        {re: /[\xF2-\xF6]/g, ch: "o"},
-        {re: /[\xD9-\xDC]/g, ch: "U"},
-        {re: /[\xF9-\xFC]/g, ch: "u"},
-        {re: /[\xC7-\xE7]/g, ch: "c"},
-        {re: /[\xD1]/g, ch: "N"},
-        {re: /[\xF1]/g, ch: "n"}
-    ];
+        var rExps=[
+        {
+            re: /[\xC0-\xC6]/g, 
+            ch: "A"
+        },
 
-    var element = $(a).text();
-    var search  = m[3];
+        {
+            re: /[\xE0-\xE6]/g, 
+            ch: "a"
+        },
 
-    $.each(rExps, function() {
-         element    = element.replace(this.re, this.ch);
-         search     = search.replace(this.re, this.ch);
-    });
+        {
+            re: /[\xC8-\xCB]/g, 
+            ch: "E"
+        },
 
-    return element.toUpperCase()
+        {
+            re: /[\xE8-\xEB]/g, 
+            ch: "e"
+        },
+
+        {
+            re: /[\xCC-\xCF]/g, 
+            ch: "I"
+        },
+
+        {
+            re: /[\xEC-\xEF]/g, 
+            ch: "i"
+        },
+
+        {
+            re: /[\xD2-\xD6]/g, 
+            ch: "O"
+        },
+
+        {
+            re: /[\xF2-\xF6]/g, 
+            ch: "o"
+        },
+
+        {
+            re: /[\xD9-\xDC]/g, 
+            ch: "U"
+        },
+
+        {
+            re: /[\xF9-\xFC]/g, 
+            ch: "u"
+        },
+
+        {
+            re: /[\xC7-\xE7]/g, 
+            ch: "c"
+        },
+
+        {
+            re: /[\xD1]/g, 
+            ch: "N"
+        },
+
+        {
+            re: /[\xF1]/g, 
+            ch: "n"
+        }
+        ];
+
+        var element = $(a).text();
+        var search  = m[3];
+
+        $.each(rExps, function() {
+            element    = element.replace(this.re, this.ch);
+            search     = search.replace(this.re, this.ch);
+        });
+
+        return element.toUpperCase()
         .indexOf(search.toUpperCase()) >= 0;
-};
+    };
     
     
     /* French initialisation for the jQuery UI date picker plugin. */
-    /* Written by Keith Wood (kbwood{at}iinet.com.au) and Stéphane Nahmani (sholby@sholby.net). */
+    /* Written by Keith Wood (kbwood{at}iinet.com.au) and StÃ©phane Nahmani (sholby@sholby.net). */
     jQuery(function($){
         $.datepicker.regional['fr'] = {
             closeText: 'Fermer',
-            prevText: '&#x3c;Préc',
+            prevText: '&#x3c;PrÃ©c',
             nextText: 'Suiv&#x3e;',
             currentText: 'Courant',
-            monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
-            'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-            monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-            'Jul','Aoû','Sep','Oct','Nov','Déc'],
+            monthNames: ['Janvier','FÃ©vrier','Mars','Avril','Mai','Juin',
+            'Juillet','AoÃ»t','Septembre','Octobre','Novembre','DÃ©cembre'],
+            monthNamesShort: ['Jan','FÃ©v','Mar','Avr','Mai','Jun',
+            'Jul','AoÃ»','Sep','Oct','Nov','DÃ©c'],
             dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
             dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
             dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
@@ -67,25 +118,24 @@ $(function() {
         closeEffect	: 'elastic'
     });
     
-     var minlength = 3;
+    var minlength = 3;
     $('.filter_input').keyup(function(){
         var that = this;
         value = $(this).val();
-         if (value.length >= minlength ) {
-             $(".table-striped tr").not(":contains('"+value+"')").hide();
-         }
-         else{
-             $(".table-striped tr").show();
-         }
+        if (value.length >= minlength ) {
+            $(".table-striped tr").not(":contains('"+value+"')").hide();
+        }
+        else{
+            $(".table-striped tr").show();
+        }
     });
     
     $('.reset_input').click(function(){
         $('.filter_input').val('');
-         $(".table-striped tr").show();
+        $(".table-striped tr").show();
     });
     
     $('.timepicker').timepicker({
-        // Options
         timeSeparator: ':',           // The character to use to separate hours and minutes. (default: ':')
         showLeadingZero: true
     });
@@ -93,20 +143,20 @@ $(function() {
     $("input:checkbox, input:radio, input:file").uniform();
                 
     $("#site_adminbundle_articlestype_special, .multipleselect, #site_adminbundle_articlestype_tag").select2();
-//                
-//    var select = $( ".slider" );
-//    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-//        min: 1,
-//        max: 5,
-//        range: "min",
-//        value: select[ 0 ].selectedIndex + 1,
-//        slide: function( event, ui ) {
-//            select[ 0 ].selectedIndex = ui.value - 1;
-//        }
-//    });
-//    $( ".slider" ).change(function() {
-//        slider.slider( "value", this.selectedIndex + 1 );
-//    });
+    //                
+    //    var select = $( ".slider" );
+    //    var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
+    //        min: 1,
+    //        max: 5,
+    //        range: "min",
+    //        value: select[ 0 ].selectedIndex + 1,
+    //        slide: function( event, ui ) {
+    //            select[ 0 ].selectedIndex = ui.value - 1;
+    //        }
+    //    });
+    //    $( ".slider" ).change(function() {
+    //        slider.slider( "value", this.selectedIndex + 1 );
+    //    });
                 
     o = jQuery("#overscroll, .scrollbox").overscroll({
         wheelDirection :'vertical',
@@ -190,7 +240,36 @@ $(function() {
         next: '#next1'
     });
         
-        
+        $( ".city" ).autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
+                        data: {
+                            featureClass: "P",
+                            style: "medium",
+                            maxRows: 12,
+                            country: 'FR',
+                            name_startsWith: request.term
+                        },
+                        success: function( data ) {
+                            response( $.map( data.geonames, function( item ) {
+                                return {
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : ""),
+                                    value: item.name
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                open: function() {
+                    $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+                },
+                close: function() {
+                    $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+                }
+            });
         
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {

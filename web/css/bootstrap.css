@@ -156,7 +156,6 @@ textarea {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -164,7 +163,6 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
-  padding-left: 20px;
 }
 
 a {

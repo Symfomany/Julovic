@@ -13,53 +13,59 @@ Parametres:
             type: string
             length: 120
             fixed: false
-            nullable: false
+            nullable: true
             column: nom_site
+        urlSite:
+            type: string
+            length: 120
+            fixed: false
+            nullable: true
+            column: url_site
         administrateursId:
             type: integer
             unsigned: false
-            nullable: false
+            nullable: true
             column: administrateurs_id
         nomAdmin:
             type: string
             length: 120
             fixed: false
-            nullable: false
+            nullable: true
             column: nom_admin
         emailAdmin:
             type: string
             length: 120
             fixed: false
-            nullable: false
+            nullable: true
             column: email_admin
         adresseAdmin:
             type: string
             length: 150
             fixed: false
-            nullable: false
+            nullable: true
             column: adresse_admin
         villeAdmin:
             type: string
             length: 150
             fixed: false
-            nullable: false
+            nullable: true
             column: ville_admin
         cpAdmin:
             type: string
             length: 150
             fixed: false
-            nullable: false
+            nullable: true
             column: cp_admin
         telAdmin:
             type: string
             length: 120
             fixed: false
-            nullable: false
+            nullable: true
             column: tel_admin
         portAdmin:
             type: string
             length: 120
             fixed: false
-            nullable: false
+            nullable: true
             column: port_admin
     lifecycleCallbacks: {  }

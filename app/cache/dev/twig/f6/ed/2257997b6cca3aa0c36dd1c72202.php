@@ -32,21 +32,21 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
         ";
         // line 7
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 23
+        // line 24
         echo "        <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
         echo "\" />
     </head>
     <body>
         ";
-        // line 26
-        $this->displayBlock('body', $context, $blocks);
         // line 27
+        $this->displayBlock('body', $context, $blocks);
+        // line 28
         echo "            
         ";
-        // line 28
+        // line 29
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 96
+        // line 100
         echo "    </body>
 </html>
 ";
@@ -67,7 +67,7 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
                 <link href=\"/css/bootstrap.css\" rel=\"stylesheet\">
                 <link href=\"/css/bootstrap-responsive.css\" rel=\"stylesheet\">
                 <link href=\"/css/docs.css\" rel=\"stylesheet\">
-                <link href=\"/css/prettify.css\" rel=\"stylesheet\">
+                <link href=\"/css/pretify.css\" rel=\"stylesheet\">
                 <link href=\"/css/main.css\" rel=\"stylesheet\">
                 <link href=\"/css/jHtmlArea.css\" rel=\"stylesheet\">
                 <link href=\"/css/dot-luv/jquery-ui-1.8.24.custom.css\" rel=\"stylesheet\">
@@ -76,54 +76,65 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
                 <link href=\"/css/select2.css\" rel=\"stylesheet\">
                 <link href=\"/css/fullcalendar.css\" rel=\"stylesheet\">
                 <link href=\"/css/tipsy.css\" rel=\"stylesheet\">
+                <link href=\"/css/jquery.ui.timepicker.css\" rel=\"stylesheet\">
        ";
     }
 
-    // line 26
+    // line 27
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 28
+    // line 29
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 29
+        // line 30
         echo "               <!-- Le javascript
                     ================================================== -->
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script type=\"text/javascript\" src=\"http://platform.twitter.com/widgets.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/jquery.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js\"></script>
-                    <script src=\"http://twitter.github.com/bootstrap/assets/js/application.js\"></script>
-                    <script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js\"></script>
-                    <script src=\"/js/jquery.mousewheel-3.0.6.pack.js\"></script>
-                    <script src=\"/js/jquery.easing.js\"></script>
-                    <script src=\"/js/jquery.fancybox.pack.js\"></script>
-                    <script src=\"/js/jquery-ui-1.8.24.custom.min.js\"></script>
-                    <script src=\"/js/jhtml.js\"></script>
-                    <script src=\"/js/jquery.uniform.min.js\"></script>
-                    <script src=\"/js/select2.min.js\"></script>
-                    <script src=\"/js/jquery.overscroll.min.js\"></script>
-                    <script src=\"/js/modernizr.js\"></script>
-                    <script src=\"/js/fullcalendar.min.js\"></script>
-                    <script src=\"/js/jquery.tipsy.js\"></script>
-                    <script src=\"/js/jquery.knob.js\"></script>
-                    <script src=\"/js/jquery.carouFredSel.js\"></script>
-                    <script src=\"/js/jquery.timer.js\"></script>
-                    <script src=\"/js/jquery.scrollTo.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/jquery.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js\"></script>
+                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/application.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.mousewheel-3.0.6.pack.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.easing.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.fancybox.pack.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery-ui-1.8.24.custom.min.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jhtml.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.uniform.min.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/select2.min.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.overscroll.min.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/modernizr.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/fullcalendar.min.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.tipsy.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.knob.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.carouFredSel.js\"></script>
+                    ";
+        // line 64
+        echo "                    <script type=\"text/javascript\" src=\"/js/jquery.scrollTo.js\"></script>
+                    <script type=\"text/javascript\" src=\"/js/jquery.ui.timepicker.js\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 66
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/fosjsrouting/js/router.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 67
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fos_js_routing_js", array("callback" => "fos.Router.setData")), "html", null, true);
+        echo "\"></script>
+
                   <!--[if lt IE 9]>
                      <script type=\"text/javascript\" src=\"/js/excanvas.js\"></script>
                  <![endif]-->
@@ -169,6 +180,6 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  89 => 29,  86 => 28,  81 => 26,  63 => 8,  60 => 7,  48 => 96,  46 => 28,  43 => 27,  41 => 26,  34 => 23,  32 => 7,  21 => 1,  378 => 186,  373 => 185,  370 => 184,  366 => 181,  360 => 178,  354 => 176,  348 => 173,  342 => 171,  336 => 168,  330 => 166,  324 => 163,  318 => 161,  315 => 160,  310 => 182,  308 => 160,  255 => 109,  225 => 82,  217 => 75,  203 => 74,  199 => 72,  195 => 70,  184 => 67,  177 => 66,  173 => 65,  170 => 64,  168 => 63,  155 => 62,  145 => 61,  137 => 58,  130 => 57,  122 => 54,  115 => 53,  112 => 52,  95 => 51,  73 => 32,  64 => 25,  56 => 23,  54 => 6,  39 => 9,  35 => 7,  31 => 5,  28 => 6,);
+        return array (  129 => 66,  125 => 64,  63 => 8,  60 => 7,  54 => 6,  48 => 100,  46 => 29,  43 => 28,  41 => 27,  34 => 24,  32 => 7,  21 => 1,  86 => 29,  81 => 28,  78 => 27,  74 => 19,  71 => 18,  62 => 20,  59 => 18,  51 => 14,  39 => 8,  31 => 5,  28 => 6,  199 => 80,  191 => 75,  176 => 67,  165 => 63,  161 => 62,  156 => 59,  144 => 52,  133 => 67,  127 => 43,  120 => 39,  116 => 38,  112 => 37,  108 => 36,  104 => 35,  100 => 34,  96 => 33,  90 => 30,  87 => 29,  82 => 27,  68 => 23,  57 => 17,  53 => 15,  45 => 11,  42 => 10,  38 => 9,  36 => 7,  29 => 4,  26 => 3,);
     }
 }

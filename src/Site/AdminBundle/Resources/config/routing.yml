@@ -12,7 +12,6 @@ login_check:
 logout:
   pattern: /logout  
 
-
 home:
     pattern:  /
     defaults: { _controller: "SiteAdminBundle:Articles:index" }
@@ -49,7 +48,18 @@ divers:
     resource: "@SiteAdminBundle/Resources/config/routing/divers.yml"
     prefix:   /
     
+administrateurs:
+    resource: "@SiteAdminBundle/Resources/config/routing/administrateurs.yml"
+    prefix:   /
+    
+pages:
+    resource: "@SiteAdminBundle/Resources/config/routing/pages.yml"
+    prefix:   /pages
+    
 parametres:
     resource: "@SiteAdminBundle/Resources/config/routing/parametres.yml"
     prefix:   /parametres
     
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+

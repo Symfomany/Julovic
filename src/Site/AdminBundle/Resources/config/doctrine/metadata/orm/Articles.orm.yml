@@ -23,7 +23,7 @@ Articles:
             type: string
             length: 200
             fixed: false
-            nullable: false
+            nullable: true
         resume:
             type: text
             nullable: true
@@ -52,7 +52,7 @@ Articles:
             nullable: true
         dateUpdated:
             type: datetime
-            nullable: false
+            nullable: true
             column: date_updated
         dateCreated:
             type: datetime

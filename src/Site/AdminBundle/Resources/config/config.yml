@@ -23,6 +23,11 @@ parameters:
             WHERE a.title = :title
             OR  c.title = :titleb
             ORDER BY a.title ASC
+     
+    SearchAjaxQuery: 
+            - SELECT a.title FROM SiteAdminBundle:Articles a WHERE a.title LIKE  ?1  ORDER BY a.title ASC
+            - SELECT a.title FROM SiteAdminBundle:Categories a WHERE a.title LIKE  ?1  ORDER BY a.title ASC
+            - SELECT a.legend AS title FROM SiteAdminBundle:Medias a WHERE a.legend LIKE  ?1  ORDER BY a.legend ASC
       
 twig:
     globals:
@@ -32,18 +37,17 @@ twig:
           - {label: 'Categories', routing: 'categories' }
           - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
           - {label: 'Medias', routing: 'medias'  }
+          - {label: 'Commentaires', routing: 'comments'  }
+          - {label: 'Pages', routing: 'pages'  }
           - {label: 'Tags', routing: 'tags' }
           - {label: 'Paramètres', routing: 'parametres' }
         fastactions:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
           - {'label': 'Nouveau Link', routing: 'links_new' }
+          - {'label': 'Nouvelle Page', routing: 'pages_new' }
+          - {'label': 'Nouveau Media', routing: 'medias_new' }
         sidebar:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
           - {'label': 'Nouveau Link', routing: 'links_new' }
-          
-#Padam87SearchBundle:
-#        resource: "@Padam87SearchBundle/Controller/"
-#        type:     annotation
-#        prefix:   /

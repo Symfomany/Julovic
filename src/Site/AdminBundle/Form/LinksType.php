@@ -13,9 +13,7 @@ class LinksType extends AbstractType
         $builder
             ->add('title')
             ->add('link')
-            ->add('description')
-            ->add('dateCreated')
-        ;
+            ->add('description');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -78,11 +78,15 @@ class MediasController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Medias();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $entity = new Medias();
+        $entity->setAdministrateur($user);
         $form = $this->createForm(new MediasType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
+            $entity->upload();
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -134,6 +138,7 @@ class MediasController extends Controller
             throw $this->createNotFoundException('Unable to find Medias entity.');
         }
 
+        
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new MediasType(), $entity);
         $editForm->bind($request);

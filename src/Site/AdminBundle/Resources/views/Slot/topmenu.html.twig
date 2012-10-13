@@ -16,15 +16,15 @@
                                     </a>
                                     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="icon-edit"></i>  editer</a></li>
-                                        <li><a href="#"><i class="icon-wrench"></i> Parametres</a></li>
+                                        <li><a href="{{ path('my_account') }}"><i class="icon-edit"></i>  Editer</a></li>
+                                        <li><a href="{{ path('parametres') }}"><i class="icon-wrench"></i> Parametres</a></li>
                                         <li><a href="#"><i class="icon-user"></i> Preference</a></li>
                                         <li class="divider"></li>
                                         <li> <a id="logout" href="{{ path('logout') }}"><i class="icon-off"></i>Deconnexion</a> <br /></li>
                                     </ul>
                             </div>
                             {# Slot search #}
-                            {% render 'SiteAdminBundle:Slot:search' %}
+                            {% render 'SiteAdminBundle:Slot:search'  %}
                                 <div class="btn-group pull-right" id="another_links">
                                     <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
                                         Actions Rapides
@@ -41,7 +41,7 @@
                             </div>
 
                             <ul class="nav">
-              {% for param in topmenu %}
+                        {% for param in topmenu %}
                                 {% if loop.first %}
                                     <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
                                         <a href="{{ path(param.routing) }}"><i class="icon-home"></i> {{ param.label }} </a>

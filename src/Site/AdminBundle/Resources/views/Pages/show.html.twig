@@ -1,0 +1,63 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block content %}
+{{ parent() }}
+
+<h1>Pages</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th>Resume</th>
+            <td>{{ entity.resume|raw }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ entity.content|raw }}</td>
+        </tr>
+        <tr>
+            <th>Tag</th>
+            <td>{{ entity.tag }}</td>
+        </tr>
+        <tr>
+            <th>Datecreated</th>
+            <td>{{ entity.dateCreated|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Dateupdated</th>
+            <td>{{ entity.dateUpdated|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('pages') }}">
+            <i class="icon-share-alt"></i>Back to the list
+        </a>
+    </li>
+    <li>
+        <a class="btn" href="{{ path('pages_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('pages_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit" class="btn-primary btn-large">Delete</button>
+        </form>
+    </li>
+</ul>
+
+
+ {% endblock %}

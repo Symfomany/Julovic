@@ -23,6 +23,9 @@
       <parameter key="WhiteOctoberBreadcrumbsBundle">WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
+      <parameter key="CraueFormFlowBundle">Craue\FormFlowBundle\CraueFormFlowBundle</parameter>
+      <parameter key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -66,6 +69,11 @@
     </parameter>
     <parameter key="searchquery">SELECT a FROM SiteAdminBundle:Articles a LEFT JOIN  a.category c WHERE a.title = :title OR  c.title = :titleb ORDER BY a.title ASC
 </parameter>
+    <parameter key="searchajaxquery" type="collection">
+      <parameter>SELECT a.title FROM SiteAdminBundle:Articles a WHERE a.title LIKE  ?1  ORDER BY a.title ASC</parameter>
+      <parameter>SELECT a.title FROM SiteAdminBundle:Categories a WHERE a.title LIKE  ?1  ORDER BY a.title ASC</parameter>
+      <parameter>SELECT a.legend AS title FROM SiteAdminBundle:Medias a WHERE a.legend LIKE  ?1  ORDER BY a.legend ASC</parameter>
+    </parameter>
     <parameter key="my.success_handler.class">
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
@@ -429,7 +437,7 @@
     <parameter key="doctrine.dbal.logger.profiling.class">Doctrine\DBAL\Logging\DebugStack</parameter>
     <parameter key="doctrine.dbal.logger.class">Symfony\Bridge\Doctrine\Logger\DbalLogger</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
-    <parameter key="doctrine.data_collector.class">Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector</parameter>
+    <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
     <parameter key="doctrine.dbal.connection_factory.class">Doctrine\Bundle\DoctrineBundle\ConnectionFactory</parameter>
     <parameter key="doctrine.dbal.events.mysql_session_init.class">Doctrine\DBAL\Event\Listeners\MysqlSessionInit</parameter>
@@ -506,8 +514,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -544,6 +552,11 @@
     <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
     <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
     <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
+    <parameter key="craue.form.flow.class">Craue\FormFlowBundle\Form\FormFlow</parameter>
+    <parameter key="craue.form.flow.storage.class">Craue\FormFlowBundle\Storage\SessionStorage</parameter>
+    <parameter key="craue_twig_extensions.formflow.class">Craue\FormFlowBundle\Twig\Extension\FormFlowExtension</parameter>
+    <parameter key="fos_js_routing.extractor.class">FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor</parameter>
+    <parameter key="fos_js_routing.controller.class">FOS\JsRoutingBundle\Controller\Controller</parameter>
     <parameter key="web_profiler.debug_toolbar.class">Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -597,6 +610,10 @@
     </parameter>
   </parameters>
   <services>
+    <service id="notificationlistener" class="Site\AdminBundle\Listener\NotificationsListener">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <argument></argument>
+    </service>
     <service id="twig.extension.debug" class="Twig_Extensions_Extension_Debug">
       <tag name="twig.extension"/>
     </service>
@@ -661,6 +678,14 @@
           <argument>pagination</argument>
         </argument>
         <argument>1</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument>notificationlistener</argument>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
       </call>
       <call method="addListenerService">
         <argument>kernel.controller</argument>
@@ -1371,6 +1396,60 @@
         <argument>fr</argument>
         <argument>validators</argument>
       </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.de.yml</argument>
+        <argument>de</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.en.yml</argument>
+        <argument>en</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.es.yml</argument>
+        <argument>es</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.nl.yml</argument>
+        <argument>nl</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.pl.yml</argument>
+        <argument>pl</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.ru.yml</argument>
+        <argument>ru</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.uk.yml</argument>
+        <argument>uk</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\bo\vendor\craue\formflow-bundle\Craue\FormFlowBundle/Resources/translations\CraueFormFlowBundle.zh.yml</argument>
+        <argument>zh</argument>
+        <argument>CraueFormFlowBundle</argument>
+      </call>
     </service>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
@@ -1841,7 +1920,7 @@
       </call>
       <call method="add">
         <argument type="service">
-          <service class="Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector" public="false">
+          <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
             <tag name="data_collector" template="DoctrineBundle:Collector:db" id="db"/>
             <argument type="service" id="doctrine"/>
             <call method="addLogger">
@@ -2545,6 +2624,9 @@
         <argument type="service" id="white_october_breadcrumbs.twig"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="twig.extension.craue_formflow"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.acme.demo"/>
       </call>
       <call method="addGlobal">
@@ -2585,6 +2667,14 @@
             <argument key="routing">medias</argument>
           </argument>
           <argument type="collection">
+            <argument key="label">Commentaires</argument>
+            <argument key="routing">comments</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Pages</argument>
+            <argument key="routing">pages</argument>
+          </argument>
+          <argument type="collection">
             <argument key="label">Tags</argument>
             <argument key="routing">tags</argument>
           </argument>
@@ -2608,6 +2698,14 @@
           <argument type="collection">
             <argument key="label">Nouveau Link</argument>
             <argument key="routing">links_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouvelle Page</argument>
+            <argument key="routing">pages_new</argument>
+          </argument>
+          <argument type="collection">
+            <argument key="label">Nouveau Media</argument>
+            <argument key="routing">medias_new</argument>
           </argument>
         </argument>
       </call>
@@ -2865,8 +2963,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5075e9b6bb3a8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5075e9b6bb3a8.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2875,10 +2973,6 @@
               <call method="setEntityNamespaces">
                 <argument type="collection">
                   <argument key="SiteAdminBundle">Site\AdminBundle\Entity</argument>
-                  <argument key="GedmoTranslatable">Gedmo\Translatable\Entity</argument>
-                  <argument key="GedmoTranslator">Gedmo\Translator\Entity</argument>
-                  <argument key="GedmoLoggable">Gedmo\Loggable\Entity</argument>
-                  <argument key="GedmoTree">Gedmo\Tree\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -2917,74 +3011,10 @@
                           <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
                             <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
                           </argument>
                         </service>
                       </argument>
                       <argument>Site\AdminBundle\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Translatable\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Translator\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Loggable\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Tree\Entity</argument>
                     </call>
                   </service>
                 </argument>
@@ -3159,6 +3189,46 @@
         <argument key="defaultSortableTemplate">SiteAdminBundle:Pagination:sortable_link.html.twig</argument>
         <argument key="defaultPageRange">5</argument>
       </argument>
+    </service>
+    <service id="craue.form.flow" class="Craue\FormFlowBundle\Form\FormFlow" scope="request">
+      <call method="setFormFactory">
+        <argument type="service" id="form.factory"/>
+      </call>
+      <call method="setRequest">
+        <argument type="service" id="request"/>
+      </call>
+      <call method="setStorage">
+        <argument type="service" id="craue.form.flow.storage"/>
+      </call>
+      <call method="setEventDispatcher">
+        <argument type="service" id="event_dispatcher"/>
+      </call>
+    </service>
+    <service id="twig.extension.craue_formflow" class="Craue\FormFlowBundle\Twig\Extension\FormFlowExtension">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="fos_js_routing.extractor" class="FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor">
+      <argument type="service" id="router"/>
+      <argument type="collection"/>
+    </service>
+    <service id="fos_js_routing.controller" class="FOS\JsRoutingBundle\Controller\Controller">
+      <argument type="service">
+        <service class="Symfony\Component\Serializer\Serializer" public="false">
+          <argument type="collection">
+            <argument type="service">
+              <service class="Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer" public="false"/>
+            </argument>
+          </argument>
+          <argument type="collection">
+            <argument key="json" type="service">
+              <service class="Symfony\Component\Serializer\Encoder\JsonEncoder" public="false"/>
+            </argument>
+          </argument>
+        </service>
+      </argument>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument>C:/wamp/www/bo/app/cache/dev</argument>
+      <argument>true</argument>
     </service>
     <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
       <tag name="twig.extension"/>
@@ -3418,6 +3488,9 @@
           </service>
         </argument>
       </argument>
+    </service>
+    <service id="craue.form.flow.storage" class="Craue\FormFlowBundle\Storage\SessionStorage" scope="request">
+      <argument type="service" id="session"/>
     </service>
     <service id="debug.event_dispatcher" alias="event_dispatcher"/>
     <service id="session.storage" alias="session.storage.native"/>

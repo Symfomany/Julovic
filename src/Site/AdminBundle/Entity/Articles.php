@@ -16,6 +16,8 @@ class Articles
 {
     
     public function __construct(){
+        $this->dateCreated = new \Datetime('now');
+        $this->dateUpdated = new \Datetime('now');
         
     }
     
@@ -30,12 +32,14 @@ class Articles
 
      /**
     * @var string $title;
+     * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="title", type="string", length=200, nullable=false, unique=true)
      */
     private $title;
 
      /**
     * @var string $resume
+     * @Assert\NotBlank(message = "Résumé  ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="resume", type="text", length=60, nullable=false, unique=true)
      * @Assert\NotBlank(message = "Résumé ne doit pas être vide")
      */
@@ -43,14 +47,14 @@ class Articles
 
     /**
      * @var string $content
-     *
+     * @Assert\NotBlank(message = "Contenu ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="content", type="text", nullable=false)
      */
     private $content;
 
     /**
      * @var string $tag
-     *
+     * @Assert\NotBlank(message = "Tag ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="tag", type="string", length=400, nullable=false)
      */
     private $tag;
@@ -80,21 +84,21 @@ class Articles
 
     /**
      * @var string $type
-     *
+     * @Assert\NotBlank(message = "Type ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="type", type="string", length=200, nullable=false)
      */
     private $type;
 
     /**
      * @var string $special
-     *
+     * @Assert\NotBlank(message = "Spécial ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="special", type="boolean", length=200, nullable=false)
      */
     private $special;
 
     /**
-     * @var string $special
-     *
+     * @var string $notes
+     * @Assert\NotBlank(message = "Notes ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="notes", type="string", length=200, nullable=false)
      */
     private $notes;

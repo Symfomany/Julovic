@@ -9,6 +9,11 @@ Administrateurs:
             nullable: false
             generator:
                 strategy: IDENTITY
+        administrateursId:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: administrateurs_id
         firstname:
             type: string
             length: 20
@@ -30,6 +35,28 @@ Administrateurs:
         email:
             type: string
             length: 255
+            fixed: false
+            nullable: true
+        dob:
+            type: date
+            nullable: true
+        adresse:
+            type: string
+            length: 250
+            fixed: false
+            nullable: true
+        ville:
+            type: string
+            length: 250
+            fixed: false
+            nullable: true
+        zipcode:
+            type: integer
+            unsigned: false
+            nullable: true
+        tel:
+            type: string
+            length: 60
             fixed: false
             nullable: true
         password:
@@ -69,10 +96,10 @@ Administrateurs:
             column: date_auth
         enabled:
             type: boolean
-            nullable: false
+            nullable: true
         accountnonlocked:
             type: boolean
-            nullable: false
+            nullable: true
             column: accountNonLocked
         accountnonexpired:
             type: boolean

@@ -12,9 +12,7 @@ class TagsType extends AbstractType
     {
         $builder
             ->add('categoryId')
-            ->add('tag')
-            ->add('dateCreated')
-        ;
+            ->add('tag');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

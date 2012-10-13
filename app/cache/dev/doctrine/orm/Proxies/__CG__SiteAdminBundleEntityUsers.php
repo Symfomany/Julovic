@@ -225,48 +225,6 @@ class Users extends \Site\AdminBundle\Entity\Users implements \Doctrine\ORM\Prox
         return parent::setQ1($q1);
     }
 
-    public function getQ1()
-    {
-        $this->__load();
-        return parent::getQ1();
-    }
-
-    public function setQ2($q2)
-    {
-        $this->__load();
-        return parent::setQ2($q2);
-    }
-
-    public function getQ2()
-    {
-        $this->__load();
-        return parent::getQ2();
-    }
-
-    public function setQ3($q3)
-    {
-        $this->__load();
-        return parent::setQ3($q3);
-    }
-
-    public function getQ3()
-    {
-        $this->__load();
-        return parent::getQ3();
-    }
-
-    public function setQ4($q4)
-    {
-        $this->__load();
-        return parent::setQ4($q4);
-    }
-
-    public function getQ4()
-    {
-        $this->__load();
-        return parent::getQ4();
-    }
-
     public function setPicture($picture)
     {
         $this->__load();
@@ -402,7 +360,7 @@ class Users extends \Site\AdminBundle\Entity\Users implements \Doctrine\ORM\Prox
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'cityId', 'gender', 'firstname', 'lastname', 'description', 'email', 'tel', 'password', 'dob', 'optin', 'ip', 'salt', 'token', 'don', 'q1', 'q2', 'q3', 'q4', 'picture', 'updatedAt', 'createdAt', 'dateAuth', 'counterUpdated', 'counterFailed', 'enabled', 'accountnonlocked', 'accountnonexpired', 'slug', 'fid');
+        return array('__isInitialized__', 'id', 'cityId', 'gender', 'firstname', 'lastname', 'description', 'email', 'tel', 'password', 'dob', 'optin', 'ip', 'salt', 'token', 'don', 'picture', 'updatedAt', 'createdAt', 'dateAuth', 'counterUpdated', 'counterFailed', 'enabled', 'accountnonlocked', 'accountnonexpired', 'slug', 'fid');
     }
 
     public function __clone()

@@ -120,34 +120,6 @@ class Users
     private $don;
 
     /**
-     * @var string $q1
-     *
-     * @ORM\Column(name="q1", type="text", nullable=true)
-     */
-    private $q1;
-
-    /**
-     * @var string $q2
-     *
-     * @ORM\Column(name="q2", type="text", nullable=true)
-     */
-    private $q2;
-
-    /**
-     * @var string $q3
-     *
-     * @ORM\Column(name="q3", type="text", nullable=true)
-     */
-    private $q3;
-
-    /**
-     * @var string $q4
-     *
-     * @ORM\Column(name="q4", type="text", nullable=true)
-     */
-    private $q4;
-
-    /**
      * @var string $picture
      *
      * @ORM\Column(name="picture", type="string", length=120, nullable=true)
@@ -569,85 +541,6 @@ class Users
         $this->q1 = $q1;
     
         return $this;
-    }
-
-    /**
-     * Get q1
-     *
-     * @return string 
-     */
-    public function getQ1()
-    {
-        return $this->q1;
-    }
-
-    /**
-     * Set q2
-     *
-     * @param string $q2
-     * @return Users
-     */
-    public function setQ2($q2)
-    {
-        $this->q2 = $q2;
-    
-        return $this;
-    }
-
-    /**
-     * Get q2
-     *
-     * @return string 
-     */
-    public function getQ2()
-    {
-        return $this->q2;
-    }
-
-    /**
-     * Set q3
-     *
-     * @param string $q3
-     * @return Users
-     */
-    public function setQ3($q3)
-    {
-        $this->q3 = $q3;
-    
-        return $this;
-    }
-
-    /**
-     * Get q3
-     *
-     * @return string 
-     */
-    public function getQ3()
-    {
-        return $this->q3;
-    }
-
-    /**
-     * Set q4
-     *
-     * @param string $q4
-     * @return Users
-     */
-    public function setQ4($q4)
-    {
-        $this->q4 = $q4;
-    
-        return $this;
-    }
-
-    /**
-     * Get q4
-     *
-     * @return string 
-     */
-    public function getQ4()
-    {
-        return $this->q4;
     }
 
     /**

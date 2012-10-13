@@ -63,6 +63,18 @@ class Parametres extends \Site\AdminBundle\Entity\Parametres implements \Doctrin
         return parent::getNomSite();
     }
 
+    public function setUrlSite($urlSite)
+    {
+        $this->__load();
+        return parent::setUrlSite($urlSite);
+    }
+
+    public function getUrlSite()
+    {
+        $this->__load();
+        return parent::getUrlSite();
+    }
+
     public function setAdministrateursId($administrateursId)
     {
         $this->__load();
@@ -159,22 +171,10 @@ class Parametres extends \Site\AdminBundle\Entity\Parametres implements \Doctrin
         return parent::getPortAdmin();
     }
 
-    public function setUrlSite($urlSite)
-    {
-        $this->__load();
-        return parent::setUrlSite($urlSite);
-    }
-
-    public function getUrlSite()
-    {
-        $this->__load();
-        return parent::getUrlSite();
-    }
-
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'nomSite', 'administrateursId', 'nomAdmin', 'emailAdmin', 'adresseAdmin', 'villeAdmin', 'cpAdmin', 'telAdmin', 'portAdmin', 'urlSite');
+        return array('__isInitialized__', 'id', 'nomSite', 'urlSite', 'administrateursId', 'nomAdmin', 'emailAdmin', 'adresseAdmin', 'villeAdmin', 'cpAdmin', 'telAdmin', 'portAdmin');
     }
 
     public function __clone()

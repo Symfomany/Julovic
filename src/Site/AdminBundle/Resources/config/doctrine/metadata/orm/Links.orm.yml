@@ -23,8 +23,7 @@ Links:
             type: text
             nullable: false
         dateCreated:
-            type: integer
-            unsigned: false
-            nullable: false
+            type: datetime
+            nullable: true
             column: date_created
     lifecycleCallbacks: {  }

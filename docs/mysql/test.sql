@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 05 Octobre 2012 à 20:04
+-- Généré le: Jeu 11 Octobre 2012 à 13:47
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `administrateurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `administrateurs_id` int(30) NOT NULL,
   `firstname` varchar(20) DEFAULT NULL,
   `lastname` varchar(30) DEFAULT NULL,
   `picture` varchar(40) DEFAULT NULL,
@@ -53,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `administrateurs` (
 -- Contenu de la table `administrateurs`
 --
 
-INSERT INTO `administrateurs` (`id`, `firstname`, `lastname`, `picture`, `description`, `email`, `password`, `optin`, `ip`, `salt`, `token`, `updated_at`, `created_at`, `date_auth`, `enabled`, `accountNonLocked`, `accountNonExpired`, `slug`) VALUES
-(217, 'Julien', 'Boyer', NULL, NULL, 'toto@gmail.com', 'pKIxrrFgN0ER0YUwMfTi5n5/NHIqxTB2KxbKA+XJC0QHIEzkej6nvaYcKE/O8M71a3e3Qs9h8Jgi8h1ZFwDAYQ==', 0, NULL, '48f2b027c5a62f4523417731e0b0705b', '1d0d09257d121befa9c7154c19e624eebb600d0d', '2012-09-16 23:49:30', '2012-09-16 23:49:30', NULL, 1, 1, 1, 'boyer-boyer');
+INSERT INTO `administrateurs` (`id`, `administrateurs_id`, `firstname`, `lastname`, `picture`, `description`, `email`, `password`, `optin`, `ip`, `salt`, `token`, `updated_at`, `created_at`, `date_auth`, `enabled`, `accountNonLocked`, `accountNonExpired`, `slug`) VALUES
+(217, 0, 'Julien', 'Boyer', NULL, NULL, 'toto@gmail.com', 'pKIxrrFgN0ER0YUwMfTi5n5/NHIqxTB2KxbKA+XJC0QHIEzkej6nvaYcKE/O8M71a3e3Qs9h8Jgi8h1ZFwDAYQ==', 0, NULL, '48f2b027c5a62f4523417731e0b0705b', '1d0d09257d121befa9c7154c19e624eebb600d0d', '2012-09-16 23:49:30', '2012-09-16 23:49:30', NULL, 1, 1, 1, 'boyer-boyer');
 
 -- --------------------------------------------------------
 
@@ -64,17 +65,29 @@ INSERT INTO `administrateurs` (`id`, `firstname`, `lastname`, `picture`, `descri
 
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) NOT NULL,
-  `type` varchar(60) NOT NULL,
-  `resume` text NOT NULL,
-  `content` text NOT NULL,
-  `tag` varchar(400) NOT NULL,
-  `active` tinyint(4) NOT NULL,
-  `special` tinyint(4) NOT NULL,
-  `notes` int(11) NOT NULL,
-  `date_created` varchar(200) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `type` varchar(60) DEFAULT NULL,
+  `title` varchar(200) NOT NULL,
+  `resume` text,
+  `content` text,
+  `tag` varchar(400) DEFAULT NULL,
+  `active` tinyint(4) DEFAULT NULL,
+  `special` tinyint(4) DEFAULT NULL,
+  `notes` int(11) DEFAULT NULL,
+  `slug` varchar(120) DEFAULT NULL,
+  `date_updated` datetime NOT NULL,
+  `date_created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Contenu de la table `articles`
+--
+
+INSERT INTO `articles` (`id`, `category_id`, `type`, `title`, `resume`, `content`, `tag`, `active`, `special`, `notes`, `slug`, `date_updated`, `date_created`) VALUES
+(11, NULL, NULL, 'Antoine', '<b>&nbsp;sfsdfsdfsd </b>sdfsdfdsfsd dsfsdf', 'sdfsdfsdfsdfsdf', NULL, 0, NULL, 34, 'antoine', '2012-10-09 20:24:57', '2012-10-09 15:49:54'),
+(12, NULL, NULL, 'dsqdqs fddf  ds', 'sdfsdf sdfsdfsdf &nbsp;ertretretre trtertertert', 'ertert rer tretrettre retr', NULL, 0, NULL, 26, 'dsqdqs-fddf-ds', '2012-10-09 18:24:38', '2012-10-09 18:24:38'),
+(13, NULL, NULL, 'sfjsdgjgfshd fsd fdsfdsdssf', 'sdfsdfdsfdf', 'dsfsdfdsf', NULL, 0, NULL, 21, 'sfjsdgjgfshd-fsd-fdsfdsdssf', '2012-10-09 18:25:04', '2012-10-09 18:25:04');
 
 -- --------------------------------------------------------
 
@@ -86,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
+  `slug` varchar(120) NOT NULL,
   `date_created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -137,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `medias` (
   PRIMARY KEY (`id`),
   KEY `offers_id` (`offer_id`),
   KEY `restaurant_id` (`restaurant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=148 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=152 ;
 
 --
 -- Contenu de la table `medias`
@@ -146,7 +160,39 @@ CREATE TABLE IF NOT EXISTS `medias` (
 INSERT INTO `medias` (`id`, `offer_id`, `restaurant_id`, `legend`, `picture`, `state`, `date_created`, `date_updated`) VALUES
 (145, NULL, 927, 'Photo 1', '1ed97440ef6ebb99cdfcdc882813cae2.jpg', 1, '2012-09-16 23:49:31', '2012-09-16 23:49:31'),
 (146, NULL, 927, 'Photo 2', '7eda9ac54ce2be6de1f1a772afe2bc1b.jpg', 2, '2012-09-16 23:49:31', '2012-09-16 23:49:31'),
-(147, NULL, 927, 'Photo 3', '7esdfsdfdsfdsfdsfsdsdfd.jpg', 0, '2012-09-16 23:49:31', '2012-09-16 23:49:31');
+(147, NULL, 927, 'Photo 3', '7esdfsdfdsfdsfdsfsdsdfd.jpg', 0, '2012-09-16 23:49:31', '2012-09-16 23:49:31'),
+(148, NULL, 927, 'Photo Alpha', '6sd1f6sd156f486sd.jpg', 1, NULL, NULL),
+(149, NULL, 927, 'Photo Beta', '9t84r6eze486gh684j6hg.jpg', 1, NULL, NULL),
+(150, NULL, 927, 'Photo Gamma', 'sd8g4fsd6dsgf46ff486sd.jpg', 0, NULL, NULL),
+(151, NULL, 927, 'Photo Delta', 'd6sqd6s46f4486gh684j6hg.jpg', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `parametres`
+--
+
+CREATE TABLE IF NOT EXISTS `parametres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_site` varchar(120) DEFAULT NULL,
+  `url_site` varchar(120) NOT NULL,
+  `administrateurs_id` int(11) DEFAULT NULL,
+  `nom_admin` varchar(120) DEFAULT NULL,
+  `email_admin` varchar(120) DEFAULT NULL,
+  `adresse_admin` varchar(150) DEFAULT NULL,
+  `ville_admin` varchar(150) DEFAULT NULL,
+  `cp_admin` varchar(150) DEFAULT NULL,
+  `tel_admin` varchar(120) DEFAULT NULL,
+  `port_admin` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `parametres`
+--
+
+INSERT INTO `parametres` (`id`, `nom_site`, `url_site`, `administrateurs_id`, `nom_admin`, `email_admin`, `adresse_admin`, `ville_admin`, `cp_admin`, `tel_admin`, `port_admin`) VALUES
+(1, 'Blog', '', 217, 'Yebox', 'zuzu38080@gmail.com', '69 Avenue Victor Hugo', 'Neuilly-Plaisance', '93360', '0145281368', '0674585648');
 
 -- --------------------------------------------------------
 

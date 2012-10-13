@@ -12,9 +12,9 @@ class ArticlesType extends AbstractType
     {
         $builder
             ->add('category')
-            ->add('title', null)
-            ->add('resume')
-            ->add('content')
+            ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
+            ->add('resume', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
+            ->add('content', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
             ->add('notes')
             ->add('active');
         

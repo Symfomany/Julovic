@@ -11,7 +11,8 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
 
         $this->blocks = array(
             'body' => array($this, 'block_body'),
-            'flash_data_off' => array($this, 'block_flash_data_off'),
+            'content' => array($this, 'block_content'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -29,64 +30,39 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
     public function block_body($context, array $blocks = array())
     {
         // line 5
-        echo "            <div id=\"wrapper\">
-                        ";
-        // line 6
+        echo "            ";
         $this->displayParentBlock("body", $context, $blocks);
         echo "
+                    <div class=\"container-fluid\">
+                            <div class=\"span5\" id=\"content\">
                                 ";
         // line 8
-        echo "                            ";
-        $this->displayBlock('flash_data_off', $context, $blocks);
-        // line 28
-        echo "                </div>
-     ";
+        $this->displayBlock('content', $context, $blocks);
+        // line 10
+        echo "                            </div>
+                    </div>
+    ";
     }
 
     // line 8
-    public function block_flash_data_off($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 9
         echo "                                ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "error"), "method")) {
-            echo " 
-                    <div class=\"alert alert-block alert-error fade in\"> 
-                        <span class=\"close\"></span>
-                                        ";
-            // line 12
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "error"), "method"), "html", null, true);
-            echo " 
-                    </div> 
-                                ";
-        }
+    }
+
+    // line 14
+    public function block_javascripts($context, array $blocks = array())
+    {
         // line 15
-        echo "                                ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "success"), "method")) {
-            echo " 
-                    <div class=\"alert alert-block alert-success fade in\"> 
-                        <span class=\"close\"></span>
-                                        ";
-            // line 18
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "success"), "method"), "html", null, true);
-            echo " 
-                    </div> 
-                                ";
-        }
-        // line 21
-        echo "                                ";
-        if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "warning"), "method")) {
-            echo " 
-                    <div class=\"alert alert-block alert-warning fade in\">
-                        <span class=\"close\"></span>
-                                        ";
-            // line 24
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "warning"), "method"), "html", null, true);
-            echo " 
-                    </div> 
-                                ";
-        }
-        // line 27
-        echo "                            ";
+        echo "             ";
+        $this->displayParentBlock("javascripts", $context, $blocks);
+        echo "
+                                    <script src=\"";
+        // line 16
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/app.js"), "html", null, true);
+        echo "\"  type=\"text/javascript\"></script>
+       ";
     }
 
     public function getTemplateName()
@@ -101,6 +77,6 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  87 => 27,  81 => 24,  74 => 21,  68 => 18,  61 => 15,  55 => 12,  48 => 9,  40 => 28,  37 => 8,  30 => 5,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 8,  36 => 5,  33 => 6,  27 => 4,);
+        return array (  61 => 16,  56 => 15,  53 => 14,  49 => 9,  46 => 8,  40 => 10,  38 => 8,  31 => 5,  28 => 4,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 10,  36 => 5,  33 => 4,  27 => 3,);
     }
 }

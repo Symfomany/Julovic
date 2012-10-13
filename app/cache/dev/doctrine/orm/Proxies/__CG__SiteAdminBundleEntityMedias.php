@@ -42,103 +42,10 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
     }
 
     
-    public function getId()
-    {
-        if ($this->__isInitialized__ === false) {
-            return (int) $this->_identifier["id"];
-        }
-        $this->__load();
-        return parent::getId();
-    }
-
-    public function setOfferId($offerId)
-    {
-        $this->__load();
-        return parent::setOfferId($offerId);
-    }
-
-    public function getOfferId()
-    {
-        $this->__load();
-        return parent::getOfferId();
-    }
-
-    public function setRestaurantId($restaurantId)
-    {
-        $this->__load();
-        return parent::setRestaurantId($restaurantId);
-    }
-
-    public function getRestaurantId()
-    {
-        $this->__load();
-        return parent::getRestaurantId();
-    }
-
-    public function setLegend($legend)
-    {
-        $this->__load();
-        return parent::setLegend($legend);
-    }
-
-    public function getLegend()
-    {
-        $this->__load();
-        return parent::getLegend();
-    }
-
-    public function setPicture($picture)
-    {
-        $this->__load();
-        return parent::setPicture($picture);
-    }
-
-    public function getPicture()
-    {
-        $this->__load();
-        return parent::getPicture();
-    }
-
-    public function setState($state)
-    {
-        $this->__load();
-        return parent::setState($state);
-    }
-
-    public function getState()
-    {
-        $this->__load();
-        return parent::getState();
-    }
-
-    public function setDateCreated($dateCreated)
-    {
-        $this->__load();
-        return parent::setDateCreated($dateCreated);
-    }
-
-    public function getDateCreated()
-    {
-        $this->__load();
-        return parent::getDateCreated();
-    }
-
-    public function setDateUpdated($dateUpdated)
-    {
-        $this->__load();
-        return parent::setDateUpdated($dateUpdated);
-    }
-
-    public function getDateUpdated()
-    {
-        $this->__load();
-        return parent::getDateUpdated();
-    }
-
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'offerId', 'restaurantId', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated');
+        return array('__isInitialized__', 'id', 'offer', 'restaurant', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated');
     }
 
     public function __clone()

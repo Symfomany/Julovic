@@ -219,30 +219,6 @@ class Administrateurs extends \Site\AdminBundle\Entity\Administrateurs implement
         return parent::getEnabled();
     }
 
-    public function setAccountnonlocked($accountnonlocked)
-    {
-        $this->__load();
-        return parent::setAccountnonlocked($accountnonlocked);
-    }
-
-    public function getAccountnonlocked()
-    {
-        $this->__load();
-        return parent::getAccountnonlocked();
-    }
-
-    public function setAccountnonexpired($accountnonexpired)
-    {
-        $this->__load();
-        return parent::setAccountnonexpired($accountnonexpired);
-    }
-
-    public function getAccountnonexpired()
-    {
-        $this->__load();
-        return parent::getAccountnonexpired();
-    }
-
     public function setSlug($slug)
     {
         $this->__load();
@@ -307,6 +283,90 @@ class Administrateurs extends \Site\AdminBundle\Entity\Administrateurs implement
     {
         $this->__load();
         return parent::unserialize($serialized);
+    }
+
+    public function setDob($dob)
+    {
+        $this->__load();
+        return parent::setDob($dob);
+    }
+
+    public function getDob()
+    {
+        $this->__load();
+        return parent::getDob();
+    }
+
+    public function setTel($tel)
+    {
+        $this->__load();
+        return parent::setTel($tel);
+    }
+
+    public function getTel()
+    {
+        $this->__load();
+        return parent::getTel();
+    }
+
+    public function setAdresse($adresse)
+    {
+        $this->__load();
+        return parent::setAdresse($adresse);
+    }
+
+    public function getAdresse()
+    {
+        $this->__load();
+        return parent::getAdresse();
+    }
+
+    public function setVille($ville)
+    {
+        $this->__load();
+        return parent::setVille($ville);
+    }
+
+    public function getVille()
+    {
+        $this->__load();
+        return parent::getVille();
+    }
+
+    public function setZipcode($zipcode)
+    {
+        $this->__load();
+        return parent::setZipcode($zipcode);
+    }
+
+    public function getZipcode()
+    {
+        $this->__load();
+        return parent::getZipcode();
+    }
+
+    public function setAccountNonLocked($accountNonLocked)
+    {
+        $this->__load();
+        return parent::setAccountNonLocked($accountNonLocked);
+    }
+
+    public function getAccountNonLocked()
+    {
+        $this->__load();
+        return parent::getAccountNonLocked();
+    }
+
+    public function setAccountNonExpired($accountNonExpired)
+    {
+        $this->__load();
+        return parent::setAccountNonExpired($accountNonExpired);
+    }
+
+    public function getAccountNonExpired()
+    {
+        $this->__load();
+        return parent::getAccountNonExpired();
     }
 
     public function createQueryBuilder($alias)
@@ -378,7 +438,7 @@ class Administrateurs extends \Site\AdminBundle\Entity\Administrateurs implement
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'firstname', 'lastname', 'picture', 'description', 'email', 'password', 'optin', 'ip', 'salt', 'token', 'updatedAt', 'createdAt', 'dateAuth', 'enabled', 'accountNonLocked', 'accountNonExpired', 'slug');
+        return array('__isInitialized__', 'id', 'firstname', 'lastname', 'picture', 'description', 'email', 'password', 'optin', 'ip', 'salt', 'token', 'updatedAt', 'createdAt', 'dateAuth', 'enabled', 'dob', 'tel', 'adresse', 'ville', 'zipcode', 'accountNonLocked', 'accountNonExpired', 'slug');
     }
 
     public function __clone()

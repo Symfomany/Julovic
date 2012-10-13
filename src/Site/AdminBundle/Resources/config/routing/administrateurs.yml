@@ -2,6 +2,10 @@ administrateurs:
     pattern:  /
     defaults: { _controller: "SiteAdminBundle:Administrateurs:index" }
 
+my_account:
+    pattern:  /my-account
+    defaults: { _controller: "SiteAdminBundle:Administrateurs:myaccount" }
+    
 administrateurs_show:
     pattern:  /{id}/show
     defaults: { _controller: "SiteAdminBundle:Administrateurs:show" }

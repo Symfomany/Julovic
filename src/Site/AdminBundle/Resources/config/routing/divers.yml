@@ -3,5 +3,11 @@ search_query:
     defaults: { _controller: "SiteAdminBundle:Slot:search" }
     requirements: { _method: post }
 
+search_query_ajax:
+    pattern:  /searchajax
+    defaults: { _controller: "SiteAdminBundle:Slot:searchajax" }
+    options:
+        expose: true
+
     
 

@@ -1,0 +1,67 @@
+<?php
+
+namespace Site\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Site\AdminBundle\Entity\Pages
+ *
+ * @ORM\Table(name="pages")
+ * @ORM\Entity
+ */
+class Pages
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=250, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string $resume
+     *
+     * @ORM\Column(name="resume", type="text", nullable=false)
+     */
+    private $resume;
+
+    /**
+     * @var string $content
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    private $content;
+
+    /**
+     * @var string $tag
+     *
+     * @ORM\Column(name="tag", type="string", length=300, nullable=false)
+     */
+    private $tag;
+
+    /**
+     * @var \DateTime $dateCreated
+     *
+     * @ORM\Column(name="date_created", type="datetime", nullable=false)
+     */
+    private $dateCreated;
+
+    /**
+     * @var \DateTime $dateUpdated
+     *
+     * @ORM\Column(name="date_updated", type="datetime", nullable=false)
+     */
+    private $dateUpdated;
+
+
+}

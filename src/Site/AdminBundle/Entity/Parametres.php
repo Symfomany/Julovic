@@ -3,6 +3,8 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Site\AdminBundle\Entity\Parametres
@@ -23,73 +25,73 @@ class Parametres
 
     /**
      * @var string $nomSite
-     *
-     * @ORM\Column(name="nom_site", type="string", length=120, nullable=false)
+     * @Assert\NotBlank(message = "Nom du site ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="nom_site", type="string", length=120, nullable=true)
      */
     private $nomSite;
 
     /**
+     * @var string $urlSite
+     * @Assert\NotBlank(message = "Url ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="url_site", type="string", length=120, nullable=true)
+     */
+    private $urlSite;
+
+    /**
      * @var integer $administrateursId
      *
-     * @ORM\Column(name="administrateurs_id", type="integer", nullable=false)
+     * @ORM\Column(name="administrateurs_id", type="integer", nullable=true)
      */
     private $administrateursId;
 
     /**
      * @var string $nomAdmin
-     *
-     * @ORM\Column(name="nom_admin", type="string", length=120, nullable=false)
+     * @Assert\NotBlank(message = "Nom ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="nom_admin", type="string", length=120, nullable=true)
      */
     private $nomAdmin;
 
     /**
      * @var string $emailAdmin
-     *
-     * @ORM\Column(name="email_admin", type="string", length=120, nullable=false)
+     * @Assert\NotBlank(message = "Email ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="email_admin", type="string", length=120, nullable=true)
      */
     private $emailAdmin;
 
     /**
      * @var string $adresseAdmin
-     *
-     * @ORM\Column(name="adresse_admin", type="string", length=150, nullable=false)
+     * @Assert\NotBlank(message = "Adresse ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="adresse_admin", type="string", length=150, nullable=true)
      */
     private $adresseAdmin;
 
     /**
      * @var string $villeAdmin
      *
-     * @ORM\Column(name="ville_admin", type="string", length=150, nullable=false)
+     * @ORM\Column(name="ville_admin", type="string", length=150, nullable=true)
      */
     private $villeAdmin;
 
     /**
      * @var string $cpAdmin
      *
-     * @ORM\Column(name="cp_admin", type="string", length=150, nullable=false)
+     * @ORM\Column(name="cp_admin", type="string", length=150, nullable=true)
      */
     private $cpAdmin;
 
     /**
      * @var string $telAdmin
-     *
-     * @ORM\Column(name="tel_admin", type="string", length=120, nullable=false)
+     * @Assert\NotBlank(message = "Tel ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="tel_admin", type="string", length=120, nullable=true)
      */
     private $telAdmin;
 
     /**
      * @var string $portAdmin
      *
-     * @ORM\Column(name="port_admin", type="string", length=120, nullable=false)
+     * @ORM\Column(name="port_admin", type="string", length=120, nullable=true)
      */
     private $portAdmin;
-
-    /**
-     * @var string $urlSite
-     *
-     * @ORM\Column(name="url_site", type="string", length=120, nullable=false)
-     */
-    private $urlSite;
 
 
 
@@ -124,6 +126,29 @@ class Parametres
     public function getNomSite()
     {
         return $this->nomSite;
+    }
+
+    /**
+     * Set urlSite
+     *
+     * @param string $urlSite
+     * @return Parametres
+     */
+    public function setUrlSite($urlSite)
+    {
+        $this->urlSite = $urlSite;
+    
+        return $this;
+    }
+
+    /**
+     * Get urlSite
+     *
+     * @return string 
+     */
+    public function getUrlSite()
+    {
+        return $this->urlSite;
     }
 
     /**
@@ -308,28 +333,5 @@ class Parametres
     public function getPortAdmin()
     {
         return $this->portAdmin;
-    }
-
-    /**
-     * Set urlSite
-     *
-     * @param string $urlSite
-     * @return Parametres
-     */
-    public function setUrlSite($urlSite)
-    {
-        $this->urlSite = $urlSite;
-    
-        return $this;
-    }
-
-    /**
-     * Get urlSite
-     *
-     * @return string 
-     */
-    public function getUrlSite()
-    {
-        return $this->urlSite;
     }
 }

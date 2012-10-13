@@ -1,22 +1,95 @@
-<h1>Administrateurs edit</h1>
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block content %}
+{{ parent() }}
+
+
+<h1>Editer mon compte</h1>
+
+
 
 <form action="{{ path('administrateurs_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('administrateurs') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('administrateurs_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+                {{ form_errors(edit_form) }}
+
+            <div>
+                    {{ form_label(edit_form.firstname, 'Prénom') }}
+                    {{ form_errors(edit_form.firstname) }}
+                    {{ form_widget(edit_form.firstname) }}
+            </div>
+
+             <div>
+                    {{ form_label(edit_form.lastname, 'Nom') }}
+                    {{ form_errors(edit_form.lastname) }}
+                    {{ form_widget(edit_form.lastname) }}
+            </div>
+    
+                 <div>
+                        {{ form_label(edit_form.description) }}
+                        {{ form_errors(edit_form.description) }}
+                        {{ form_widget(edit_form.description) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.email) }}
+                        {{ form_errors(edit_form.email) }}
+                        {{ form_widget(edit_form.email) }}
+                </div>
+    
+              <div>
+                        {{ form_row( edit_form.password.mdp, { 'label': 'Mot de passe' } ) }}     
+                        {{ form_row( edit_form.password.mdp_conf, { 'label': 'Confirmation du mot de passe' } ) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.dob, 'Date de naissance') }}
+                        {{ form_errors(edit_form.dob) }}
+                        {{ form_widget(edit_form.dob) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.tel, 'Téléphone') }}
+                        {{ form_errors(edit_form.tel) }}
+                        {{ form_widget(edit_form.tel) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.adresse,'Adresse') }}
+                        {{ form_errors(edit_form.adresse) }}
+                        {{ form_widget(edit_form.adresse) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.ville, 'Ville') }}
+                        {{ form_errors(edit_form.ville) }}
+                        {{ form_widget(edit_form.ville, {'attr' : {'class' : 'city'}}) }}
+                </div>
+    
+                <div>
+                        {{ form_label(edit_form.zipcode, 'Code Postal') }}
+                        {{ form_errors(edit_form.zipcode) }}
+                        {{ form_widget(edit_form.zipcode) }}
+                </div>
+
+                <div>
+                        {{ form_label(edit_form.enabled, 'Activé') }}
+                        {{ form_errors(edit_form.enabled) }}
+                        {{ form_widget(edit_form.enabled) }}  
+                </div>
+
+                        {{ form_rest(edit_form) }}
+                <p>
+                    <button type="submit" class="btn">Editer mon compte</button>
+                </p>
+            </form>
+
+                            <ul class="record_actions">
+                                <li>
+                                    <a href="{{ path('administrateurs') }}">
+                                        <i class="icon-share-alt"></i>Back to the list
+                                    </a>
+                                </li>
+                            </ul>
+
+ {% endblock %}

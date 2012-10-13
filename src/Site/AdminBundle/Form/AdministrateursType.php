@@ -10,25 +10,30 @@ class AdministrateursType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+                
+        $minDob = new \Datetime('now');
+        $maxDob = new \Datetime('now');
+        $minDob->modify(('-18 years'));
+        $maxDob->modify(('-90 years'));
+        
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('picture')
             ->add('description')
-            ->add('email')
-            ->add('password')
-            ->add('optin')
-            ->add('ip')
-            ->add('salt')
-            ->add('token')
-            ->add('updatedAt')
-            ->add('createdAt')
-            ->add('dateAuth')
+            ->add('dob', 'birthday', array('widget' => 'choice', 'years' =>range($minDob->format('Y'), $maxDob->format('Y')), 'format' => 'dd / MM / yyyy'))
+            ->add('email', 'email')
+            ->add('tel')
+            ->add('adresse')
+            ->add('ville')
+            ->add('zipcode')
             ->add('enabled')
-            ->add('accountNonLocked')
-            ->add('accountNonExpired')
-            ->add('slug')
-        ;
+            ->add('password', 'repeated', array(
+                        'type' => 'password',
+                        'first_name' => 'mdp',
+                        'second_name' => 'mdp_conf',
+                        'invalid_message' => "Le mot de passe n'est pas le même",
+                        'error_bubbling' => true,
+                    ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

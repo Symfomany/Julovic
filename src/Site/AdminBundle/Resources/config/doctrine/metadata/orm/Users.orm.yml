@@ -69,18 +69,6 @@ Users:
         don:
             type: float
             nullable: true
-        q1:
-            type: text
-            nullable: true
-        q2:
-            type: text
-            nullable: true
-        q3:
-            type: text
-            nullable: true
-        q4:
-            type: text
-            nullable: true
         picture:
             type: string
             length: 120

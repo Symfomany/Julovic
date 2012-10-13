@@ -11,7 +11,7 @@ class __TwigTemplate_6a35c7a889aabb1e44f60e692948ee78 extends Twig_Template
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -32,11 +32,11 @@ class __TwigTemplate_6a35c7a889aabb1e44f60e692948ee78 extends Twig_Template
     }
 
     // line 4
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 5
         echo "        ";
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
  <p></p>
  <p></p>

@@ -3,6 +3,9 @@
 namespace Site\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Site\AdminBundle\Entity\Comments
@@ -12,6 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comments
 {
+    public function __construct(){
+        $this->dateCreated = new \Datetime('now');
+    }
+    
     /**
      * @var integer $id
      *
@@ -23,14 +30,14 @@ class Comments
 
     /**
      * @var string $email
-     *
+     * @Assert\NotBlank(message = "E-mail ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="email", type="string", length=200, nullable=false)
      */
     private $email;
 
     /**
      * @var string $content
-     *
+     * @Assert\NotBlank(message = "Contenu ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="content", type="text", nullable=false)
      */
     private $content;

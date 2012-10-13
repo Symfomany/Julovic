@@ -12,8 +12,7 @@ class CategoriesType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
-            ->add('dateCreated')
+            ->add('description');
         ;
     }
 

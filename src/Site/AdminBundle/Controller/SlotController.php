@@ -7,6 +7,7 @@ use Site\AdminBundle\Entity\Articles;
 use Site\AdminBundle\Form\SearchType;
 use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Sidebar controller.
@@ -22,14 +23,52 @@ class SlotController extends Controller {
         return $this->render('SiteAdminBundle:Slot:flashdatas.html.twig');
     }
 
+    public function searchajaxAction() {
+        $request = $this->getRequest();
+          if ($request->isXmlHttpRequest()) {   
+              $em = $this->getDoctrine()->getEntityManager();
+
+                $tab = Array();
+                $result = Array();
+                $result2 = null;
+                $search =  $request->request->get('search', null);
+                $tab[] = $search;
+                
+                $que = $this->container->getParameter('SearchAjaxQuery');
+
+                $dql = $em->createQuery($que[0])
+                                     ->setParameter(1, "%".trim($search)."%");
+                $dql->setMaxResults(10);
+                $result = $dql->getScalarResult();
+                
+                for($i = 1 ; $i < count($que); $i++){
+                    $dql2 = $em->createQuery($que[$i])
+                        ->setParameter(1, "%".trim($search)."%");
+                        $dql2->setMaxResults(10);
+                        $result2 = $dql2->getScalarResult();
+                        $result_final = array_merge((array)$result, (array)$result2);
+                }
+
+                $tab = Array();
+                if(!empty($result_final)){
+                    foreach($result_final as $one){
+                         $tab[] = $one;
+                    }
+                }
+                    $return = json_encode($tab);
+            return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
+        }
+    }
+
     /*
      * ->createQuery('
-            SELECT p, c FROM AcmeStoreBundle:Product p
-            JOIN p.category c
-            WHERE p.id = :id'
-        )->setParameter('id', $id);
+      SELECT p, c FROM AcmeStoreBundle:Product p
+      JOIN p.category c
+      WHERE p.id = :id'
+      )->setParameter('id', $id);
      * 
      */
+
     public function searchAction() {
 
         $form = $this->createForm(new SearchType());
@@ -38,44 +77,27 @@ class SlotController extends Controller {
 
         if ('POST' === $request->getMethod()) {
             $form->bind($request);
-             if ($form->isValid()) {
-                   $field =$form->getData();
-                    $search_word = $field['search'];
-                    $que = $this->container->getParameter('SearchQuery');
-                   $dql = $em->createQuery($que)
+            if ($form->isValid()) {
+                $field = $form->getData();
+                $search_word = $field['search'];
+                $que = $this->container->getParameter('SearchQuery');
+                $dql = $em->createQuery($que)
                         ->setParameters(
-                                array(
-                                    'title' =>$search_word,
-                                    'titleb' => $search_word,
-                                    ));
-
-                    $paginator = $this->get('knp_paginator'); 
-                    $pagination = $paginator->paginate( $dql, $this->get('request')->query->get('page',1), 5);  //page number/, 10/limit per page/ );
-              
-                return $this->render('SiteAdminBundle:Slot:search_result.html.twig', 
                         array(
-                                    'search_word' => $search_word,
-                                    'pagination' => $pagination
-                            ));
+                            'title' => $search_word,
+                            'titleb' => $search_word,
+                        ));
+
+                $paginator = $this->get('knp_paginator');
+                $pagination = $paginator->paginate($dql, $this->get('request')->query->get('page', 1), 5);  //page number/, 10/limit per page/ );
+
+                return $this->render('SiteAdminBundle:Slot:search_result.html.twig', array(
+                            'search_word' => $search_word,
+                            'pagination' => $pagination,
+                            'form' => $form->createView()
+                        ));
             }
         }
-//
-//        $em = $this->getDoctrine()->getEntityManager();
-//        $qb = $em->getRepository('SiteAdminBundle:Articles')->createQueryBuilder('c');
-//
-//        $factory = new FilterFactory($em);
-//
-//        $filter = $factory->create($article, 'c');
-//        if ($filter->toExpr() != false) {
-//            $qb->where($filter->toExpr());
-//
-//            foreach ($filter->toParameters() as $parameter) {
-//                $qb->setParameter($parameter['title'], $parameter['value']);
-//            }
-//        }
-//
-//        $articles_result = $qb->setFirstResult(0)->setMaxResults(100)->getQuery()->getResult();
-//        exit(Debug::dump($articles_result));
         return $this->render('SiteAdminBundle:Slot:search.html.twig', array('form' => $form->createView()));
     }
 

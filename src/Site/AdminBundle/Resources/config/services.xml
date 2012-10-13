@@ -18,5 +18,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"></argument>
             <argument type="service" id="session"></argument>
         </service>
+        <service id="notificationlistener" class="Site\AdminBundle\Listener\NotificationsListener">
+            <argument></argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
     </services>
 </container>

@@ -3,7 +3,7 @@
  {% block content %}
 {{ parent() }}
 
-<h1>Résultat de recherche pour "{{ search_word|capitalize|default('rien') }}"</h1>
+<h1>Résultat de recherche pour "{{ search_word|capitalize|default('Aucun') }}"</h1>
 {# display navigation #}
 <div class="navigation">
     {{ pagination.render()|raw }}

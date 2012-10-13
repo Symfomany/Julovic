@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Site\AdminBundle\Entity\Administrateurs;
 use Site\AdminBundle\Form\AdministrateursType;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 /**
  * Administrateurs controller.
@@ -14,6 +15,11 @@ use Site\AdminBundle\Form\AdministrateursType;
  */
 class AdministrateursController extends Controller
 {
+    
+    public function __construct(){
+        
+    }
+    
     /**
      * Lists all Administrateurs entities.
      *
@@ -27,6 +33,25 @@ class AdministrateursController extends Controller
         return $this->render('SiteAdminBundle:Administrateurs:index.html.twig', array(
             'entities' => $entities,
         ));
+    }
+
+
+    public function myaccountAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $entity = $em->getRepository('SiteAdminBundle:Administrateurs')->find($user->getId());
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Administrateurs entity.');
+        }
+        
+        $editForm = $this->createForm(new AdministrateursType(), $entity);
+
+        return $this->render('SiteAdminBundle:Administrateurs:edit.html.twig',
+                array( 'entity' => $entity,
+                            'edit_form'   => $editForm->createView()));
     }
 
     /**
@@ -117,6 +142,41 @@ class AdministrateursController extends Controller
      * Edits an existing Administrateurs entity.
      *
      */
+    public function myupdateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SiteAdminBundle:Administrateurs')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Administrateurs entity.');
+        }
+
+        $editForm = $this->createForm(new AdministrateursType(), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+            $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+            $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+            $entity->setPassword($password);
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('administrateurs_edit', array('id' => $id)));
+        }
+
+        return $this->render('SiteAdminBundle:Administrateurs:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView()
+        ));
+    }
+    
+    
+    
+    /**
+     * Edits an existing Administrateurs entity.
+     *
+     */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -127,11 +187,13 @@ class AdministrateursController extends Controller
             throw $this->createNotFoundException('Unable to find Administrateurs entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new AdministrateursType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+            $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+            $entity->setPassword($password);
             $em->persist($entity);
             $em->flush();
 
@@ -140,8 +202,7 @@ class AdministrateursController extends Controller
 
         return $this->render('SiteAdminBundle:Administrateurs:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView()
         ));
     }
 

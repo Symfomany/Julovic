@@ -10,7 +10,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,21 +25,45 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <h1>Medias list</h1>
 
-<table class=\"table\" class=\"records_list\">
+";
+        // line 10
+        $this->env->loadTemplate("SiteAdminBundle:Slot:filter.html.twig")->display($context);
+        // line 11
+        echo "
+
+";
+        // line 14
+        echo "<div class=\"navigation\">
+    ";
+        // line 15
+        echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
+        echo "
+</div>
+<table class=\"table table-striped\">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>";
+        // line 20
+        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
+        echo "</th>
             <th>Offerid</th>
             <th>Restaurantid</th>
-            <th>Legend</th>
+            <th";
+        // line 23
+        if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Legend"), "method")) {
+            echo " class=\"sorted\"";
+        }
+        echo ">";
+        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Legend", 1 => "a.legend"), "method");
+        echo "</th>
             <th>Picture</th>
             <th>State</th>
             <th>Datecreated</th>
@@ -48,84 +72,114 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
         </tr>
     </thead>
     <tbody>
-    ";
-        // line 25
+            ";
+        // line 32
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
+        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "pagination"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 26
-            echo "        <tr>
-            <td><a href=\"";
-            // line 27
+            // line 33
+            echo "            <tr>
+                <td><a href=\"";
+            // line 34
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
-            <td>";
-            // line 28
+                <td>";
+            // line 35
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "offerId"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 29
+                <td>";
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "restaurantId"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 30
+                <td>";
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "legend"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 31
+                <td>";
+            // line 38
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "picture"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 32
+                <td>";
+            // line 39
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "state"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 33
+                <td>";
+            // line 40
             if ($this->getAttribute($this->getContext($context, "entity"), "dateCreated")) {
                 echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "Y-m-d H:i:s"), "html", null, true);
             }
             echo "</td>
-            <td>";
-            // line 34
+                <td>";
+            // line 41
             if ($this->getAttribute($this->getContext($context, "entity"), "dateUpdated")) {
                 echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateUpdated"), "Y-m-d H:i:s"), "html", null, true);
             }
             echo "</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href=\"";
-            // line 38
+                <td>
+                    <ul>
+                        <li>
+                            <a href=\"";
+            // line 45
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">show</a>
-                    </li>
-                    <li>
-                        <a href=\"";
-            // line 41
+            echo "\"><i class=\"icon-search\"></i>show</a>
+                        </li>
+                        <li>
+                            <a href=\"";
+            // line 48
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    ";
+            echo "\"><i class=\"icon-edit\"></i> edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+              ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 47
+        // line 54
         echo "    </tbody>
+        <thead>
+        <tr>
+            <th>";
+        // line 57
+        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
+        echo "</th>
+            <th>Offerid</th>
+            <th>Restaurantid</th>
+            <th";
+        // line 60
+        if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Legend"), "method")) {
+            echo " class=\"sorted\"";
+        }
+        echo ">";
+        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Legend", 1 => "a.legend"), "method");
+        echo "</th>
+            <th>Picture</th>
+            <th>State</th>
+            <th>Datecreated</th>
+            <th>Dateupdated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 </table>
+
+<div class=\"navigation\">
+    ";
+        // line 71
+        echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
+        echo "
+</div>
 
 <ul>
     <li>
         <a href=\"";
-        // line 52
+        // line 76
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_new"), "html", null, true);
         echo "\">
-            Create a new entry
+           <i class=\"icon-pencil\"></i> Create a new entry
         </a>
     </li>
 </ul>
@@ -144,6 +198,6 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  124 => 52,  117 => 47,  105 => 41,  99 => 38,  90 => 34,  84 => 33,  80 => 32,  76 => 31,  72 => 30,  68 => 29,  64 => 28,  58 => 27,  55 => 26,  51 => 25,  29 => 6,  26 => 5,);
+        return array (  178 => 76,  170 => 71,  152 => 60,  146 => 57,  141 => 54,  129 => 48,  123 => 45,  114 => 41,  108 => 40,  104 => 39,  100 => 38,  96 => 37,  92 => 36,  88 => 35,  82 => 34,  79 => 33,  75 => 32,  59 => 23,  53 => 20,  45 => 15,  42 => 14,  38 => 11,  36 => 10,  29 => 6,  26 => 5,);
     }
 }

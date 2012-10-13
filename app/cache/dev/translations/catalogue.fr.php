@@ -136,6 +136,13 @@ $catalogue = new MessageCatalogue('fr', array (
     'security.login.User account has expired.' => 'Votre compte est exipré',
     'security.login.User credentials have expired.' => 'Vos droits ont expiré',
   ),
+  'CraueFormFlowBundle' => 
+  array (
+    'button.next' => 'suivant',
+    'button.finish' => 'terminer',
+    'button.back' => 'précédent',
+    'button.reset' => 'recommencer',
+  ),
 ));
 
 

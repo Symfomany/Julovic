@@ -1,3 +1,8 @@
+.container-fluid {
+    min-height: 586px;
+    margin-bottom: 50px;
+}
+
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     font-size: 12px;
 }
@@ -8,8 +13,8 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 #filter_box label{
     float: left;
-margin-right: 8px;
-padding-top: 5px;
+    margin-right: 8px;
+    padding-top: 5px;
 }
 h1{
     background: transparent url('../images/bandeau_title.png') no-repeat 1px 11px;
@@ -293,20 +298,21 @@ div.jHtmlArea .ToolBar ul li a.custom_disk_button
 
 div.jHtmlArea { border: solid 1px #ccc; }
 #another_links{
-position: absolute;
-margin-left: -166px;
-margin-top: -40px;
+    position: absolute;
+    margin-left: -166px;
+    margin-top: -40px;
 }
 #sidebar_context{
     margin-top: 20px;
 }
 #top_search{
-margin-left: -378px;
+margin-left: -360px;
 margin-top: -42px;
 position: absolute;
 }
 #content{
     margin-top: 20px;
+    min-height: 600px;
 }
 
 .pagination ul > li.current > a{
@@ -316,13 +322,62 @@ position: absolute;
     margin-left: 583px;
 }
 .breadcrumb {
-   margin-top: 15px;
+    margin-top: 15px;
 }
 .navbar-search .search-query{
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+div.ajaxLoading{
+    width: 100%;
+    background-image: url("../images/ajax-loader3.gif");
+    background-repeat: no-repeat;
+    background-position: left middle;
+    height: 16px;
+    position: absolute;
+    margin-top: -26px;
+    margin-left: 300px;
+    display: none;
+}
+.navbar-inverse .navbar-search .search-query {
+    padding: 8px 14px 5px 13px;
+    height: 15px;
+    font-size: 12px;
+    /* Fonctionne déjà sur webkit */
+    -webkit-transition-property: background-color;
+    -webkit-transition-duration: 1s;
+
+    /* Bientôt supporté par Firefox */
+    -moz-transition-property: background-color;
+    -moz-transition-duration: 1s;
+
+    /* … et lorsque ce sera standardisé */
+    transition-property: background-color;
+    transition-duration: 1s;
+
+}
+.navbar-inverse .navbar-search .search-query:focus,
+.navbar-inverse .navbar-search .search-query.focused {
+    background-color: white;
+    padding: 8px 14px 5px 13px;
+}
+#footer{
+    background-color: #333;
+    height: 120px;
+    width: 100%;
+    border-top: 1px solid black;
+}
+#footer p{
+color: white;
+text-align: center;
+padding-top: 24px;
+width: 250px;
+margin: 0 auto;
+font-size: 11px;
+text-shadow: 1px 1px black,1px 1px black;
+}
+
 
 /*#sidebar_left{
     margin-top: 21px;

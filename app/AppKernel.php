@@ -23,7 +23,9 @@ class AppKernel extends Kernel
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle()
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
+           new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+           new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -13,12 +13,12 @@ Comments:
             type: string
             length: 200
             fixed: false
-            nullable: false
+            nullable: true
         content:
             type: text
-            nullable: false
+            nullable: true
         dateCreated:
             type: datetime
-            nullable: false
+            nullable: true
             column: date_created
     lifecycleCallbacks: {  }

@@ -8,6 +8,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface as UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface as AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+
+use Site\AdminBundle\Entity\Medias;
 
 use  Site\AdminBundle\Repository\AdministrateursRepository;
 use Doctrine\ORM\EntityRepository;
@@ -59,14 +63,14 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
 
     /**
      * @var string $firstname
-     *
+    * @Assert\NotBlank(message = "Prénom ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="firstname", type="string", length=20, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string $lastname
-     *
+    * @Assert\NotBlank(message = "Nom  ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="lastname", type="string", length=30, nullable=true)
      */
     private $lastname;
@@ -96,10 +100,15 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
      */
     private $email;
 
-    /**
+     /**
      * @var string $password
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message = "Mot de passe ne doit pas être vide", groups={"suscribe", "infos"})
+     * @Assert\MinLength(
+     *     limit=8,
+     *     message="Votre mot de passe  doit comporter {{ limit }} charactères.",
+     *     groups={"suscribe", "infos"}
+     * )
+     * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
@@ -131,17 +140,19 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
      */
     private $token;
 
-    /**
-     * @var \DateTime $updatedAt
+  /**
+     * @var datetime $dateUpdated
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime", length=200, nullable=false)
      */
     private $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var string $dateCreated
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime", length=200, nullable=false)
      */
     private $createdAt;
 
@@ -160,6 +171,62 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
     private $enabled;
 
     /**
+     * @var boolean $dob
+     *
+     * @ORM\Column(name="dob", type="date", nullable=false)
+     */
+    private $dob;
+    
+    
+    /**
+     * @var string $tel
+     * @ORM\Column(name="tel", type="string", nullable=true)
+     * @Assert\NotBlank(message = "Telephone ne doit pas être vide", groups={"coordonnees", "suscribe"})
+     * @Assert\Regex(pattern="/^0[1-68]([-. ]?[0-9]{2}){4}$/", message="Le tel est invalide",  groups={"coordonnees", "suscribe"})
+     */
+    protected $tel;
+    
+    
+    /**
+     * @var string $adresse
+     * @ORM\Column(name="adresse", type="text",  nullable=false)
+     * @Assert\NotBlank(groups={"infos","suscribe"}, message = "Adresse n'est pas vide")
+     * @Assert\MinLength(
+     *     limit=5,
+     *     message="Votre adresse doit comporter {{ limit }} charactères.", 
+     *     groups={"infos","suscribe"}
+     * )
+     */
+    protected $adresse;
+
+    /**
+     * @var string $ville
+     * @ORM\Column(name="ville", type="string", nullable=false,length=200)
+     * @Assert\NotBlank(groups={"infos", "suscribe"}, message="Ville vide")
+     * @Assert\MinLength(
+     *     limit=3,
+     *     message="Votre ville doit comporter {{ limit }} charactères.",
+     *     groups={"infos", "suscribe"}
+     * )
+     */
+    protected $ville;
+
+    /**
+     * @var string $zipcode
+     * @ORM\Column(name="zipcode", type="string", nullable=false,length=200)
+     * @Assert\NotBlank(groups={"infos", "suscribe"}, message="Zipcode  vide")
+     * @Assert\Regex(pattern="/^[0-9]{5}$/", message="Cp est invalide",  groups={"infos", "suscribe"})
+     */
+    protected $zipcode;
+    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Medias", mappedBy="administrateur", cascade={"all"},orphanRemoval=true)
+     */
+    protected $medias;
+    
+
+    /**
      * @var boolean $accountnonlocked
      *
      * @ORM\Column(name="accountNonLocked", type="boolean", nullable=false)
@@ -173,10 +240,9 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
      */
     private $accountNonExpired;
 
-    /**
-     * @var string $slug
-     *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     /**
+     * @Gedmo\Slug(fields={"lastname"})
+     * @ORM\Column( length=128, unique=true)
      */
     private $slug;
 
@@ -507,51 +573,6 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
         return $this->enabled;
     }
 
-    /**
-     * Set accountnonlocked
-     *
-     * @param boolean $accountnonlocked
-     * @return Administrateurs
-     */
-    public function setAccountnonlocked($accountnonlocked)
-    {
-        $this->accountnonlocked = $accountnonlocked;
-    
-        return $this;
-    }
-
-    /**
-     * Get accountnonlocked
-     *
-     * @return boolean 
-     */
-    public function getAccountnonlocked()
-    {
-        return $this->accountnonlocked;
-    }
-
-    /**
-     * Set accountnonexpired
-     *
-     * @param boolean $accountnonexpired
-     * @return Administrateurs
-     */
-    public function setAccountnonexpired($accountnonexpired)
-    {
-        $this->accountnonexpired = $accountnonexpired;
-    
-        return $this;
-    }
-
-    /**
-     * Get accountnonexpired
-     *
-     * @return boolean 
-     */
-    public function getAccountnonexpired()
-    {
-        return $this->accountnonexpired;
-    }
 
     /**
      * Set slug
@@ -655,5 +676,200 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
                 $this->password,
                 $this->email
                 ) = unserialize($serialized);
+    }
+
+    /**
+     * Set dob
+     *
+     * @param \DateTime $dob
+     * @return Administrateurs
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+    
+        return $this;
+    }
+
+    /**
+     * Get dob
+     *
+     * @return \DateTime 
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+
+    /**
+     * Set tel
+     *
+     * @param string $tel
+     * @return Administrateurs
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string 
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return Administrateurs
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     * @return Administrateurs
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+    
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string 
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     * @return Administrateurs
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+    
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string 
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set accountNonLocked
+     *
+     * @param boolean $accountNonLocked
+     * @return Administrateurs
+     */
+    public function setAccountNonLocked($accountNonLocked)
+    {
+        $this->accountNonLocked = $accountNonLocked;
+    
+        return $this;
+    }
+
+    /**
+     * Get accountNonLocked
+     *
+     * @return boolean 
+     */
+    public function getAccountNonLocked()
+    {
+        return $this->accountNonLocked;
+    }
+
+    /**
+     * Set accountNonExpired
+     *
+     * @param boolean $accountNonExpired
+     * @return Administrateurs
+     */
+    public function setAccountNonExpired($accountNonExpired)
+    {
+        $this->accountNonExpired = $accountNonExpired;
+    
+        return $this;
+    }
+
+    /**
+     * Get accountNonExpired
+     *
+     * @return boolean 
+     */
+    public function getAccountNonExpired()
+    {
+        return $this->accountNonExpired;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     * @return Administrateurs
+     */
+    public function addMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->medias[] = $medias;
+    
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     */
+    public function removeMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

@@ -21,6 +21,7 @@ class Categories
     public function __construct()
     {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateCreated = new  \Datetime('now');
     }
     /**
      * @var integer $id
@@ -33,14 +34,14 @@ class Categories
 
     /**
      * @var string $title
-     *
+     * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="title", type="string", length=200, nullable=false)
      */
     private $title;
 
     /**
      * @var string $description
-     *
+     * @Assert\NotBlank(message = "Description  ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
