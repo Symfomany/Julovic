@@ -58,19 +58,19 @@ People can pick and choose the right approaches for their CMS without having to 
 
 <h2>Features</h2>:
 
-  * Dashboard multi views
-  * AST Functions Custom
-  * Console Lines Classes
-  * Custom Validator Constraints
-  * Datafixtures for ORM
-  * QRCode Package loaded
-  * MultiStep Form loaded
-  * Imagine Manipulation Images
-  * Breadscrumb library
-  * Ajax & Autocomplete functions
-  * Event & Suscribers
-  * Tests Units & Fcts
-  * Administrateurs handler and configs
+  - Dashboard multi views
+  - AST Functions Custom
+  - Console Lines Classes
+  - Custom Validator Constraints
+  - Datafixtures for ORM
+  - QRCode Package loaded
+  - MultiStep Form loaded
+  - Imagine Manipulation Images
+  - Breadscrumb library
+  - Ajax & Autocomplete functions
+  - Event & Suscribers
+  - Tests Units & Fcts
+  - Administrateurs handler and configs
 
 
 ================================
