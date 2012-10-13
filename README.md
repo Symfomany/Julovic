@@ -67,6 +67,10 @@ People can pick and choose the right approaches for their CMS without having to 
   * MultiStep Form loaded
   * Imagine Manipulation Images
   * Breadscrumb library
+  * Ajax & Autocomplete functions
+  * Event & Suscribers
+  * Tests Units & Fcts
+  * Administrateurs handler and configs
 
 
 ================================
