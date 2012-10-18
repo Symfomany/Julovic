@@ -37,9 +37,7 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
 <form  action=\"";
         // line 10
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_create"), "html", null, true);
-        echo "\" method=\"post\" ";
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'enctype');
-        echo ">
+        echo "\" method=\"post\" enctype=\"multipart/form-data\">
                 
                 ";
         // line 12
@@ -82,7 +80,7 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
         echo "
                 ";
         // line 24
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "resume"), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "resume"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
                 
                 ";
@@ -95,7 +93,7 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
         echo "
                 ";
         // line 28
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "content"), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "content"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
                 
                 ";
@@ -111,21 +109,34 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "notes"), 'widget', array("attr" => array("class" => "knobed")));
         echo "
                 
-                ";
-        // line 34
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'label');
-        echo "
-                ";
-        // line 35
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'errors');
-        echo "
-                ";
-        // line 36
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "active"), 'widget');
-        echo "  
                 
                 ";
-        // line 38
+        // line 35
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "form"), "medias"));
+        foreach ($context['_seq'] as $context["_key"] => $context["media"]) {
+            // line 36
+            echo "                        ";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "media"), 'label');
+            echo "
+                        ";
+            // line 37
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "media"), 'errors');
+            echo "
+                        ";
+            // line 38
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "media"), 'widget');
+            echo "  
+                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['media'], $context['_parent'], $context['loop']);
+        $context = array_merge($_parent, array_intersect_key($context, $_parent));
+        // line 40
+        echo "                
+                
+                ";
+        // line 42
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'rest');
         echo "
                 
@@ -136,7 +147,7 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
             <ul class=\"record_actions\">
                 <li>
                     <a class=\"btn\" href=\"";
-        // line 46
+        // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
                         <i class=\"icon-share-alt\"></i> Back to the list
@@ -158,6 +169,6 @@ class __TwigTemplate_f419c78fd50c367caeebaed43cdc502a extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  138 => 46,  127 => 38,  122 => 36,  118 => 35,  114 => 34,  109 => 32,  105 => 31,  101 => 30,  96 => 28,  92 => 27,  88 => 26,  83 => 24,  79 => 23,  75 => 22,  70 => 20,  66 => 19,  62 => 18,  57 => 16,  53 => 15,  49 => 14,  44 => 12,  37 => 10,  29 => 5,  26 => 4,);
+        return array (  149 => 50,  138 => 42,  134 => 40,  126 => 38,  122 => 37,  117 => 36,  113 => 35,  107 => 32,  103 => 31,  99 => 30,  94 => 28,  90 => 27,  86 => 26,  81 => 24,  77 => 23,  73 => 22,  68 => 20,  64 => 19,  60 => 18,  55 => 16,  51 => 15,  47 => 14,  42 => 12,  37 => 10,  29 => 5,  26 => 4,);
     }
 }

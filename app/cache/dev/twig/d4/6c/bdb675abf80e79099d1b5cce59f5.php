@@ -33,102 +33,88 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
 
 <h1>Articles edit</h1>
 
-<form novalidate=\"novalidate\" action=\"";
+<form action=\"";
         // line 10
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_update", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'enctype');
         echo ">
-                
                 ";
-        // line 12
+        // line 11
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'errors');
         echo "
-    
+        
                 ";
-        // line 14
+        // line 13
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'label');
         echo "
                 ";
-        // line 15
+        // line 14
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'errors');
         echo "
                 ";
-        // line 16
+        // line 15
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'widget');
         echo "
-                    
+
                 ";
-        // line 18
+        // line 17
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'label');
         echo "
                 ";
-        // line 19
+        // line 18
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'errors');
         echo "
                 ";
-        // line 20
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'widget');
+        // line 19
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'widget', array("attr" => array("class" => "city")));
         echo "
-                
+
                 ";
-        // line 22
+        // line 21
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'label');
         echo "
                 ";
-        // line 23
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'errors');
         echo "
                 ";
-        // line 24
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'widget');
+        // line 23
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
-                
+
                 ";
-        // line 26
+        // line 25
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'label');
         echo "
                 ";
-        // line 27
+        // line 26
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'errors');
         echo "
                 ";
-        // line 28
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'widget');
+        // line 27
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
-                
+
                 ";
-        // line 30
+        // line 29
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'label');
         echo "
                 ";
-        // line 31
+        // line 30
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'errors');
         echo "
                 ";
-        // line 32
+        // line 31
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'widget', array("attr" => array("class" => "knobed")));
         echo "
+
                 
                 ";
         // line 34
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "active"), 'label');
-        echo "
-                ";
-        // line 35
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "active"), 'errors');
-        echo "
-                ";
-        // line 36
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "active"), 'widget');
-        echo "  
-                
-                ";
-        // line 38
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'rest');
         echo "
-                
-                <p>
+    <p>
         <button type=\"submit\" class=\"btn\">edit</button>
     </p>
 </form>
@@ -136,7 +122,7 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
 <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 47
+        // line 42
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
             <i class=\"icon-share-alt\"></i> Back to the list
@@ -144,17 +130,17 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
     </li>
     <li>
         <form action=\"";
-        // line 52
+        // line 47
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\">
             ";
-        // line 53
+        // line 48
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
-            <button type=\"submit\" class=\"btn\">Delete</button>
-        </form>
-    </li>
-</ul>
+                <button type=\"submit\" class=\"btn\">Delete</button>
+            </form>
+        </li>
+    </ul>
 
  ";
     }
@@ -171,6 +157,6 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  150 => 53,  146 => 52,  138 => 47,  126 => 38,  121 => 36,  117 => 35,  113 => 34,  108 => 32,  104 => 31,  100 => 30,  95 => 28,  91 => 27,  87 => 26,  82 => 24,  78 => 23,  74 => 22,  69 => 20,  65 => 19,  61 => 18,  56 => 16,  52 => 15,  48 => 14,  43 => 12,  36 => 10,  29 => 6,  26 => 5,);
+        return array (  136 => 48,  132 => 47,  124 => 42,  113 => 34,  107 => 31,  103 => 30,  99 => 29,  94 => 27,  90 => 26,  86 => 25,  81 => 23,  77 => 22,  73 => 21,  68 => 19,  64 => 18,  60 => 17,  55 => 15,  51 => 14,  47 => 13,  42 => 11,  36 => 10,  29 => 6,  26 => 5,);
     }
 }

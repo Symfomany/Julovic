@@ -25,7 +25,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-           new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
+           new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+           new SensioLabs\DoctrineQueryStatisticsBundle\SensioLabsDoctrineQueryStatisticsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

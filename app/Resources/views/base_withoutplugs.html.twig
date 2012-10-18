@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <!-- Le styles -->
                 <link href="/css/reset.css" rel="stylesheet">
                 <link href="/css/bootstrap.css" rel="stylesheet">
                 <link href="/css/bootstrap-responsive.css" rel="stylesheet">
@@ -18,16 +17,11 @@
         {% block body %}{% endblock %}
             
         {% block javascripts %}
-               <!-- Le javascript
-                    ================================================== -->
-                    <!-- Placed at the end of the document so the pages load faster -->
                     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
                     <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
                     <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
                     <script src="/js/bootstrap.min.js"></script>
                     <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
-       
-    </script>
 {% endblock %}
     </body>
 </html>

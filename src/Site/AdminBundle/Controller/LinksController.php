@@ -14,6 +14,13 @@ use Site\AdminBundle\Form\LinksType;
  */
 class LinksController extends Controller
 {
+        
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Liens", $this->get("router")->generate("links"));
+    }
+    
+    
     /**
      * Lists all Links entities.
      *

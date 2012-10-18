@@ -10,7 +10,7 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,10 +25,10 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 
@@ -40,10 +40,34 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
         echo "\" method=\"post\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'enctype');
         echo ">
-    ";
-        // line 12
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'widget');
+        
+                ";
+        // line 13
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "title"), 'label');
         echo "
+                ";
+        // line 14
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "title"), 'errors');
+        echo "
+                ";
+        // line 15
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "title"), 'widget');
+        echo "        <span class=\"help-inline\"><span class=\"label label-info\">Help!</span> Test alpha</span>
+                
+                ";
+        // line 17
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "description"), 'label');
+        echo "
+                ";
+        // line 18
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "description"), 'errors');
+        echo "
+                ";
+        // line 19
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "description"), 'widget', array("attr" => array("class" => "textarea")));
+        echo "
+                
+        
     <p>
         <button type=\"submit\" class=\"btn btn-primary btn-large\">Create</button>
     </p>
@@ -52,10 +76,10 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
 <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 20
+        // line 29
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories"), "html", null, true);
         echo "\">
-            Back to the list
+            <i class=\"icon-share-alt\"></i> Back to the list
         </a>
     </li>
 </ul>
@@ -74,6 +98,6 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  54 => 20,  43 => 12,  37 => 11,  29 => 6,  26 => 5,);
+        return array (  78 => 29,  65 => 19,  61 => 18,  57 => 17,  52 => 15,  48 => 14,  44 => 13,  37 => 11,  29 => 6,  26 => 5,);
     }
 }

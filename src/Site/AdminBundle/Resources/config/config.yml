@@ -51,3 +51,10 @@ twig:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }
           - {'label': 'Nouveau Link', routing: 'links_new' }
+        advices:
+          - Conseil ici numéro 1
+          - Conseil ici numéro 2
+          - Conseil ici numéro 3
+          - Conseil ici numéro 4
+          - Conseil ici numéro 5
+          - Conseil ici numéro 6

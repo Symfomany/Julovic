@@ -14,6 +14,12 @@ use Site\AdminBundle\Form\CategoriesType;
  */
 class CategoriesController extends Controller
 {
+    
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Categories", $this->get("router")->generate("categories"));
+    }
+    
     /**
      * Lists all Categories entities.
      *

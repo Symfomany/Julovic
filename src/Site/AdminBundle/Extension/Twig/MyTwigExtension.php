@@ -19,10 +19,11 @@ class MyTwigExtension extends \Twig_Extension {
             'formule' => new \Twig_Filter_Method($this, 'formule'),
             'disponibilite' => new \Twig_Filter_Method($this, 'disponibilite'),
             'extras' => new \Twig_Filter_Method($this, 'extras'),
+            'validate' => new \Twig_Filter_Method($this, 'validate'),
             'file_exist' => new \Twig_Filter_Method($this, 'file_exist'),
             'commat' => new \Twig_Filter_Method($this, 'split_commat'),
             'localeDate' => new \Twig_Filter_Function(
-                    ' Site\AdminBundle\Extension\Twig\MyTwigExtension::localeDateFilter'
+            ' Site\AdminBundle\Extension\Twig\MyTwigExtension::localeDateFilter'
             ),
             'created_ago' => new \Twig_Filter_Method($this, 'createdAgo'),
             'readmore' => new \Twig_Filter_Method($this, 'ReadMore', array('is_safe' => array('html'))),
@@ -35,6 +36,11 @@ class MyTwigExtension extends \Twig_Extension {
 
     public function file_exist($file = null) {
         return file_exists($file);
+    }
+
+    public function validate($bool = false) {
+       $img = ($bool == true) ? "<i class='icon-ok'></i>" : "<i class='icon-remove'></i>";
+       return $img;
     }
 
     public function split_commat($ch = null) {

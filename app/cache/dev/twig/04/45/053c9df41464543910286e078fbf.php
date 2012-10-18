@@ -119,7 +119,7 @@ class __TwigTemplate_0445053c9df41464543910286e078fbf extends Twig_Template
             echo "</td>
             <td>";
             // line 39
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "active"), "html", null, true);
+            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "active"));
             echo "</td>
             <td>
                 <ul>

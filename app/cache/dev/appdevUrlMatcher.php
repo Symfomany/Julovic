@@ -114,6 +114,15 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/admin')) {
+            // home
+            if (rtrim($pathinfo, '/') === '/admin') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'home');
+                }
+
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'home',);
+            }
+
             // site_admin_homepage
             if ($pathinfo === '/admin/demo') {
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'site_admin_homepage',);
@@ -132,15 +141,6 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // logout
             if ($pathinfo === '/admin/logout') {
                 return array('_route' => 'logout');
-            }
-
-            // home
-            if (rtrim($pathinfo, '/') === '/admin') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'home');
-                }
-
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'home',);
             }
 
             if (0 === strpos($pathinfo, '/admin/articles')) {

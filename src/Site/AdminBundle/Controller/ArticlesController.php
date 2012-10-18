@@ -5,13 +5,22 @@ namespace Site\AdminBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Site\AdminBundle\Entity\Articles;
+use Site\AdminBundle\Entity\Medias;
 use Site\AdminBundle\Form\ArticlesType;
+use Site\AdminBundle\Form\Type\MediasType;
+use Doctrine\Common\Util\Debug;
+
 
 /**
  * Articles controller.
  *
  */
 class ArticlesController extends Controller {
+    
+     public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Articles", $this->get("router")->generate("articles"));
+    }
 
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
@@ -19,7 +28,7 @@ class ArticlesController extends Controller {
         $dql = "SELECT a FROM SiteAdminBundle:Articles a";
         $query = $em->createQuery($dql);
         $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $this->get('request')->query->get('page', 1),4);  //page number/, 10/limit per page/ );
+        $pagination = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 4);  //page number/, 10/limit per page/ );
 
         return $this->render('SiteAdminBundle:Articles:index.html.twig', array(
                     'pagination' => $pagination,
@@ -44,8 +53,12 @@ class ArticlesController extends Controller {
      */
     public function newAction() {
         $entity = new Articles();
+        
+        $medias = new Medias();
+        $medias->setArticle($entity);
+        $entity->addMedia($medias);
         $form = $this->createForm(new ArticlesType(), $entity);
-
+        
         return $this->render('SiteAdminBundle:Articles:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
@@ -57,14 +70,33 @@ class ArticlesController extends Controller {
      *
      */
     public function createAction(Request $request) {
+        $user = $this->get('security.context')->getToken()->getUser();
         $entity = new Articles();
+        $medias = new Medias();
+        $medias->setArticle($entity);
+        $medias->setAdministrateur($user);
+        $entity->addMedia($medias);
+        
         $form = $this->createForm(new ArticlesType(), $entity);
         $form->bind($request);
 
+//        exit(Debug::dump($entity->getMedias()));
+
         if ($form->isValid()) {
+            
+            
+//             foreach ($form->getMedias() as $media) {
+//                    if ($media->file === null)
+//                        $offer->removeMedias($media);
+//                    else
+//                        $media->upload();
+//                }
+            
+              $medias->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre changement a été pris en compte!');
 
             return $this->redirect($this->generateUrl('articles_show', array('id' => $entity->getId())));
         }
@@ -123,6 +155,7 @@ class ArticlesController extends Controller {
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre changement a été pris en compte!');
 
             return $this->redirect($this->generateUrl('articles_edit', array('id' => $id)));
         }

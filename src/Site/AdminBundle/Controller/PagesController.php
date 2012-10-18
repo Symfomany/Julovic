@@ -14,6 +14,12 @@ use Site\AdminBundle\Form\PagesType;
  */
 class PagesController extends Controller
 {
+            
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Pages", $this->get("router")->generate("pages"));
+    }
+    
     /**
      * Lists all Pages entities.
      *

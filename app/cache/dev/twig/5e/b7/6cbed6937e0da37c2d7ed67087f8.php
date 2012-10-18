@@ -54,10 +54,8 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
         // line 20
         echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
         echo "</th>
-            <th>Offerid</th>
-            <th>Restaurantid</th>
             <th";
-        // line 23
+        // line 21
         if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Legend"), "method")) {
             echo " class=\"sorted\"";
         }
@@ -73,48 +71,58 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
     </thead>
     <tbody>
             ";
-        // line 32
+        // line 30
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "pagination"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 33
+            // line 31
             echo "            <tr>
                 <td><a href=\"";
-            // line 34
+            // line 32
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                 <td>";
+            // line 33
+            echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "legend")), "html", null, true);
+            echo "</td>
+                   <td> ";
+            // line 34
+            $context["img_path"] = ((("uploads/administrateurs/" . $this->getAttribute($this->getContext($context, "user"), "id")) . "/") . $this->getAttribute($this->getContext($context, "entity"), "picture"));
             // line 35
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "offerId"), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 36
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "restaurantId"), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 37
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "legend"), "html", null, true);
-            echo "</td>
-                <td>";
+            echo "                    ";
+            if (($this->getAttribute($this->getContext($context, "entity"), "picture") && $this->env->getExtension('my_twig_extension')->file_exist($this->getContext($context, "img_path")))) {
+                // line 36
+                echo "                           <a href=\"/uploads/administrateurs/";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "user"), "id"), "html", null, true);
+                echo "/";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "picture"), "html", null, true);
+                echo "\" class=\"fancybox\">
+                           <img src=\"/uploads/administrateurs/";
+                // line 37
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "user"), "id"), "html", null, true);
+                echo "/";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "picture"), "html", null, true);
+                echo "\"  width=\"300\" height=\"200\" class=\"img-polaroid\">
+                    ";
+            }
             // line 38
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "picture"), "html", null, true);
-            echo "</td>
+            echo "</a></td>
                 <td>";
             // line 39
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "state"), "html", null, true);
+            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "state"));
             echo "</td>
                 <td>";
             // line 40
             if ($this->getAttribute($this->getContext($context, "entity"), "dateCreated")) {
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "Y-m-d H:i:s"), "html", null, true);
+                echo twig_escape_filter($this->env, twig_localized_date_filter(twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "Y-m-d"), "short", "none"), "html", null, true);
             }
             echo "</td>
                 <td>";
             // line 41
             if ($this->getAttribute($this->getContext($context, "entity"), "dateUpdated")) {
-                echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateUpdated"), "Y-m-d H:i:s"), "html", null, true);
+                echo twig_escape_filter($this->env, twig_localized_date_filter(twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateUpdated"), "Y-m-d"), "full", "none"), "html", null, true);
             }
             echo "</td>
                 <td>
@@ -147,10 +155,8 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
         // line 57
         echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
         echo "</th>
-            <th>Offerid</th>
-            <th>Restaurantid</th>
             <th";
-        // line 60
+        // line 58
         if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Legend"), "method")) {
             echo " class=\"sorted\"";
         }
@@ -168,7 +174,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
 
 <div class=\"navigation\">
     ";
-        // line 71
+        // line 69
         echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
         echo "
 </div>
@@ -176,7 +182,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
 <ul>
     <li>
         <a href=\"";
-        // line 76
+        // line 74
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("medias_new"), "html", null, true);
         echo "\">
            <i class=\"icon-pencil\"></i> Create a new entry
@@ -198,6 +204,6 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  178 => 76,  170 => 71,  152 => 60,  146 => 57,  141 => 54,  129 => 48,  123 => 45,  114 => 41,  108 => 40,  104 => 39,  100 => 38,  96 => 37,  92 => 36,  88 => 35,  82 => 34,  79 => 33,  75 => 32,  59 => 23,  53 => 20,  45 => 15,  42 => 14,  38 => 11,  36 => 10,  29 => 6,  26 => 5,);
+        return array (  184 => 74,  176 => 69,  158 => 58,  154 => 57,  149 => 54,  137 => 48,  131 => 45,  122 => 41,  116 => 40,  112 => 39,  109 => 38,  102 => 37,  95 => 36,  92 => 35,  90 => 34,  86 => 33,  80 => 32,  77 => 31,  73 => 30,  57 => 21,  53 => 20,  45 => 15,  42 => 14,  38 => 11,  36 => 10,  29 => 6,  26 => 5,);
     }
 }

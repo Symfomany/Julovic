@@ -14,6 +14,13 @@ use Site\AdminBundle\Form\CommentsType;
  */
 class CommentsController extends Controller
 {
+        
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Commentaires", $this->get("router")->generate("comments"));
+    }
+    
+    
     /**
      * Lists all Comments entities.
      *
@@ -79,6 +86,7 @@ class CommentsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre changement a été pris en compte!');
 
             return $this->redirect($this->generateUrl('comments_show', array('id' => $entity->getId())));
         }

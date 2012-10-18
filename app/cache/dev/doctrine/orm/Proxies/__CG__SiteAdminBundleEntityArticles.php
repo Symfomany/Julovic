@@ -183,10 +183,52 @@ class Articles extends \Site\AdminBundle\Entity\Articles implements \Doctrine\OR
         return parent::getSlug();
     }
 
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->__load();
+        return parent::setDateUpdated($dateUpdated);
+    }
+
+    public function getDateUpdated()
+    {
+        $this->__load();
+        return parent::getDateUpdated();
+    }
+
+    public function setImageName($imageName)
+    {
+        $this->__load();
+        return parent::setImageName($imageName);
+    }
+
+    public function getImageName()
+    {
+        $this->__load();
+        return parent::getImageName();
+    }
+
+    public function addMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->__load();
+        return parent::addMedia($medias);
+    }
+
+    public function removeMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->__load();
+        return parent::removeMedia($medias);
+    }
+
+    public function getMedias()
+    {
+        $this->__load();
+        return parent::getMedias();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'resume', 'content', 'tag', 'dateCreated', 'dateUpdated', 'active', 'type', 'special', 'notes', 'slug', 'category');
+        return array('__isInitialized__', 'id', 'title', 'resume', 'content', 'tag', 'dateCreated', 'dateUpdated', 'active', 'type', 'special', 'notes', 'slug', 'category', 'medias');
     }
 
     public function __clone()

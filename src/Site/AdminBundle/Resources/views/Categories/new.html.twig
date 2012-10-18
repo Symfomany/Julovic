@@ -9,7 +9,16 @@
 <h1>Categories creation</h1>
 
 <form action="{{ path('categories_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+        
+                {{ form_label(form.title) }}
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title) }}        <span class="help-inline"><span class="label label-info">Help!</span> Test alpha</span>
+                
+                {{ form_label(form.description) }}
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description, { 'attr': {'class': 'textarea'}}) }}
+                
+        
     <p>
         <button type="submit" class="btn btn-primary btn-large">Create</button>
     </p>

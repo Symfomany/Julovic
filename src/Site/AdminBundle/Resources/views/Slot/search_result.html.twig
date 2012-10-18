@@ -4,49 +4,14 @@
 {{ parent() }}
 
 <h1>Résultat de recherche pour "{{ search_word|capitalize|default('Aucun') }}"</h1>
-{# display navigation #}
-<div class="navigation">
-    {{ pagination.render()|raw }}
-</div>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>{{ pagination.sortable('Id', 'a.id')|raw }}</th>
-            <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ pagination.sortable('Title', 'a.title')|raw }}</th>
-            <th>Category</th>
-            <th>Resume</th>
-            <th>Content</th>
-            <th{% if pagination.isSorted('a.Tag') %} class="sorted"{% endif %}>{{ pagination.sortable('Tag', 'a.tag')|raw }}</th>
-            <th>Datecreated</th>
-            <th>Active</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-{% for entity in pagination %}
-        <tr>
-            <td><a href="{{ path('articles_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.title|capitalize }}</td>
-            <td>{{ entity.category }}</td>
-            <td>{% autoescape false %}{{ entity.resume| truncate(50, true) }}{% endautoescape  %}</td>
-            <td>{{ entity.content|truncate(50, true) }}</td>
-            <td>{{ entity.tag }}</td>
-            <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
-            <td>{{ entity.active }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('articles_show', { 'id': entity.id }) }}"><i class="icon-search"></i>show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('articles_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-            </tbody>
-            <tfoot>
+
+{% if pagination %}
+        {# display navigation #}
+        <div class="navigation">
+            {{ pagination.render()|raw }}
+        </div>
+        <table class="table table-striped">
+            <thead>
                 <tr>
                     <th>{{ pagination.sortable('Id', 'a.id')|raw }}</th>
                     <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ pagination.sortable('Title', 'a.title')|raw }}</th>
@@ -58,10 +23,49 @@
                     <th>Active</th>
                     <th>Actions</th>
                 </tr>
-            </tfoot>
-</table>
-{# display navigation #}
-<div class="navigation">
-    {{ pagination.render()|raw }}
-</div>
+            </thead>
+            <tbody>
+        {% for entity in pagination %}
+                <tr>
+                    <td><a href="{{ path('articles_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.title|capitalize }}</td>
+                    <td>{{ entity.category }}</td>
+                    <td>{% autoescape false %}{{ entity.resume| truncate(50, true) }}{% endautoescape  %}</td>
+                    <td>{{ entity.content|truncate(50, true) }}</td>
+                    <td>{{ entity.tag }}</td>
+                    <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
+                    <td>{{ entity.active }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('articles_show', { 'id': entity.id }) }}"><i class="icon-search"></i>show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('articles_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{{ pagination.sortable('Id', 'a.id')|raw }}</th>
+                            <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ pagination.sortable('Title', 'a.title')|raw }}</th>
+                            <th>Category</th>
+                            <th>Resume</th>
+                            <th>Content</th>
+                            <th{% if pagination.isSorted('a.Tag') %} class="sorted"{% endif %}>{{ pagination.sortable('Tag', 'a.tag')|raw }}</th>
+                            <th>Datecreated</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ pagination.render()|raw }}
+        </div>
+
+{% endif %}
  {% endblock %}

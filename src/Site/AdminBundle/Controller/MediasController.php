@@ -14,12 +14,20 @@ use Site\AdminBundle\Form\MediasType;
  */
 class MediasController extends Controller
 {
+    
+            
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Medias", $this->get("router")->generate("medias"));
+    }
+    
     /**
      * Lists all Medias entities.
      *
      */
     public function indexAction()
     {
+        $user = $this->get('security.context')->getToken()->getUser();
        $em = $this->get('doctrine.orm.entity_manager'); 
        $dql = "SELECT a FROM SiteAdminBundle:Medias a";
        $query = $em->createQuery($dql);
@@ -33,6 +41,7 @@ class MediasController extends Controller
 
         return $this->render('SiteAdminBundle:Medias:index.html.twig', array(
             'pagination' => $pagination,
+            'user' => $user
         ));
     }
 

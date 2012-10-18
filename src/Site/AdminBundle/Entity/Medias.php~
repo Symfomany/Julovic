@@ -18,10 +18,11 @@ use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 
 /**
- * Site\AdminBundle\Entity\Medias
- *
+ * Meetserious\SiteProBundle\Entity\Medias
  * @ORM\Table(name="medias")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Site\AdminBundle\Repository\MediasRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Medias {
 
@@ -62,6 +63,14 @@ class Medias {
      * @ORM\Column(name="picture", type="string", length=150, nullable=true)
      */
     private $picture;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Articles", inversedBy="medias")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
+     */
+    protected $article;
+
 
     /**
      * @Assert\File(
@@ -126,7 +135,7 @@ class Medias {
      * @return type 
      */
     protected function getUploadDir($location) {
-        return 'uploads/' . $location . '/' . $this->restaurant->getId();
+        return 'uploads/' . $location . '/' . $this->administrateur->getId();
     }
 
     /**
@@ -134,7 +143,7 @@ class Medias {
      * @param type $location
      * @return type 
      */
-    public function upload($location = 'restaurants') {
+    public function upload($location = 'administrateurs') {
 
         // the file property can be empty if the field is not required
         if (null === $this->file) {
@@ -166,10 +175,6 @@ class Medias {
                 ->thumbnail(new \Imagine\Image\Box(500, 200))
                 ->save($this->getUploadRootDir($location) . '/' . $this->picture_name . '-big.' . $this->extension);
 
-//        $this->createthumb($this->getUploadRootDir($location) . '/' . $this->picture, $this->getUploadRootDir($location) .'/'.$this->picture_name.'-small.'.$this->extension, 150,75,$this->extension);
-//        $this->createthumb($this->getUploadRootDir($location) . '/' . $this->picture, $this->getUploadRootDir($location) .'/'.$this->picture_name.'-medium.'.$this->extension, 300,150,$this->extension);
-//        $this->createthumb($this->getUploadRootDir($location) . '/' . $this->picture, $this->getUploadRootDir($location) .'/'.$this->picture_name.'-big.'.$this->extension, 500,200,$this->extension);
-        // clean up the file property as you won't need it anymore
         $this->file = null;
     }
 
@@ -367,4 +372,27 @@ class Medias {
 
     
     
+
+    /**
+     * Set administrateur
+     *
+     * @param Site\AdminBundle\Entity\Administrateurs $administrateur
+     * @return Medias
+     */
+    public function setAdministrateur(\Site\AdminBundle\Entity\Administrateurs $administrateur = null)
+    {
+        $this->administrateur = $administrateur;
+    
+        return $this;
+    }
+
+    /**
+     * Get administrateur
+     *
+     * @return Site\AdminBundle\Entity\Administrateurs 
+     */
+    public function getAdministrateur()
+    {
+        return $this->administrateur;
+    }
 }

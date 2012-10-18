@@ -10,7 +10,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,15 +25,15 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <h1>Articles</h1>
 
-<table class=\"record_properties\">
+<table class=\"record_properties table table-striped\">
     <tbody>
         <tr>
             <th>Id</th>
@@ -43,10 +43,10 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         echo "</td>
         </tr>
         <tr>
-            <th>Categoryid</th>
+            <th>Category</th>
             <td>";
         // line 18
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "categoryId"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "category"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
@@ -74,7 +74,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
             <th>Datecreated</th>
             <td>";
         // line 34
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "m/d/Y"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
@@ -93,7 +93,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         // line 45
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
-            Back to the list
+            <i class=\"icon-share-alt\"></i> Back to the list
         </a>
     </li>
     <li>
@@ -101,7 +101,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">
-            Edit
+            edit
         </a>
     </li>
     <li>
@@ -113,7 +113,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         // line 56
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
-            <button type=\"submit\">Delete</button>
+            <button type=\"submit\" class=\"btn-primary btn-large\">Delete</button>
         </form>
     </li>
 </ul>

@@ -1,7 +1,14 @@
+
+#Homepage
+home:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Articles:index" }
+
 site_admin_homepage:
     pattern:  /demo
     defaults: { _controller: SiteAdminBundle:Default:index }
 
+#Security Routing
 login:
   pattern: /login
   defaults: { _controller: SiteAdminBundle:Security:login }
@@ -12,10 +19,8 @@ login_check:
 logout:
   pattern: /logout  
 
-home:
-    pattern:  /
-    defaults: { _controller: "SiteAdminBundle:Articles:index" }
 
+#All Modules
 articles:
     resource: "@SiteAdminBundle/Resources/config/routing/articles.yml"
     prefix:   /articles

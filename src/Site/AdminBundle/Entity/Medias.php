@@ -11,6 +11,7 @@ use Doctrine\Common\Util\Debug;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Site\AdminBundle\Entity\Administrateurs;
+use Site\AdminBundle\Entity\Articles;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
@@ -63,6 +64,14 @@ class Medias {
      * @ORM\Column(name="picture", type="string", length=150, nullable=true)
      */
     private $picture;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Articles", inversedBy="medias")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=true)
+     */
+    protected $article;
+
 
     /**
      * @Assert\File(
@@ -76,7 +85,7 @@ class Medias {
     /**
      * @var integer $state
      *
-     * @ORM\Column(name="state", type="integer", nullable=false)
+     * @ORM\Column(name="state", type="boolean", nullable=false)
      */
     private $state;
 
@@ -137,6 +146,7 @@ class Medias {
      */
     public function upload($location = 'administrateurs') {
 
+        
         // the file property can be empty if the field is not required
         if (null === $this->file) {
             return;
@@ -386,5 +396,28 @@ class Medias {
     public function getAdministrateur()
     {
         return $this->administrateur;
+    }
+
+    /**
+     * Set article
+     *
+     * @param Site\AdminBundle\Entity\Articles $article
+     * @return Medias
+     */
+    public function setArticle(\Site\AdminBundle\Entity\Articles $article = null)
+    {
+        $this->article = $article;
+    
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return Site\AdminBundle\Entity\Articles 
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

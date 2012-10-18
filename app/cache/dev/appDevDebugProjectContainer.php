@@ -200,6 +200,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'controllistener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Site\AdminBundle\Listener\ControlListener A Site\AdminBundle\Listener\ControlListener instance.
+     */
+    protected function getControllistenerService()
+    {
+        return $this->services['controllistener'] = new \Site\AdminBundle\Listener\ControlListener();
+    }
+
+    /**
      * Gets the 'craue.form.flow' service.
      *
      * This service is shared.
@@ -356,11 +369,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php';
 
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
@@ -390,7 +403,7 @@ class appDevDebugProjectContainer extends Container
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
 
     /**
@@ -449,6 +462,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('knp_pager.before', array(0 => 'knp_paginator.subscriber.sortable', 1 => 'before'), 1);
         $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'pagination'), 1);
         $instance->addListenerService('kernel.request', array(0 => 'notificationlistener', 1 => 'onKernelRequest'), 0);
+        $instance->addListenerService('kernel.controller', array(0 => 'controllistener', 1 => 'onCoreController'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'security.firewall', 1 => 'onKernelRequest'), 8);
         $instance->addListenerService('kernel.response', array(0 => 'security.rememberme.response_listener', 1 => 'onKernelResponse'), 0);
@@ -1442,6 +1456,7 @@ class appDevDebugProjectContainer extends Container
         $instance->add(new \Symfony\Component\HttpKernel\DataCollector\TimeDataCollector($b));
         $instance->add(new \Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector());
         $instance->add($this->get('data_collector.router'));
+        $instance->add($this->get('sensiolabs.doctrinequerystatistics.data_collector'));
         $instance->add(new \Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector($this->get('security.context')));
         $instance->add(new \Symfony\Bridge\Swiftmailer\DataCollector\MessageDataCollector($this, true));
         $instance->add($e);
@@ -1889,6 +1904,23 @@ class appDevDebugProjectContainer extends Container
     protected function getSensioFrameworkExtra_View_ListenerService()
     {
         return $this->services['sensio_framework_extra.view.listener'] = new \Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener($this);
+    }
+
+    /**
+     * Gets the 'sensiolabs.doctrinequerystatistics.data_collector' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return SensioLabs\DoctrineQueryStatisticsBundle\DataCollector\DoctrineQueryStatisticsDataCollector A SensioLabs\DoctrineQueryStatisticsBundle\DataCollector\DoctrineQueryStatisticsDataCollector instance.
+     */
+    protected function getSensiolabs_Doctrinequerystatistics_DataCollectorService()
+    {
+        $this->services['sensiolabs.doctrinequerystatistics.data_collector'] = $instance = new \SensioLabs\DoctrineQueryStatisticsBundle\DataCollector\DoctrineQueryStatisticsDataCollector();
+
+        $instance->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
+
+        return $instance;
     }
 
     /**
@@ -2765,6 +2797,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Commentaires', 'routing' => 'comments'), 6 => array('label' => 'Pages', 'routing' => 'pages'), 7 => array('label' => 'Tags', 'routing' => 'tags'), 8 => array('label' => 'Paramètres', 'routing' => 'parametres')));
         $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new'), 3 => array('label' => 'Nouvelle Page', 'routing' => 'pages_new'), 4 => array('label' => 'Nouveau Media', 'routing' => 'medias_new')));
         $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
+        $instance->addGlobal('advices', array(0 => 'Conseil ici numéro 1', 1 => 'Conseil ici numéro 2', 2 => 'Conseil ici numéro 3', 3 => 'Conseil ici numéro 4', 4 => 'Conseil ici numéro 5', 5 => 'Conseil ici numéro 6'));
 
         return $instance;
     }
@@ -2962,7 +2995,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3347,6 +3380,7 @@ class appDevDebugProjectContainer extends Container
                 'CraueFormFlowBundle' => 'Craue\\FormFlowBundle\\CraueFormFlowBundle',
                 'FOSJsRoutingBundle' => 'FOS\\JsRoutingBundle\\FOSJsRoutingBundle',
                 'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
+                'SensioLabsDoctrineQueryStatisticsBundle' => 'SensioLabs\\DoctrineQueryStatisticsBundle\\SensioLabsDoctrineQueryStatisticsBundle',
                 'AcmeDemoBundle' => 'Acme\\DemoBundle\\AcmeDemoBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3398,6 +3432,7 @@ class appDevDebugProjectContainer extends Container
             'my.success_handler.class' => '
             Site\\AdminBundle\\Authentication\\AuthenticationHandler
         ',
+            'control.class' => 'Site\\AdminBundle\\Listener\\ControlListener',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -3855,8 +3890,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
@@ -3902,6 +3937,7 @@ class appDevDebugProjectContainer extends Container
             'craue_twig_extensions.formflow.class' => 'Craue\\FormFlowBundle\\Twig\\Extension\\FormFlowExtension',
             'fos_js_routing.extractor.class' => 'FOS\\JsRoutingBundle\\Extractor\\ExposedRoutesExtractor',
             'fos_js_routing.controller.class' => 'FOS\\JsRoutingBundle\\Controller\\Controller',
+            'sensiolabs.doctrinequerystatistics.data_collector.class' => 'SensioLabs\\DoctrineQueryStatisticsBundle\\DataCollector\\DoctrineQueryStatisticsDataCollector',
             'web_profiler.debug_toolbar.class' => 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener',
             'web_profiler.debug_toolbar.intercept_redirects' => false,
             'web_profiler.debug_toolbar.mode' => 2,
@@ -3939,6 +3975,10 @@ class appDevDebugProjectContainer extends Container
                 'data_collector.router' => array(
                     0 => 'router',
                     1 => 'WebProfilerBundle:Collector:router',
+                ),
+                'sensiolabs.doctrinequerystatistics.data_collector' => array(
+                    0 => 'doctrinequerystatistics',
+                    1 => 'SensioLabsDoctrineQueryStatisticsBundle:Collector:doctrinequerystatistics',
                 ),
                 'data_collector.security' => array(
                     0 => 'security',

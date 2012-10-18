@@ -2,6 +2,8 @@
 <form class="navbar-search pull-left" action="{{  path('search_query') }}" id="top_search" method="post">
             {{ form_errors(form.search) }}
             {{ form_widget(form.search , { 'attr': {'class': 'search-query span2','placeholder' : 'Nom, titre ...'   }}) }}
+            <i id="search_btn" class="icon-search"></i>
             <div class="ajaxLoading"></div>
             {{ form_rest(form) }}
 </form>
+

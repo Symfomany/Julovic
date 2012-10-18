@@ -40,8 +40,8 @@ class __TwigTemplate_6a35c7a889aabb1e44f60e692948ee78 extends Twig_Template
         echo "
  <p></p>
  <p></p>
-    <div class=\"span6 center\">
-        <div class=\"well\">
+    <div class=\"span6\">
+        <div class=\"well\" >
                         ";
         // line 10
         if ($this->getContext($context, "error")) {

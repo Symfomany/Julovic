@@ -31,21 +31,21 @@ class __TwigTemplate_ec316745752dc43e3250e91a3264ecf1 extends Twig_Template
         ";
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 16
+        // line 18
         echo "        <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
         echo "\" />
     </head>
     <body>
         ";
-        // line 19
+        // line 21
         $this->displayBlock('body', $context, $blocks);
-        // line 20
+        // line 22
         echo "            
         ";
-        // line 21
+        // line 23
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 32
+        // line 34
         echo "    </body>
 </html>
 ";
@@ -62,25 +62,48 @@ class __TwigTemplate_ec316745752dc43e3250e91a3264ecf1 extends Twig_Template
     {
         // line 7
         echo "            <!-- Le styles -->
-                <link href=\"/css/reset.css\" rel=\"stylesheet\">
-                <link href=\"/css/bootstrap.css\" rel=\"stylesheet\">
-                <link href=\"/css/bootstrap-responsive.css\" rel=\"stylesheet\">
-                <link href=\"/css/main.css\" rel=\"stylesheet\">
-                <link href=\"/css/dot-luv/jquery-ui-1.8.24.custom.css\" rel=\"stylesheet\">
-                <link href=\"/css/jquery.fancybox.css\" rel=\"stylesheet\">
-                <link href=\"/css/uniform.default.css\" rel=\"stylesheet\">
+                <link href=\"";
+        // line 8
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/reset.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 9
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/bootstrap.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 10
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/bootstrap-responsive.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 11
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/main.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 12
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/dot-luv/jquery-ui-1.8.24.custom.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 13
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/jquery.fancybox.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                <link href=\"";
+        // line 14
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/css/uniform.default.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
+                         
+                         
        ";
     }
 
-    // line 19
+    // line 21
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 21
+    // line 23
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 22
+        // line 24
         echo "               <!-- Le javascript
                     ================================================== -->
                     <!-- Placed at the end of the document so the pages load faster -->
@@ -105,6 +128,6 @@ class __TwigTemplate_ec316745752dc43e3250e91a3264ecf1 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  82 => 22,  79 => 21,  74 => 19,  62 => 7,  59 => 6,  42 => 20,  21 => 1,  61 => 16,  56 => 15,  53 => 5,  49 => 9,  46 => 8,  40 => 19,  38 => 8,  31 => 6,  28 => 4,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 32,  45 => 21,  36 => 5,  33 => 16,  27 => 5,);
+        return array (  105 => 24,  102 => 23,  97 => 21,  89 => 14,  85 => 13,  81 => 12,  77 => 11,  73 => 10,  69 => 9,  65 => 8,  62 => 7,  59 => 6,  53 => 5,  47 => 34,  45 => 23,  42 => 22,  40 => 21,  33 => 18,  31 => 6,  27 => 5,  21 => 1,);
     }
 }

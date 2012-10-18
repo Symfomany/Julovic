@@ -4,14 +4,15 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <!-- Le styles -->
-                <link href="/css/reset.css" rel="stylesheet">
-                <link href="/css/bootstrap.css" rel="stylesheet">
-                <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-                <link href="/css/main.css" rel="stylesheet">
-                <link href="/css/dot-luv/jquery-ui-1.8.24.custom.css" rel="stylesheet">
-                <link href="/css/jquery.fancybox.css" rel="stylesheet">
-                <link href="/css/uniform.default.css" rel="stylesheet">
+                <link href="{{ asset('bundles/siteadmin/css/reset.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/bootstrap.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/bootstrap-responsive.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/main.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/dot-luv/jquery-ui-1.8.24.custom.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/jquery.fancybox.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/uniform.default.css') }}" rel="stylesheet" />
+                         
+                         
        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -19,15 +20,9 @@
         {% block body %}{% endblock %}
             
         {% block javascripts %}
-               <!-- Le javascript
-                    ================================================== -->
-                    <!-- Placed at the end of the document so the pages load faster -->
                     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
                     <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
                     <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-                    <script src="/js/jquery-ui-1.8.24.custom.min.js"></script>
-                    <script src="/js/jquery.uniform.min.js"></script>
-                    <script src="/js/app_light.js"></script>
 {% endblock %}
     </body>
 </html>

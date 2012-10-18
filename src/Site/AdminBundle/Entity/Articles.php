@@ -5,6 +5,8 @@ namespace Site\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Site\AdminBundle\Entity\Medias;
+
 
 /**
  * Site\AdminBundle\Entity\Articles
@@ -18,7 +20,7 @@ class Articles
     public function __construct(){
         $this->dateCreated = new \Datetime('now');
         $this->dateUpdated = new \Datetime('now');
-        
+        $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -117,6 +119,12 @@ class Articles
      */
     protected $category;
     
+    /**
+     * Severals Medias
+     * @ORM\OneToMany(targetEntity="Medias", mappedBy="article", cascade={"all"},orphanRemoval=true)
+     * @ORM\OrderBy({"state" = "DESC"})
+     */
+    protected $medias;
     
     /**
      * Get id
@@ -379,5 +387,84 @@ class Articles
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set dateUpdated
+     *
+     * @param \DateTime $dateUpdated
+     * @return Articles
+     */
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
+    
+        return $this;
+    }
+
+    /**
+     * Get dateUpdated
+     *
+     * @return \DateTime 
+     */
+    public function getDateUpdated()
+    {
+        return $this->dateUpdated;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     * @return Articles
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string 
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     * @return Articles
+     */
+    public function addMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->medias[] = $medias;
+    
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     */
+    public function removeMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

@@ -97,7 +97,7 @@ class __TwigTemplate_73da9facfc9a7b1b5cf780701db04712 extends Twig_Template
         } else {
             // line 43
             echo "        <p>
-            <em>No timing events have been recorded. Are you sure that debugging is enabled in the kernel ?</em>
+            <em>No timing events have been recorded. Are you sure that debugging is enabled in the kernel?</em>
         </p>
     ";
         }

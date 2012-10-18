@@ -14,6 +14,13 @@ use Site\AdminBundle\Form\TagsType;
  */
 class TagsController extends Controller
 {
+    
+            
+    public function preExecute() {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Tags", $this->get("router")->generate("tags"));
+    }
+    
     /**
      * Lists all Tags entities.
      *

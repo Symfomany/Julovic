@@ -87,6 +87,8 @@ class SlotController extends Controller {
                             'title' => $search_word,
                             'titleb' => $search_word,
                         ));
+                
+//                if($dql->cou)
 
                 $paginator = $this->get('knp_paginator');
                 $pagination = $paginator->paginate($dql, $this->get('request')->query->get('page', 1), 5);  //page number/, 10/limit per page/ );

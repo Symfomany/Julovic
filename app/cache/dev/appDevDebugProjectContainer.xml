@@ -26,6 +26,7 @@
       <parameter key="CraueFormFlowBundle">Craue\FormFlowBundle\CraueFormFlowBundle</parameter>
       <parameter key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
+      <parameter key="SensioLabsDoctrineQueryStatisticsBundle">SensioLabs\DoctrineQueryStatisticsBundle\SensioLabsDoctrineQueryStatisticsBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -77,6 +78,7 @@
     <parameter key="my.success_handler.class">
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
+    <parameter key="control.class">Site\AdminBundle\Listener\ControlListener</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -514,8 +516,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -557,6 +559,7 @@
     <parameter key="craue_twig_extensions.formflow.class">Craue\FormFlowBundle\Twig\Extension\FormFlowExtension</parameter>
     <parameter key="fos_js_routing.extractor.class">FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor</parameter>
     <parameter key="fos_js_routing.controller.class">FOS\JsRoutingBundle\Controller\Controller</parameter>
+    <parameter key="sensiolabs.doctrinequerystatistics.data_collector.class">SensioLabs\DoctrineQueryStatisticsBundle\DataCollector\DoctrineQueryStatisticsDataCollector</parameter>
     <parameter key="web_profiler.debug_toolbar.class">Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -595,6 +598,10 @@
         <parameter>router</parameter>
         <parameter>WebProfilerBundle:Collector:router</parameter>
       </parameter>
+      <parameter key="sensiolabs.doctrinequerystatistics.data_collector" type="collection">
+        <parameter>doctrinequerystatistics</parameter>
+        <parameter>SensioLabsDoctrineQueryStatisticsBundle:Collector:doctrinequerystatistics</parameter>
+      </parameter>
       <parameter key="data_collector.security" type="collection">
         <parameter>security</parameter>
         <parameter>SecurityBundle:Collector:security</parameter>
@@ -613,6 +620,9 @@
     <service id="notificationlistener" class="Site\AdminBundle\Listener\NotificationsListener">
       <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
       <argument></argument>
+    </service>
+    <service id="controllistener" class="Site\AdminBundle\Listener\ControlListener">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onCoreController"/>
     </service>
     <service id="twig.extension.debug" class="Twig_Extensions_Extension_Debug">
       <tag name="twig.extension"/>
@@ -684,6 +694,14 @@
         <argument type="collection">
           <argument>notificationlistener</argument>
           <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument>controllistener</argument>
+          <argument>onCoreController</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -1902,6 +1920,9 @@
         <argument type="service" id="data_collector.router"/>
       </call>
       <call method="add">
+        <argument type="service" id="sensiolabs.doctrinequerystatistics.data_collector"/>
+      </call>
+      <call method="add">
         <argument type="service">
           <service class="Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector" public="false">
             <tag name="data_collector" template="SecurityBundle:Collector:security" id="security"/>
@@ -2726,6 +2747,17 @@
           </argument>
         </argument>
       </call>
+      <call method="addGlobal">
+        <argument>advices</argument>
+        <argument type="collection">
+          <argument>Conseil ici numéro 1</argument>
+          <argument>Conseil ici numéro 2</argument>
+          <argument>Conseil ici numéro 3</argument>
+          <argument>Conseil ici numéro 4</argument>
+          <argument>Conseil ici numéro 5</argument>
+          <argument>Conseil ici numéro 6</argument>
+        </argument>
+      </call>
     </service>
     <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
       <argument type="service" id="templating.locator"/>
@@ -2963,8 +2995,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5078fe93b29a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5078fe93b29a4.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -3229,6 +3261,13 @@
       <argument type="service" id="fos_js_routing.extractor"/>
       <argument>C:/wamp/www/bo/app/cache/dev</argument>
       <argument>true</argument>
+    </service>
+    <service id="sensiolabs.doctrinequerystatistics.data_collector" class="SensioLabs\DoctrineQueryStatisticsBundle\DataCollector\DoctrineQueryStatisticsDataCollector">
+      <tag name="data_collector" template="SensioLabsDoctrineQueryStatisticsBundle:Collector:doctrinequerystatistics" id="doctrinequerystatistics" priority="255"/>
+      <call method="addLogger">
+        <argument>default</argument>
+        <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
+      </call>
     </service>
     <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
       <tag name="twig.extension"/>

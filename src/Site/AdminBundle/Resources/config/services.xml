@@ -9,6 +9,7 @@
         <parameter key="my.success_handler.class">
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
+                <parameter key="control.class">Site\AdminBundle\Listener\ControlListener</parameter>
     </parameters>
     
 <!--Services -->
@@ -19,8 +20,11 @@
             <argument type="service" id="session"></argument>
         </service>
         <service id="notificationlistener" class="Site\AdminBundle\Listener\NotificationsListener">
-            <argument></argument>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+                <argument></argument>
+                <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+        <service id="controllistener" class="%control.class%">
+                <tag name="kernel.event_listener" event="kernel.controller" method="onCoreController"/>
         </service>
     </services>
 </container>

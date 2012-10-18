@@ -5,6 +5,8 @@ namespace Site\AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Site\AdminBundle\Form\MediasType;
+
 
 class ArticlesType extends AbstractType
 {
@@ -16,7 +18,9 @@ class ArticlesType extends AbstractType
             ->add('resume', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
             ->add('content', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
             ->add('notes')
-            ->add('active');
+            ->add('medias', 'collection', array(
+                    'type' => new MediasType(),
+            ));
         
     }
 

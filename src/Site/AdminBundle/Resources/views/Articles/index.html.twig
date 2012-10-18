@@ -36,7 +36,7 @@
             <td>{{ entity.content|truncate(50, true) }}</td>
             <td>{{ entity.tag }}</td>
             <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
-            <td>{{ entity.active }}</td>
+            <td>{{ entity.active|validate|raw }}</td>
             <td>
                 <ul>
                     <li>

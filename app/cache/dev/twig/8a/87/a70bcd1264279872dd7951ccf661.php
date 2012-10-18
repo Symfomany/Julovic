@@ -58,10 +58,6 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
         echo "             ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
-                                    <script src=\"";
-        // line 16
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/app.js"), "html", null, true);
-        echo "\"  type=\"text/javascript\"></script>
        ";
     }
 
@@ -77,6 +73,6 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  61 => 16,  56 => 15,  53 => 14,  49 => 9,  46 => 8,  40 => 10,  38 => 8,  31 => 5,  28 => 4,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 10,  36 => 5,  33 => 4,  27 => 3,);
+        return array (  56 => 15,  53 => 14,  49 => 9,  46 => 8,  40 => 10,  38 => 8,  31 => 5,  28 => 4,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 10,  36 => 5,  33 => 4,  27 => 3,);
     }
 }

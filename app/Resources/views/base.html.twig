@@ -3,33 +3,32 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <!-- Le styles -->
-                <link href="/css/reset.css" rel="stylesheet">
-                <link href="/css/bootstrap.css" rel="stylesheet">
-                <link href="/css/bootstrap-responsive.css" rel="stylesheet">
-                <link href="/css/docs.css" rel="stylesheet">
-                <link href="/css/pretify.css" rel="stylesheet">
-                <link href="/css/main.css" rel="stylesheet">
-                <link href="/css/jHtmlArea.css" rel="stylesheet">
-                <link href="/css/dot-luv/jquery-ui-1.8.24.custom.css" rel="stylesheet">
-                <link href="/css/jquery.fancybox.css" rel="stylesheet">
-                <link href="/css/uniform.default.css" rel="stylesheet">
-                <link href="/css/select2.css" rel="stylesheet">
-                <link href="/css/fullcalendar.css" rel="stylesheet">
-                <link href="/css/tipsy.css" rel="stylesheet">
-                <link href="/css/jquery.ui.timepicker.css" rel="stylesheet">
+                <link href="{{ asset('bundles/siteadmin/css/reset.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/bootstrap.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/bootstrap-responsive.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/docs.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/pretify.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/main.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/jHtmlArea.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/dot-luv/jquery-ui-1.8.24.custom.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/jquery.fancybox.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/uniform.default.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/select2.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/fullcalendar.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/tipsy.css') }}" rel="stylesheet" />
+                <link href="{{ asset('bundles/siteadmin/css/jquery.ui.timepicker.css') }}" rel="stylesheet" />
        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
             
         {% block javascripts %}
-               <!-- Le javascript
-                    ================================================== -->
-                    <!-- Placed at the end of the document so the pages load faster -->
                     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
@@ -47,30 +46,35 @@
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
-                    <script type="text/javascript" src="/js/jquery.mousewheel-3.0.6.pack.js"></script>
-                    <script type="text/javascript" src="/js/jquery.easing.js"></script>
-                    <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
-                    <script type="text/javascript" src="/js/jquery-ui-1.8.24.custom.min.js"></script>
-                    <script type="text/javascript" src="/js/jhtml.js"></script>
-                    <script type="text/javascript" src="/js/jquery.uniform.min.js"></script>
-                    <script type="text/javascript" src="/js/select2.min.js"></script>
-                    <script type="text/javascript" src="/js/jquery.overscroll.min.js"></script>
-                    <script type="text/javascript" src="/js/modernizr.js"></script>
-                    <script type="text/javascript" src="/js/fullcalendar.min.js"></script>
-                    <script type="text/javascript" src="/js/jquery.tipsy.js"></script>
-                    <script type="text/javascript" src="/js/jquery.knob.js"></script>
-                    <script type="text/javascript" src="/js/jquery.carouFredSel.js"></script>
-                    {#<script type="text/javascript" src="/js/jquery.timer.js"></script>#}
-                    <script type="text/javascript" src="/js/jquery.scrollTo.js"></script>
-                    <script type="text/javascript" src="/js/jquery.ui.timepicker.js"></script>
+                    
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.easing.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.fancybox.pack.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery-ui-1.8.24.custom.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jhtml.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.uniform.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/select2.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.overscroll.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/modernizr.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/fullcalendar.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.tipsy.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.knob.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.carouFredSel.js') }}"></script>
+                    {#<script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.timer.js') }}"></script>#}
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.scrollTo.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.ui.timepicker.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.cookie.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jscolor.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/wysihtml5-0.3.0.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/bootstrap-wysihtml5.js') }}"></script>
                     <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
                     <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
+                    <script type="text/javascript">
+                            $.cookie('cookie_flash', true);
+                    </script>
                   <!--[if lt IE 9]>
                      <script type="text/javascript" src="/js/excanvas.js"></script>
                  <![endif]-->
-                    
-                    
                     
 <!--[if IE]>
     <script type="text/javascript">
@@ -95,7 +99,6 @@
     </script>
 <![endif]-->
        
-    </script>
 {% endblock %}
     </body>
 </html>
