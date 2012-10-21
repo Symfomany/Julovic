@@ -63,7 +63,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
         echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Legend", 1 => "a.legend"), "method");
         echo "</th>
             <th>Picture</th>
-            <th>State</th>
+            <th>Visibility</th>
             <th>Datecreated</th>
             <th>Dateupdated</th>
             <th>Actions</th>
@@ -111,7 +111,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
             echo "</a></td>
                 <td>";
             // line 39
-            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "state"));
+            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "active"), $this->getAttribute($this->getContext($context, "entity"), "id"));
             echo "</td>
                 <td>";
             // line 40

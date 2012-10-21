@@ -15,10 +15,23 @@ use Site\AdminBundle\Form\MediasType;
 class MediasController extends Controller
 {
     
+    protected $breadcrumbs;
+    protected $common;
             
     public function preExecute() {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Medias", $this->get("router")->generate("medias"));
+        $this->breadcrumbs = $this->get("white_october_breadcrumbs");
+        $this->breadcrumbs->addItem("Medias", $this->get("router")->generate("medias"));
+        $this->common = $this->get("commoncontroller");
+    }
+    
+    
+        /**
+     * Modiy Activation
+     */
+    public function activationAction($id, $bool = 1)
+    {
+         $this->common->setActive('Medias',$id,  $bool);
+        return $this->redirect($this->generateUrl('medias'));
     }
     
     /**

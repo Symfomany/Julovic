@@ -11,6 +11,7 @@ use Doctrine\Common\Util\Debug;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Site\AdminBundle\Entity\Administrateurs;
+use Site\AdminBundle\Entity\Articles;
 
 use Imagine\Gd\Imagine;
 use Imagine\Image\Point;
@@ -84,7 +85,7 @@ class Medias {
     /**
      * @var integer $state
      *
-     * @ORM\Column(name="state", type="integer", nullable=false)
+     * @ORM\Column(name="state", type="boolean", nullable=false)
      */
     private $state;
 
@@ -101,6 +102,13 @@ class Medias {
      * @ORM\Column(name="date_updated", type="datetime", nullable=true)
      */
     private $dateUpdated;
+
+    /**
+     * @var boolean $active
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    private $active;
 
     /*     * ************************************************************  Uploaded **************************************************************** */
 
@@ -145,6 +153,7 @@ class Medias {
      */
     public function upload($location = 'administrateurs') {
 
+        
         // the file property can be empty if the field is not required
         if (null === $this->file) {
             return;
@@ -395,4 +404,32 @@ class Medias {
     {
         return $this->administrateur;
     }
+
+    /**
+     * Set article
+     *
+     * @param Site\AdminBundle\Entity\Articles $article
+     * @return Medias
+     */
+    public function setArticle(\Site\AdminBundle\Entity\Articles $article = null)
+    {
+        $this->article = $article;
+    
+        return $this;
+    }
+
+    /**
+     * Get article
+     *
+     * @return Site\AdminBundle\Entity\Articles 
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+    
+    public function __toString(){
+        return $this->legend;
+    }
+    
 }

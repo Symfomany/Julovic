@@ -103,6 +103,13 @@ class Medias {
      */
     private $dateUpdated;
 
+    /**
+     * @var boolean $active
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    private $active;
+
     /*     * ************************************************************  Uploaded **************************************************************** */
 
     /**
@@ -425,4 +432,27 @@ class Medias {
         return $this->legend;
     }
     
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Medias
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
 }

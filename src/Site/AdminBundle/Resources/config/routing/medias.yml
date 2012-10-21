@@ -28,3 +28,7 @@ medias_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SiteAdminBundle:Medias:delete" }
     requirements: { _method: post }
+
+medias_activation:
+    pattern:  /activation/{id}/{bool}
+    defaults: { _controller: "SiteAdminBundle:Medias:activation", bool : 1  }
