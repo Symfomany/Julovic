@@ -27,6 +27,7 @@ class AppKernel extends Kernel
            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
            new SensioLabs\DoctrineQueryStatisticsBundle\SensioLabsDoctrineQueryStatisticsBundle(),
+//           new Behat\BehatBundle\BehatBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

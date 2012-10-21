@@ -4,6 +4,10 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+            <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+        
                 <link href="{{ asset('bundles/siteadmin/css/reset.css') }}" rel="stylesheet" />
                 <link href="{{ asset('bundles/siteadmin/css/bootstrap.css') }}" rel="stylesheet" />
                 <link href="{{ asset('bundles/siteadmin/css/bootstrap-responsive.css') }}" rel="stylesheet" />
@@ -20,9 +24,10 @@
         {% block body %}{% endblock %}
             
         {% block javascripts %}
-                    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-                    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-                    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-{% endblock %}
+                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/twitter/jquery.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/twitter/bootstrap.min.js') }}"></script>
+                   <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.uniform.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/app_light.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

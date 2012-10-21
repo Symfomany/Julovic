@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Julovic CMF Framework{% endblock %}</title>
         {% block stylesheets %}
             <!-- Le styles -->
                 <link href="{{ asset('bundles/siteadmin/css/reset.css') }}" rel="stylesheet" />
@@ -29,6 +29,7 @@
         {% endblock %}
             
         {% block javascripts %}
+                  {#  
                     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
@@ -46,11 +47,16 @@
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
                     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
+                    #}
+            
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/twitter/jquery.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/twitter/bootstrap.min.js') }}"></script>
                     
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.mousewheel-3.0.6.pack.js') }}"></script>
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.easing.js') }}"></script>
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.fancybox.pack.js') }}"></script>
-                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery-ui-1.8.24.custom.min.js') }}"></script>
+                    <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery-ui-1.9.0.custom.min.js') }}"></script>
+                   {# <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.mjs.nestedsortable.js') }}"></script>#}
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jhtml.js') }}"></script>
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/jquery.uniform.min.js') }}"></script>
                     <script type="text/javascript" src="{{ asset('bundles/siteadmin/js/select2.min.js') }}"></script>
@@ -72,9 +78,9 @@
                     <script type="text/javascript">
                             $.cookie('cookie_flash', true);
                     </script>
-                  <!--[if lt IE 9]>
-                     <script type="text/javascript" src="/js/excanvas.js"></script>
-                 <![endif]-->
+                    <!--[if lt IE 9]>
+                        <script type="text/javascript" src="/js/excanvas.js"></script>
+                    <![endif]-->
                     
 <!--[if IE]>
     <script type="text/javascript">

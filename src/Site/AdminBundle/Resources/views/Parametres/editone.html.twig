@@ -1,0 +1,21 @@
+<div class="modal hide fade" id="myModal" width="800"  height="600"tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Paramètres du site</h3>
+    </div>
+    <div class="modal-body">
+<form action="{{ path('parametres_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+        
+        <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q={{ entity.adresseAdmin|url_encode() }},+{{ entity.villeAdmin|url_encode() }}&amp;aq=0&amp;oq={{ entity.adresseAdmin|url_encode() }},{{ entity.villeAdmin|url_encode() }},{{ entity.cpAdmin|url_encode() }}&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+        
+    </div>
+    <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer les changements</button>
+</form>
+    </div>                              
+</div>
+
+
+

@@ -25,8 +25,8 @@
         <tr>
             <td><a href="{{ path('pages_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.title }}</td>
-            <td>{{ entity.resume }}</td>
-            <td>{{ entity.content }}</td>
+            <td>{% autoescape false %}{{ entity.resume|raw|truncate(250, true) }} {% endautoescape %}</td>
+            <td>{% autoescape false %}{{ entity.content|raw|truncate(250, true) }} {% endautoescape %}</td>
             <td>{{ entity.tag }}</td>
             <td>{% if entity.dateCreated %}{{ entity.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.dateUpdated %}{{ entity.dateUpdated|date('Y-m-d H:i:s') }}{% endif %}</td>

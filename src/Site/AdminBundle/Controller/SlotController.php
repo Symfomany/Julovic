@@ -57,7 +57,8 @@ class SlotController extends Controller {
                 }
                     $return = json_encode($tab);
             return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
-        }
+       
+            }
     }
 
     /*

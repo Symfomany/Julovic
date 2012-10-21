@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Site\AdminBundle\Entity\Medias;
-
+use Site\AdminBundle\Entity\Categories;
 
 /**
  * Site\AdminBundle\Entity\Articles
@@ -14,15 +14,14 @@ use Site\AdminBundle\Entity\Medias;
  * @ORM\Table(name="articles")
  * @ORM\Entity
  */
-class Articles
-{
-    
-    public function __construct(){
+class Articles {
+
+    public function __construct() {
         $this->dateCreated = new \Datetime('now');
         $this->dateUpdated = new \Datetime('now');
         $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * @var integer $id
      *
@@ -32,15 +31,15 @@ class Articles
      */
     private $id;
 
-     /**
-    * @var string $title;
+    /**
+     * @var string $title;
      * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="title", type="string", length=200, nullable=false, unique=true)
      */
     private $title;
 
-     /**
-    * @var string $resume
+    /**
+     * @var string $resume
      * @Assert\NotBlank(message = "Résumé  ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="resume", type="text", length=60, nullable=false, unique=true)
      * @Assert\NotBlank(message = "Résumé ne doit pas être vide")
@@ -69,7 +68,7 @@ class Articles
      */
     private $dateCreated;
 
-  /**
+    /**
      * @var datetime $dateUpdated
      *
      * @Gedmo\Timestampable(on="update")
@@ -105,59 +104,44 @@ class Articles
      */
     private $notes;
 
-    
-     /**
+    /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column( length=128, unique=true)
      */
     private $slug;
 
-        
     /**
-     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="articles")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="Categories", cascade={"persist", "remove"})
      */
-    protected $category;
-    
+    protected $categories;
+
     /**
      * Severals Medias
-     * @ORM\OneToMany(targetEntity="Medias", mappedBy="restaurant", cascade={"persist", "remove"},orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Medias", mappedBy="article", cascade={"all"},orphanRemoval=true)
      * @ORM\OrderBy({"state" = "DESC"})
      */
     protected $medias;
     
+    
+    
+    /**
+     * @var \String $position
+     * 
+     * @ORM\Column(name="position", type="integer", nullable=true)
+     */
+    protected $position;
+    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     * @return Articles
-     */
-    public function setCategory($categoryId)
-    {
-        $this->category = $categoryId;
-    
-        return $this;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return integer 
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 
     /**
      * Set resume
@@ -165,10 +149,9 @@ class Articles
      * @param string $resume
      * @return Articles
      */
-    public function setResume($resume)
-    {
+    public function setResume($resume) {
         $this->resume = $resume;
-    
+
         return $this;
     }
 
@@ -177,8 +160,7 @@ class Articles
      *
      * @return string 
      */
-    public function getResume()
-    {
+    public function getResume() {
         return $this->resume;
     }
 
@@ -188,10 +170,9 @@ class Articles
      * @param string $content
      * @return Articles
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
-    
+
         return $this;
     }
 
@@ -200,8 +181,7 @@ class Articles
      *
      * @return string 
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
@@ -211,10 +191,9 @@ class Articles
      * @param string $tag
      * @return Articles
      */
-    public function setTag($tag)
-    {
+    public function setTag($tag) {
         $this->tag = $tag;
-    
+
         return $this;
     }
 
@@ -223,8 +202,7 @@ class Articles
      *
      * @return string 
      */
-    public function getTag()
-    {
+    public function getTag() {
         return $this->tag;
     }
 
@@ -234,10 +212,9 @@ class Articles
      * @param string $dateCreated
      * @return Articles
      */
-    public function setDateCreated($dateCreated)
-    {
+    public function setDateCreated($dateCreated) {
         $this->dateCreated = $dateCreated;
-    
+
         return $this;
     }
 
@@ -246,8 +223,7 @@ class Articles
      *
      * @return string 
      */
-    public function getDateCreated()
-    {
+    public function getDateCreated() {
         return $this->dateCreated;
     }
 
@@ -257,10 +233,9 @@ class Articles
      * @param boolean $active
      * @return Articles
      */
-    public function setActive($active)
-    {
+    public function setActive($active) {
         $this->active = $active;
-    
+
         return $this;
     }
 
@@ -269,8 +244,7 @@ class Articles
      *
      * @return boolean 
      */
-    public function getActive()
-    {
+    public function getActive() {
         return $this->active;
     }
 
@@ -280,10 +254,9 @@ class Articles
      * @param string $type
      * @return Articles
      */
-    public function setType($type)
-    {
+    public function setType($type) {
         $this->type = $type;
-    
+
         return $this;
     }
 
@@ -292,8 +265,7 @@ class Articles
      *
      * @return string 
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->type;
     }
 
@@ -303,10 +275,9 @@ class Articles
      * @param boolean $special
      * @return Articles
      */
-    public function setSpecial($special)
-    {
+    public function setSpecial($special) {
         $this->special = $special;
-    
+
         return $this;
     }
 
@@ -315,8 +286,7 @@ class Articles
      *
      * @return boolean 
      */
-    public function getSpecial()
-    {
+    public function getSpecial() {
         return $this->special;
     }
 
@@ -326,10 +296,9 @@ class Articles
      * @param integer $notes
      * @return Articles
      */
-    public function setNotes($notes)
-    {
+    public function setNotes($notes) {
         $this->notes = $notes;
-    
+
         return $this;
     }
 
@@ -338,8 +307,7 @@ class Articles
      *
      * @return integer 
      */
-    public function getNotes()
-    {
+    public function getNotes() {
         return $this->notes;
     }
 
@@ -349,10 +317,9 @@ class Articles
      * @param string $title
      * @return Articles
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -361,8 +328,7 @@ class Articles
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -372,10 +338,9 @@ class Articles
      * @param string $slug
      * @return Articles
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -384,8 +349,7 @@ class Articles
      *
      * @return string 
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -395,10 +359,9 @@ class Articles
      * @param \DateTime $dateUpdated
      * @return Articles
      */
-    public function setDateUpdated($dateUpdated)
-    {
+    public function setDateUpdated($dateUpdated) {
         $this->dateUpdated = $dateUpdated;
-    
+
         return $this;
     }
 
@@ -407,8 +370,7 @@ class Articles
      *
      * @return \DateTime 
      */
-    public function getDateUpdated()
-    {
+    public function getDateUpdated() {
         return $this->dateUpdated;
     }
 
@@ -418,10 +380,9 @@ class Articles
      * @param string $imageName
      * @return Articles
      */
-    public function setImageName($imageName)
-    {
+    public function setImageName($imageName) {
         $this->imageName = $imageName;
-    
+
         return $this;
     }
 
@@ -430,8 +391,84 @@ class Articles
      *
      * @return string 
      */
-    public function getImageName()
-    {
+    public function getImageName() {
         return $this->imageName;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     * @return Articles
+     */
+    public function addMedia(\Site\AdminBundle\Entity\Medias $medias) {
+        $this->medias[] = $medias;
+
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param Site\AdminBundle\Entity\Medias $medias
+     */
+    public function removeMedia(\Site\AdminBundle\Entity\Medias $medias) {
+        $this->medias->removeElement($medias);
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias() {
+        return $this->medias;
+    }
+
+    public function __toString() {
+        return $this->title;
+    }
+
+
+    /**
+     * Add categories
+     *
+     * @param Site\AdminBundle\Entity\Categories $categories
+     * @return Articles
+     */
+    public function addCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    public function setCategories(\Doctrine\Common\Collections\ArrayCollection $categories)
+    {
+        foreach($categories as $category){
+            $this->categories->removeElement($category);
+             $this->categories[] = $category;
+        }
+    }
+
+    
+    /**
+     * Remove categories
+     *
+     * @param Site\AdminBundle\Entity\Categories $categories
+     */
+    public function removeCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

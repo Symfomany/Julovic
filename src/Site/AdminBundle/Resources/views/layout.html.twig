@@ -17,6 +17,9 @@
                             <div class="span10" id="content">
                                         {% render 'SiteAdminBundle:Slot:flashdatas' %}
                         {% block content %}
+                                    
+                        {% render 'SiteAdminBundle:Parametres:editOne' %}
+                                    
                                     <p id="print_btn" class="right"><i class="icon-print"><a href="javascript:window.print()"></i> Imprimer</a></p>
                                   {% if not app.request.cookies.has('cookie_flash') %}
                                           {% if advices is defined and advices is not empty %} 

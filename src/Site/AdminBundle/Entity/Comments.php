@@ -28,10 +28,15 @@ class Comments
      */
     private $id;
 
+
     /**
      * @var string $email
-     * @Assert\NotBlank(message = "E-mail ne doit pas être vide", groups={"suscribe_step2"})
-     * @ORM\Column(name="email", type="string", length=200, nullable=false)
+     * @ORM\Column(name="email", type="string", length=60, nullable=false, unique=true)
+     * @Assert\NotBlank(message = "Email ne doit pas être vide")
+     * @Assert\Email(
+     *     message = "The email '{{ value }}'n'est pas valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 

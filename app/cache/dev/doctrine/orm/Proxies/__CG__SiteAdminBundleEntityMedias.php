@@ -165,6 +165,12 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
         return parent::getArticle();
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
 
     public function __sleep()
     {

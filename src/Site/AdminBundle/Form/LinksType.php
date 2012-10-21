@@ -12,8 +12,9 @@ class LinksType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('link')
-            ->add('description');
+            ->add('link', 'url')
+            ->add('description', 'textarea', array('attr' => array('class' => 'textarea'), 'required' => true));
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -10,10 +10,6 @@
 <form  action="{{ path('articles_create') }}" method="post" enctype="multipart/form-data">
                 
                 {{ form_errors(form) }}
-    
-                {{ form_label(form.category) }}
-                {{ form_errors(form.category) }}
-                {{ form_widget(form.category) }}
                 
                 {{ form_label(form.title) }}
                 {{ form_errors(form.title) }}

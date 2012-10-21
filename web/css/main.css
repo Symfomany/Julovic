@@ -1,6 +1,4 @@
 button.btn, input[type="submit"].btn {
-    display: block;
-    clear: both;
 }
 label {
     font-family: Calibri;
@@ -346,7 +344,7 @@ div.jHtmlArea { border: solid 1px #ccc; }
     margin-left: 583px;
 }
 .breadcrumb {
-   margin-top: 27px;
+    margin-top: 27px;
 }
 .navbar-search .search-query{
     -webkit-border-radius: 3px;
@@ -474,12 +472,13 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active {
 
 ul.wysihtml5-commands-disabled .dropdown-menu {
     display: none !important;
-}
+}   
 #search_btn{
     float: right;
     position: relative;
     bottom: 28px;
 }
+
 
 /*#sidebar_left{
     margin-top: 21px;

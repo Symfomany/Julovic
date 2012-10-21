@@ -52,7 +52,7 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
                 ";
         // line 15
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "title"), 'widget');
-        echo "        <span class=\"help-inline\"><span class=\"label label-info\">Help!</span> Test alpha</span>
+        echo "  
                 
                 ";
         // line 17
@@ -67,6 +67,11 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "form"), "description"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
                 
+                
+                ";
+        // line 22
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'rest');
+        echo "
         
     <p>
         <button type=\"submit\" class=\"btn btn-primary btn-large\">Create</button>
@@ -76,7 +81,7 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
 <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 29
+        // line 31
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories"), "html", null, true);
         echo "\">
             <i class=\"icon-share-alt\"></i> Back to the list
@@ -98,6 +103,6 @@ class __TwigTemplate_12e9ba4a3991c686a9aa41cddfa49187 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  78 => 29,  65 => 19,  61 => 18,  57 => 17,  52 => 15,  48 => 14,  44 => 13,  37 => 11,  29 => 6,  26 => 5,);
+        return array (  83 => 31,  71 => 22,  65 => 19,  61 => 18,  57 => 17,  52 => 15,  48 => 14,  44 => 13,  37 => 11,  29 => 6,  26 => 5,);
     }
 }

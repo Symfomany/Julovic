@@ -420,4 +420,9 @@ class Medias {
     {
         return $this->article;
     }
+    
+    public function __toString(){
+        return $this->legend;
+    }
+    
 }

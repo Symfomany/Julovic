@@ -87,24 +87,6 @@ class Categories extends \Site\AdminBundle\Entity\Categories implements \Doctrin
         return parent::getDateCreated();
     }
 
-    public function addArticle(\Site\AdminBundle\Entity\Articles $articles)
-    {
-        $this->__load();
-        return parent::addArticle($articles);
-    }
-
-    public function removeArticle(\Site\AdminBundle\Entity\Articles $articles)
-    {
-        $this->__load();
-        return parent::removeArticle($articles);
-    }
-
-    public function getArticles()
-    {
-        $this->__load();
-        return parent::getArticles();
-    }
-
     public function setSlug($slug)
     {
         $this->__load();
@@ -117,16 +99,118 @@ class Categories extends \Site\AdminBundle\Entity\Categories implements \Doctrin
         return parent::getSlug();
     }
 
+    public function setLft($lft)
+    {
+        $this->__load();
+        return parent::setLft($lft);
+    }
+
+    public function getLft()
+    {
+        $this->__load();
+        return parent::getLft();
+    }
+
+    public function setLvl($lvl)
+    {
+        $this->__load();
+        return parent::setLvl($lvl);
+    }
+
+    public function getLvl()
+    {
+        $this->__load();
+        return parent::getLvl();
+    }
+
+    public function setRgt($rgt)
+    {
+        $this->__load();
+        return parent::setRgt($rgt);
+    }
+
+    public function getRgt()
+    {
+        $this->__load();
+        return parent::getRgt();
+    }
+
+    public function setRoot($root)
+    {
+        $this->__load();
+        return parent::setRoot($root);
+    }
+
+    public function getRoot()
+    {
+        $this->__load();
+        return parent::getRoot();
+    }
+
+    public function setParent($parent = NULL)
+    {
+        $this->__load();
+        return parent::setParent($parent);
+    }
+
+    public function getParent()
+    {
+        $this->__load();
+        return parent::getParent();
+    }
+
+    public function getOptionLabel()
+    {
+        $this->__load();
+        return parent::getOptionLabel();
+    }
+
     public function __toString()
     {
         $this->__load();
         return parent::__toString();
     }
 
+    public function getLaveledTitle()
+    {
+        $this->__load();
+        return parent::getLaveledTitle();
+    }
+
+    public function setPosition($position)
+    {
+        $this->__load();
+        return parent::setPosition($position);
+    }
+
+    public function getPosition()
+    {
+        $this->__load();
+        return parent::getPosition();
+    }
+
+    public function addChildren(\Site\AdminBundle\Entity\Categories $children)
+    {
+        $this->__load();
+        return parent::addChildren($children);
+    }
+
+    public function removeChildren(\Site\AdminBundle\Entity\Categories $children)
+    {
+        $this->__load();
+        return parent::removeChildren($children);
+    }
+
+    public function getChildren()
+    {
+        $this->__load();
+        return parent::getChildren();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'description', 'dateCreated', 'slug', 'articles');
+        return array('__isInitialized__', 'id', 'title', 'description', 'dateCreated', 'slug', 'lft', 'lvl', 'rgt', 'root', 'position', 'parent', 'children');
     }
 
     public function __clone()

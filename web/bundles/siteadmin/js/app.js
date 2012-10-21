@@ -141,7 +141,8 @@ $(function() {
     });
                 
     $("input:checkbox, input:radio, input:file, select").uniform();
-    $("#scrollTop").click(function(){
+    
+    $("#scrollTop, .scrollTop").click(function(){
         $('body').scrollTo( 0,800, {
             easing:'easeInOutQuart'
         } );
@@ -290,6 +291,7 @@ $(function() {
         }, 600);
         return false;
     });
+    
     $('.textarea').wysihtml5({
         'locale': "fr-FR",
         "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
@@ -300,5 +302,7 @@ $(function() {
         "image": true, //Button to insert an image. Default true,
         "color": true //Button to change color of font  
     });
-                
+    
+
+    
 });

@@ -61,7 +61,7 @@ class __TwigTemplate_1ec9a46ca20713a6a72d69724afa03d4 extends Twig_Template
         // line 19
         echo "                        ";
         $this->displayBlock('content', $context, $blocks);
-        // line 64
+        // line 67
         echo "                            </div>
                     </div>
                     <div id=\"footer\">
@@ -76,27 +76,33 @@ class __TwigTemplate_1ec9a46ca20713a6a72d69724afa03d4 extends Twig_Template
     public function block_content($context, array $blocks = array())
     {
         // line 20
-        echo "                                    <p id=\"print_btn\" class=\"right\"><i class=\"icon-print\"><a href=\"javascript:window.print()\"></i> Imprimer</a></p>
-                                  ";
+        echo "                                    
+                        ";
         // line 21
+        echo $this->env->getExtension('actions')->renderAction("SiteAdminBundle:Parametres:editOne", array(), array());
+        // line 22
+        echo "                                    
+                                    <p id=\"print_btn\" class=\"right\"><i class=\"icon-print\"><a href=\"javascript:window.print()\"></i> Imprimer</a></p>
+                                  ";
+        // line 24
         if ((!$this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "cookies"), "has", array(0 => "cookie_flash"), "method"))) {
-            // line 22
+            // line 25
             echo "                                          ";
             if ((array_key_exists("advices", $context) && (!twig_test_empty($this->getContext($context, "advices"))))) {
                 echo " 
                                                             <div class=\"alert alert-info\">
                                                                       <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
                                                                      ";
-                // line 25
+                // line 28
                 echo twig_escape_filter($this->env, twig_random($this->env, $this->getContext($context, "advices")), "html", null, true);
                 echo "
                                                             </div>
                                     ";
             }
-            // line 28
+            // line 31
             echo "                                    ";
         }
-        // line 29
+        // line 32
         echo "                                          ";
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "notice"), "method")) {
             echo " 
@@ -104,93 +110,93 @@ class __TwigTemplate_1ec9a46ca20713a6a72d69724afa03d4 extends Twig_Template
                                                 <a class=\"close\" data-dismiss=\"alert\">×</button>
                                                 <span class=\"label label-info\">Info</span>
                                                 ";
-            // line 33
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "notice"), "method"), "html", null, true);
             echo " 
                                             </div> 
                                        ";
         }
-        // line 35
+        // line 38
         echo " 
                                        ";
-        // line 36
+        // line 39
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "error"), "method")) {
             echo " 
                                            <div class=\"alert alert-error\">
                                                 <span class=\"label label-important\">Important</span>                                          
                                                 ";
-            // line 39
+            // line 42
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "error"), "method"), "html", null, true);
             echo " 
                                             </div> 
                                        ";
         }
-        // line 41
+        // line 44
         echo " 
                                        ";
-        // line 42
+        // line 45
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "success"), "method")) {
             echo " 
                                             <div class=\"alert alert-success\">
                                                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
                                                 <span class=\"label label-success\">Success</span>                                         
                                                 ";
-            // line 46
+            // line 49
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "success"), "method"), "html", null, true);
             echo " 
                                             </div> 
                                        ";
         }
-        // line 48
+        // line 51
         echo " 
                                        ";
-        // line 49
+        // line 52
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "warning"), "method")) {
             echo " 
                                            <div class=\"alert\">
                                                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
                                                 <span class=\"label label-warning\">Warning</span>                                        
                                                 ";
-            // line 53
+            // line 56
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "warning"), "method"), "html", null, true);
             echo " 
                                             </div> 
                                        ";
         }
-        // line 55
+        // line 58
         echo " 
                                        ";
-        // line 56
+        // line 59
         if ($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "hasFlash", array(0 => "inverse"), "method")) {
             echo " 
                                               <div class=\"alert alert-info\">
                                                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
                                                 <span class=\"label label-inverse\">Inverse</span>          
                                                        ";
-            // line 60
+            // line 63
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flash", array(0 => "inverse"), "method"), "html", null, true);
             echo " 
                                             </div> 
                                        ";
         }
-        // line 62
+        // line 65
         echo " 
                         ";
     }
 
-    // line 73
+    // line 76
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 74
+        // line 77
         echo "             ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
                                     <script src=\"";
-        // line 75
+        // line 78
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/app.js"), "html", null, true);
         echo "\"  type=\"text/javascript\"></script>
                                     <script src=\"";
-        // line 76
+        // line 79
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("/js/ajax.js"), "html", null, true);
         echo "\"  type=\"text/javascript\"></script>
        ";
@@ -208,6 +214,6 @@ class __TwigTemplate_1ec9a46ca20713a6a72d69724afa03d4 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  192 => 76,  188 => 75,  183 => 74,  180 => 73,  175 => 62,  169 => 60,  162 => 56,  159 => 55,  153 => 53,  146 => 49,  143 => 48,  137 => 46,  130 => 42,  127 => 41,  121 => 39,  115 => 36,  112 => 35,  106 => 33,  98 => 29,  95 => 28,  89 => 25,  82 => 22,  80 => 21,  77 => 20,  74 => 19,  63 => 64,  60 => 19,  58 => 18,  54 => 16,  52 => 15,  46 => 12,  43 => 11,  40 => 9,  37 => 8,  31 => 5,  28 => 4,);
+        return array (  198 => 79,  194 => 78,  189 => 77,  186 => 76,  181 => 65,  175 => 63,  168 => 59,  165 => 58,  159 => 56,  152 => 52,  149 => 51,  143 => 49,  136 => 45,  133 => 44,  127 => 42,  121 => 39,  112 => 36,  104 => 32,  101 => 31,  95 => 28,  88 => 25,  86 => 24,  80 => 21,  77 => 20,  74 => 19,  63 => 67,  60 => 19,  58 => 18,  54 => 16,  52 => 15,  46 => 12,  43 => 11,  40 => 9,  37 => 8,  31 => 5,  28 => 4,  201 => 80,  193 => 75,  178 => 67,  167 => 63,  163 => 62,  158 => 59,  146 => 52,  135 => 46,  129 => 43,  122 => 39,  118 => 38,  114 => 37,  110 => 36,  106 => 35,  102 => 34,  98 => 33,  92 => 32,  87 => 31,  82 => 22,  67 => 22,  57 => 19,  53 => 18,  45 => 13,  42 => 12,  38 => 9,  36 => 8,  29 => 4,  26 => 3,);
     }
 }

@@ -276,20 +276,21 @@ $(function() {
         }
     });
         
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 100) {
-            $('.scrollup').fadeIn();
-        } else {
-            $('.scrollup').fadeOut();
-        }
-    }); 
+//    $(window).scroll(function(){
+//        if ($(this).scrollTop() > 100) {
+//            $('.scrollup').fadeIn();
+//        } else {
+//            $('.scrollup').fadeOut();
+//        }
+//    }); 
 			
-    $('.scrollup').click(function(){
+    $('#scrollTop, .scrollTop').click(function(){
         $("html, body").animate({
             scrollTop: 0
         }, 600);
         return false;
     });
+    
     $('.textarea').wysihtml5({
         'locale': "fr-FR",
         "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
@@ -300,5 +301,6 @@ $(function() {
         "image": true, //Button to insert an image. Default true,
         "color": true //Button to change color of font  
     });
-                
+    
+    
 });

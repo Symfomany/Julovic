@@ -48,6 +48,7 @@
     <parameter key="secret">40883bff372c0554b1017107629556b4e6</parameter>
     <parameter key="database_path">null</parameter>
     <parameter key="email_administrateur">zuzu38080@gmail.com</parameter>
+    <parameter key="limit_per_page">6</parameter>
     <parameter key="sidebar_entities" type="collection">
       <parameter key="Articles" type="collection">
         <parameter key="field">title</parameter>
@@ -79,6 +80,7 @@
             Site\AdminBundle\Authentication\AuthenticationHandler
         </parameter>
     <parameter key="control.class">Site\AdminBundle\Listener\ControlListener</parameter>
+    <parameter key="common.class">Site\AdminBundle\Controller\CommonController</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -516,8 +518,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -624,6 +626,61 @@
     <service id="controllistener" class="Site\AdminBundle\Listener\ControlListener">
       <tag name="kernel.event_listener" event="kernel.controller" method="onCoreController"/>
     </service>
+    <service id="commoncontroller" class="Site\AdminBundle\Controller\CommonController">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="request"/>
+      <argument type="service" id="knp_paginator"/>
+      <argument type="service" id="session"/>
+    </service>
+    <service id="extension.listener" class="Site\AdminBundle\Listener\DoctrineExtensionListener">
+      <tag name="kernel.event_listener" event="kernel.request" method="onLateKernelRequest" priority="-10"/>
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.tree" class="Gedmo\Tree\TreeListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.translatable" class="Gedmo\Translatable\TranslatableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+      <call method="setDefaultLocale">
+        <argument>fr</argument>
+      </call>
+      <call method="setTranslationFallback">
+        <argument>false</argument>
+      </call>
+    </service>
+    <service id="gedmo.listener.timestampable" class="Gedmo\Timestampable\TimestampableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.sluggable" class="Gedmo\Sluggable\SluggableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.sortable" class="Gedmo\Sortable\SortableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.loggable" class="Gedmo\Loggable\LoggableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
     <service id="twig.extension.debug" class="Twig_Extensions_Extension_Debug">
       <tag name="twig.extension"/>
     </service>
@@ -702,6 +759,22 @@
         <argument type="collection">
           <argument>controllistener</argument>
           <argument>onCoreController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument>extension.listener</argument>
+          <argument>onLateKernelRequest</argument>
+        </argument>
+        <argument>-10</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument>extension.listener</argument>
+          <argument>onKernelRequest</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -2651,6 +2724,14 @@
         <argument type="service" id="twig.extension.acme.demo"/>
       </call>
       <call method="addGlobal">
+        <argument>nom_site</argument>
+        <argument>Julovic</argument>
+      </call>
+      <call method="addGlobal">
+        <argument>slogan</argument>
+        <argument>a CMF for Everybody</argument>
+      </call>
+      <call method="addGlobal">
         <argument>topmenu</argument>
         <argument type="collection">
           <argument type="collection">
@@ -2668,20 +2749,6 @@
           <argument type="collection">
             <argument key="label">Liens</argument>
             <argument key="routing">links</argument>
-            <argument key="subrouting" type="collection">
-              <argument type="collection">
-                <argument key="label">Categories</argument>
-                <argument key="routing">categories</argument>
-              </argument>
-              <argument type="collection">
-                <argument key="label">Liens</argument>
-                <argument key="routing">links</argument>
-              </argument>
-              <argument type="collection">
-                <argument key="label">Medias</argument>
-                <argument key="routing">medias</argument>
-              </argument>
-            </argument>
           </argument>
           <argument type="collection">
             <argument key="label">Medias</argument>
@@ -2692,16 +2759,26 @@
             <argument key="routing">comments</argument>
           </argument>
           <argument type="collection">
-            <argument key="label">Pages</argument>
-            <argument key="routing">pages</argument>
-          </argument>
-          <argument type="collection">
             <argument key="label">Tags</argument>
             <argument key="routing">tags</argument>
           </argument>
           <argument type="collection">
-            <argument key="label">Paramètres</argument>
-            <argument key="routing">parametres</argument>
+            <argument key="label">Autres</argument>
+            <argument key="routing">other</argument>
+            <argument key="subrouting" type="collection">
+              <argument type="collection">
+                <argument key="label">Pages</argument>
+                <argument key="routing">pages</argument>
+              </argument>
+              <argument type="collection">
+                <argument key="label">Administrateurs</argument>
+                <argument key="routing">administrateurs</argument>
+              </argument>
+              <argument type="collection">
+                <argument key="label">Référencement</argument>
+                <argument key="routing">referencement</argument>
+              </argument>
+            </argument>
           </argument>
         </argument>
       </call>
@@ -2963,6 +3040,24 @@
             </argument>
           </call>
           <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.sortable"/>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.translatable"/>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.tree"/>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.timestampable"/>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.loggable"/>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service" id="gedmo.listener.sluggable"/>
+          </call>
+          <call method="addEventSubscriber">
             <argument type="service">
               <service class="Gedmo\Sluggable\SluggableListener" public="false">
                 <tag name="doctrine.event_subscriber" connection="default"/>
@@ -2995,8 +3090,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -3005,6 +3100,7 @@
               <call method="setEntityNamespaces">
                 <argument type="collection">
                   <argument key="SiteAdminBundle">Site\AdminBundle\Entity</argument>
+                  <argument key="GedmoTree">Gedmo\Tree\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -3043,10 +3139,23 @@
                           <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
                             <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
+                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
                           </argument>
                         </service>
                       </argument>
                       <argument>Site\AdminBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>C:\wamp\www\bo\src\Site\AdminBundle\Entity</argument>
+                            <argument>C:\wamp\www\bo\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Gedmo\Tree\Entity</argument>
                     </call>
                   </service>
                 </argument>

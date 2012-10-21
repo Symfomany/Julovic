@@ -18,20 +18,25 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
         // line 2
         echo "        <div class=\"navbar navbar-inverse navbar-fixed-top\">
             <div class=\"navbar-inner\">
-                    <a id=\"scrollTop\" class=\"btn\"><i class=\"icon-chevron-up\"></i>Remonter</a>
-                    <a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">
-                        <span class=\"icon-bar\"></span>
-                        <span class=\"icon-bar\"></span>
-                        <span class=\"icon-bar\"></span>
-                    </a>
+                <div id=\"box_slogan\" class=\"pull-left\">
+                         <p><span class=\"lead\"><a href=\"";
+        // line 5
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home"), "html", null, true);
+        echo "\">";
+        echo twig_escape_filter($this->env, $this->getContext($context, "nom_site"), "html", null, true);
+        echo "</a></span><br /><span class=\"italic\"><i>";
+        echo twig_escape_filter($this->env, $this->getContext($context, "slogan"), "html", null, true);
+        echo "</i></span></p>
+                </div>   
+                <a id=\"scrollTop\" class=\"btn btn-small\"><i class=\"icon-chevron-up\"></i>Remonter</a>
                     <div class=\"nav-collapse collapse\">
                         <div class=\"navbar-text pull-right\">
                             <div class=\"btn-group\">
                                 <a class=\"btn btn-primary\" href=\"#\"><i class=\"icon-user icon-white\"></i> 
                                 ";
-        // line 14
+        // line 12
         if ($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : null), "user", array(), "any", false, true), "firstname", array(), "any", true, true)) {
-            // line 15
+            // line 13
             echo "                                            Bonjour <b>";
             echo twig_escape_filter($this->env, _twig_default_filter(twig_title_string_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "user"), "firstname")), "Prénom"), "html", null, true);
             echo " ";
@@ -39,43 +44,43 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
             echo "</b>
                                 ";
         }
-        // line 17
+        // line 15
         echo "                                    </a>
                                     <a class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"caret\"></span></a>
                                     <ul class=\"dropdown-menu\">
                                         <li><a href=\"";
-        // line 20
+        // line 18
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("my_account"), "html", null, true);
         echo "\"><i class=\"icon-edit\"></i>  Editer</a></li>
                                         <li><a href=\"";
-        // line 21
+        // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("parametres"), "html", null, true);
         echo "\"><i class=\"icon-wrench\"></i> Parametres</a></li>
                                         <li><a href=\"#\"><i class=\"icon-user\"></i> Preference</a></li>
                                         <li class=\"divider\"></li>
                                         <li> <a id=\"logout\" href=\"";
-        // line 24
+        // line 22
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("logout"), "html", null, true);
         echo "\"><i class=\"icon-off\"></i>Deconnexion</a> <br /></li>
                                     </ul>
                             </div>
                             ";
-        // line 28
+        // line 26
         echo "                            ";
         echo $this->env->getExtension('actions')->renderAction("SiteAdminBundle:Slot:search", array(), array());
-        // line 29
+        // line 27
         echo "                                <div class=\"btn-group pull-right\" id=\"another_links\">
-                                    <a class=\"btn btn-inverse dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
+                                    <a class=\"btn btn-small  dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
                                         Actions Rapides
                                         <span class=\"caret\"></span>
                                     </a>
                                     <ul class=\"right dropdown-menu\">
                                          ";
-        // line 35
+        // line 33
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "fastactions"));
         foreach ($context['_seq'] as $context["_key"] => $context["subroute"]) {
-            // line 36
+            // line 34
             echo "                                                <li><a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "subroute"), "routing")), "html", null, true);
             echo "\">";
@@ -86,16 +91,15 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['subroute'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 38
+        // line 36
         echo "                                        <li class=\"divider\"></li>
-                                        <li><a href=\"#\">Separated link</a></li>
+                                        <li><a href=\"#\">Base</a></li>
                                     </ul>
                                 </div>
                             </div>
-
                             <ul class=\"nav\">
-                        ";
-        // line 45
+                                        ";
+        // line 42
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "topmenu"));
         $context['loop'] = array(
@@ -112,41 +116,26 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["param"]) {
-            // line 46
-            echo "                                ";
+            // line 43
+            echo "                                            ";
             if ($this->getAttribute($this->getContext($context, "loop"), "first")) {
-                // line 47
-                echo "                                    <li class=\"";
+                // line 44
+                echo "                                                <li class=\"";
                 if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "param"), "routing"))) {
                     echo "active";
                 }
                 echo "\">
-                                        <a href=\"";
-                // line 48
+                                                    <a href=\"";
+                // line 45
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "param"), "routing")), "html", null, true);
                 echo "\"><i class=\"icon-home\"></i> ";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "param"), "label"), "html", null, true);
                 echo " </a>
-                                    </li>                                 
-                                ";
-            } elseif ($this->getAttribute($this->getContext($context, "loop"), "last")) {
-                // line 51
-                echo "                                    <li class=\"";
-                if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "param"), "routing"))) {
-                    echo "active";
-                }
-                echo "\">
-                                        <a href=\"";
-                // line 52
-                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "param"), "routing")), "html", null, true);
-                echo "\">";
-                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "param"), "label"), "html", null, true);
-                echo "</a>
-                                    </li>                                 
-                                ";
+                                                </li>                                 
+                                            ";
             } else {
-                // line 55
-                echo "                                    <li class=\"";
+                // line 48
+                echo "                                                <li class=\"";
                 if ($this->getAttribute((isset($context["param"]) ? $context["param"] : null), "subrouting", array(), "any", true, true)) {
                     echo "dropdown ";
                 }
@@ -154,8 +143,8 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
                     echo "active";
                 }
                 echo "\">
-                                        <a ";
-                // line 56
+                                                    <a ";
+                // line 49
                 if ($this->getAttribute((isset($context["param"]) ? $context["param"] : null), "subrouting", array(), "any", true, true)) {
                     echo "class=\"dropdown-toggle\" data-toggle=\"dropdown\" ";
                 }
@@ -167,44 +156,44 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
                     echo "<b class=\"caret\"></b>";
                 }
                 echo "</a>
-                                    ";
-                // line 57
+                                                ";
+                // line 50
                 if ($this->getAttribute((isset($context["param"]) ? $context["param"] : null), "subrouting", array(), "any", true, true)) {
-                    // line 58
-                    echo "                                        <ul class=\"dropdown-menu\">
-                                        ";
-                    // line 59
+                    // line 51
+                    echo "                                                    <ul class=\"dropdown-menu\">
+                                                    ";
+                    // line 52
                     $context['_parent'] = (array) $context;
                     $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "param"), "subrouting"));
                     foreach ($context['_seq'] as $context["_key"] => $context["subroute"]) {
-                        // line 60
-                        echo "                                                <li class=\"";
+                        // line 53
+                        echo "                                                            <li class=\"";
                         if (($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "request"), "attributes"), "get", array(0 => "_route"), "method") == $this->getAttribute($this->getContext($context, "subroute"), "routing"))) {
                             echo "active";
                         }
                         echo "\">
-                                                    <a href=\"";
-                        // line 61
+                                                                <a href=\"";
+                        // line 54
                         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath($this->getAttribute($this->getContext($context, "subroute"), "routing")), "html", null, true);
                         echo "\">";
                         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "subroute"), "label"), "html", null, true);
                         echo "</a>
-                                                </li>  
-                                        ";
+                                                            </li>  
+                                                    ";
                     }
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['subroute'], $context['_parent'], $context['loop']);
                     $context = array_merge($_parent, array_intersect_key($context, $_parent));
-                    // line 64
-                    echo "                                            </ul>
-                                    ";
+                    // line 57
+                    echo "                                                        </ul>
+                                                ";
                 }
-                // line 66
-                echo "                                        </li>                                 
-                                ";
+                // line 59
+                echo "                                                    </li>                                 
+                                            ";
             }
-            // line 68
-            echo "                            ";
+            // line 61
+            echo "                                        ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
             $context['loop']['first'] = false;
@@ -217,11 +206,14 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['param'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 69
-        echo "                                    </ul>
-                                </div><!--/.nav-collapse -->
-                            </div>
+        // line 62
+        echo "                            </ul>
+                            <div class=\"pull-right\" id=\"btn_param\">
+                                <button type=\"button\" class=\"btn btn-mini\" data-toggle=\"modal\" data-target=\"#myModal\">Paramètres</button>
+                        </div>
                     </div>
+            </div>
+    </div>
 ";
     }
 
@@ -237,6 +229,6 @@ class __TwigTemplate_fe67dc8676b54d23d55a1a64eb73da00 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  219 => 69,  205 => 68,  201 => 66,  197 => 64,  186 => 61,  179 => 60,  175 => 59,  170 => 57,  157 => 56,  147 => 55,  139 => 52,  132 => 51,  117 => 47,  114 => 46,  97 => 45,  88 => 38,  65 => 29,  56 => 24,  50 => 21,  33 => 15,  17 => 2,  135 => 69,  125 => 64,  87 => 29,  82 => 27,  63 => 8,  60 => 7,  54 => 6,  48 => 104,  46 => 20,  43 => 28,  41 => 17,  34 => 24,  32 => 7,  21 => 1,  189 => 73,  185 => 72,  180 => 71,  177 => 70,  172 => 58,  166 => 59,  159 => 55,  156 => 54,  150 => 52,  143 => 48,  140 => 47,  134 => 45,  127 => 41,  124 => 48,  118 => 38,  103 => 32,  79 => 21,  74 => 19,  71 => 18,  62 => 28,  59 => 18,  51 => 14,  39 => 8,  31 => 14,  28 => 6,  184 => 74,  176 => 69,  158 => 58,  154 => 57,  149 => 54,  137 => 48,  131 => 68,  122 => 41,  116 => 40,  112 => 35,  109 => 34,  102 => 37,  95 => 28,  92 => 27,  90 => 30,  86 => 24,  80 => 32,  77 => 36,  73 => 35,  57 => 17,  53 => 15,  45 => 11,  42 => 10,  38 => 11,  36 => 7,  29 => 6,  26 => 5,);
+        return array (  208 => 62,  164 => 52,  93 => 36,  78 => 33,  70 => 27,  51 => 18,  22 => 5,  17 => 2,  231 => 77,  227 => 76,  223 => 75,  219 => 74,  215 => 73,  211 => 72,  207 => 71,  202 => 70,  190 => 59,  182 => 64,  174 => 62,  170 => 61,  161 => 51,  157 => 57,  153 => 56,  144 => 53,  140 => 52,  137 => 51,  132 => 31,  128 => 45,  125 => 28,  119 => 23,  115 => 22,  111 => 21,  107 => 20,  103 => 19,  99 => 18,  91 => 16,  83 => 14,  79 => 13,  75 => 12,  71 => 11,  64 => 9,  61 => 22,  55 => 19,  49 => 109,  47 => 31,  44 => 30,  35 => 25,  33 => 8,  21 => 1,  198 => 68,  194 => 61,  189 => 77,  186 => 57,  181 => 65,  175 => 54,  168 => 53,  165 => 60,  159 => 50,  152 => 52,  149 => 55,  143 => 49,  136 => 48,  133 => 44,  127 => 42,  121 => 44,  112 => 36,  104 => 32,  101 => 42,  95 => 17,  88 => 25,  86 => 24,  80 => 21,  77 => 20,  74 => 19,  63 => 67,  60 => 19,  58 => 18,  54 => 16,  52 => 15,  46 => 15,  43 => 11,  40 => 9,  37 => 8,  31 => 5,  28 => 4,  201 => 80,  193 => 75,  178 => 63,  167 => 63,  163 => 62,  158 => 59,  146 => 49,  135 => 32,  129 => 43,  122 => 39,  118 => 43,  114 => 37,  110 => 36,  106 => 35,  102 => 34,  98 => 33,  92 => 32,  87 => 15,  82 => 34,  67 => 26,  57 => 19,  53 => 18,  45 => 13,  42 => 28,  38 => 13,  36 => 12,  29 => 7,  26 => 3,);
     }
 }

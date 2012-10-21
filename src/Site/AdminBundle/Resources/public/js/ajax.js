@@ -7,7 +7,7 @@ $(function() {
         $container.autocomplete({
             source: function( request, response ) {
                 $.ajax({
-                    url: Routing.generate($route),
+                    url: Routing.generate('categories_position'),
                     beforeSend: function ( xhr ) {
                         $('div.ajaxLoading').show();
                     },
@@ -61,8 +61,28 @@ $(function() {
              $(this).parents('form').find('.ajaxLoading').hide();
          });
      }
-    
-    
+  
+    function sortable(container, $motif, $handler,$placeholder,$route){
+          $(container).sortable({
+            'placeholder': $placeholder,
+            'axis' : 'y',
+            'opacity':'0.5',
+            'delay' : 300,
+            'handle': $handler,
+            'nested' :  $motif,
+            'item' :  $motif,
+            'cursor':'pointer',
+            'update' : function (event, ui) {
+                serial = $(this).sortable('serialize');
+                $.ajax({
+                        type: 'POST',
+                        url: Routing.generate($route),
+                        data: serial
+                });
+            }
+      });
+      $('.sortable').disableSelection();
+    }
         
         
     autosuggestion($('#site_adminbundle_searchtype_search'), 'search_query_ajax' ,'title');

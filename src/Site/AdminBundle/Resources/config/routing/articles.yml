@@ -2,6 +2,16 @@ articles:
     pattern:  /
     defaults: { _controller: "SiteAdminBundle:Articles:index" }
 
+articles_position:
+    pattern:  /position
+    defaults: { _controller: "SiteAdminBundle:Articles:position"  }
+    options:
+        expose: true
+
+articles_activation:
+    pattern:  /activation/{id}/{bool}
+    defaults: { _controller: "SiteAdminBundle:Articles:activation", bool : 1  }
+
 articles_show:
     pattern:  /show/{id}
     defaults: { _controller: "SiteAdminBundle:Articles:show" }

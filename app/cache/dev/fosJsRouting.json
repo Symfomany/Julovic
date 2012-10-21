@@ -1,1 +1,1 @@
-{"base_url":"\/app_dev.php","routes":{"search_query_ajax":{"tokens":[["text","\/admin\/searchajax"]],"defaults":[]}}}
+{"base_url":"\/app_dev.php","routes":{"articles_position":{"tokens":[["text","\/admin\/articles\/position"]],"defaults":[]},"categories_position":{"tokens":[["text","\/admin\/categories\/position"]],"defaults":[]},"search_query_ajax":{"tokens":[["text","\/admin\/searchajax"]],"defaults":[]}}}

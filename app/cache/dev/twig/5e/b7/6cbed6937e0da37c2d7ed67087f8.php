@@ -103,7 +103,7 @@ class __TwigTemplate_5eb76cbed6937e0da37c2d7ed67087f8 extends Twig_Template
                 // line 37
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "user"), "id"), "html", null, true);
                 echo "/";
-                echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "picture"), "html", null, true);
+                echo twig_escape_filter($this->env, $this->env->getExtension('my_twig_extension')->sizes($this->getAttribute($this->getContext($context, "entity"), "picture"), "medium"), "html", null, true);
                 echo "\"  width=\"300\" height=\"200\" class=\"img-polaroid\">
                     ";
             }

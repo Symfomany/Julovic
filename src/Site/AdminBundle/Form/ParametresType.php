@@ -10,18 +10,21 @@ class ParametresType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('nomSite')
-            ->add('urlSite', 'url')
-            ->add('administrateursId')
-            ->add('nomAdmin')
-            ->add('emailAdmin')
-            ->add('adresseAdmin')
-            ->add('villeAdmin')
-            ->add('cpAdmin')
-            ->add('telAdmin')
-            ->add('portAdmin')
-        ;
+        
+                $builder
+            ->add('nomSite', null,array('label' => 'Nom du site'))
+            ->add('urlSite', 'url', array('label' => 'URL du site'))
+            ->add('descriptionSite', 'textarea', array('label' => 'Description', 'attr' => array('rows' => 5, 'cols' => 40, 'class' => 'textarea'), 'required' => true))
+            ->add('immatriculation', null, array('label' => 'Immatriculation du site'))
+            ->add('nomAdmin',null, array('label' => 'Nom'))
+            ->add('emailAdmin', 'email', array('label' => 'E-mail'))
+            ->add('adresseAdmin', 'textarea', array('label' => 'Adresse', 'attr' => array('rows' => 5, 'cols' => 40, 'class' => 'textarea'), 'required' => true))
+            ->add('villeAdmin',  null , array('label' => 'Ville', 'attr' => array('class' => 'city'), 'required' => true))
+            ->add('cpAdmin',null,  array('label' => 'Cp:', 'attr' => array('maxlength' => 3)))
+            ->add('telAdmin',null,  array('label' => 'Tel:',  'attr' => array('maxlength' => 10)))
+            ->add('portAdmin',null,  array('label' => 'Portable:', 'attr' => array('maxlength' => 10)));
+        
+        
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

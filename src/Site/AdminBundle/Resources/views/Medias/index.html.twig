@@ -33,8 +33,8 @@
                 <td>{{ entity.legend|capitalize }}</td>
                    <td> {% set img_path =  'uploads/administrateurs/'~user.id~'/'~entity.picture %}
                     {% if entity.picture and  img_path|file_exist %}
-                           <a href="/uploads/administrateurs/{{user.id}}/{{entity.picture}}" class="fancybox">
-                           <img src="/uploads/administrateurs/{{user.id}}/{{entity.picture}}"  width="300" height="200" class="img-polaroid">
+                           <a href="/uploads/administrateurs/{{user.id}}/{{entity.picture  }}" class="fancybox">
+                           <img src="/uploads/administrateurs/{{user.id}}/{{entity.picture|sizes('medium')}}"  width="300" height="200" class="img-polaroid">
                     {% endif %}</a></td>
                 <td>{{ entity.state|validate|raw }}</td>
                 <td>{% if entity.dateCreated %}{{ entity.dateCreated|date('Y-m-d')|localizeddate('short', 'none') }}{% endif %}</td>

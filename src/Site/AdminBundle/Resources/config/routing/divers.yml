@@ -9,5 +9,9 @@ search_query_ajax:
     options:
         expose: true
 
+other:
+    pattern:  /notfound
+    defaults: { _controller: "SiteAdminBundle:Default:index" }
+
     
 

@@ -55,6 +55,29 @@ class ParametresController extends Controller
         ));
     }
 
+
+    /**
+     * Displays a form to edit an existing Parametres entity.
+     *
+     */
+    public function editOneAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SiteAdminBundle:Parametres')->find(2);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Parametres entity');
+        }
+
+        $editForm = $this->createForm(new ParametresType(), $entity);
+
+        return $this->render('SiteAdminBundle:Parametres:editone.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        ));
+    }
+
     /**
      * Edits an existing Parametres entity.
      *
@@ -76,8 +99,9 @@ class ParametresController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre changement a été pris en compte!');
 
-            return $this->redirect($this->generateUrl('parametres_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('home'));
         }
 
         return $this->render('SiteAdminBundle:Parametres:edit.html.twig', array(

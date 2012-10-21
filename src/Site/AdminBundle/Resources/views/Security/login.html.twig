@@ -5,30 +5,38 @@
         {{ parent() }}
  <p></p>
  <p></p>
-    <div class="span6">
-        <div class="well" >
-                        {% if error %}
-                                    <div class="alert alert-block alert-error fade in"> 
-                                            <span class="close"></span>
+    <div class="span6" id="box_login">
+                   {% if error %}
+                                    <div class="alert alert-error">
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
                                             {{ error.message|trans({}, 'AdminBundle') }} 
                                     </div>      
                         {% endif %}
+                                <center><h3>{{ nom_site }}</h3></center>
+                                <center><p><i>{{ slogan|capitalize }}</i></p></center>
+        <div class="well" >
                             <legend>Authentification</legend>
                                 <form  class="form-horizontal" action="{{ path('login_check') }}" method="post">
                                     <div class="control-group">
                                         <label class="control-label" for="login">Login: </label>
                                         <div class="controls">
-                                            <input required="required" id="login"  type="text" name="_username" value="{{ last_username }}" {% if last_username is empty %}placeholder="E-mail" {% endif %}>
+                                                <div class="input-prepend">
+                                                        <span class="add-on">@</span>
+                                                        <input class="span2" name="_username"  required="required" id="prependedInput" value="{{ last_username }}" size="16" type="text" {% if last_username is empty %} placeholder="E-mail"{% endif %} />
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label" for="mdp">Password: </label>
                                         <div class="controls">
-                                             <input id="mdp" required="required" type="password" placeholder="Password" name="_password">
+                                            <div class="input-prepend">
+                                                        <span class="add-on">?</span>
+                                                        <input type="password"  id="mdp"  required="required" placeholder="Password" name="_password" class="span2" id="prependedInput" size="16" type="text" />
+                                                </div>
                                              <p></p>
-                                             <label id="entrer" class="active"><input type="checkbox" name="_remember_me" checked="checked">Se souvenir de moi</label>
+                                             <label id="entrer" class="active"><i class="icon-user"></i><input type="checkbox" name="_remember_me" checked="checked">Se souvenir de moi</label>
                                               <p></p>
-                                             <input type="submit" name="login" value="Connexion" class="btn btn-primary btn-large">
+                                             <button type="submit" name="login"  data-loading-text="Loading..."  class="btn">Se Connecter</button>
                                         </div>
                                     </div>
                                     </form>

@@ -18,6 +18,7 @@ class CommentsController extends Controller
     public function preExecute() {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Commentaires", $this->get("router")->generate("comments"));
+        $this->limit = $this->container->getParameter('limit_per_page');
     }
     
     
@@ -28,12 +29,16 @@ class CommentsController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('SiteAdminBundle:Comments')->findAll();
+        $em = $this->get('doctrine.orm.entity_manager');
+        $dql = "SELECT a FROM SiteAdminBundle:Comments a";
+        $query = $em->createQuery($dql);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $this->get('request')->query->get('page', 1), $this->limit);  //page number/, 10/limit per page/ );
 
         return $this->render('SiteAdminBundle:Comments:index.html.twig', array(
-            'entities' => $entities,
+                    'pagination' => $pagination,
         ));
+        
     }
 
     /**

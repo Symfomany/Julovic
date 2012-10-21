@@ -23,7 +23,13 @@ class MediasType extends AbstractType
                             'choices'   => array('0' => 'Non', '1' => 'Oui'),
                             'required'  => false
                         ))
-                ->add('legend');
+                ->add('legend', null, array(
+                           "attr" => array( 
+                                'class' => 'input-xxlarge',
+                                'required'  => true,
+                                'empty_value' => false,
+                               'empty_data'  => null
+                        )));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

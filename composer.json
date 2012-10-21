@@ -27,7 +27,9 @@
         "craue/formflow-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "sensiolabs/doctrine-query-statistics-bundle": "*",
-        "imagine/Imagine" : "dev-master"
+        "imagine/Imagine" : "dev-master",
+        "behat/behat": "2.4.*@stable",
+        "behat/mink": "1.4.*@stable"
     },
     "scripts": {
         "post-install-cmd": [

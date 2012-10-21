@@ -11,9 +11,8 @@ class CategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
             ->add('description');
-        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

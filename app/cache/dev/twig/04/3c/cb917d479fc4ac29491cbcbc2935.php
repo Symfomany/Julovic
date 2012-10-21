@@ -10,7 +10,7 @@ class __TwigTemplate_043ccb917d479fc4ac29491cbcbc2935 extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,15 +25,27 @@ class __TwigTemplate_043ccb917d479fc4ac29491cbcbc2935 extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <h1>Links list</h1>
-
-<table class=\"table\" class=\"records_list\">
+";
+        // line 9
+        $this->env->loadTemplate("SiteAdminBundle:Slot:filter.html.twig")->display($context);
+        // line 10
+        echo "
+";
+        // line 12
+        echo "<div class=\"navigation\">
+    ";
+        // line 13
+        echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
+        echo "
+</div>
+<table class=\"table table-striped\" class=\"records_list\">
     <thead>
         <tr>
             <th>Id</th>
@@ -46,47 +58,47 @@ class __TwigTemplate_043ccb917d479fc4ac29491cbcbc2935 extends Twig_Template
     </thead>
     <tbody>
     ";
-        // line 22
+        // line 27
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
+        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "pagination"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 23
+            // line 28
             echo "        <tr>
             <td><a href=\"";
-            // line 24
+            // line 29
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("links_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
             <td>";
-            // line 25
+            // line 30
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title"), "html", null, true);
             echo "</td>
             <td>";
-            // line 26
+            // line 31
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "link"), "html", null, true);
             echo "</td>
             <td>";
-            // line 27
+            // line 32
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "description"), "html", null, true);
             echo "</td>
             <td>";
-            // line 28
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "html", null, true);
+            // line 33
+            echo twig_escape_filter($this->env, twig_localized_date_filter(twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "Y-m-d"), "short", "none"), "html", null, true);
             echo "</td>
             <td>
                 <ul>
                     <li>
                         <a href=\"";
-            // line 32
+            // line 37
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("links_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">show</a>
+            echo "\"><i class=\"icon-search\"></i>show</a>
                     </li>
                     <li>
                         <a href=\"";
-            // line 35
+            // line 40
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("links_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
-            echo "\">edit</a>
+            echo "\"><i class=\"icon-edit\"></i> edit</a>
                     </li>
                 </ul>
             </td>
@@ -96,17 +108,23 @@ class __TwigTemplate_043ccb917d479fc4ac29491cbcbc2935 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 41
+        // line 46
         echo "    </tbody>
 </table>
+<div class=\"navigation\">
+    ";
+        // line 49
+        echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
+        echo "
+</div>
 
 <ul>
     <li>
         <a href=\"";
-        // line 46
+        // line 54
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("links_new"), "html", null, true);
         echo "\">
-            Create a new entry
+           <i class=\"icon-pencil\"></i> Create a new entry
         </a>
     </li>
 </ul>
@@ -125,6 +143,6 @@ class __TwigTemplate_043ccb917d479fc4ac29491cbcbc2935 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  105 => 46,  98 => 41,  86 => 35,  80 => 32,  73 => 28,  69 => 27,  65 => 26,  61 => 25,  55 => 24,  52 => 23,  48 => 22,  29 => 6,  26 => 5,);
+        return array (  123 => 54,  115 => 49,  110 => 46,  98 => 40,  92 => 37,  85 => 33,  81 => 32,  77 => 31,  73 => 30,  67 => 29,  64 => 28,  60 => 27,  43 => 13,  40 => 12,  37 => 10,  35 => 9,  29 => 6,  26 => 5,);
     }
 }

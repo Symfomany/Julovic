@@ -9,10 +9,6 @@
 
 <form action="{{ path('articles_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
                 {{ form_errors(edit_form) }}
-        
-                {{ form_label(edit_form.category) }}
-                {{ form_errors(edit_form.category) }}
-                {{ form_widget(edit_form.category) }}
 
                 {{ form_label(edit_form.title) }}
                 {{ form_errors(edit_form.title) }}
@@ -29,11 +25,10 @@
                 {{ form_label(edit_form.notes) }}
                 {{ form_errors(edit_form.notes) }}
                 {{ form_widget(edit_form.notes, { 'attr': {'class': 'knobed'}}) }}
-
                 
                 {{ form_rest(edit_form) }}
     <p>
-        <button type="submit" class="btn">edit</button>
+        <button type="submit" class="btn">Editer</button>
     </p>
 </form>
 

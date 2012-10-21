@@ -12,7 +12,7 @@ class CommentsType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('content');
+            ->add('content', 'textarea', array('attr' => array('class' => 'textarea'), 'required' => true));
         ;
     }
 

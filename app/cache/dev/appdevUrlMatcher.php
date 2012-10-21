@@ -153,6 +153,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'articles',);
                 }
 
+                // articles_position
+                if ($pathinfo === '/admin/articles/position') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::positionAction',  '_route' => 'articles_position',);
+                }
+
+                // articles_activation
+                if (0 === strpos($pathinfo, '/admin/articles/activation') && preg_match('#^/admin/articles/activation/(?<id>[^/]+)(?:/(?<bool>[^/]+))?$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::activationAction',  'bool' => '1',)), array('_route' => 'articles_activation'));
+                }
+
                 // articles_show
                 if (0 === strpos($pathinfo, '/admin/articles/show') && preg_match('#^/admin/articles/show/(?<id>[^/]+)$#s', $pathinfo, $matches)) {
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::showAction',)), array('_route' => 'articles_show'));
@@ -233,6 +243,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Site\\AdminBundle\\Controller\\CategoriesController::createAction',  '_route' => 'categories_create',);
                 }
                 not_categories_create:
+
+                // categories_position
+                if ($pathinfo === '/admin/categories/position') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\CategoriesController::positionAction',  '_route' => 'categories_position',);
+                }
 
                 // categories_edit
                 if (preg_match('#^/admin/categories/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
@@ -579,6 +594,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::searchajaxAction',  '_route' => 'search_query_ajax',);
             }
 
+            // other
+            if ($pathinfo === '/admin/notfound') {
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'other',);
+            }
+
             // administrateurs
             if (rtrim($pathinfo, '/') === '/admin') {
                 if (substr($pathinfo, -1) !== '/') {
@@ -731,6 +751,66 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ParametresController::updateAction',)), array('_route' => 'parametres_update'));
                 }
                 not_parametres_update:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/referencement')) {
+                // referencement
+                if (rtrim($pathinfo, '/') === '/admin/referencement') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'referencement');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::indexAction',  '_route' => 'referencement',);
+                }
+
+                // referencement_show
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::showAction',)), array('_route' => 'referencement_show'));
+                }
+
+                // referencement_new
+                if ($pathinfo === '/admin/referencement/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::newAction',  '_route' => 'referencement_new',);
+                }
+
+                // referencement_create
+                if ($pathinfo === '/admin/referencement/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::createAction',  '_route' => 'referencement_create',);
+                }
+                not_referencement_create:
+
+                // referencement_edit
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::editAction',)), array('_route' => 'referencement_edit'));
+                }
+
+                // referencement_update
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::updateAction',)), array('_route' => 'referencement_update'));
+                }
+                not_referencement_update:
+
+                // referencement_delete
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::deleteAction',)), array('_route' => 'referencement_delete'));
+                }
+                not_referencement_delete:
 
             }
 

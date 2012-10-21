@@ -43,86 +43,72 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
         // line 11
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'errors');
         echo "
-        
-                ";
-        // line 13
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'label');
-        echo "
-                ";
-        // line 14
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'errors');
-        echo "
-                ";
-        // line 15
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "category"), 'widget');
-        echo "
 
                 ";
-        // line 17
+        // line 13
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'label');
         echo "
                 ";
-        // line 18
+        // line 14
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'errors');
         echo "
                 ";
-        // line 19
+        // line 15
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "title"), 'widget', array("attr" => array("class" => "city")));
         echo "
 
                 ";
-        // line 21
+        // line 17
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'label');
         echo "
                 ";
-        // line 22
+        // line 18
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'errors');
         echo "
                 ";
-        // line 23
+        // line 19
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "resume"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
 
                 ";
-        // line 25
+        // line 21
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'label');
         echo "
                 ";
-        // line 26
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'errors');
         echo "
                 ";
-        // line 27
+        // line 23
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "content"), 'widget', array("attr" => array("class" => "textarea")));
         echo "
 
                 ";
-        // line 29
+        // line 25
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'label');
         echo "
                 ";
-        // line 30
+        // line 26
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'errors');
         echo "
                 ";
-        // line 31
+        // line 27
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "edit_form"), "notes"), 'widget', array("attr" => array("class" => "knobed")));
         echo "
-
                 
                 ";
-        // line 34
+        // line 29
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'rest');
         echo "
     <p>
-        <button type=\"submit\" class=\"btn\">edit</button>
+        <button type=\"submit\" class=\"btn\">Editer</button>
     </p>
 </form>
 
 <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 42
+        // line 37
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
             <i class=\"icon-share-alt\"></i> Back to the list
@@ -130,11 +116,11 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
     </li>
     <li>
         <form action=\"";
-        // line 47
+        // line 42
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\">
             ";
-        // line 48
+        // line 43
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
                 <button type=\"submit\" class=\"btn\">Delete</button>
@@ -157,6 +143,6 @@ class __TwigTemplate_d46cbdb675abf80e79099d1b5cce59f5 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  136 => 48,  132 => 47,  124 => 42,  113 => 34,  107 => 31,  103 => 30,  99 => 29,  94 => 27,  90 => 26,  86 => 25,  81 => 23,  77 => 22,  73 => 21,  68 => 19,  64 => 18,  60 => 17,  55 => 15,  51 => 14,  47 => 13,  42 => 11,  36 => 10,  29 => 6,  26 => 5,);
+        return array (  122 => 43,  118 => 42,  110 => 37,  99 => 29,  94 => 27,  90 => 26,  86 => 25,  81 => 23,  77 => 22,  73 => 21,  68 => 19,  64 => 18,  60 => 17,  55 => 15,  51 => 14,  47 => 13,  42 => 11,  36 => 10,  29 => 6,  26 => 5,);
     }
 }

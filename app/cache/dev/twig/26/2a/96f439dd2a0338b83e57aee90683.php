@@ -214,7 +214,7 @@ class __TwigTemplate_262a96f439dd2a0338b83e57aee90683 extends Twig_Template
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "edit_form"), 'rest');
         echo "
                 <p>
-                    <button type=\"submit\" class=\"btn\">Editer mon compte</button>
+                    <button type=\"submit\" class=\"btn\">Editerer mon compte</button>
                 </p>
             </form>
 

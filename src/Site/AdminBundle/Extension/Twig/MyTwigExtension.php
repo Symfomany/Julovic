@@ -21,6 +21,7 @@ class MyTwigExtension extends \Twig_Extension {
             'extras' => new \Twig_Filter_Method($this, 'extras'),
             'validate' => new \Twig_Filter_Method($this, 'validate'),
             'file_exist' => new \Twig_Filter_Method($this, 'file_exist'),
+            'sizes' => new \Twig_Filter_Method($this, 'sizes'),
             'commat' => new \Twig_Filter_Method($this, 'split_commat'),
             'localeDate' => new \Twig_Filter_Function(
             ' Site\AdminBundle\Extension\Twig\MyTwigExtension::localeDateFilter'
@@ -38,9 +39,16 @@ class MyTwigExtension extends \Twig_Extension {
         return file_exists($file);
     }
 
-    public function validate($bool = false) {
-       $img = ($bool == true) ? "<i class='icon-ok'></i>" : "<i class='icon-remove'></i>";
+    public function validate($bool = false, $id) {
+       $img = ($bool == true) ? "<a href='activation/".$id."/0'><i class='icon-ok'></i></a>" : "<a href='activation/".$id."/1'><i class='icon-remove'></i></a>";
        return $img;
+    }
+
+    public function sizes($picture = null,$size = 'medium') {
+        $parts = explode('.', $picture);
+        $name = $parts[count($parts)-2];
+        $ext = $parts[count($parts)-1];
+        return $name.'-'.$size.'.'.$ext;
     }
 
     public function split_commat($ch = null) {

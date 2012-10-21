@@ -10,7 +10,7 @@ class __TwigTemplate_18cc737c8a56b2ef4eff9666c005c9cf extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,10 +25,10 @@ class __TwigTemplate_18cc737c8a56b2ef4eff9666c005c9cf extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <h1>Links creation</h1>
@@ -54,7 +54,7 @@ class __TwigTemplate_18cc737c8a56b2ef4eff9666c005c9cf extends Twig_Template
         // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("links"), "html", null, true);
         echo "\">
-            Back to the list
+            <i class=\"icon-share-alt\"></i> Back to the list
         </a>
     </li>
 </ul>

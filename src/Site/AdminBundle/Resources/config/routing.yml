@@ -65,6 +65,12 @@ parametres:
     resource: "@SiteAdminBundle/Resources/config/routing/parametres.yml"
     prefix:   /parametres
     
+referencement:
+    resource: "@SiteAdminBundle/Resources/config/routing/referencement.yml"
+    prefix:   /referencement
+    
+#FOS Routing
+    
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 

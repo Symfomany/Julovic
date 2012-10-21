@@ -3,6 +3,7 @@
 namespace Site\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Site\AdminBundle\Entity\Articles;
 use Site\AdminBundle\Entity\Medias;
@@ -12,27 +13,29 @@ use Doctrine\Common\Util\Debug;
 
 
 /**
+ * 
  * Articles controller.
  *
  */
 class ArticlesController extends Controller {
     
+    protected $breadcrumbs;
+    protected $limit;
+    protected $common;
+    
      public function preExecute() {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Articles", $this->get("router")->generate("articles"));
+        $this->breadcrumbs = $this->get("white_october_breadcrumbs");
+        $this->breadcrumbs ->addItem("Articles", $this->get("router")->generate("articles"));
+        $this->limit = $this->container->getParameter('limit_per_page');
+        $this->common = $this->get("commoncontroller");
+        
     }
 
     public function indexAction() {
-        $em = $this->getDoctrine()->getManager();
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM SiteAdminBundle:Articles a";
-        $query = $em->createQuery($dql);
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 4);  //page number/, 10/limit per page/ );
-
+        $pagination =   $this->common->getList('Articles', null, 'position');
         return $this->render('SiteAdminBundle:Articles:index.html.twig', array(
                     'pagination' => $pagination,
-                ));
+         ));
     }
 
     public function showAction($id) {
@@ -60,11 +63,29 @@ class ArticlesController extends Controller {
         $form = $this->createForm(new ArticlesType(), $entity);
         
         return $this->render('SiteAdminBundle:Articles:new.html.twig', array(
-                    'entity' => $entity,
-                    'form' => $form->createView(),
-                ));
+                'entity' => $entity,
+                'form' => $form->createView()
+        ));
     }
 
+    /**
+     * Modiy Position
+     */
+    public function positionAction(Request $request)
+    {
+         $this->common->setPosition('Articles');
+         return new Response(1, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
+    }
+
+    /**
+     * Modiy Activation
+     */
+    public function activationAction($id, $bool = 1)
+    {
+         $this->common->setActive('Articles',$id,  $bool);
+        return $this->redirect($this->generateUrl('articles'));
+    }
+    
     /**
      * Creates a new Articles entity.
      *

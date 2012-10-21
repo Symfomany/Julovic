@@ -1,12 +1,10 @@
 {# Toolbar #}
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
-                    <a id="scrollTop" class="btn"><i class="icon-chevron-up"></i>Remonter</a>
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+                <div id="box_slogan" class="pull-left">
+                         <p><span class="lead"><a href="{{ path('home')}}">{{ nom_site }}</a></span><br /><span class="italic"><i>{{ slogan }}</i></span></p>
+                </div>   
+                <a id="scrollTop" class="btn btn-small"><i class="icon-chevron-up"></i>Remonter</a>
                     <div class="nav-collapse collapse">
                         <div class="navbar-text pull-right">
                             <div class="btn-group">
@@ -27,7 +25,7 @@
                             {# Slot search #}
                             {% render 'SiteAdminBundle:Slot:search'  %}
                                 <div class="btn-group pull-right" id="another_links">
-                                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a class="btn btn-small  dropdown-toggle" data-toggle="dropdown" href="#">
                                         Actions Rapides
                                         <span class="caret"></span>
                                     </a>
@@ -36,37 +34,35 @@
                                                 <li><a href="{{ path(subroute.routing) }}">{{ subroute.label}}</a></li>
                                         {% endfor %}
                                         <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">Base</a></li>
                                     </ul>
                                 </div>
                             </div>
-
                             <ul class="nav">
-                        {% for param in topmenu %}
-                                {% if loop.first %}
-                                    <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
-                                        <a href="{{ path(param.routing) }}"><i class="icon-home"></i> {{ param.label }} </a>
-                                    </li>                                 
-                                {% elseif loop.last %}
-                                    <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
-                                        <a href="{{ path(param.routing) }}">{{ param.label }}</a>
-                                    </li>                                 
-                                {% else %}
-                                    <li class="{% if param.subrouting is defined %}dropdown {% endif %}{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
-                                        <a {% if param.subrouting is defined %}class="dropdown-toggle" data-toggle="dropdown" {% endif %} href="{{ path(param.routing) }}">{{ param.label }}{% if param.subrouting is defined %}<b class="caret"></b>{% endif %}</a>
-                                    {% if param.subrouting is defined %}
-                                        <ul class="dropdown-menu">
-                                        {% for subroute in param.subrouting %}
-                                                <li class="{% if app.request.attributes.get('_route') == subroute.routing %}active{% endif %}">
-                                                    <a href="{{ path(subroute.routing) }}">{{ subroute.label }}</a>
-                                                </li>  
+                                        {% for param in topmenu %}
+                                            {% if loop.first %}
+                                                <li class="{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
+                                                    <a href="{{ path(param.routing) }}"><i class="icon-home"></i> {{ param.label }} </a>
+                                                </li>                                 
+                                            {% else %}
+                                                <li class="{% if param.subrouting is defined %}dropdown {% endif %}{% if app.request.attributes.get('_route') == param.routing %}active{% endif %}">
+                                                    <a {% if param.subrouting is defined %}class="dropdown-toggle" data-toggle="dropdown" {% endif %} href="{{ path(param.routing) }}">{{ param.label }}{% if param.subrouting is defined %}<b class="caret"></b>{% endif %}</a>
+                                                {% if param.subrouting is defined %}
+                                                    <ul class="dropdown-menu">
+                                                    {% for subroute in param.subrouting %}
+                                                            <li class="{% if app.request.attributes.get('_route') == subroute.routing %}active{% endif %}">
+                                                                <a href="{{ path(subroute.routing) }}">{{ subroute.label }}</a>
+                                                            </li>  
+                                                    {% endfor %}
+                                                        </ul>
+                                                {% endif %}
+                                                    </li>                                 
+                                            {% endif %}
                                         {% endfor %}
-                                            </ul>
-                                    {% endif %}
-                                        </li>                                 
-                                {% endif %}
-                            {% endfor %}
-                                    </ul>
-                                </div><!--/.nav-collapse -->
-                            </div>
+                            </ul>
+                            <div class="pull-right" id="btn_param">
+                                <button type="button" class="btn btn-mini" data-toggle="modal" data-target="#myModal">Paramètres</button>
+                        </div>
                     </div>
+            </div>
+    </div>

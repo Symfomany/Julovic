@@ -200,6 +200,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'commoncontroller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Site\AdminBundle\Controller\CommonController A Site\AdminBundle\Controller\CommonController instance.
+     */
+    protected function getCommoncontrollerService()
+    {
+        return $this->services['commoncontroller'] = new \Site\AdminBundle\Controller\CommonController($this->get('doctrine.orm.default_entity_manager'), $this->get('request'), $this->get('knp_paginator'), $this->get('session'));
+    }
+
+    /**
      * Gets the 'controllistener' service.
      *
      * This service is shared.
@@ -358,6 +371,12 @@ class appDevDebugProjectContainer extends Container
 
         $f = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
         $f->addEventSubscriber($d);
+        $f->addEventSubscriber($this->get('gedmo.listener.sortable'));
+        $f->addEventSubscriber($this->get('gedmo.listener.translatable'));
+        $f->addEventSubscriber($this->get('gedmo.listener.tree'));
+        $f->addEventSubscriber($this->get('gedmo.listener.timestampable'));
+        $f->addEventSubscriber($this->get('gedmo.listener.loggable'));
+        $f->addEventSubscriber($this->get('gedmo.listener.sluggable'));
         $f->addEventSubscriber($e);
 
         return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'test', 'host' => 'localhost', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), $c, $f, array());
@@ -369,14 +388,13 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php';
 
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
+        $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
@@ -384,26 +402,32 @@ class appDevDebugProjectContainer extends Container
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
-        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity')), 'Site\\AdminBundle\\Entity');
+        $d = new \Doctrine\Common\Cache\ArrayCache();
+        $d->setNamespace('sf2orm_default_1798635f18e566ece8c1e4d3155e8da6');
 
-        $e = new \Doctrine\ORM\Configuration();
-        $e->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity'));
-        $e->setMetadataCacheImpl($a);
-        $e->setQueryCacheImpl($b);
-        $e->setResultCacheImpl($c);
-        $e->setMetadataDriverImpl($d);
-        $e->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
-        $e->setProxyNamespace('Proxies');
-        $e->setAutoGenerateProxyClasses(false);
-        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => 'C:\\wamp\\www\\bo\\src\\Site\\AdminBundle\\Entity', 1 => 'C:\\wamp\\www\\bo\\vendor\\gedmo\\doctrine-extensions\\lib\\Gedmo\\Tree\\Entity'));
 
-        $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
-        $this->get('doctrine.orm.default_manager_configurator')->configure($f);
+        $f = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $f->addDriver($e, 'Site\\AdminBundle\\Entity');
+        $f->addDriver($e, 'Gedmo\\Tree\\Entity');
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        $g = new \Doctrine\ORM\Configuration();
+        $g->setEntityNamespaces(array('SiteAdminBundle' => 'Site\\AdminBundle\\Entity', 'GedmoTree' => 'Gedmo\\Tree\\Entity'));
+        $g->setMetadataCacheImpl($b);
+        $g->setQueryCacheImpl($c);
+        $g->setResultCacheImpl($d);
+        $g->setMetadataDriverImpl($f);
+        $g->setProxyDir('C:/wamp/www/bo/app/cache/dev/doctrine/orm/Proxies');
+        $g->setProxyNamespace('Proxies');
+        $g->setAutoGenerateProxyClasses(false);
+        $g->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $g->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $g->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+
+        $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
+        $this->get('doctrine.orm.default_manager_configurator')->configure($h);
+
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -463,6 +487,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('knp_pager.pagination', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'pagination'), 1);
         $instance->addListenerService('kernel.request', array(0 => 'notificationlistener', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'controllistener', 1 => 'onCoreController'), 0);
+        $instance->addListenerService('kernel.request', array(0 => 'extension.listener', 1 => 'onLateKernelRequest'), -10);
+        $instance->addListenerService('kernel.request', array(0 => 'extension.listener', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addListenerService('kernel.request', array(0 => 'security.firewall', 1 => 'onKernelRequest'), 8);
         $instance->addListenerService('kernel.response', array(0 => 'security.rememberme.response_listener', 1 => 'onKernelResponse'), 0);
@@ -485,6 +511,23 @@ class appDevDebugProjectContainer extends Container
         $instance->addSubscriberService('twig.exception_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener');
         $instance->addSubscriberService('swiftmailer.email_sender.listener', 'Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener');
         $instance->addSubscriberService('web_profiler.debug_toolbar', 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener');
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'extension.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Site\AdminBundle\Listener\DoctrineExtensionListener A Site\AdminBundle\Listener\DoctrineExtensionListener instance.
+     */
+    protected function getExtension_ListenerService()
+    {
+        $this->services['extension.listener'] = $instance = new \Site\AdminBundle\Listener\DoctrineExtensionListener();
+
+        $instance->setContainer($this);
 
         return $instance;
     }
@@ -1033,6 +1076,110 @@ class appDevDebugProjectContainer extends Container
     protected function getFosJsRouting_ExtractorService()
     {
         return $this->services['fos_js_routing.extractor'] = new \FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor($this->get('router'), array());
+    }
+
+    /**
+     * Gets the 'gedmo.listener.loggable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Loggable\LoggableListener A Gedmo\Loggable\LoggableListener instance.
+     */
+    protected function getGedmo_Listener_LoggableService()
+    {
+        $this->services['gedmo.listener.loggable'] = $instance = new \Gedmo\Loggable\LoggableListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'gedmo.listener.sluggable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Sluggable\SluggableListener A Gedmo\Sluggable\SluggableListener instance.
+     */
+    protected function getGedmo_Listener_SluggableService()
+    {
+        $this->services['gedmo.listener.sluggable'] = $instance = new \Gedmo\Sluggable\SluggableListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'gedmo.listener.sortable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Sortable\SortableListener A Gedmo\Sortable\SortableListener instance.
+     */
+    protected function getGedmo_Listener_SortableService()
+    {
+        $this->services['gedmo.listener.sortable'] = $instance = new \Gedmo\Sortable\SortableListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'gedmo.listener.timestampable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Timestampable\TimestampableListener A Gedmo\Timestampable\TimestampableListener instance.
+     */
+    protected function getGedmo_Listener_TimestampableService()
+    {
+        $this->services['gedmo.listener.timestampable'] = $instance = new \Gedmo\Timestampable\TimestampableListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'gedmo.listener.translatable' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Translatable\TranslatableListener A Gedmo\Translatable\TranslatableListener instance.
+     */
+    protected function getGedmo_Listener_TranslatableService()
+    {
+        $this->services['gedmo.listener.translatable'] = $instance = new \Gedmo\Translatable\TranslatableListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+        $instance->setDefaultLocale('fr');
+        $instance->setTranslationFallback(false);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'gedmo.listener.tree' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Gedmo\Tree\TreeListener A Gedmo\Tree\TreeListener instance.
+     */
+    protected function getGedmo_Listener_TreeService()
+    {
+        $this->services['gedmo.listener.tree'] = $instance = new \Gedmo\Tree\TreeListener();
+
+        $instance->setAnnotationReader($this->get('annotation_reader'));
+
+        return $instance;
     }
 
     /**
@@ -2794,7 +2941,9 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addExtension($this->get('twig.extension.craue_formflow'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
-        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links', 'subrouting' => array(0 => array('label' => 'Categories', 'routing' => 'categories'), 1 => array('label' => 'Liens', 'routing' => 'links'), 2 => array('label' => 'Medias', 'routing' => 'medias'))), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Commentaires', 'routing' => 'comments'), 6 => array('label' => 'Pages', 'routing' => 'pages'), 7 => array('label' => 'Tags', 'routing' => 'tags'), 8 => array('label' => 'Paramètres', 'routing' => 'parametres')));
+        $instance->addGlobal('nom_site', 'Julovic');
+        $instance->addGlobal('slogan', 'a CMF for Everybody');
+        $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links'), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Commentaires', 'routing' => 'comments'), 6 => array('label' => 'Tags', 'routing' => 'tags'), 7 => array('label' => 'Autres', 'routing' => 'other', 'subrouting' => array(0 => array('label' => 'Pages', 'routing' => 'pages'), 1 => array('label' => 'Administrateurs', 'routing' => 'administrateurs'), 2 => array('label' => 'Référencement', 'routing' => 'referencement')))));
         $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new'), 3 => array('label' => 'Nouvelle Page', 'routing' => 'pages_new'), 4 => array('label' => 'Nouveau Media', 'routing' => 'medias_new')));
         $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
         $instance->addGlobal('advices', array(0 => 'Conseil ici numéro 1', 1 => 'Conseil ici numéro 2', 2 => 'Conseil ici numéro 3', 3 => 'Conseil ici numéro 4', 4 => 'Conseil ici numéro 5', 5 => 'Conseil ici numéro 6'));
@@ -2995,7 +3144,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -3402,6 +3551,7 @@ class appDevDebugProjectContainer extends Container
             'secret' => '40883bff372c0554b1017107629556b4e6',
             'database_path' => NULL,
             'email_administrateur' => 'zuzu38080@gmail.com',
+            'limit_per_page' => 6,
             'sidebar_entities' => array(
                 'Articles' => array(
                     'field' => 'title',
@@ -3433,6 +3583,7 @@ class appDevDebugProjectContainer extends Container
             Site\\AdminBundle\\Authentication\\AuthenticationHandler
         ',
             'control.class' => 'Site\\AdminBundle\\Listener\\ControlListener',
+            'common.class' => 'Site\\AdminBundle\\Controller\\CommonController',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -3890,8 +4041,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_507f4eba320ff.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager507f4eba320ff_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

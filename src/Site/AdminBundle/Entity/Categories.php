@@ -7,22 +7,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Site\AdminBundle\Entity\Categories
- *
  * @ORM\Table(name="categories")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
+ * @Gedmo\Tree(type="nested")
  */
-class Categories
-{
-    
-        /**
+class Categories {
+
+    /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateCreated = new  \Datetime('now');
+        $this->dateCreated = new \Datetime('now');
     }
+
     /**
      * @var integer $id
      *
@@ -30,51 +28,86 @@ class Categories
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $title
      * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="title", type="string", length=200, nullable=false)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string $description
      * @Assert\NotBlank(message = "Description  ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="description", type="text", nullable=false)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var \DateTime $dateCreated
      *
      * @ORM\Column(name="date_created", type="datetime", nullable=false)
      */
-    private $dateCreated;
+    protected $dateCreated;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Articles", mappedBy="category", cascade={"persist", "remove"},orphanRemoval=true)
-     */
-    protected $articles;
-        
-     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column( length=128, unique=true)
      */
-    private $slug;
-    
-    
-    
+    protected $slug;
+
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    protected $lft;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    protected $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    protected $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(name="root", type="integer", nullable=true)
+     */
+    protected $root;
+
+    /**
+     * @var \String $position
+     * 
+     * @ORM\Column(name="position", type="integer", nullable=true)
+     */
+    protected $position;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Categories", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Categories", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    protected $children;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -84,10 +117,9 @@ class Categories
      * @param string $title
      * @return Categories
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
-    
+
         return $this;
     }
 
@@ -96,8 +128,7 @@ class Categories
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -107,10 +138,9 @@ class Categories
      * @param string $description
      * @return Categories
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -119,8 +149,7 @@ class Categories
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -130,10 +159,9 @@ class Categories
      * @param \DateTime $dateCreated
      * @return Categories
      */
-    public function setDateCreated($dateCreated)
-    {
+    public function setDateCreated($dateCreated) {
         $this->dateCreated = $dateCreated;
-    
+
         return $this;
     }
 
@@ -142,55 +170,20 @@ class Categories
      *
      * @return \DateTime 
      */
-    public function getDateCreated()
-    {
+    public function getDateCreated() {
         return $this->dateCreated;
     }
 
-    
-    /**
-     * Add articles
-     *
-     * @param Site\AdminBundle\Entity\Articles $articles
-     * @return Categories
-     */
-    public function addArticle(\Site\AdminBundle\Entity\Articles $articles)
-    {
-        $this->articles[] = $articles;
-    
-        return $this;
-    }
 
     /**
-     * Remove articles
-     *
-     * @param Site\AdminBundle\Entity\Articles $articles
-     */
-    public function removeArticle(\Site\AdminBundle\Entity\Articles $articles)
-    {
-        $this->articles->removeElement($articles);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-    
-       /**
      * Set slug
      *
      * @param string $slug
      * @return Articles
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -199,15 +192,184 @@ class Categories
      *
      * @return string 
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
-    
-        
-    public function __toString(){
-        return $this->getSlug();
-        
+
+    /**
+     * Set lft
+     *
+     * @param integer $lft
+     * @return Categories
+     */
+    public function setLft($lft) {
+        $this->lft = $lft;
+
+        return $this;
     }
 
+    /**
+     * Get lft
+     *
+     * @return integer 
+     */
+    public function getLft() {
+        return $this->lft;
+    }
+
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     * @return Categories
+     */
+    public function setLvl($lvl) {
+        $this->lvl = $lvl;
+
+        return $this;
+    }
+
+    /**
+     * Get lvl
+     *
+     * @return integer 
+     */
+    public function getLvl() {
+        return $this->lvl;
+    }
+
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     * @return Categories
+     */
+    public function setRgt($rgt) {
+        $this->rgt = $rgt;
+
+        return $this;
+    }
+
+    /**
+     * Get rgt
+     *
+     * @return integer 
+     */
+    public function getRgt() {
+        return $this->rgt;
+    }
+
+    /**
+     * Set root
+     *
+     * @param integer $root
+     * @return Categories
+     */
+    public function setRoot($root) {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Get root
+     *
+     * @return integer 
+     */
+    public function getRoot() {
+        return $this->root;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param Site\AdminBundle\Entity\Categories $parent
+     * @return Categories
+     */
+    public function setParent($parent = null) {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Site\AdminBundle\Entity\Categories
+     */
+    public function getParent() {
+        return $this->parent;
+    }
+
+    public function getOptionLabel() {
+        return str_repeat(
+                        html_entity_decode('&nbsp;', ENT_QUOTES, 'UTF-8'), ($this->getLvl() + 1) * 3
+                ) . $this->getTitle();
+    }
+
+    public function __toString() {
+        return $this->title;
+    }
+
+
+    public function getLaveledTitle()
+    {
+        return (string)$this;
+    }
+
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Categories
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Add children
+     *
+     * @param Site\AdminBundle\Entity\Categories $children
+     * @return Categories
+     */
+    public function addChildren(\Site\AdminBundle\Entity\Categories $children)
+    {
+        $this->children[] = $children;
+    
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param Site\AdminBundle\Entity\Categories $children
+     */
+    public function removeChildren(\Site\AdminBundle\Entity\Categories $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }

@@ -47,7 +47,7 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
         ";
         // line 31
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 103
+        // line 109
         echo "    </body>
 </html>
 ";
@@ -56,7 +56,7 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
     // line 7
     public function block_title($context, array $blocks = array())
     {
-        echo "Welcome!";
+        echo "Julovic CMF Framework";
     }
 
     // line 8
@@ -134,115 +134,110 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
     public function block_javascripts($context, array $blocks = array())
     {
         // line 32
-        echo "                    <script type=\"text/javascript\" src=\"http://platform.twitter.com/widgets.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/jquery.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js\"></script>
-                    <script type=\"text/javascript\" src=\"http://twitter.github.com/bootstrap/assets/js/application.js\"></script>
-                    
-                    <script type=\"text/javascript\" src=\"";
-        // line 50
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.mousewheel-3.0.6.pack.js"), "html", null, true);
-        echo "\"></script>
-                    <script type=\"text/javascript\" src=\"";
+        echo "                  ";
         // line 51
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.easing.js"), "html", null, true);
-        echo "\"></script>
+        echo "            
                     <script type=\"text/javascript\" src=\"";
         // line 52
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.fancybox.pack.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/twitter/jquery.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 53
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery-ui-1.8.24.custom.min.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/twitter/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
-                    <script type=\"text/javascript\" src=\"";
-        // line 54
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jhtml.js"), "html", null, true);
-        echo "\"></script>
+                    
                     <script type=\"text/javascript\" src=\"";
         // line 55
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.uniform.min.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.mousewheel-3.0.6.pack.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 56
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/select2.min.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.easing.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 57
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.overscroll.min.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.fancybox.pack.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 58
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/modernizr.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery-ui-1.9.0.custom.min.js"), "html", null, true);
         echo "\"></script>
-                    <script type=\"text/javascript\" src=\"";
-        // line 59
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/fullcalendar.min.js"), "html", null, true);
-        echo "\"></script>
-                    <script type=\"text/javascript\" src=\"";
+                   ";
         // line 60
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.tipsy.js"), "html", null, true);
+        echo "                    <script type=\"text/javascript\" src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jhtml.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 61
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.knob.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.uniform.min.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
         // line 62
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/select2.min.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 63
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.overscroll.min.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 64
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/modernizr.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 65
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/fullcalendar.min.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 66
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.tipsy.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 67
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.knob.js"), "html", null, true);
+        echo "\"></script>
+                    <script type=\"text/javascript\" src=\"";
+        // line 68
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.carouFredSel.js"), "html", null, true);
         echo "\"></script>
                     ";
-        // line 64
+        // line 70
         echo "                    <script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.scrollTo.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 65
+        // line 71
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.ui.timepicker.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 66
+        // line 72
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jquery.cookie.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 67
+        // line 73
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/jscolor.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 68
+        // line 74
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/wysihtml5-0.3.0.min.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 69
+        // line 75
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/siteadmin/js/bootstrap-wysihtml5.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 70
+        // line 76
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/fosjsrouting/js/router.js"), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\" src=\"";
-        // line 71
+        // line 77
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fos_js_routing_js", array("callback" => "fos.Router.setData")), "html", null, true);
         echo "\"></script>
                     <script type=\"text/javascript\">
                             \$.cookie('cookie_flash', true);
                     </script>
-                  <!--[if lt IE 9]>
-                     <script type=\"text/javascript\" src=\"/js/excanvas.js\"></script>
-                 <![endif]-->
+                    <!--[if lt IE 9]>
+                        <script type=\"text/javascript\" src=\"/js/excanvas.js\"></script>
+                    <![endif]-->
                     
 <!--[if IE]>
     <script type=\"text/javascript\">
@@ -282,6 +277,6 @@ class __TwigTemplate_f6ed2257997b6cca3aa0c36dd1c72202 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  236 => 71,  232 => 70,  228 => 69,  224 => 68,  220 => 67,  216 => 66,  212 => 65,  207 => 64,  203 => 62,  199 => 61,  195 => 60,  191 => 59,  187 => 58,  183 => 57,  179 => 56,  175 => 55,  171 => 54,  167 => 53,  163 => 52,  159 => 51,  155 => 50,  135 => 32,  132 => 31,  128 => 29,  125 => 28,  119 => 23,  115 => 22,  111 => 21,  107 => 20,  103 => 19,  99 => 18,  95 => 17,  91 => 16,  87 => 15,  83 => 14,  79 => 13,  75 => 12,  71 => 11,  67 => 10,  64 => 9,  61 => 8,  55 => 7,  49 => 103,  47 => 31,  44 => 30,  42 => 28,  35 => 25,  33 => 8,  29 => 7,  21 => 1,);
+        return array (  231 => 77,  227 => 76,  223 => 75,  219 => 74,  215 => 73,  211 => 72,  207 => 71,  202 => 70,  190 => 66,  182 => 64,  174 => 62,  170 => 61,  161 => 58,  157 => 57,  153 => 56,  144 => 53,  140 => 52,  137 => 51,  132 => 31,  128 => 29,  125 => 28,  119 => 23,  115 => 22,  111 => 21,  107 => 20,  103 => 19,  99 => 18,  91 => 16,  83 => 14,  79 => 13,  75 => 12,  71 => 11,  64 => 9,  61 => 8,  55 => 7,  49 => 109,  47 => 31,  44 => 30,  35 => 25,  33 => 8,  21 => 1,  198 => 68,  194 => 67,  189 => 77,  186 => 65,  181 => 65,  175 => 63,  168 => 59,  165 => 60,  159 => 56,  152 => 52,  149 => 55,  143 => 49,  136 => 45,  133 => 44,  127 => 42,  121 => 39,  112 => 36,  104 => 32,  101 => 31,  95 => 17,  88 => 25,  86 => 24,  80 => 21,  77 => 20,  74 => 19,  63 => 67,  60 => 19,  58 => 18,  54 => 16,  52 => 15,  46 => 12,  43 => 11,  40 => 9,  37 => 8,  31 => 5,  28 => 4,  201 => 80,  193 => 75,  178 => 63,  167 => 63,  163 => 62,  158 => 59,  146 => 52,  135 => 32,  129 => 43,  122 => 39,  118 => 38,  114 => 37,  110 => 36,  106 => 35,  102 => 34,  98 => 33,  92 => 32,  87 => 15,  82 => 22,  67 => 10,  57 => 19,  53 => 18,  45 => 13,  42 => 28,  38 => 9,  36 => 8,  29 => 7,  26 => 3,);
     }
 }

@@ -33,28 +33,32 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
         echo "            ";
         $this->displayParentBlock("body", $context, $blocks);
         echo "
-                    <div class=\"container-fluid\">
+ ";
+        // line 6
+        $this->env->loadTemplate("SiteAdminBundle:Slot:topmenulight.html.twig")->display($context);
+        // line 7
+        echo "                    <div class=\"container-fluid\">
                             <div class=\"span5\" id=\"content\">
                                 ";
-        // line 8
+        // line 9
         $this->displayBlock('content', $context, $blocks);
-        // line 10
+        // line 11
         echo "                            </div>
                     </div>
     ";
     }
 
-    // line 8
+    // line 9
     public function block_content($context, array $blocks = array())
     {
-        // line 9
+        // line 10
         echo "                                ";
     }
 
-    // line 14
+    // line 15
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 15
+        // line 16
         echo "             ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
@@ -73,6 +77,6 @@ class __TwigTemplate_8a87a70bcd1264279872dd7951ccf661 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  56 => 15,  53 => 14,  49 => 9,  46 => 8,  40 => 10,  38 => 8,  31 => 5,  28 => 4,  67 => 21,  60 => 17,  57 => 16,  51 => 13,  47 => 11,  45 => 10,  36 => 5,  33 => 4,  27 => 3,);
+        return array (  57 => 15,  53 => 10,  42 => 9,  38 => 7,  31 => 5,  28 => 4,  69 => 23,  60 => 16,  56 => 15,  50 => 9,  46 => 10,  44 => 11,  36 => 6,  33 => 4,  27 => 3,);
     }
 }

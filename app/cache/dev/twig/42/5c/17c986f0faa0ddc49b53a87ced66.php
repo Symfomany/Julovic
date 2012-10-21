@@ -71,11 +71,13 @@ class __TwigTemplate_425c17c986f0faa0ddc49b53a87ced66 extends Twig_Template
             echo "</td>
             <td>";
             // line 28
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "resume"), "html", null, true);
+            echo twig_truncate_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "resume"), 250, true);
+            echo " ";
             echo "</td>
             <td>";
             // line 29
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "content"), "html", null, true);
+            echo twig_truncate_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "content"), 250, true);
+            echo " ";
             echo "</td>
             <td>";
             // line 30
@@ -143,6 +145,6 @@ class __TwigTemplate_425c17c986f0faa0ddc49b53a87ced66 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  123 => 49,  117 => 45,  105 => 39,  99 => 36,  90 => 32,  84 => 31,  80 => 30,  76 => 29,  72 => 28,  68 => 27,  62 => 26,  59 => 25,  55 => 24,  38 => 9,  36 => 8,  29 => 4,  26 => 3,);
+        return array (  125 => 49,  119 => 45,  107 => 39,  101 => 36,  92 => 32,  86 => 31,  82 => 30,  77 => 29,  72 => 28,  68 => 27,  62 => 26,  59 => 25,  55 => 24,  38 => 9,  36 => 8,  29 => 4,  26 => 3,);
     }
 }

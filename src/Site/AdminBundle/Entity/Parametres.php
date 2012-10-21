@@ -38,11 +38,19 @@ class Parametres
     private $urlSite;
 
     /**
-     * @var integer $administrateursId
-     *
-     * @ORM\Column(name="administrateurs_id", type="integer", nullable=true)
+     * @var text $descriptionSite
+     * @Assert\NotBlank(message = "Description ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="description_site", type="text", nullable=true)
      */
-    private $administrateursId;
+    private $descriptionSite;
+    
+    
+    /**
+     * @var string $immatriculation
+     * @Assert\NotBlank(message = "Immatriculation ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="immatriculation", type="string", length=120, nullable=true)
+     */
+    private $immatriculation;
 
     /**
      * @var string $nomAdmin
@@ -74,13 +82,14 @@ class Parametres
 
     /**
      * @var string $cpAdmin
-     *
+     * @Assert\MaxLength(5)
      * @ORM\Column(name="cp_admin", type="string", length=150, nullable=true)
      */
     private $cpAdmin;
 
     /**
      * @var string $telAdmin
+     * @Assert\MaxLength(10)
      * @Assert\NotBlank(message = "Tel ne doit pas être vide", groups={"suscribe_step2"})
      * @ORM\Column(name="tel_admin", type="string", length=120, nullable=true)
      */
@@ -149,29 +158,6 @@ class Parametres
     public function getUrlSite()
     {
         return $this->urlSite;
-    }
-
-    /**
-     * Set administrateursId
-     *
-     * @param integer $administrateursId
-     * @return Parametres
-     */
-    public function setAdministrateursId($administrateursId)
-    {
-        $this->administrateursId = $administrateursId;
-    
-        return $this;
-    }
-
-    /**
-     * Get administrateursId
-     *
-     * @return integer 
-     */
-    public function getAdministrateursId()
-    {
-        return $this->administrateursId;
     }
 
     /**
@@ -333,5 +319,51 @@ class Parametres
     public function getPortAdmin()
     {
         return $this->portAdmin;
+    }
+
+    /**
+     * Set descriptionSite
+     *
+     * @param string $descriptionSite
+     * @return Parametres
+     */
+    public function setDescriptionSite($descriptionSite)
+    {
+        $this->descriptionSite = $descriptionSite;
+    
+        return $this;
+    }
+
+    /**
+     * Get descriptionSite
+     *
+     * @return string 
+     */
+    public function getDescriptionSite()
+    {
+        return $this->descriptionSite;
+    }
+
+    /**
+     * Set immatriculation
+     *
+     * @param string $immatriculation
+     * @return Parametres
+     */
+    public function setImmatriculation($immatriculation)
+    {
+        $this->immatriculation = $immatriculation;
+    
+        return $this;
+    }
+
+    /**
+     * Get immatriculation
+     *
+     * @return string 
+     */
+    public function getImmatriculation()
+    {
+        return $this->immatriculation;
     }
 }

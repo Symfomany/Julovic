@@ -51,18 +51,6 @@ class Articles extends \Site\AdminBundle\Entity\Articles implements \Doctrine\OR
         return parent::getId();
     }
 
-    public function setCategory($categoryId)
-    {
-        $this->__load();
-        return parent::setCategory($categoryId);
-    }
-
-    public function getCategory()
-    {
-        $this->__load();
-        return parent::getCategory();
-    }
-
     public function setResume($resume)
     {
         $this->__load();
@@ -225,10 +213,52 @@ class Articles extends \Site\AdminBundle\Entity\Articles implements \Doctrine\OR
         return parent::getMedias();
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
+    public function addCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->__load();
+        return parent::addCategorie($categories);
+    }
+
+    public function setCategories(\Doctrine\Common\Collections\ArrayCollection $categories)
+    {
+        $this->__load();
+        return parent::setCategories($categories);
+    }
+
+    public function removeCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->__load();
+        return parent::removeCategorie($categories);
+    }
+
+    public function getCategories()
+    {
+        $this->__load();
+        return parent::getCategories();
+    }
+
+    public function setPosition($position)
+    {
+        $this->__load();
+        return parent::setPosition($position);
+    }
+
+    public function getPosition()
+    {
+        $this->__load();
+        return parent::getPosition();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'resume', 'content', 'tag', 'dateCreated', 'dateUpdated', 'active', 'type', 'special', 'notes', 'slug', 'category', 'medias');
+        return array('__isInitialized__', 'id', 'title', 'resume', 'content', 'tag', 'dateCreated', 'dateUpdated', 'active', 'type', 'special', 'notes', 'slug', 'position', 'categories', 'medias');
     }
 
     public function __clone()

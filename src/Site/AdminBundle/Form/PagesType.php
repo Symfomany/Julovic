@@ -12,8 +12,8 @@ class PagesType extends AbstractType
     {
         $builder
             ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
-            ->add('resume', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
-            ->add('content', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
+            ->add('resume', 'textarea', array('attr' => array('class' => 'textarea'), 'required' => true))
+            ->add('content', 'textarea', array('attr' => array('class' => 'textarea'), 'required' => true))
             ->add('tag');
     }
 

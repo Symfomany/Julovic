@@ -18,6 +18,7 @@ class LinksController extends Controller
     public function preExecute() {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Liens", $this->get("router")->generate("links"));
+        $this->common = $this->get("commoncontroller");
     }
     
     
@@ -27,12 +28,9 @@ class LinksController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('SiteAdminBundle:Links')->findAll();
-
+        $pagination =   $this->common->getList('Links', null, 'id');
         return $this->render('SiteAdminBundle:Links:index.html.twig', array(
-            'entities' => $entities,
+            'pagination' => $pagination
         ));
     }
 
@@ -43,15 +41,11 @@ class LinksController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('SiteAdminBundle:Links')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Links entity.');
         }
-
         $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('SiteAdminBundle:Links:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));

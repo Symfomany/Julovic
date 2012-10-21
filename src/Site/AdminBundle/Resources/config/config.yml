@@ -1,5 +1,6 @@
 parameters:
     email_administrateur: zuzu38080@gmail.com
+    limit_per_page: 6
     sidebar_entities:
        Articles:
             field: 'title'
@@ -31,16 +32,18 @@ parameters:
       
 twig:
     globals:
+        nom_site: Julovic 
+        slogan: a CMF for Everybody
         topmenu:
           - {label: 'Home', routing: 'home' }
           - {label: 'Articles', routing: 'articles'}
           - {label: 'Categories', routing: 'categories' }
-          - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
+#          - {label: 'Liens', routing: 'links', subrouting : [ {label: 'Categories', routing: 'categories' },{label: 'Liens', routing: 'links' } {label: 'Medias', routing: 'medias' }]  }
+          - {label: 'Liens', routing: 'links'  }
           - {label: 'Medias', routing: 'medias'  }
           - {label: 'Commentaires', routing: 'comments'  }
-          - {label: 'Pages', routing: 'pages'  }
           - {label: 'Tags', routing: 'tags' }
-          - {label: 'Paramètres', routing: 'parametres' }
+          - {label: 'Autres', routing: 'other', subrouting : [{label: 'Pages', routing: 'pages'  }, {label: 'Administrateurs', routing: 'administrateurs'  }, {label: 'Référencement', routing: 'referencement'  }]  }
         fastactions:
           - {'label': 'Nouvel Article', routing: 'articles_new' }
           - {'label': 'Nouvel Catégorie', routing: 'categories_new' }

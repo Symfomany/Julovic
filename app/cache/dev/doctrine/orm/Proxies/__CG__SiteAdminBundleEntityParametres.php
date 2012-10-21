@@ -75,18 +75,6 @@ class Parametres extends \Site\AdminBundle\Entity\Parametres implements \Doctrin
         return parent::getUrlSite();
     }
 
-    public function setAdministrateursId($administrateursId)
-    {
-        $this->__load();
-        return parent::setAdministrateursId($administrateursId);
-    }
-
-    public function getAdministrateursId()
-    {
-        $this->__load();
-        return parent::getAdministrateursId();
-    }
-
     public function setNomAdmin($nomAdmin)
     {
         $this->__load();
@@ -171,10 +159,34 @@ class Parametres extends \Site\AdminBundle\Entity\Parametres implements \Doctrin
         return parent::getPortAdmin();
     }
 
+    public function setDescriptionSite($descriptionSite)
+    {
+        $this->__load();
+        return parent::setDescriptionSite($descriptionSite);
+    }
+
+    public function getDescriptionSite()
+    {
+        $this->__load();
+        return parent::getDescriptionSite();
+    }
+
+    public function setImmatriculation($immatriculation)
+    {
+        $this->__load();
+        return parent::setImmatriculation($immatriculation);
+    }
+
+    public function getImmatriculation()
+    {
+        $this->__load();
+        return parent::getImmatriculation();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'nomSite', 'urlSite', 'administrateursId', 'nomAdmin', 'emailAdmin', 'adresseAdmin', 'villeAdmin', 'cpAdmin', 'telAdmin', 'portAdmin');
+        return array('__isInitialized__', 'id', 'nomSite', 'urlSite', 'descriptionSite', 'immatriculation', 'nomAdmin', 'emailAdmin', 'adresseAdmin', 'villeAdmin', 'cpAdmin', 'telAdmin', 'portAdmin');
     }
 
     public function __clone()

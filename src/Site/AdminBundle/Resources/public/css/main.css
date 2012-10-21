@@ -1,6 +1,24 @@
+.well {
+  padding:0px;  
+}
+
+.ui-state-highlight { height: 2em; line-height: 1.8em; }
+.actions {
+background: whiteSmoke;
+margin-top: 18px;
+margin-bottom: 18px;
+padding: 17px 20px 18px 150px;
+border-top: 1px solid #DDD;
+-webkit-border-radius: 0 0 3px 3px;
+-moz-border-radius: 0 0 3px 3px;
+border-radius: 0 0 3px 3px;
+}
+
+.breadcrumb li {
+text-shadow: 1px 1px white, 1px 1px white;
+}
+
 button.btn, input[type="submit"].btn {
-    display: block;
-    clear: both;
 }
 label {
     font-family: Calibri;
@@ -11,9 +29,28 @@ label {
 }
 
 legend {
-    text-shadow: 1px 1px #CCC, 1px 1px #CCC;
-    font-family: Microsoft;
-    color: #111;
+text-shadow: 1px 1px white, 1px 1px white;
+color: #333;
+font-family: Microsoft;
+background-color: #F6F6F6;
+background-image: -moz-linear-gradient(top, #FAFAFA, #F2F2F2);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FAFAFA), to(#F2F2F2));
+background-image: -webkit-linear-gradient(top, #FAFAFA, #F2F2F2);
+background-image: -o-linear-gradient(top, #FAFAFA, #F2F2F2);
+background-image: linear-gradient(to bottom, #FAFAFA,#F2F2F2);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFAFAFA', endColorstr='#FFF2F2F2', GradientType=0);
+border-top: 1px solid white;
+border-bottom: 1px solid #CCC;
+-moz-border-radius-topleft: 4px;
+-webkit-border-top-left-radius: 4px;
+border-top-left-radius: 4px;
+-moz-border-radius-topright: 4px;
+-webkit-border-top-right-radius: 4px;
+border-top-right-radius: 4px;
+height: 46px;
+padding-left: 20px;
+width: 548px;
 }
 
 .container-fluid {
@@ -34,6 +71,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     float: left;
     margin-right: 8px;
     padding-top: 5px;
+}
+body{
+        background: transparent url('../images/background.jpg') repeat top left;
 }
 h1{
     background: transparent url('../images/bandeau_title.png') no-repeat 1px 11px;
@@ -317,9 +357,10 @@ div.jHtmlArea .ToolBar ul li a.custom_disk_button
 
 div.jHtmlArea { border: solid 1px #ccc; }
 #another_links{
-    position: absolute;
-    left: 134px;
-    top: 42px;
+position: absolute;
+left: 0px;
+margin-left: 102px;
+margin-top: -31px;
 }
 #sidebar_context{
     margin-top: 20px;
@@ -331,8 +372,7 @@ div.jHtmlArea { border: solid 1px #ccc; }
 }
 #scrollTop{
     position: absolute;
-    left: -1px;
-    top: 47px;
+margin-top: 60px;
 }
 #content{
     margin-top: 20px;
@@ -396,7 +436,7 @@ div.ajaxLoading{
     width: 230px;
 }
 #footer{
-    background-color: #333;
+background-color: #111;
     height: 120px;
     width: 100%;
     border-top: 1px solid black;
@@ -480,7 +520,25 @@ ul.wysihtml5-commands-disabled .dropdown-menu {
     position: relative;
     bottom: 28px;
 }
-
+#box_login{
+    margin-left: 368px;
+    margin-top: 115px;
+}
+#btn_param{
+    margin: 10px;
+}
+.italic{
+    font-style: italic;
+}
+.gras{
+    font-weight: bold;
+}
+.souligner{
+    text-decoration: underline;
+}
+#box_slogan{
+    margin-left:10px;
+}
 /*#sidebar_left{
     margin-top: 21px;
 }*/

@@ -13,11 +13,11 @@ class ArticlesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category')
             ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
             ->add('resume', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
             ->add('content', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'wyswyg'), 'required' => true))
             ->add('notes')
+            ->add('categories', null, array('property' => 'optionLabel', 'attr' => array('class' => 'multipleselect')))
             ->add('medias', 'collection', array(
                     'type' => new MediasType(),
             ));

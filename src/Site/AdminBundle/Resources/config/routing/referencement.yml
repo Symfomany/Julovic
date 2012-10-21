@@ -1,0 +1,30 @@
+referencement:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Referencement:index" }
+
+referencement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Referencement:show" }
+
+referencement_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Referencement:new" }
+
+referencement_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Referencement:create" }
+    requirements: { _method: post }
+
+referencement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Referencement:edit" }
+
+referencement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Referencement:update" }
+    requirements: { _method: post }
+
+referencement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Referencement:delete" }
+    requirements: { _method: post }
