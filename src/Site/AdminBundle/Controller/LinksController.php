@@ -50,6 +50,16 @@ class LinksController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
+    
+        /**
+     * Modiy Activation
+     */
+    public function activationAction($id, $bool = 1)
+    {
+         $this->common->setActive('Links',$id,  $bool);
+        return $this->redirect($this->generateUrl('links'));
+    }
+    
 
     /**
      * Displays a form to create a new Links entity.

@@ -396,6 +396,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
                 not_links_delete:
 
+                // links_activation
+                if (0 === strpos($pathinfo, '/admin/links/activation') && preg_match('#^/admin/links/activation/(?<id>[^/]+)(?:/(?<bool>[^/]+))?$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\LinksController::activationAction',  'bool' => '1',)), array('_route' => 'links_activation'));
+                }
+
             }
 
             if (0 === strpos($pathinfo, '/admin/medias')) {

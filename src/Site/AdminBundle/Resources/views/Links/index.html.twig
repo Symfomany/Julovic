@@ -20,6 +20,7 @@
             <th>Link</th>
             <th>Description</th>
             <th>Datecreated</th>
+            <th>Activation</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -31,6 +32,7 @@
             <td>{{ entity.link }}</td>
             <td>{{ entity.description }}</td>
             <td>{{ entity.dateCreated|date('Y-m-d')|localizeddate('short', 'none')  }}</td>
+            <td>{{ entity.active|validate(entity.id)|raw }}</td>
             <td>
                 <ul>
                     <li>

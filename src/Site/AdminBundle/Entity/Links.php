@@ -58,6 +58,13 @@ class Links
     private $dateCreated;
 
 
+    /**
+     * @var string $active
+     *
+     * @ORM\Column(name="active", type="boolean", length=200, nullable=false)
+     */
+    private $active;
+
 
     /**
      * Get id
@@ -159,5 +166,28 @@ class Links
     public function getDateCreated()
     {
         return $this->dateCreated;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Links
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

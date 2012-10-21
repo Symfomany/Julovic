@@ -28,3 +28,7 @@ links_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SiteAdminBundle:Links:delete" }
     requirements: { _method: post }
+
+links_activation:
+    pattern:  /activation/{id}/{bool}
+    defaults: { _controller: "SiteAdminBundle:Links:activation", bool : 1  }

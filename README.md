@@ -1,4 +1,4 @@
-<h2>Julovic 1.2</h2>
+<h2>Julovic 1.3</h2>
 
 CMF By Juju &amp; Lulu
 Open Source Project -- License MIT
@@ -71,7 +71,11 @@ People can pick and choose the right approaches for their CMS without having to 
   - Event & Suscribers
   - Tests Units & Fcts
   - Administrateurs handler and configs
-
+  - Nested Categories Structure
+  - Visibility of Entities 
+  -  Sortable handlers
+  -  Quick actions 
+  -  Params of site to handle structure
 
 ================================
 <h2>Documentation</h2>
