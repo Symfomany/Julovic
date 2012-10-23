@@ -1,3 +1,12 @@
+.table{
+    
+}
+.table tr{
+    
+}
+.table tr td.wide{
+    min-width:150px;
+}
 .well {
   padding:0px;  
 }

@@ -9,6 +9,10 @@ search_query_ajax:
     options:
         expose: true
 
+displaying:
+    pattern:  /displaying/{page}
+    defaults: { _controller: "SiteAdminBundle:Slot:displaying" , page: 5}
+
 other:
     pattern:  /notfound
     defaults: { _controller: "SiteAdminBundle:Default:index" }

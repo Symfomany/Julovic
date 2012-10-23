@@ -2,6 +2,7 @@
 {% extends '::base.html.twig' %}
 
         {% block body%}
+                    {% render "SiteAdminBundle:Notifications:index" %}
             {{ parent() }}
 
             {# Toolbar #}
@@ -19,15 +20,15 @@
                         {% block content %}
                                     
                         {% render 'SiteAdminBundle:Parametres:editOne' %}
-                                    
+                                 
                                     <p id="print_btn" class="right"><i class="icon-print"><a href="javascript:window.print()"></i> Imprimer</a></p>
                                   {% if not app.request.cookies.has('cookie_flash') %}
-                                          {% if advices is defined and advices is not empty %} 
+                                            {% if advices is defined and advices is not empty %} 
                                                             <div class="alert alert-info">
                                                                       <button type="button" class="close" data-dismiss="alert">×</button>
                                                                      {{ random(advices) }}
                                                             </div>
-                                    {% endif %}
+                                             {% endif %}
                                     {% endif %}
                                           {% if app.session.hasFlash('notice') %} 
                                               <div class="alert alert-info">

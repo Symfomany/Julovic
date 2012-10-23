@@ -301,6 +301,6 @@ $(function() {
         "image": true, //Button to insert an image. Default true,
         "color": true //Button to change color of font  
     });
-    
-    
+
+        
 });

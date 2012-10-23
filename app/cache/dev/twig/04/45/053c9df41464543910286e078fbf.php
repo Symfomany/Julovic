@@ -99,13 +99,13 @@ class __TwigTemplate_0445053c9df41464543910286e078fbf extends Twig_Template
             // line 33
             echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title")), "html", null, true);
             echo "</td>
-            <td>";
+            <td class=\"wide\">";
             // line 34
             echo twig_truncate_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "resume"), 50, true);
             echo "</td>
-            <td>";
+            <td class=\"wide\">";
             // line 35
-            echo twig_escape_filter($this->env, twig_truncate_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "content"), 50, true), "html", null, true);
+            echo twig_truncate_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "content"), 50, true);
             echo "</td>
             <td>";
             // line 36

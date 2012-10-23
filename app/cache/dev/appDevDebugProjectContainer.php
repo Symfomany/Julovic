@@ -388,11 +388,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php';
 
         $a = $this->get('annotation_reader');
 
@@ -427,7 +427,7 @@ class appDevDebugProjectContainer extends Container
         $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
         $this->get('doctrine.orm.default_manager_configurator')->configure($h);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -2941,8 +2941,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('white_october_breadcrumbs.twig'));
         $instance->addExtension($this->get('twig.extension.craue_formflow'));
         $instance->addExtension($this->get('twig.extension.acme.demo'));
-        $instance->addGlobal('nom_site', 'Julovic');
-        $instance->addGlobal('slogan', 'a CMF for Everybody');
+        $instance->addGlobal('nom_site', 'Julovik');
+        $instance->addGlobal('slogan', 'CMF for EveryBody');
         $instance->addGlobal('topmenu', array(0 => array('label' => 'Home', 'routing' => 'home'), 1 => array('label' => 'Articles', 'routing' => 'articles'), 2 => array('label' => 'Categories', 'routing' => 'categories'), 3 => array('label' => 'Liens', 'routing' => 'links'), 4 => array('label' => 'Medias', 'routing' => 'medias'), 5 => array('label' => 'Commentaires', 'routing' => 'comments'), 6 => array('label' => 'Tags', 'routing' => 'tags'), 7 => array('label' => 'Autres', 'routing' => 'other', 'subrouting' => array(0 => array('label' => 'Pages', 'routing' => 'pages'), 1 => array('label' => 'Administrateurs', 'routing' => 'administrateurs'), 2 => array('label' => 'Référencement', 'routing' => 'referencement')))));
         $instance->addGlobal('fastactions', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new'), 3 => array('label' => 'Nouvelle Page', 'routing' => 'pages_new'), 4 => array('label' => 'Nouveau Media', 'routing' => 'medias_new')));
         $instance->addGlobal('sidebar', array(0 => array('label' => 'Nouvel Article', 'routing' => 'articles_new'), 1 => array('label' => 'Nouvel Catégorie', 'routing' => 'categories_new'), 2 => array('label' => 'Nouveau Link', 'routing' => 'links_new')));
@@ -3144,7 +3144,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -4041,8 +4041,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

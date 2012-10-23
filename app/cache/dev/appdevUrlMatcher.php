@@ -604,6 +604,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::searchajaxAction',  '_route' => 'search_query_ajax',);
             }
 
+            // displaying
+            if (0 === strpos($pathinfo, '/admin/displaying') && preg_match('#^/admin/displaying(?:/(?<page>[^/]+))?$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::displayingAction',  'page' => '5',)), array('_route' => 'displaying'));
+            }
+
             // other
             if ($pathinfo === '/admin/notfound') {
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'other',);
@@ -821,6 +826,66 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::deleteAction',)), array('_route' => 'referencement_delete'));
                 }
                 not_referencement_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/notifications')) {
+                // notifications
+                if (rtrim($pathinfo, '/') === '/admin/notifications') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'notifications');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::indexAction',  '_route' => 'notifications',);
+                }
+
+                // notifications_show
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::showAction',)), array('_route' => 'notifications_show'));
+                }
+
+                // notifications_new
+                if ($pathinfo === '/admin/notifications/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::newAction',  '_route' => 'notifications_new',);
+                }
+
+                // notifications_create
+                if ($pathinfo === '/admin/notifications/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::createAction',  '_route' => 'notifications_create',);
+                }
+                not_notifications_create:
+
+                // notifications_edit
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::editAction',)), array('_route' => 'notifications_edit'));
+                }
+
+                // notifications_update
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::updateAction',)), array('_route' => 'notifications_update'));
+                }
+                not_notifications_update:
+
+                // notifications_delete
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::deleteAction',)), array('_route' => 'notifications_delete'));
+                }
+                not_notifications_delete:
 
             }
 

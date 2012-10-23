@@ -1,0 +1,30 @@
+notifications:
+    pattern:  /
+    defaults: { _controller: "SiteAdminBundle:Notifications:index" }
+
+notifications_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SiteAdminBundle:Notifications:show" }
+
+notifications_new:
+    pattern:  /new
+    defaults: { _controller: "SiteAdminBundle:Notifications:new" }
+
+notifications_create:
+    pattern:  /create
+    defaults: { _controller: "SiteAdminBundle:Notifications:create" }
+    requirements: { _method: post }
+
+notifications_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SiteAdminBundle:Notifications:edit" }
+
+notifications_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SiteAdminBundle:Notifications:update" }
+    requirements: { _method: post }
+
+notifications_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SiteAdminBundle:Notifications:delete" }
+    requirements: { _method: post }

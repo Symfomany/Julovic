@@ -171,10 +171,22 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
         return parent::__toString();
     }
 
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated', 'administrateur', 'article');
+        return array('__isInitialized__', 'id', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated', 'active', 'administrateur', 'article');
     }
 
     public function __clone()

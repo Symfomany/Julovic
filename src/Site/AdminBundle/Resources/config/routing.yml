@@ -69,6 +69,11 @@ referencement:
     resource: "@SiteAdminBundle/Resources/config/routing/referencement.yml"
     prefix:   /referencement
     
+    
+notifications:
+    resource: "@SiteAdminBundle/Resources/config/routing/notifications.yml"
+    prefix:   /notifications
+    
 #FOS Routing
     
 fos_js_routing:

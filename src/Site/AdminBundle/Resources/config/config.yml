@@ -32,8 +32,8 @@ parameters:
       
 twig:
     globals:
-        nom_site: Julovic 
-        slogan: a CMF for Everybody
+        nom_site: Julovik
+        slogan:  CMF for EveryBody
         topmenu:
           - {label: 'Home', routing: 'home' }
           - {label: 'Articles', routing: 'articles'}

@@ -872,4 +872,9 @@ class Administrateurs extends EntityRepository implements AdvancedUserInterface,
     {
         return $this->medias;
     }
+    
+
+    public  function __toString(){
+          return $this->lastname.$this->firstname;
+    }
 }

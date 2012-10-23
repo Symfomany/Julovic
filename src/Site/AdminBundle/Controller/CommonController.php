@@ -29,7 +29,6 @@ class CommonController  {
         $this->limit =  5;
     }
     
-    
     public function getList($entity= 'Medias', $limit = 0,$orderBy = 'id'){
         $dql = "SELECT a FROM SiteAdminBundle:".$entity." a ORDER  BY a.".$orderBy;
         $query = $this->em->createQuery($dql);
@@ -48,6 +47,11 @@ class CommonController  {
              return true;
     }
     
+    public function setDisplay($number = 5){
+             $this->limit = $number;
+             return true;
+    }
+
     public function setActive($entity= 'Categories', $find, $bool = true){
                 $entity = $this->em->getRepository('SiteAdminBundle:'.$entity)->find($find);
                 if(!$entity){

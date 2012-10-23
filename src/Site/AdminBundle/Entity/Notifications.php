@@ -1,0 +1,137 @@
+<?php
+
+namespace Site\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Site\AdminBundle\Entity\Administrateurs;
+
+
+/**
+ * Site\AdminBundle\Entity\Notifications
+ *
+ * @ORM\Table(name="notifications")
+ * @ORM\Entity
+ */
+class Notifications {
+
+    public function __construct() {
+        $this->dateCreated = new \Datetime('now');
+    }
+
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+    /**
+     * @var string $content
+     * @Assert\NotBlank(message = "Message ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="message", type="text", nullable=false)
+     */
+    private $message;
+
+/**
+* @ORM\OneToOne(targetEntity="Administrateurs", cascade={"persist", "merge"})
+* @ORM\JoinColumn(name="administrateurs_id")
+*/
+    private $administrateursId;
+
+    /**
+     * @var string $dateCreated
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="date_created", type="datetime", length=200, nullable=false)
+     */
+    private $dateCreated;
+
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+
+    /**
+     * Set resume
+     *
+     * @param string $resume
+     * @return Articles
+     */
+    public function setMessage($resume) {
+        $this->message = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return string 
+     */
+    public function getMessage() {
+        return $this->message;
+    }
+    
+    /**
+     * Set dateCreated
+     *
+     * @param string $dateCreated
+     * @return Articles
+     */
+    public function setDateCreated($dateCreated) {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return string 
+     */
+    public function getDateCreated() {
+        return $this->dateCreated;
+    }
+  
+
+    public function __toString() {
+        return $this->message;
+    }
+
+
+
+    /**
+     * Set administrateursId
+     *
+     * @param Site\AdminBundle\Entity\Administrateurs $administrateursId
+     * @return Notifications
+     */
+    public function setAdministrateursId(\Site\AdminBundle\Entity\Administrateurs $administrateursId = null)
+    {
+        $this->administrateursId = $administrateursId;
+    
+        return $this;
+    }
+
+    /**
+     * Get administrateursId
+     *
+     * @return Site\AdminBundle\Entity\Administrateurs 
+     */
+    public function getAdministrateursId()
+    {
+        return $this->administrateursId;
+    }
+}

@@ -76,6 +76,7 @@ People can pick and choose the right approaches for their CMS without having to 
   -  Sortable handlers
   -  Quick actions 
   -  Params of site to handle structure
+ -   SuperControler to handle common actions
 
 ================================
 <h2>Documentation</h2>

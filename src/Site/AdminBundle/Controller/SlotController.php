@@ -14,12 +14,23 @@ use Symfony\Component\HttpFoundation\Response;
  *
  */
 class SlotController extends Controller {
+        
+    protected $common;
+    
+     public function preExecute() {
+        $this->common = $this->get("commoncontroller");
+    }
+    
 
     public function sidebarAction() {
         return $this->render('SiteAdminBundle:Slot:sidebar.html.twig');
     }
 
     public function flashdatasAction() {
+        return $this->render('SiteAdminBundle:Slot:flashdatas.html.twig');
+    }
+
+    public function displayingAction() {
         return $this->render('SiteAdminBundle:Slot:flashdatas.html.twig');
     }
 
@@ -57,7 +68,6 @@ class SlotController extends Controller {
                 }
                     $return = json_encode($tab);
             return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
-       
             }
     }
 

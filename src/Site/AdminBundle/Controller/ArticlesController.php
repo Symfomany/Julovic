@@ -11,12 +11,6 @@ use Site\AdminBundle\Form\ArticlesType;
 use Site\AdminBundle\Form\Type\MediasType;
 use Doctrine\Common\Util\Debug;
 
-
-/**
- * 
- * Articles controller.
- *
- */
 class ArticlesController extends Controller {
     
     protected $breadcrumbs;
@@ -32,9 +26,18 @@ class ArticlesController extends Controller {
     }
 
     public function indexAction() {
+        $pagination =   $this->common->setLimit(3);
         $pagination =   $this->common->getList('Articles', null, 'position');
         return $this->render('SiteAdminBundle:Articles:index.html.twig', array(
-                    'pagination' => $pagination,
+                    'pagination' => $pagination
+         ));
+    }
+
+    public function displayingAction($page = 5) {
+        $pagination =   $this->common->setLimit(3);
+        $pagination =   $this->common->getList('Articles', null, 'position');
+        return $this->render('SiteAdminBundle:Articles:index.html.twig', array(
+                    'pagination' => $pagination
          ));
     }
 
@@ -47,7 +50,7 @@ class ArticlesController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
         return $this->render('SiteAdminBundle:Articles:show.html.twig', array(
                     'entity' => $entity,
-                    'delete_form' => $deleteForm->createView(),));
+                    'delete_form' => $deleteForm->createView()));
     }
 
     /**
@@ -66,6 +69,15 @@ class ArticlesController extends Controller {
                 'entity' => $entity,
                 'form' => $form->createView()
         ));
+    }
+
+    /**
+     * Modiy Position
+     */
+    public function displayAction(Request $request)
+    {
+         $this->common->setPosition('Articles');
+         return new Response(1, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
     }
 
     /**

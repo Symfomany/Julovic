@@ -518,8 +518,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -2725,11 +2725,11 @@
       </call>
       <call method="addGlobal">
         <argument>nom_site</argument>
-        <argument>Julovic</argument>
+        <argument>Julovik</argument>
       </call>
       <call method="addGlobal">
         <argument>slogan</argument>
-        <argument>a CMF for Everybody</argument>
+        <argument>CMF for EveryBody</argument>
       </call>
       <call method="addGlobal">
         <argument>topmenu</argument>
@@ -3090,8 +3090,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5083f5414ff30_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5083f5414ff30.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>

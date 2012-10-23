@@ -303,6 +303,4 @@ $(function() {
         "color": true //Button to change color of font  
     });
     
-
-    
 });

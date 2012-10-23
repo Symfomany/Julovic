@@ -446,6 +446,7 @@ class Articles {
     public function setCategories(\Doctrine\Common\Collections\ArrayCollection $categories)
     {
         foreach($categories as $category){
+            if(!empty($this->categorie))
             $this->categories->removeElement($category);
              $this->categories[] = $category;
         }

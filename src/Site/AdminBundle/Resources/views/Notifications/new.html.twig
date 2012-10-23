@@ -1,0 +1,25 @@
+
+ {% extends 'SiteAdminBundle::layout.html.twig' %}
+
+
+ {% block content %}
+{{ parent() }}
+
+<h1>Notifications creation</h1>
+
+<form action="{{ path('notifications_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('notifications') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+ {% endblock %}

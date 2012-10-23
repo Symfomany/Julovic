@@ -43,44 +43,37 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
         echo "</td>
         </tr>
         <tr>
-            <th>Category</th>
-            <td>";
-        // line 18
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "category"), "html", null, true);
-        echo "</td>
-        </tr>
-        <tr>
             <th>Resume</th>
             <td>";
-        // line 22
+        // line 18
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "resume"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <th>Content</th>
             <td>";
-        // line 26
+        // line 22
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "content"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <th>Tag</th>
             <td>";
-        // line 30
+        // line 26
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "tag"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <th>Datecreated</th>
             <td>";
-        // line 34
+        // line 30
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "m/d/Y"), "html", null, true);
         echo "</td>
         </tr>
         <tr>
             <th>Active</th>
             <td>";
-        // line 38
+        // line 34
         echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "active"), "html", null, true);
         echo "</td>
         </tr>
@@ -90,7 +83,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
 <ul class=\"record_actions\">
     <li>
         <a href=\"";
-        // line 45
+        // line 41
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles"), "html", null, true);
         echo "\">
             <i class=\"icon-share-alt\"></i> Back to the list
@@ -98,7 +91,7 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
     </li>
     <li>
         <a href=\"";
-        // line 50
+        // line 46
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\">
             edit
@@ -106,11 +99,11 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
     </li>
     <li>
         <form action=\"";
-        // line 55
+        // line 51
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("articles_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
         echo "\" method=\"post\">
             ";
-        // line 56
+        // line 52
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "delete_form"), 'widget');
         echo "
             <button type=\"submit\" class=\"btn-primary btn-large\">Delete</button>
@@ -133,6 +126,6 @@ class __TwigTemplate_b975fe8b454993f270cebc6596f16326 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  112 => 56,  108 => 55,  100 => 50,  92 => 45,  82 => 38,  75 => 34,  68 => 30,  61 => 26,  54 => 22,  47 => 18,  40 => 14,  29 => 6,  26 => 5,);
+        return array (  105 => 52,  101 => 51,  93 => 46,  85 => 41,  75 => 34,  68 => 30,  61 => 26,  54 => 22,  47 => 18,  40 => 14,  29 => 6,  26 => 5,);
     }
 }

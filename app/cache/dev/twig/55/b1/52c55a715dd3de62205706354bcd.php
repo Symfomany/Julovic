@@ -10,7 +10,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
         $this->parent = $this->env->loadTemplate("SiteAdminBundle::layout.html.twig");
 
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'content' => array($this, 'block_content'),
         );
     }
 
@@ -25,10 +25,10 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
     }
 
     // line 5
-    public function block_body($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 6
-        $this->displayParentBlock("body", $context, $blocks);
+        $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <div class=\"span9\">
@@ -1176,7 +1176,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
             <h1>Labels and badges</h1>
           </div>
           <h3>Labels</h3>
-          <table class=\"table\" class=\"table table-bordered table-striped\">
+          <table class=\"table table-striped\" class=\"table table-bordered table-striped\">
             <thead>
               <tr>
                 <th>Labels</th>
@@ -1236,7 +1236,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           </table>
 
           <h3>Badges</h3>
-          <table class=\"table\" class=\"table table-bordered table-striped\">
+          <table class=\"table table-striped\" class=\"table table-bordered table-striped\">
             <thead>
               <tr>
                 <th>Name</th>
@@ -2029,7 +2029,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           <h2>Default styles</h2>
           <p>For basic styling—light padding and only horizontal dividers—add the base class <code>.table</code> to any <code>&lt;table&gt;</code>.</p>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table\">
+            <table class=\"table table-striped\" class=\"table\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2072,7 +2072,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           <h3><code>.table-striped</code></h3>
           <p>Adds zebra-striping to any table row within the <code>&lt;tbody&gt;</code> via the <code>:nth-child</code> CSS selector (not available in IE7-IE8).</p>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table table-striped\">
+            <table class=\"table table-striped\" class=\"table table-striped\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2108,7 +2108,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           <h3><code>.table-bordered</code></h3>
           <p>Add borders and rounded corners to the table.</p>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table table-bordered\">
+            <table class=\"table table-striped\" class=\"table table-bordered\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2148,7 +2148,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           <h3><code>.table-hover</code></h3>
           <p>Enable a hover state on table rows within a <code>&lt;tbody&gt;</code>.</p>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table table-hover\">
+            <table class=\"table table-striped\" class=\"table table-hover\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2183,7 +2183,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
           <h3><code>.table-condensed</code></h3>
           <p>Makes tables more compact by cutting cell padding in half.</p>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table table-condensed\">
+            <table class=\"table table-striped\" class=\"table table-condensed\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2221,7 +2221,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
 
           <h2>Optional row classes</h2>
           <p>Use contextual classes to color table rows.</p>
-          <table class=\"table\" class=\"table table-bordered table-striped\">
+          <table class=\"table table-striped\" class=\"table table-bordered table-striped\">
             <colgroup>
               <col class=\"span1\">
               <col class=\"span7\">
@@ -2260,7 +2260,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
             </tbody>
           </table>
           <div class=\"bs-docs-example\">
-            <table class=\"table\" class=\"table\">
+            <table class=\"table table-striped\" class=\"table\">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2305,7 +2305,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
 
           <h2>Supported table markup</h2>
           <p>List of supported table HTML elements and how they should be used.</p>
-          <table class=\"table\" class=\"table table-bordered table-striped\">
+          <table class=\"table table-striped\" class=\"table table-bordered table-striped\">
             <colgroup>
               <col class=\"span1\">
               <col class=\"span7\">
@@ -2782,7 +2782,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
 
           <h2>Default buttons</h2>
           <p>Button styles can be applied to anything with the <code>.btn</code> class applied. However, typically you'll want to apply these to only <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code> elements for the best rendering.</p>
-          <table class=\"table\" class=\"table table-bordered table-striped\">
+          <table class=\"table table-striped\" class=\"table table-bordered table-striped\">
             <thead>
               <tr>
                 <th>Button</th>
@@ -3001,7 +3001,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
             <li><i class=\"icon-indent-right\"></i> icon-indent-right</li>
             <li><i class=\"icon-facetime-video\"></i> icon-facetime-video</li>
             <li><i class=\"icon-picture\"></i> icon-picture</li>
-            <li><i class=\"icon-pencil\"></i> icon-pencil</li>
+            <li><i class=\"icon-edit\"></i>  icon-pencil</li>
             <li><i class=\"icon-map-marker\"></i> icon-map-marker</li>
             <li><i class=\"icon-adjust\"></i> icon-adjust</li>
             <li><i class=\"icon-tint\"></i> icon-tint</li>
@@ -3130,7 +3130,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
               <a class=\"btn btn-primary\" href=\"#\"><i class=\"icon-user icon-white\"></i> User</a>
               <a class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"caret\"></span></a>
               <ul class=\"dropdown-menu\">
-                <li><a href=\"#\"><i class=\"icon-pencil\"></i> Edit</a></li>
+                <li><a href=\"#\"><i class=\"icon-edit\"></i>  <i class=\"icon-edit\"></i> edit</a></li>
                 <li><a href=\"#\"><i class=\"icon-trash\"></i> Delete</a></li>
                 <li><a href=\"#\"><i class=\"icon-ban-circle\"></i> Ban</a></li>
                 <li class=\"divider\"></li>
@@ -3138,7 +3138,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
               </ul>
             </div>
           </div>
-<pre class=\"prettyprint linenums\"><ol class=\"linenums\"><li class=\"L0\"><span class=\"tag\">&lt;div</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn-group\"</span><span class=\"tag\">&gt;</span></li><li class=\"L1\"><span class=\"pln\">  </span><span class=\"tag\">&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn btn-primary\"</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-user icon-white\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> User</span><span class=\"tag\">&lt;/a&gt;</span></li><li class=\"L2\"><span class=\"pln\">  </span><span class=\"tag\">&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn btn-primary dropdown-toggle\"</span><span class=\"pln\"> </span><span class=\"atn\">data-toggle</span><span class=\"pun\">=</span><span class=\"atv\">\"dropdown\"</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;span</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"caret\"</span><span class=\"tag\">&gt;&lt;/span&gt;&lt;/a&gt;</span></li><li class=\"L3\"><span class=\"pln\">  </span><span class=\"tag\">&lt;ul</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"dropdown-menu\"</span><span class=\"tag\">&gt;</span></li><li class=\"L4\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-pencil\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Edit</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L5\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-trash\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Delete</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L6\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-ban-circle\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Ban</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L7\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"divider\"</span><span class=\"tag\">&gt;&lt;/li&gt;</span></li><li class=\"L8\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"i\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Make admin</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L9\"><span class=\"pln\">  </span><span class=\"tag\">&lt;/ul&gt;</span></li><li class=\"L0\"><span class=\"tag\">&lt;/div&gt;</span></li></ol></pre>
+<pre class=\"prettyprint linenums\"><ol class=\"linenums\"><li class=\"L0\"><span class=\"tag\">&lt;div</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn-group\"</span><span class=\"tag\">&gt;</span></li><li class=\"L1\"><span class=\"pln\">  </span><span class=\"tag\">&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn btn-primary\"</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-user icon-white\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> User</span><span class=\"tag\">&lt;/a&gt;</span></li><li class=\"L2\"><span class=\"pln\">  </span><span class=\"tag\">&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"btn btn-primary dropdown-toggle\"</span><span class=\"pln\"> </span><span class=\"atn\">data-toggle</span><span class=\"pun\">=</span><span class=\"atv\">\"dropdown\"</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;span</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"caret\"</span><span class=\"tag\">&gt;&lt;/span&gt;&lt;/a&gt;</span></li><li class=\"L3\"><span class=\"pln\">  </span><span class=\"tag\">&lt;ul</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"dropdown-menu\"</span><span class=\"tag\">&gt;</span></li><li class=\"L4\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-pencil\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> edit</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L5\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-trash\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Delete</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L6\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"icon-ban-circle\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Ban</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L7\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"divider\"</span><span class=\"tag\">&gt;&lt;/li&gt;</span></li><li class=\"L8\"><span class=\"pln\">    </span><span class=\"tag\">&lt;li&gt;&lt;a</span><span class=\"pln\"> </span><span class=\"atn\">href</span><span class=\"pun\">=</span><span class=\"atv\">\"#\"</span><span class=\"tag\">&gt;&lt;i</span><span class=\"pln\"> </span><span class=\"atn\">class</span><span class=\"pun\">=</span><span class=\"atv\">\"i\"</span><span class=\"tag\">&gt;&lt;/i&gt;</span><span class=\"pln\"> Make admin</span><span class=\"tag\">&lt;/a&gt;&lt;/li&gt;</span></li><li class=\"L9\"><span class=\"pln\">  </span><span class=\"tag\">&lt;/ul&gt;</span></li><li class=\"L0\"><span class=\"tag\">&lt;/div&gt;</span></li></ol></pre>
 
           <h5>Small button</h5>
           <div class=\"bs-docs-example\">
@@ -3153,7 +3153,7 @@ class __TwigTemplate_55b152c55a715dd3de62205706354bcd extends Twig_Template
               <ul class=\"nav nav-list\">
                 <li class=\"active\"><a href=\"#\"><i class=\"icon-home icon-white\"></i> Home</a></li>
                 <li><a href=\"#\"><i class=\"icon-book\"></i> Library</a></li>
-                <li><a href=\"#\"><i class=\"icon-pencil\"></i> Applications</a></li>
+                <li><a href=\"#\"><i class=\"icon-edit\"></i>  Applications</a></li>
                 <li><a href=\"#\"><i class=\"i\"></i> Misc</a></li>
               </ul>
             </div>

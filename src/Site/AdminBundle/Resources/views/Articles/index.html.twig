@@ -31,8 +31,8 @@
         <tr id="menu_{{entity.id }}">
             <td><a href="{{ path('articles_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.title|capitalize }}</td>
-            <td>{% autoescape false %}{{ entity.resume| truncate(50, true) }}{% endautoescape  %}</td>
-            <td>{{ entity.content|truncate(50, true) }}</td>
+            <td class="wide">{% autoescape false %}{{ entity.resume|raw|truncate(50, true) }}{% endautoescape  %}</td>
+            <td class="wide">{% autoescape false %}{{ entity.content|raw|truncate(50, true) }}{% endautoescape  %}</td>
             <td>{{ entity.tag }}</td>
             <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
             <td><div class="sort_item"><a id="{{ entity.position }}"><i class="icon-move"></i></a></div></td>

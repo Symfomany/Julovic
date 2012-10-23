@@ -16,7 +16,7 @@
                                     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('my_account') }}"><i class="icon-edit"></i>  Editer</a></li>
-                                        <li><a href="{{ path('parametres') }}"><i class="icon-wrench"></i> Parametres</a></li>
+                                        <li><a href="{{ path('parametres') }}"><i class="icon-wrench"></i> Paramètres</a></li>
                                         <li><a href="#"><i class="icon-user"></i> Preference</a></li>
                                         <li class="divider"></li>
                                         <li> <a id="logout" href="{{ path('logout') }}"><i class="icon-off"></i>Deconnexion</a> <br /></li>
@@ -61,6 +61,7 @@
                                         {% endfor %}
                             </ul>
                             <div class="pull-right" id="btn_param">
+                                <button type="button" class="btn btn-mini btn-warning"  data-toggle="modal" data-target="#myModal2">Messages</button>
                                 <button type="button" class="btn btn-mini" data-toggle="modal" data-target="#myModal">Paramètres</button>
                         </div>
                     </div>
