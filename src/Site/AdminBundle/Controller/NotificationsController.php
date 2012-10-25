@@ -14,6 +14,7 @@ use Site\AdminBundle\Form\NotificationsType;
 class NotificationsController extends Controller
 {
     
+    
     /**
      * Lists all Notifications entities.
      */
@@ -58,7 +59,9 @@ class NotificationsController extends Controller
      */
     public function newAction()
     {
+        $user = $this->get('security.context')->getToken()->getUser();
         $entity = new Notifications();
+        $entity->setAdministrateursId($user);
         $form   = $this->createForm(new NotificationsType(), $entity);
 
         return $this->render('SiteAdminBundle:Notifications:new.html.twig', array(
@@ -73,7 +76,10 @@ class NotificationsController extends Controller
      */
     public function createAction(Request $request)
     {
+         $user = $this->get('security.context')->getToken()->getUser();
         $entity  = new Notifications();
+         $entity->setAdministrateursId($user);
+         $entity->setActive(true);
         $form = $this->createForm(new NotificationsType(), $entity);
         $form->bind($request);
 
@@ -125,12 +131,13 @@ class NotificationsController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('SiteAdminBundle:Notifications')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Notifications entity.');
         }
+        $user = $this->get('security.context')->getToken()->getUser();
+         $entity->setAdministrateursId($user);
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new NotificationsType(), $entity);
@@ -139,6 +146,7 @@ class NotificationsController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre changement a été pris en compte!');
 
             return $this->redirect($this->generateUrl('notifications_edit', array('id' => $id)));
         }

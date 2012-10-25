@@ -113,7 +113,6 @@ class ArticlesController extends Controller {
         $form = $this->createForm(new ArticlesType(), $entity);
         $form->bind($request);
 
-//        exit(Debug::dump($entity->getMedias()));
 
         if ($form->isValid()) {
             

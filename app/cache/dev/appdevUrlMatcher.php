@@ -353,6 +353,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\LinksController::showAction',)), array('_route' => 'links_show'));
                 }
 
+                // links_position
+                if ($pathinfo === '/admin/links/position') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::positionAction',  '_route' => 'links_position',);
+                }
+
                 // links_new
                 if ($pathinfo === '/admin/links/new') {
                     return array (  '_controller' => 'Site\\AdminBundle\\Controller\\LinksController::newAction',  '_route' => 'links_new',);

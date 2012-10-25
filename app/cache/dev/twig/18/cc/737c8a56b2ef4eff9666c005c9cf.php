@@ -44,7 +44,7 @@ class __TwigTemplate_18cc737c8a56b2ef4eff9666c005c9cf extends Twig_Template
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "form"), 'widget');
         echo "
     <p>
-        <button type=\"submit\" class=\"btn btn-primary btn-large\">Create</button>
+        <button type=\"submit\" class=\"btn btn-primary\">Create</button>
     </p>
 </form>
 

@@ -22,7 +22,7 @@
                                         <div class="controls">
                                                 <div class="input-prepend">
                                                         <span class="add-on">@</span>
-                                                        <input class="span2" name="_username"  required="required" id="prependedInput" value="{{ last_username }}" size="16" type="text" {% if last_username is empty %} placeholder="E-mail"{% endif %} />
+                                                        <input class="span2" name="_username"  required="required" id="prependedInput" value="{{ last_username }}" size="16" type="email" {% if last_username is empty %} placeholder="E-mail"{% endif %} />
                                                 </div>
                                         </div>
                                     </div>
@@ -31,7 +31,7 @@
                                         <div class="controls">
                                             <div class="input-prepend">
                                                         <span class="add-on">?</span>
-                                                        <input type="password"  id="mdp"  required="required" placeholder="Password" name="_password" class="span2" id="prependedInput" size="16" type="text" />
+                                                        <input type="password"  id="mdp"  required="required" minlength="5" placeholder="Password" name="_password" class="span2" id="prependedInput" size="16" type="text" />
                                                 </div>
                                              <p></p>
                                              <label id="entrer" class="active"><i class="icon-user"></i><input type="checkbox" name="_remember_me" checked="checked">Se souvenir de moi</label>

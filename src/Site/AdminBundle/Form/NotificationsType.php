@@ -11,10 +11,8 @@ class NotificationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message','textarea', array('attr' => array('class' => 'textarea'), 'required' => true ))
-            ->add('dateCreated')
-            ->add('administrateursId')
-        ;
+            ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
+            ->add('message','textarea', array('attr' => array('class' => 'textarea'), 'required' => true ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

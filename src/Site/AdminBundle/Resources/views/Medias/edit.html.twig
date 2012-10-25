@@ -5,12 +5,25 @@
  {% block content %}
 {{ parent() }}
 
-<h1>Medias edit</h1>
+<h1>Editer ce medias:  "{{ entity.legend }}"</h1>
 
 <form action="{{ path('medias_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
+        <p>
+        {% if entity.extension == 'png' or entity.extension == 'jpg' or entity.extension == 'gif' %}
+            {% if entity.picture %}
+                    <a href="/uploads/administrateurs/{{app.user.id}}/{{entity.picture  }}" class="fancybox">
+                    <img src="/uploads/administrateurs/{{app.user.id}}/{{entity.picture|sizes('big')}}"  width="300" height="200" class="img-polaroid">
+                    </a>
+            {% endif %}
+        {% else %}
+                <a target="_blank" href="/uploads/administrateurs/{{app.user.id}}/{{entity.picture  }}">
+                    <i class="icon-download"></i>Lien vers le fichier
+                </a>
+        {% endif %}
+        </p>
     <p>
-        <button type="submit" class="btn btn-primary btn-large">Editer</button>
+        <button type="submit" class="btn btn-primary">Editer ce fichier</button>
     </p>
 </form>
 
@@ -23,7 +36,7 @@
     <li>
         <form action="{{ path('medias_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+            <button type="submit" class="btn btn-primary">Delete</button>
         </form>
     </li>
 </ul>

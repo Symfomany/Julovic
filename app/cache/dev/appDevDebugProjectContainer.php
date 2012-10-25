@@ -388,11 +388,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager5089bc771f8dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager5089bc771f8dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50891253b1d55.php';
+        require_once 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5089bc771f8dc.php';
 
         $a = $this->get('annotation_reader');
 
@@ -427,7 +427,7 @@ class appDevDebugProjectContainer extends Container
         $h = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $g);
         $this->get('doctrine.orm.default_manager_configurator')->configure($h);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5089bc771f8dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($h, $this);
     }
 
     /**
@@ -3144,7 +3144,7 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the doctrine.orm.entity_manager service alias.
      *
-     * @return EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
+     * @return EntityManager5089bc771f8dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager An instance of the doctrine.orm.default_entity_manager service
      */
     protected function getDoctrine_Orm_EntityManagerService()
     {
@@ -4040,8 +4040,8 @@ class appDevDebugProjectContainer extends Container
             ),
             'jms_di_extra.cache_dir' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra',
             'jms_di_extra.doctrine_integration' => true,
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50891253b1d55.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5089bc771f8dc.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5089bc771f8dc_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),

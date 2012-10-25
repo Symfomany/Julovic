@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="links")
  * @ORM\Entity
+ * @Gedmo\Tree(type="nested")
  */
 class Links
 {
@@ -28,6 +29,40 @@ class Links
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    protected $lft;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    protected $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    protected $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(name="root", type="integer", nullable=true)
+     */
+    protected $root;
+
+    
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Links", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $parent;
+    
 
     /**
      * @var string $title
@@ -65,6 +100,13 @@ class Links
      */
     private $active;
 
+    
+    /**
+     * @var \String $position
+     * 
+     * @ORM\Column(name="position", type="integer", nullable=true)
+     */
+    protected $position;
 
     /**
      * Get id
@@ -189,5 +231,149 @@ class Links
     public function getActive()
     {
         return $this->active;
+    }
+
+
+    /**
+     * Set lft
+     *
+     * @param integer $lft
+     * @return Links
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+    
+        return $this;
+    }
+
+    /**
+     * Get lft
+     *
+     * @return integer 
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     * @return Links
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+    
+        return $this;
+    }
+
+    /**
+     * Get lvl
+     *
+     * @return integer 
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     * @return Links
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+    
+        return $this;
+    }
+
+    /**
+     * Get rgt
+     *
+     * @return integer 
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Set root
+     *
+     * @param integer $root
+     * @return Links
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+    
+        return $this;
+    }
+
+    /**
+     * Get root
+     *
+     * @return integer 
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param Site\AdminBundle\Entity\Links $parent
+     * @return Links
+     */
+    public function setParent(\Site\AdminBundle\Entity\Links $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Site\AdminBundle\Entity\Links 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    
+    
+    public function getIndentedTitle() {
+        return str_repeat(" - - ", $this->lvl) . $this->title;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Links
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

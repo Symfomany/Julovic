@@ -6,6 +6,12 @@ links_show:
     pattern:  /{id}/show
     defaults: { _controller: "SiteAdminBundle:Links:show" }
 
+links_position:
+    pattern:  /position
+    defaults: { _controller: "SiteAdminBundle:Articles:position"  }
+    options:
+        expose: true
+
 links_new:
     pattern:  /new
     defaults: { _controller: "SiteAdminBundle:Links:new" }

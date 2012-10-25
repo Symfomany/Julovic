@@ -76,7 +76,7 @@ class __TwigTemplate_6a35c7a889aabb1e44f60e692948ee78 extends Twig_Template
                                                         <input class=\"span2\" name=\"_username\"  required=\"required\" id=\"prependedInput\" value=\"";
         // line 25
         echo twig_escape_filter($this->env, $this->getContext($context, "last_username"), "html", null, true);
-        echo "\" size=\"16\" type=\"text\" ";
+        echo "\" size=\"16\" type=\"email\" ";
         if (twig_test_empty($this->getContext($context, "last_username"))) {
             echo " placeholder=\"E-mail\"";
         }
@@ -89,7 +89,7 @@ class __TwigTemplate_6a35c7a889aabb1e44f60e692948ee78 extends Twig_Template
                                         <div class=\"controls\">
                                             <div class=\"input-prepend\">
                                                         <span class=\"add-on\">?</span>
-                                                        <input type=\"password\"  id=\"mdp\"  required=\"required\" placeholder=\"Password\" name=\"_password\" class=\"span2\" id=\"prependedInput\" size=\"16\" type=\"text\" />
+                                                        <input type=\"password\"  id=\"mdp\"  required=\"required\" minlength=\"5\" placeholder=\"Password\" name=\"_password\" class=\"span2\" id=\"prependedInput\" size=\"16\" type=\"text\" />
                                                 </div>
                                              <p></p>
                                              <label id=\"entrer\" class=\"active\"><i class=\"icon-user\"></i><input type=\"checkbox\" name=\"_remember_me\" checked=\"checked\">Se souvenir de moi</label>

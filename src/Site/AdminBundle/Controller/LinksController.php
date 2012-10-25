@@ -15,12 +15,16 @@ use Site\AdminBundle\Form\LinksType;
 class LinksController extends Controller
 {
         
+    protected $limit;
+    protected $breadcrumbs;
+    protected $common;
+    
     public function preExecute() {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Liens", $this->get("router")->generate("links"));
+        $this->breadcrumbs = $this->get("white_october_breadcrumbs");
+        $this->breadcrumbs->addItem("Liens", $this->get("router")->generate("links"));
+        $this->limit = $this->container->getParameter('limit_per_page');
         $this->common = $this->get("commoncontroller");
     }
-    
     
     /**
      * Lists all Links entities.
@@ -28,10 +32,20 @@ class LinksController extends Controller
      */
     public function indexAction()
     {
-        $pagination =   $this->common->getList('Links', null, 'id');
+        $pagination =   $this->common->getList('Links', null, 'position');
         return $this->render('SiteAdminBundle:Links:index.html.twig', array(
             'pagination' => $pagination
         ));
+    }
+    
+    
+    /**
+     * Modiy Position
+     */
+    public function positionAction(Request $request)
+    {
+         $this->common->setPosition('Links');
+         return new Response(1, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
     }
 
     /**
@@ -66,7 +80,6 @@ class LinksController extends Controller
     {
         $entity = new Links();
         $form   = $this->createForm(new LinksType(), $entity);
-
         return $this->render('SiteAdminBundle:Links:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -80,6 +93,7 @@ class LinksController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Links();
+          $entity->setActive(true);
         $form = $this->createForm(new LinksType(), $entity);
         $form->bind($request);
 

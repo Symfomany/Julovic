@@ -12,6 +12,16 @@ class CategoriesType extends AbstractType
     {
         $builder
             ->add('title', null, array('attr' => array('class' => 'input-xxlarge'), 'required' => true))
+            ->add('parent', 'entity', array(
+                        'class' => 'SiteAdminBundle:Categories',
+                            'property' => 'indentedTitle',
+                       'query_builder' => function($er) {
+                                return $er->createQueryBuilder('c')
+                                    ->orderBy('c.root', 'ASC')
+                                    ->addOrderBy('c.lft', 'ASC');
+                            },
+                            'required' => false
+                    ))
             ->add('description');
     }
 

@@ -3,7 +3,7 @@
 namespace Site\AdminBundle\Extension\Twig;
 
 use Symfony\Component\Locale\Locale;
-
+use Symfony\Component\HttpFoundation\Request;
 /**
  * Surcharge all filters
  */
@@ -39,8 +39,9 @@ class MyTwigExtension extends \Twig_Extension {
         return file_exists($file);
     }
 
-    public function validate($bool = false, $id) {
-       $img = ($bool == true) ? "<a href='activation/".$id."/0'><i class='icon-ok'></i></a>" : "<a href='activation/".$id."/1'><i class='icon-remove'></i></a>";
+    public function validate($bool = false,$entity = null,$id) {
+        $request = Request::createFromGlobals();
+       $img = ($bool == true) ? "<a href='".$request->getBaseUrl()."/admin/".$entity."/activation/".$id."/0'><i class='icon-ok'></i></a>" : "<a href='".$request->getBaseUrl()."/admin/".$entity."/activation/".$id."/1'><i class='icon-remove'></i></a>";
        return $img;
     }
 

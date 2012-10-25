@@ -18,11 +18,14 @@
                 {{ form_errors(form.description) }}
                 {{ form_widget(form.description, { 'attr': {'class': 'textarea'}}) }}
                 
+                {{ form_label(form.parent) }}
+                {{ form_errors(form.parent) }}
+                {{ form_widget(form.parent)  }}
                 
                 {{ form_rest(form) }}
         
     <p>
-        <button type="submit" class="btn btn-primary btn-large">Create</button>
+        <button type="submit" class="btn btn-primary">Create</button>
     </p>
 </form>
 

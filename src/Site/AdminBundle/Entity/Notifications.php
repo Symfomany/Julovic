@@ -29,7 +29,14 @@ class Notifications {
      */
     private $id;
 
-
+    /**
+     * @var string $title;
+     * @Assert\NotBlank(message = "Titre ne doit pas être vide", groups={"suscribe_step2"})
+     * @ORM\Column(name="title", type="string", length=200, nullable=false, unique=true)
+     */
+    private $title;
+    
+    
     /**
      * @var string $content
      * @Assert\NotBlank(message = "Message ne doit pas être vide", groups={"suscribe_step2"})
@@ -162,5 +169,28 @@ class Notifications {
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Notifications
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

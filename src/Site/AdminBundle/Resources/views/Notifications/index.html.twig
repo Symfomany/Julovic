@@ -11,11 +11,11 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab1">
-                                                <h1>Notifications</h1>
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th>Id</th>
+                                                            <th>Titre</th>
                                                             <th>Message</th>
                                                             <th>Datecreated</th>
                                                             <th>Actions</th>
@@ -25,7 +25,8 @@
                                                     {% for entity in entities %}
                                                         <tr>
                                                             <td><a href="{{ path('notifications_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                                                            <td>{{ entity.message }}</td>
+                                                            <td>{{ entity.title }}</td>
+                                                            <td>{% autoescape false %}{{ entity.message|raw|truncate(50,true) }}{% endautoescape %}</td>
                                                             <td>{% if entity.dateCreated %}{{ entity.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
                                                             <td>
                                                                 <ul>
@@ -44,7 +45,6 @@
                                         </div>
 
                                         <div class="tab-pane" id="tab2">
-                                                <h1>Création de Notification</h1>
                                                 <form action="{{ path('notifications_create') }}" method="post" {{ form_enctype(form) }}>
                                                         {{ form_widget(form) }}
                                                     <p><button   type="submit" class="btn btn-primary"><i class="icon-pencil"></i>Créer une notification</button></p>

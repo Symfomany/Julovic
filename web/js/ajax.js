@@ -90,6 +90,7 @@ $(function() {
         
     sortable('.sortable','.sortable','.sort_item','ui-state-highlight','categories_position');
     sortable('.sortable','.sortable','.sort_item','ui-state-highlight','articles_position');
+    sortable('.sortable','.sortable','.sort_item','ui-state-highlight','links_position');
         
         
     autosuggestion($('#site_adminbundle_searchtype_search'), 'search_query_ajax' ,'title');

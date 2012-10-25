@@ -207,6 +207,12 @@ class Categories extends \Site\AdminBundle\Entity\Categories implements \Doctrin
         return parent::getChildren();
     }
 
+    public function getIndentedTitle()
+    {
+        $this->__load();
+        return parent::getIndentedTitle();
+    }
+
 
     public function __sleep()
     {

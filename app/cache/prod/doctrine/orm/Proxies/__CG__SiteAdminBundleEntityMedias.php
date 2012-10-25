@@ -183,10 +183,34 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
         return parent::getActive();
     }
 
+    public function setExtension($extension)
+    {
+        $this->__load();
+        return parent::setExtension($extension);
+    }
+
+    public function getExtension()
+    {
+        $this->__load();
+        return parent::getExtension();
+    }
+
+    public function setDescription($description)
+    {
+        $this->__load();
+        return parent::setDescription($description);
+    }
+
+    public function getDescription()
+    {
+        $this->__load();
+        return parent::getDescription();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated', 'active', 'administrateur', 'article');
+        return array('__isInitialized__', 'id', 'legend', 'picture', 'description', 'extension', 'state', 'dateCreated', 'dateUpdated', 'active', 'administrateur', 'article');
     }
 
     public function __clone()

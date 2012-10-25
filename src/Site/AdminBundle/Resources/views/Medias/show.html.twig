@@ -15,16 +15,28 @@
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Legend</th>
+            <th>Légende</th>
             <td>{{ entity.legend }}</td>
         </tr>
         <tr>
-            <th>Picture</th>
-            <td>{{ entity.picture }}</td>
+            <th>Image</th>
+            <td>
+                    {% if entity.extension == 'png' or entity.extension == 'jpg' or entity.extension == 'gif' %}
+                        {% if entity.picture %}
+                                <a href="/uploads/administrateurs/{{app.user.id}}/{{entity.picture  }}" class="fancybox">
+                                <img src="/uploads/administrateurs/{{app.user.id}}/{{entity.picture|sizes('big')}}"  width="300" height="200" class="img-polaroid">
+                                </a>
+                        {% endif %}
+                    {% else %}
+                            <a target="_blank" href="/uploads/administrateurs/{{app.user.id}}/{{entity.picture  }}">
+                                <i class="icon-download"></i>Lien vers le fichier
+                            </a>
+                    {% endif %}
+            </td>
         </tr>
         <tr>
             <th>State</th>
-            <td>{{ entity.state }}</td>
+            <td>{{ entity.state|validate('medias',entity.id)|raw}}</td>
         </tr>
     </tbody>
 </table>
@@ -43,7 +55,7 @@
     <li>
         <form action="{{ path('medias_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+            <button type="submit" class="btn btn-primary">Delete</button>
         </form>
     </li>
 </ul>

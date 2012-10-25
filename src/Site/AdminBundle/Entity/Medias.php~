@@ -65,6 +65,20 @@ class Medias {
      */
     private $picture;
     
+
+    /**
+     * @var string $description
+     * @ORM\Column(name="description", type="text", length=150, nullable=true)
+     */
+    private $description;
+    
+
+    /**
+     * @var string $extension
+     * @ORM\Column(name="extension", type="string", length=150, nullable=true)
+     */
+    private $extension;
+    
     
     /**
      * @ORM\ManyToOne(targetEntity="Articles", inversedBy="medias")
@@ -75,8 +89,7 @@ class Medias {
 
     /**
      * @Assert\File(
-     *     maxSize = "5000k",
-     *     mimeTypes = {"image/jpg","image/jpeg", "image/png"},
+     *     maxSize = "7000k",
      *     mimeTypesMessage = "Please upload a valid Image"
      * )
      */
@@ -168,6 +181,8 @@ class Medias {
 
         $path = $this->file->move($this->getUploadRootDir($location), $this->picture);
 
+        if($this->extension == 'jpg' || $this->extension == 'gif' || $this->extension == 'gif'){
+            
         $imagine = new \Imagine\Gd\Imagine();
         $imagine2 = clone $imagine;
         $imagine3 = clone $imagine;
@@ -184,6 +199,8 @@ class Medias {
                 ->thumbnail(new \Imagine\Image\Box(500, 200))
                 ->save($this->getUploadRootDir($location) . '/' . $this->picture_name . '-big.' . $this->extension);
 
+        }
+        
         $this->file = null;
     }
 
@@ -432,4 +449,50 @@ class Medias {
         return $this->legend;
     }
     
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Medias
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return Medias
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    
+        return $this;
+    }
+
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 }

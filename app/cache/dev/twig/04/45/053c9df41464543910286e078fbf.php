@@ -121,7 +121,7 @@ class __TwigTemplate_0445053c9df41464543910286e078fbf extends Twig_Template
             echo "\"><i class=\"icon-move\"></i></a></div></td>
             <td>";
             // line 39
-            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "active"), $this->getAttribute($this->getContext($context, "entity"), "id"));
+            echo $this->env->getExtension('my_twig_extension')->validate($this->getAttribute($this->getContext($context, "entity"), "active"), "articles", $this->getAttribute($this->getContext($context, "entity"), "id"));
             echo "</td>
             <td>
                 <ul>

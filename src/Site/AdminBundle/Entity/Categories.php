@@ -51,7 +51,6 @@ class Categories {
      */
     protected $dateCreated;
 
-
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column( length=128, unique=true)
@@ -173,7 +172,6 @@ class Categories {
     public function getDateCreated() {
         return $this->dateCreated;
     }
-
 
     /**
      * Set slug
@@ -310,12 +308,9 @@ class Categories {
         return $this->title;
     }
 
-
-    public function getLaveledTitle()
-    {
-        return (string)$this;
+    public function getLaveledTitle() {
+        return (string) $this;
     }
-
 
     /**
      * Set position
@@ -323,10 +318,9 @@ class Categories {
      * @param integer $position
      * @return Categories
      */
-    public function setPosition($position)
-    {
+    public function setPosition($position) {
         $this->position = $position;
-    
+
         return $this;
     }
 
@@ -335,8 +329,7 @@ class Categories {
      *
      * @return integer 
      */
-    public function getPosition()
-    {
+    public function getPosition() {
         return $this->position;
     }
 
@@ -346,10 +339,9 @@ class Categories {
      * @param Site\AdminBundle\Entity\Categories $children
      * @return Categories
      */
-    public function addChildren(\Site\AdminBundle\Entity\Categories $children)
-    {
+    public function addChildren(\Site\AdminBundle\Entity\Categories $children) {
         $this->children[] = $children;
-    
+
         return $this;
     }
 
@@ -358,8 +350,7 @@ class Categories {
      *
      * @param Site\AdminBundle\Entity\Categories $children
      */
-    public function removeChildren(\Site\AdminBundle\Entity\Categories $children)
-    {
+    public function removeChildren(\Site\AdminBundle\Entity\Categories $children) {
         $this->children->removeElement($children);
     }
 
@@ -368,8 +359,12 @@ class Categories {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->children;
     }
+
+    public function getIndentedTitle() {
+        return str_repeat(" - - ", $this->lvl) . $this->title;
+    }
+
 }

@@ -5,18 +5,25 @@
  {% block content %}
 {{ parent() }}
 
-<h1>Categories edit</h1>
+<h1>Editer la categorie {{ entity.title }}</h1>
 
 <form action="{{ path('categories_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
                         {{ form_label(edit_form.title) }}
                 {{ form_errors(edit_form.title) }}
                 {{ form_widget(edit_form.title) }}
+                  
+                {{ form_label(edit_form.parent) }}
+                {{ form_errors(edit_form.parent) }}
+                {{ form_widget(edit_form.parent)  }}
 
                 {{ form_label(edit_form.description) }}
                 {{ form_errors(edit_form.description) }}
-                {{ form_widget(edit_form.description, {'attr': {'class' : 'textarea'}} ) }}
+                {{ form_widget(edit_form.description, {'attr': {'class' : 'textarea'}} )}}
+                
+                
+                {{ form_rest(edit_form) }}
     <p>
-        <button type="submit" class="btn btn-primary btn-large">Editer</button>
+        <button type="submit" class="btn btn-primary">Editer</button>
     </p>
 </form>
 
@@ -29,7 +36,7 @@
     <li>
         <form action="{{ path('categories_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit" class="btn btn-primary btn-large">Delete</button>
+            <button type="submit" class="btn btn-primary">Delete</button>
         </form>
     </li>
 </ul>

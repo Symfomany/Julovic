@@ -112,8 +112,8 @@ class MediasController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('medias_show', array('id' => $entity->getId())));
+            $this->get('session')->setFlash('success', 'Votre média a été ajouté');
+            return $this->redirect($this->generateUrl('medias'));
         }
 
         return $this->render('SiteAdminBundle:Medias:new.html.twig', array(
@@ -166,10 +166,14 @@ class MediasController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            
+             $entity->upload();
+             
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->setFlash('success', 'Votre modification a été pris en compte');
 
-            return $this->redirect($this->generateUrl('medias_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('medias'));
         }
 
         return $this->render('SiteAdminBundle:Medias:edit.html.twig', array(

@@ -31,7 +31,7 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         $this->displayParentBlock("content", $context, $blocks);
         echo "
 
-<h1>Categories list</h1>
+<h1>Les Categories</h1>
 
 ";
         // line 9
@@ -56,12 +56,12 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
             echo " class=\"sorted\"";
         }
         echo ">";
-        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Title", 1 => "a.title"), "method");
+        echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Titre", 1 => "a.title"), "method");
         echo "</th>
                 <th>Parent</th>
                 <th>Position</th>
                 <th>Description</th>
-                <th>Datecreated</th>
+                <th>Date de création</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -126,12 +126,12 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         }
         if (!$context['_iterated']) {
             // line 46
-            echo "                <tr>
-            <div class=\"alert\">
-                <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-                <strong>Warning!</strong> Aucun résultat.
-            </div>
-        </tr>
+            echo "                <tr><td colspan=\"9\">
+                    <div class=\"alert\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+                        <strong>Attention:</strong> Aucune catégorie crée.
+                    </div>
+                </td></tr>
         ";
         }
         $_parent = $context['_parent'];

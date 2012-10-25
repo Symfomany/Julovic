@@ -20,10 +20,13 @@ class MediasType extends AbstractType
                         "accept" => "image/*",
                         )))
             ->add('state','choice', array(
-                            'choices'   => array('0' => 'Non', '1' => 'Oui'),
+                           'label' => 'Status',
+                            'choices'   => array('0' => 'Invisible', '1' => 'Visible'),
                             'required'  => false
                         ))
+            ->add('description', 'textarea', array('attr' => array('rows' => 5, 'cols' => 40, 'class' => 'textarea'), 'required' => false))
                 ->add('legend', null, array(
+                            'label' => 'Titre',
                            "attr" => array( 
                                 'class' => 'input-xxlarge',
                                 'required'  => true,

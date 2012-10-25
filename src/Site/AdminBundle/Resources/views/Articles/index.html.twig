@@ -36,7 +36,7 @@
             <td>{{ entity.tag }}</td>
             <td>{{ entity.dateCreated|date("m/d/Y") }}</td>
             <td><div class="sort_item"><a id="{{ entity.position }}"><i class="icon-move"></i></a></div></td>
-            <td>{{ entity.active|validate(entity.id)|raw }}</td>
+            <td>{{ entity.active|validate('articles',entity.id)|raw }}</td>
             <td>
                 <ul>
                     <li>

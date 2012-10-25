@@ -4,7 +4,7 @@
  {% block content %}
 {{ parent() }}
 
-<h1>Categories list</h1>
+<h1>Les Categories</h1>
 
 {% include 'SiteAdminBundle:Slot:filter.html.twig' %}
 <div class="navigation">
@@ -14,11 +14,11 @@
         <thead>
             <tr>
                 <th>{{ pagination.sortable('Id', 'a.id')|raw }}</th>
-                <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ pagination.sortable('Title', 'a.title')|raw }}</th>
+                <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ pagination.sortable('Titre', 'a.title')|raw }}</th>
                 <th>Parent</th>
                 <th>Position</th>
                 <th>Description</th>
-                <th>Datecreated</th>
+                <th>Date de création</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -43,12 +43,12 @@
                     </td>
                 </tr>
         {% else %}
-                <tr>
-            <div class="alert">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Warning!</strong> Aucun résultat.
-            </div>
-        </tr>
+                <tr><td colspan="9">
+                    <div class="alert">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Attention:</strong> Aucune catégorie crée.
+                    </div>
+                </td></tr>
         {% endfor %}    
     </tbody>
         <thead>
