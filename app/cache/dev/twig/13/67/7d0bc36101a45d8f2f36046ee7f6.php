@@ -24,22 +24,22 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 5
+    // line 4
     public function block_content($context, array $blocks = array())
     {
-        // line 6
+        // line 5
         $this->displayParentBlock("content", $context, $blocks);
         echo "
 
 <h1>Categories list</h1>
 
 ";
-        // line 10
+        // line 9
         $this->env->loadTemplate("SiteAdminBundle:Slot:filter.html.twig")->display($context);
-        // line 11
+        // line 10
         echo "<div class=\"navigation\">
     ";
-        // line 12
+        // line 11
         echo $this->getAttribute($this->getContext($context, "pagination"), "render", array(), "method");
         echo "
     </div>
@@ -47,11 +47,11 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         <thead>
             <tr>
                 <th>";
-        // line 17
+        // line 16
         echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
         echo "</th>
                 <th";
-        // line 18
+        // line 17
         if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Title"), "method")) {
             echo " class=\"sorted\"";
         }
@@ -67,39 +67,39 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         </thead>
         <tbody class=\"sortable\">
             ";
-        // line 27
+        // line 26
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getContext($context, "pagination"));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 28
+            // line 27
             echo "                <tr id=\"menu_";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "\">
                     <td><a href=\"";
-            // line 29
+            // line 28
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "id"), "html", null, true);
             echo "</a></td>
                     <td>";
-            // line 30
+            // line 29
             echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title")), "html", null, true);
             echo "</td>
                     <td>";
-            // line 31
+            // line 30
             echo twig_escape_filter($this->env, twig_capitalize_string_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "parent")), "html", null, true);
             echo "</td>
                     <td><div class=\"sort_item\"><a id=\"";
-            // line 32
+            // line 31
             echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "position"), "html", null, true);
             echo "\"><i class=\"icon-move\"></i></a></div></td>
                     <td>";
-            // line 33
+            // line 32
             echo $this->getAttribute($this->getContext($context, "entity"), "description");
             echo "</td>
                     <td>";
-            // line 34
+            // line 33
             if ($this->getAttribute($this->getContext($context, "entity"), "dateCreated")) {
                 echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "dateCreated"), "Y-m-d H:i:s"), "html", null, true);
             }
@@ -108,13 +108,13 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
                         <ul>
                             <li>
                                 <a href=\"";
-            // line 38
+            // line 37
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories_show", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-search\"></i>show</a>
                             </li>
                             <li>
                                 <a href=\"";
-            // line 41
+            // line 40
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id"))), "html", null, true);
             echo "\"><i class=\"icon-edit\"></i> edit</a>
                             </li>
@@ -125,7 +125,7 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 47
+            // line 46
             echo "                <tr>
             <div class=\"alert\">
                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
@@ -137,17 +137,17 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_merge($_parent, array_intersect_key($context, $_parent));
-        // line 53
+        // line 52
         echo "    
     </tbody>
         <thead>
             <tr>
                 <th>";
-        // line 57
+        // line 56
         echo $this->getAttribute($this->getContext($context, "pagination"), "sortable", array(0 => "Id", 1 => "a.id"), "method");
         echo "</th>
                 <th";
-        // line 58
+        // line 57
         if ($this->getAttribute($this->getContext($context, "pagination"), "isSorted", array(0 => "a.Title"), "method")) {
             echo " class=\"sorted\"";
         }
@@ -165,7 +165,7 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
 <ul>
     <li>
         <a href=\"";
-        // line 69
+        // line 68
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("categories_new"), "html", null, true);
         echo "\">
             <i class=\"icon-pencil\"></i> Create a new entry
@@ -187,6 +187,6 @@ class __TwigTemplate_13677d0bc36101a45d8f2f36046ee7f6 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  167 => 69,  149 => 58,  145 => 57,  139 => 53,  127 => 47,  116 => 41,  110 => 38,  101 => 34,  97 => 33,  93 => 32,  89 => 31,  85 => 30,  79 => 29,  74 => 28,  69 => 27,  53 => 18,  49 => 17,  41 => 12,  38 => 11,  36 => 10,  29 => 6,  26 => 5,);
+        return array (  167 => 68,  149 => 57,  145 => 56,  139 => 52,  127 => 46,  116 => 40,  110 => 37,  101 => 33,  97 => 32,  93 => 31,  89 => 30,  85 => 29,  79 => 28,  74 => 27,  69 => 26,  53 => 17,  49 => 16,  41 => 11,  38 => 10,  36 => 9,  29 => 5,  26 => 4,);
     }
 }

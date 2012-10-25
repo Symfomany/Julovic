@@ -99,10 +99,22 @@ class Links extends \Site\AdminBundle\Entity\Links implements \Doctrine\ORM\Prox
         return parent::getDateCreated();
     }
 
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'link', 'description', 'dateCreated');
+        return array('__isInitialized__', 'id', 'title', 'link', 'description', 'dateCreated', 'active');
     }
 
     public function __clone()

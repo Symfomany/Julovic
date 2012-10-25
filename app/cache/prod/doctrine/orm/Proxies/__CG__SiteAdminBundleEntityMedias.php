@@ -42,6 +42,36 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
     }
 
     
+    public function getAbsolutePath()
+    {
+        $this->__load();
+        return parent::getAbsolutePath();
+    }
+
+    public function getWebPath()
+    {
+        $this->__load();
+        return parent::getWebPath();
+    }
+
+    public function upload($location = 'administrateurs')
+    {
+        $this->__load();
+        return parent::upload($location);
+    }
+
+    public function updateDateUpdated()
+    {
+        $this->__load();
+        return parent::updateDateUpdated();
+    }
+
+    public function removeUpload()
+    {
+        $this->__load();
+        return parent::removeUpload();
+    }
+
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -49,30 +79,6 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
         }
         $this->__load();
         return parent::getId();
-    }
-
-    public function setOfferId($offerId)
-    {
-        $this->__load();
-        return parent::setOfferId($offerId);
-    }
-
-    public function getOfferId()
-    {
-        $this->__load();
-        return parent::getOfferId();
-    }
-
-    public function setRestaurantId($restaurantId)
-    {
-        $this->__load();
-        return parent::setRestaurantId($restaurantId);
-    }
-
-    public function getRestaurantId()
-    {
-        $this->__load();
-        return parent::getRestaurantId();
     }
 
     public function setLegend($legend)
@@ -135,10 +141,52 @@ class Medias extends \Site\AdminBundle\Entity\Medias implements \Doctrine\ORM\Pr
         return parent::getDateUpdated();
     }
 
+    public function setAdministrateur(\Site\AdminBundle\Entity\Administrateurs $administrateur = NULL)
+    {
+        $this->__load();
+        return parent::setAdministrateur($administrateur);
+    }
+
+    public function getAdministrateur()
+    {
+        $this->__load();
+        return parent::getAdministrateur();
+    }
+
+    public function setArticle(\Site\AdminBundle\Entity\Articles $article = NULL)
+    {
+        $this->__load();
+        return parent::setArticle($article);
+    }
+
+    public function getArticle()
+    {
+        $this->__load();
+        return parent::getArticle();
+    }
+
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'offerId', 'restaurantId', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated');
+        return array('__isInitialized__', 'id', 'legend', 'picture', 'state', 'dateCreated', 'dateUpdated', 'active', 'administrateur', 'article');
     }
 
     public function __clone()

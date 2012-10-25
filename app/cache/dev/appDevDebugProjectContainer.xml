@@ -69,11 +69,10 @@
         <parameter key="limit">5</parameter>
       </parameter>
     </parameter>
-    <parameter key="searchquery">SELECT a FROM SiteAdminBundle:Articles a LEFT JOIN  a.category c WHERE a.title = :title OR  c.title = :titleb ORDER BY a.title ASC
+    <parameter key="searchquery">SELECT a FROM SiteAdminBundle:Articles a WHERE a.title = :title ORDER BY a.title ASC
 </parameter>
     <parameter key="searchajaxquery" type="collection">
       <parameter>SELECT a.title FROM SiteAdminBundle:Articles a WHERE a.title LIKE  ?1  ORDER BY a.title ASC</parameter>
-      <parameter>SELECT a.title FROM SiteAdminBundle:Categories a WHERE a.title LIKE  ?1  ORDER BY a.title ASC</parameter>
       <parameter>SELECT a.legend AS title FROM SiteAdminBundle:Medias a WHERE a.legend LIKE  ?1  ORDER BY a.legend ASC</parameter>
     </parameter>
     <parameter key="my.success_handler.class">
@@ -518,8 +517,8 @@
     <parameter key="jms_di_extra.directories" type="collection"/>
     <parameter key="jms_di_extra.cache_dir">C:/wamp/www/bo/app/cache/dev/jms_diextra</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50891253b1d55.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -3090,8 +3089,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager5084959b8e4e2_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_5084959b8e4e2.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager50891253b1d55_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/wamp/www/bo/app/cache/dev/jms_diextra/doctrine/EntityManager_50891253b1d55.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>

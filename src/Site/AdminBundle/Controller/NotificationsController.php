@@ -10,22 +10,24 @@ use Site\AdminBundle\Form\NotificationsType;
 
 /**
  * Notifications controller.
- *
  */
 class NotificationsController extends Controller
 {
+    
     /**
      * Lists all Notifications entities.
-     *
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('SiteAdminBundle:Notifications')->findAll();
+            $entity = new Notifications();
+            $em = $this->getDoctrine()->getManager();
+            $form   = $this->createForm(new NotificationsType(), $entity);
+            $entities = $em->getRepository('SiteAdminBundle:Notifications')->findAll();
 
         return $this->render('SiteAdminBundle:Notifications:index.html.twig', array(
             'entities' => $entities,
+            'entity' => $entity,
+            'form'   => $form->createView()
         ));
     }
 
@@ -79,9 +81,12 @@ class NotificationsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+        $this->get('session')->setFlash('success', 'Votre changement a été pris en compte');
 
             return $this->redirect($this->generateUrl('notifications_show', array('id' => $entity->getId())));
         }
+        
+        $this->get('warning')->setFlash('success', 'Des erreurs ont été commises');
 
         return $this->render('SiteAdminBundle:Notifications:new.html.twig', array(
             'entity' => $entity,

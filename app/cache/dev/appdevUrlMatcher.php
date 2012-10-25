@@ -614,67 +614,70 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'other',);
             }
 
-            // administrateurs
-            if (rtrim($pathinfo, '/') === '/admin') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'administrateurs');
+            if (0 === strpos($pathinfo, '/admin/administrateurs')) {
+                // administrateurs
+                if (rtrim($pathinfo, '/') === '/admin/administrateurs') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'administrateurs');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::indexAction',  '_route' => 'administrateurs',);
                 }
 
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::indexAction',  '_route' => 'administrateurs',);
-            }
-
-            // my_account
-            if ($pathinfo === '/admin/my-account') {
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::myaccountAction',  '_route' => 'my_account',);
-            }
-
-            // administrateurs_show
-            if (preg_match('#^/admin/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
-                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::showAction',)), array('_route' => 'administrateurs_show'));
-            }
-
-            // administrateurs_new
-            if ($pathinfo === '/admin/new') {
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::newAction',  '_route' => 'administrateurs_new',);
-            }
-
-            // administrateurs_create
-            if ($pathinfo === '/admin/create') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_administrateurs_create;
+                // my_account
+                if ($pathinfo === '/admin/administrateurs/my-account') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::myaccountAction',  '_route' => 'my_account',);
                 }
 
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::createAction',  '_route' => 'administrateurs_create',);
-            }
-            not_administrateurs_create:
-
-            // administrateurs_edit
-            if (preg_match('#^/admin/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
-                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::editAction',)), array('_route' => 'administrateurs_edit'));
-            }
-
-            // administrateurs_update
-            if (preg_match('#^/admin/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_administrateurs_update;
+                // administrateurs_show
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::showAction',)), array('_route' => 'administrateurs_show'));
                 }
 
-                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::updateAction',)), array('_route' => 'administrateurs_update'));
-            }
-            not_administrateurs_update:
-
-            // administrateurs_delete
-            if (preg_match('#^/admin/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_administrateurs_delete;
+                // administrateurs_new
+                if ($pathinfo === '/admin/administrateurs/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::newAction',  '_route' => 'administrateurs_new',);
                 }
 
-                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::deleteAction',)), array('_route' => 'administrateurs_delete'));
+                // administrateurs_create
+                if ($pathinfo === '/admin/administrateurs/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::createAction',  '_route' => 'administrateurs_create',);
+                }
+                not_administrateurs_create:
+
+                // administrateurs_edit
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::editAction',)), array('_route' => 'administrateurs_edit'));
+                }
+
+                // administrateurs_update
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::updateAction',)), array('_route' => 'administrateurs_update'));
+                }
+                not_administrateurs_update:
+
+                // administrateurs_delete
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::deleteAction',)), array('_route' => 'administrateurs_delete'));
+                }
+                not_administrateurs_delete:
+
             }
-            not_administrateurs_delete:
 
             if (0 === strpos($pathinfo, '/admin/pages')) {
                 // pages

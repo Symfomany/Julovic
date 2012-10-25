@@ -55,7 +55,7 @@ divers:
     
 administrateurs:
     resource: "@SiteAdminBundle/Resources/config/routing/administrateurs.yml"
-    prefix:   /
+    prefix:   /administrateurs
     
 pages:
     resource: "@SiteAdminBundle/Resources/config/routing/pages.yml"

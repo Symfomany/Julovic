@@ -20,14 +20,11 @@ parameters:
      
     SearchQuery: >
             SELECT a FROM SiteAdminBundle:Articles a
-            LEFT JOIN  a.category c
             WHERE a.title = :title
-            OR  c.title = :titleb
             ORDER BY a.title ASC
      
     SearchAjaxQuery: 
             - SELECT a.title FROM SiteAdminBundle:Articles a WHERE a.title LIKE  ?1  ORDER BY a.title ASC
-            - SELECT a.title FROM SiteAdminBundle:Categories a WHERE a.title LIKE  ?1  ORDER BY a.title ASC
             - SELECT a.legend AS title FROM SiteAdminBundle:Medias a WHERE a.legend LIKE  ?1  ORDER BY a.legend ASC
       
 twig:

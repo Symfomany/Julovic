@@ -504,102 +504,6 @@ abstract class AbstractProxy
     }
 }
 }
-
-namespace
-{
-
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-/**
- * SessionHandlerInterface
- *
- * Provides forward compatibility with PHP 5.4
- *
- * Extensive documentation can be found at php.net, see links:
- *
- * @see http://php.net/sessionhandlerinterface
- * @see http://php.net/session.customhandler
- * @see http://php.net/session-set-save-handler
- *
- * @author Drak <drak@zikula.org>
- */
-interface SessionHandlerInterface
-{
-    /**
-     * Open session.
-     *
-     * @see http://php.net/sessionhandlerinterface.open
-     *
-     * @param string $savePath    Save path.
-     * @param string $sessionName Session Name.
-     *
-     * @throws \RuntimeException If something goes wrong starting the session.
-     *
-     * @return boolean
-     */
-    public function open($savePath, $sessionName);
-    /**
-     * Close session.
-     *
-     * @see http://php.net/sessionhandlerinterface.close
-     *
-     * @return boolean
-     */
-    public function close();
-    /**
-     * Read session.
-     *
-     * @see http://php.net/sessionhandlerinterface.read
-     *
-     * @throws \RuntimeException On fatal error but not "record not found".
-     *
-     * @return string String as stored in persistent storage or empty string in all other cases.
-     */
-    public function read($sessionId);
-    /**
-     * Commit session to storage.
-     *
-     * @see http://php.net/sessionhandlerinterface.write
-     *
-     * @param string $sessionId Session ID.
-     * @param string $data      Session serialized data to save.
-     *
-     * @return boolean
-     */
-    public function write($sessionId, $data);
-    /**
-     * Destroys this session.
-     *
-     * @see http://php.net/sessionhandlerinterface.destroy
-     *
-     * @param string $sessionId Session ID.
-     *
-     * @throws \RuntimeException On fatal error.
-     *
-     * @return boolean
-     */
-    public function destroy($sessionId);
-    /**
-     * Garbage collection for storage.
-     *
-     * @see http://php.net/sessionhandlerinterface.gc
-     *
-     * @param integer $lifetime Max lifetime in seconds to keep sessions stored.
-     *
-     * @throws \RuntimeException On fatal error.
-     *
-     * @return boolean
-     */
-    public function gc($lifetime);
-}
-
-}
  
 
 
@@ -1385,6 +1289,8 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\ConfigurableRequirementsInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 
 class Router implements RouterInterface
@@ -1475,8 +1381,12 @@ class Router implements RouterInterface
     {
         $this->context = $context;
 
-        $this->getMatcher()->setContext($context);
-        $this->getGenerator()->setContext($context);
+        if (null !== $this->matcher) {
+            $this->getMatcher()->setContext($context);
+        }
+        if (null !== $this->generator) {
+            $this->getGenerator()->setContext($context);
+        }
     }
 
     
@@ -2908,7 +2818,7 @@ class Request
     {
         $request = new static($_GET, $_POST, array(), $_COOKIE, $_FILES, $_SERVER);
 
-        if (0 === strpos($request->server->get('CONTENT_TYPE'), 'application/x-www-form-urlencoded')
+        if (0 === strpos($request->headers->get('CONTENT_TYPE'), 'application/x-www-form-urlencoded')
             && in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), array('PUT', 'DELETE', 'PATCH'))
         ) {
             parse_str($request->getContent(), $data);
@@ -2963,7 +2873,7 @@ class Request
         }
 
         if (!isset($components['path'])) {
-            $components['path'] = '';
+            $components['path'] = '/';
         }
 
         switch (strtoupper($method)) {
@@ -3420,13 +3330,17 @@ class Request
     
     public function getContentType()
     {
-        return $this->getFormat($this->server->get('CONTENT_TYPE'));
+        return $this->getFormat($this->headers->get('CONTENT_TYPE'));
     }
 
     
     public function setDefaultLocale($locale)
     {
-        $this->setPhpDefaultLocale($this->defaultLocale = $locale);
+        $this->defaultLocale = $locale;
+
+        if (null === $this->locale) {
+            $this->setPhpDefaultLocale($locale);
+        }
     }
 
     
@@ -3570,21 +3484,29 @@ class Request
         }
 
         $values = array();
+        $groups = array();
         foreach (array_filter(explode(',', $header)) as $value) {
                         if (preg_match('/;\s*(q=.*$)/', $value, $match)) {
-                $q     = (float) substr(trim($match[1]), 2);
+                $q     = substr(trim($match[1]), 2);
                 $value = trim(substr($value, 0, -strlen($match[0])));
             } else {
                 $q = 1;
             }
 
-            if (0 < $q) {
-                $values[trim($value)] = $q;
-            }
+            $groups[$q][] = $value;
         }
 
-        arsort($values);
-        reset($values);
+        krsort($groups);
+
+        foreach ($groups as $q => $items) {
+            $q = (float) $q;
+
+            if (0 < $q) {
+                foreach ($items as $value) {
+                    $values[trim($value)] = $q;
+                }
+            }
+        }
 
         return $values;
     }
@@ -6503,7 +6425,7 @@ class RequestMatcher implements RequestMatcherInterface
     
     protected function checkIp6($requestIp, $ip)
     {
-        if (!defined('AF_INET6')) {
+        if (!((extension_loaded('sockets') && defined('AF_INET6')) || @inet_pton('::1'))) {
             throw new \RuntimeException('Unable to check Ipv6. Check that PHP was not compiled with option "disable-ipv6".');
         }
 
@@ -6554,7 +6476,7 @@ namespace
  */
 class Twig_Environment
 {
-    const VERSION = '1.10.1-DEV';
+    const VERSION = '1.11.0-DEV';
     protected $charset;
     protected $loader;
     protected $debug;
@@ -7823,6 +7745,7 @@ class Twig_Extension_Core extends Twig_Extension
             'nl2br'      => new Twig_Filter_Function('nl2br', array('pre_escape' => 'html', 'is_safe' => array('html'))),
             // array helpers
             'join'    => new Twig_Filter_Function('twig_join_filter'),
+            'split'   => new Twig_Filter_Function('twig_split_filter'),
             'sort'    => new Twig_Filter_Function('twig_sort_filter'),
             'merge'   => new Twig_Filter_Function('twig_array_merge'),
             // string/array filters
@@ -8270,6 +8193,36 @@ function twig_join_filter($value, $glue = '')
         $value = iterator_to_array($value, false);
     }
     return implode($glue, (array) $value);
+}
+/**
+ * Splits the string into an array.
+ *
+ * <pre>
+ *  {{ "one,two,three"|split(',') }}
+ *  {# returns [one, two, three] #}
+ *
+ *  {{ "one,two,three,four,five"|split(',', 3) }}
+ *  {# returns [one, two, "three,four,five"] #}
+ *
+ *  {{ "123"|split('') }}
+ *  {# returns [1, 2, 3] #}
+ *
+ *  {{ "aabbcc"|split('', 2) }}
+ *  {# returns [aa, bb, cc] #}
+ * </pre>
+ *
+ * @param string  $value     A string
+ * @param string  $delimiter The delimiter
+ * @param integer $limit     The limit
+ *
+ * @return array The split string as an array
+ */
+function twig_split_filter($value, $delimiter, $limit = null)
+{
+    if (empty($delimiter)) {
+        return str_split($value, null === $limit ? 1 : $limit);
+    }
+    return null === $limit ? explode($delimiter, $value) : explode($delimiter, $value, $limit);
 }
 // The '_default' filter is used internally to avoid using the ternary operator
 // which costs a lot for big contexts (before PHP 5.4). So, on average,
@@ -9281,7 +9234,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
             if ($ignoreStrictCheck || !$this->env->isStrictVariables()) {
                 return null;
             }
-            throw new Twig_Error_Runtime(sprintf('Variable "%s" does not exist', $item));
+            throw new Twig_Error_Runtime(sprintf('Variable "%s" does not exist', $item), -1, $this->getTemplateName());
         }
         return $context[$item];
     }

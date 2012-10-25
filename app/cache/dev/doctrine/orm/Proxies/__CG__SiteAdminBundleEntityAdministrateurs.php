@@ -387,6 +387,12 @@ class Administrateurs extends \Site\AdminBundle\Entity\Administrateurs implement
         return parent::getMedias();
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
     public function createQueryBuilder($alias)
     {
         $this->__load();

@@ -51,18 +51,6 @@ class Articles extends \Site\AdminBundle\Entity\Articles implements \Doctrine\OR
         return parent::getId();
     }
 
-    public function setCategoryId($categoryId)
-    {
-        $this->__load();
-        return parent::setCategoryId($categoryId);
-    }
-
-    public function getCategoryId()
-    {
-        $this->__load();
-        return parent::getCategoryId();
-    }
-
     public function setResume($resume)
     {
         $this->__load();
@@ -159,10 +147,118 @@ class Articles extends \Site\AdminBundle\Entity\Articles implements \Doctrine\OR
         return parent::getNotes();
     }
 
+    public function setTitle($title)
+    {
+        $this->__load();
+        return parent::setTitle($title);
+    }
+
+    public function getTitle()
+    {
+        $this->__load();
+        return parent::getTitle();
+    }
+
+    public function setSlug($slug)
+    {
+        $this->__load();
+        return parent::setSlug($slug);
+    }
+
+    public function getSlug()
+    {
+        $this->__load();
+        return parent::getSlug();
+    }
+
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->__load();
+        return parent::setDateUpdated($dateUpdated);
+    }
+
+    public function getDateUpdated()
+    {
+        $this->__load();
+        return parent::getDateUpdated();
+    }
+
+    public function setImageName($imageName)
+    {
+        $this->__load();
+        return parent::setImageName($imageName);
+    }
+
+    public function getImageName()
+    {
+        $this->__load();
+        return parent::getImageName();
+    }
+
+    public function addMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->__load();
+        return parent::addMedia($medias);
+    }
+
+    public function removeMedia(\Site\AdminBundle\Entity\Medias $medias)
+    {
+        $this->__load();
+        return parent::removeMedia($medias);
+    }
+
+    public function getMedias()
+    {
+        $this->__load();
+        return parent::getMedias();
+    }
+
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
+    public function addCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->__load();
+        return parent::addCategorie($categories);
+    }
+
+    public function setCategories(\Doctrine\Common\Collections\ArrayCollection $categories)
+    {
+        $this->__load();
+        return parent::setCategories($categories);
+    }
+
+    public function removeCategorie(\Site\AdminBundle\Entity\Categories $categories)
+    {
+        $this->__load();
+        return parent::removeCategorie($categories);
+    }
+
+    public function getCategories()
+    {
+        $this->__load();
+        return parent::getCategories();
+    }
+
+    public function setPosition($position)
+    {
+        $this->__load();
+        return parent::setPosition($position);
+    }
+
+    public function getPosition()
+    {
+        $this->__load();
+        return parent::getPosition();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'categoryId', 'resume', 'content', 'tag', 'dateCreated', 'active', 'type', 'special', 'notes');
+        return array('__isInitialized__', 'id', 'title', 'resume', 'content', 'tag', 'dateCreated', 'dateUpdated', 'active', 'type', 'special', 'notes', 'slug', 'position', 'categories', 'medias');
     }
 
     public function __clone()

@@ -26,6 +26,15 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $pathinfo = rawurldecode($pathinfo);
 
         if (0 === strpos($pathinfo, '/admin')) {
+            // home
+            if (rtrim($pathinfo, '/') === '/admin') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'home');
+                }
+
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'home',);
+            }
+
             // site_admin_homepage
             if ($pathinfo === '/admin/demo') {
                 return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'site_admin_homepage',);
@@ -46,15 +55,6 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array('_route' => 'logout');
             }
 
-            // home
-            if (rtrim($pathinfo, '/') === '/admin') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'home');
-                }
-
-                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'home',);
-            }
-
             if (0 === strpos($pathinfo, '/admin/articles')) {
                 // articles
                 if (rtrim($pathinfo, '/') === '/admin/articles') {
@@ -63,6 +63,16 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     }
 
                     return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::indexAction',  '_route' => 'articles',);
+                }
+
+                // articles_position
+                if ($pathinfo === '/admin/articles/position') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::positionAction',  '_route' => 'articles_position',);
+                }
+
+                // articles_activation
+                if (0 === strpos($pathinfo, '/admin/articles/activation') && preg_match('#^/admin/articles/activation/(?<id>[^/]+)(?:/(?<bool>[^/]+))?$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ArticlesController::activationAction',  'bool' => '1',)), array('_route' => 'articles_activation'));
                 }
 
                 // articles_show
@@ -145,6 +155,11 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return array (  '_controller' => 'Site\\AdminBundle\\Controller\\CategoriesController::createAction',  '_route' => 'categories_create',);
                 }
                 not_categories_create:
+
+                // categories_position
+                if ($pathinfo === '/admin/categories/position') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\CategoriesController::positionAction',  '_route' => 'categories_position',);
+                }
 
                 // categories_edit
                 if (preg_match('#^/admin/categories/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
@@ -293,6 +308,11 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 }
                 not_links_delete:
 
+                // links_activation
+                if (0 === strpos($pathinfo, '/admin/links/activation') && preg_match('#^/admin/links/activation/(?<id>[^/]+)(?:/(?<bool>[^/]+))?$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\LinksController::activationAction',  'bool' => '1',)), array('_route' => 'links_activation'));
+                }
+
             }
 
             if (0 === strpos($pathinfo, '/admin/medias')) {
@@ -352,6 +372,11 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\MediasController::deleteAction',)), array('_route' => 'medias_delete'));
                 }
                 not_medias_delete:
+
+                // medias_activation
+                if (0 === strpos($pathinfo, '/admin/medias/activation') && preg_match('#^/admin/medias/activation/(?<id>[^/]+)(?:/(?<bool>[^/]+))?$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\MediasController::activationAction',  'bool' => '1',)), array('_route' => 'medias_activation'));
+                }
 
             }
 
@@ -473,6 +498,315 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 }
                 not_users_delete:
 
+            }
+
+            // search_query
+            if ($pathinfo === '/admin/search') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_search_query;
+                }
+
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::searchAction',  '_route' => 'search_query',);
+            }
+            not_search_query:
+
+            // search_query_ajax
+            if ($pathinfo === '/admin/searchajax') {
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::searchajaxAction',  '_route' => 'search_query_ajax',);
+            }
+
+            // displaying
+            if (0 === strpos($pathinfo, '/admin/displaying') && preg_match('#^/admin/displaying(?:/(?<page>[^/]+))?$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\SlotController::displayingAction',  'page' => '5',)), array('_route' => 'displaying'));
+            }
+
+            // other
+            if ($pathinfo === '/admin/notfound') {
+                return array (  '_controller' => 'Site\\AdminBundle\\Controller\\DefaultController::indexAction',  '_route' => 'other',);
+            }
+
+            if (0 === strpos($pathinfo, '/admin/administrateurs')) {
+                // administrateurs
+                if (rtrim($pathinfo, '/') === '/admin/administrateurs') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'administrateurs');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::indexAction',  '_route' => 'administrateurs',);
+                }
+
+                // my_account
+                if ($pathinfo === '/admin/administrateurs/my-account') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::myaccountAction',  '_route' => 'my_account',);
+                }
+
+                // administrateurs_show
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::showAction',)), array('_route' => 'administrateurs_show'));
+                }
+
+                // administrateurs_new
+                if ($pathinfo === '/admin/administrateurs/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::newAction',  '_route' => 'administrateurs_new',);
+                }
+
+                // administrateurs_create
+                if ($pathinfo === '/admin/administrateurs/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::createAction',  '_route' => 'administrateurs_create',);
+                }
+                not_administrateurs_create:
+
+                // administrateurs_edit
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::editAction',)), array('_route' => 'administrateurs_edit'));
+                }
+
+                // administrateurs_update
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::updateAction',)), array('_route' => 'administrateurs_update'));
+                }
+                not_administrateurs_update:
+
+                // administrateurs_delete
+                if (preg_match('#^/admin/administrateurs/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_administrateurs_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\AdministrateursController::deleteAction',)), array('_route' => 'administrateurs_delete'));
+                }
+                not_administrateurs_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/pages')) {
+                // pages
+                if (rtrim($pathinfo, '/') === '/admin/pages') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'pages');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::indexAction',  '_route' => 'pages',);
+                }
+
+                // pages_show
+                if (preg_match('#^/admin/pages/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::showAction',)), array('_route' => 'pages_show'));
+                }
+
+                // pages_new
+                if ($pathinfo === '/admin/pages/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::newAction',  '_route' => 'pages_new',);
+                }
+
+                // pages_create
+                if ($pathinfo === '/admin/pages/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_pages_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::createAction',  '_route' => 'pages_create',);
+                }
+                not_pages_create:
+
+                // pages_edit
+                if (preg_match('#^/admin/pages/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::editAction',)), array('_route' => 'pages_edit'));
+                }
+
+                // pages_update
+                if (preg_match('#^/admin/pages/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_pages_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::updateAction',)), array('_route' => 'pages_update'));
+                }
+                not_pages_update:
+
+                // pages_delete
+                if (preg_match('#^/admin/pages/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_pages_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\PagesController::deleteAction',)), array('_route' => 'pages_delete'));
+                }
+                not_pages_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/parametres')) {
+                // parametres
+                if (rtrim($pathinfo, '/') === '/admin/parametres') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'parametres');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ParametresController::indexAction',  '_route' => 'parametres',);
+                }
+
+                // parametres_show
+                if (preg_match('#^/admin/parametres/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ParametresController::showAction',)), array('_route' => 'parametres_show'));
+                }
+
+                // parametres_edit
+                if (preg_match('#^/admin/parametres/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ParametresController::editAction',)), array('_route' => 'parametres_edit'));
+                }
+
+                // parametres_update
+                if (preg_match('#^/admin/parametres/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_parametres_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ParametresController::updateAction',)), array('_route' => 'parametres_update'));
+                }
+                not_parametres_update:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/referencement')) {
+                // referencement
+                if (rtrim($pathinfo, '/') === '/admin/referencement') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'referencement');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::indexAction',  '_route' => 'referencement',);
+                }
+
+                // referencement_show
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::showAction',)), array('_route' => 'referencement_show'));
+                }
+
+                // referencement_new
+                if ($pathinfo === '/admin/referencement/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::newAction',  '_route' => 'referencement_new',);
+                }
+
+                // referencement_create
+                if ($pathinfo === '/admin/referencement/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::createAction',  '_route' => 'referencement_create',);
+                }
+                not_referencement_create:
+
+                // referencement_edit
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::editAction',)), array('_route' => 'referencement_edit'));
+                }
+
+                // referencement_update
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::updateAction',)), array('_route' => 'referencement_update'));
+                }
+                not_referencement_update:
+
+                // referencement_delete
+                if (preg_match('#^/admin/referencement/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_referencement_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\ReferencementController::deleteAction',)), array('_route' => 'referencement_delete'));
+                }
+                not_referencement_delete:
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/notifications')) {
+                // notifications
+                if (rtrim($pathinfo, '/') === '/admin/notifications') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'notifications');
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::indexAction',  '_route' => 'notifications',);
+                }
+
+                // notifications_show
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/show$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::showAction',)), array('_route' => 'notifications_show'));
+                }
+
+                // notifications_new
+                if ($pathinfo === '/admin/notifications/new') {
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::newAction',  '_route' => 'notifications_new',);
+                }
+
+                // notifications_create
+                if ($pathinfo === '/admin/notifications/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_create;
+                    }
+
+                    return array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::createAction',  '_route' => 'notifications_create',);
+                }
+                not_notifications_create:
+
+                // notifications_edit
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/edit$#s', $pathinfo, $matches)) {
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::editAction',)), array('_route' => 'notifications_edit'));
+                }
+
+                // notifications_update
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/update$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_update;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::updateAction',)), array('_route' => 'notifications_update'));
+                }
+                not_notifications_update:
+
+                // notifications_delete
+                if (preg_match('#^/admin/notifications/(?<id>[^/]+)/delete$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_notifications_delete;
+                    }
+
+                    return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Site\\AdminBundle\\Controller\\NotificationsController::deleteAction',)), array('_route' => 'notifications_delete'));
+                }
+                not_notifications_delete:
+
+            }
+
+            // fos_js_routing_js
+            if (0 === strpos($pathinfo, '/admin/js/routing') && preg_match('#^/admin/js/routing(?:\\.(?<_format>js|json))?$#s', $pathinfo, $matches)) {
+                return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'fos_js_routing.controller:indexAction',  '_format' => 'js',)), array('_route' => 'fos_js_routing_js'));
             }
 
         }

@@ -18,64 +18,61 @@
                             <div class="span10" id="content">
                                         {% render 'SiteAdminBundle:Slot:flashdatas' %}
                         {% block content %}
-                                    
                         {% render 'SiteAdminBundle:Parametres:editOne' %}
-                                 
-                                    <p id="print_btn" class="right"><i class="icon-print"><a href="javascript:window.print()"></i> Imprimer</a></p>
-                                  {% if not app.request.cookies.has('cookie_flash') %}
-                                            {% if advices is defined and advices is not empty %} 
-                                                            <div class="alert alert-info">
-                                                                      <button type="button" class="close" data-dismiss="alert">×</button>
-                                                                     {{ random(advices) }}
-                                                            </div>
-                                             {% endif %}
-                                    {% endif %}
-                                          {% if app.session.hasFlash('notice') %} 
-                                              <div class="alert alert-info">
-                                                <a class="close" data-dismiss="alert">×</button>
-                                                <span class="label label-info">Info</span>
-                                                {{ app.session.flash('notice') }} 
-                                            </div> 
-                                       {% endif %} 
-                                       {% if app.session.hasFlash('error') %} 
-                                           <div class="alert alert-error">
-                                                <span class="label label-important">Important</span>                                          
-                                                {{ app.session.flash('error') }} 
-                                            </div> 
-                                       {% endif %} 
-                                       {% if app.session.hasFlash('success') %} 
-                                            <div class="alert alert-success">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                                <span class="label label-success">Success</span>                                         
-                                                {{ app.session.flash('success') }} 
-                                            </div> 
-                                       {% endif %} 
-                                       {% if app.session.hasFlash('warning') %} 
-                                           <div class="alert">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                                <span class="label label-warning">Warning</span>                                        
-                                                {{ app.session.flash('warning') }} 
-                                            </div> 
-                                       {% endif %} 
-                                       {% if app.session.hasFlash('inverse') %} 
-                                              <div class="alert alert-info">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                                <span class="label label-inverse">Inverse</span>          
-                                                       {{ app.session.flash('inverse') }} 
-                                            </div> 
-                                       {% endif %} 
+                            <p id="print_btn" class="right"><i class="icon-print"><a href="javascript:window.print()"></i> Imprimer</a></p>
+                            {% if not app.request.cookies.has('cookie_flash') %}
+                                    {% if advices is defined and advices is not empty %} 
+                                                    <div class="alert alert-info">
+                                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                                {{ random(advices) }}
+                                                    </div>
+                                        {% endif %}
+                            {% endif %}
+                                    {% if app.session.hasFlash('notice') %} 
+                                        <div class="alert alert-info">
+                                        <a class="close" data-dismiss="alert">×</button>
+                                        <span class="label label-info">Info</span>
+                                        {{ app.session.flash('notice') }} 
+                                    </div> 
+                                {% endif %} 
+                                {% if app.session.hasFlash('error') %} 
+                                    <div class="alert alert-error">
+                                        <span class="label label-important">Important</span>                                          
+                                        {{ app.session.flash('error') }} 
+                                    </div> 
+                                {% endif %} 
+                                {% if app.session.hasFlash('success') %} 
+                                    <div class="alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <span class="label label-success">Succès</span>                                         
+                                        {{ app.session.flash('success') }} 
+                                    </div> 
+                                {% endif %} 
+                                {% if app.session.hasFlash('warning') %} 
+                                    <div class="alert">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <span class="label label-warning">Warning</span>                                        
+                                        {{ app.session.flash('warning') }} 
+                                    </div> 
+                                {% endif %} 
+                                {% if app.session.hasFlash('inverse') %} 
+                                        <div class="alert alert-info">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <span class="label label-inverse">Attention</span>          
+                                                {{ app.session.flash('inverse') }} 
+                                    </div> 
+                                {% endif %} 
                         {% endblock %}
                             </div>
                     </div>
                     <div id="footer">
                             <p>Julovic Copyright @Symfomany 2012-2013</p>
-                            <p>Project hosted by Github here <a href="https://github.com/Symfomany/Julovic">Julovic</a>
-</p>
+                            <p>Project hosted by Github here <a href="https://github.com/Symfomany/Julovic">Julovic</a></p>
                     </div>
     {% endblock %}
     
        {% block javascripts %}
              {{ parent() }}
-                                    <script src="{{ asset('/js/app.js') }}"  type="text/javascript"></script>
                                     <script src="{{ asset('/js/ajax.js') }}"  type="text/javascript"></script>
+                                    <script src="{{ asset('/js/app.js') }}"  type="text/javascript"></script>
        {% endblock %}

@@ -140,7 +140,7 @@ $(function() {
         showLeadingZero: true
     });
                 
-    $("input:checkbox, input:radio, input:file, select").uniform();
+    $("input:checkbox, input:radio, input:file").uniform();
     $("#scrollTop").click(function(){
         $('body').scrollTo( 0,800, {
             easing:'easeInOutQuart'
@@ -301,6 +301,21 @@ $(function() {
         "image": true, //Button to insert an image. Default true,
         "color": true //Button to change color of font  
     });
+    
+       function changeAjaxView($container,$route){
+         $.ajax({
+                url: '/app_dev.php/admin/notifications/new',
+                beforeSend: function ( xhr ) {
+                    $('div.ajaxLoading').show();
+                },
+                type: "GET",
+                cache: true,
+                success: function(data) {
+                    $('div.ajaxLoading').hide();
+                        $container.html(data);
+                    }
+            });
+    }
 
         
 });

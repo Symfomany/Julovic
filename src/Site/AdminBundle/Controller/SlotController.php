@@ -72,12 +72,7 @@ class SlotController extends Controller {
     }
 
     /*
-     * ->createQuery('
-      SELECT p, c FROM AcmeStoreBundle:Product p
-      JOIN p.category c
-      WHERE p.id = :id'
-      )->setParameter('id', $id);
-     * 
+    *
      */
 
     public function searchAction() {
@@ -95,12 +90,9 @@ class SlotController extends Controller {
                 $dql = $em->createQuery($que)
                         ->setParameters(
                         array(
-                            'title' => $search_word,
-                            'titleb' => $search_word,
+                            'title' => $search_word
                         ));
                 
-//                if($dql->cou)
-
                 $paginator = $this->get('knp_paginator');
                 $pagination = $paginator->paginate($dql, $this->get('request')->query->get('page', 1), 5);  //page number/, 10/limit per page/ );
 

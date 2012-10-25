@@ -52,6 +52,12 @@ class Notifications {
     private $dateCreated;
 
     
+    /**
+     * @var string $active
+     *
+     * @ORM\Column(name="active", type="boolean", length=200, nullable=false)
+     */
+    private $active;
 
     /**
      * Get id
@@ -133,5 +139,28 @@ class Notifications {
     public function getAdministrateursId()
     {
         return $this->administrateursId;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Notifications
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }
