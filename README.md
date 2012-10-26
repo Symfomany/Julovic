@@ -40,7 +40,7 @@ Join zuzu38080@gmail.com or ludo.verrecchia@gmail.com
 
 ================================
 
-<h2>Notices:</h2>
+<h2>Notices</h2>
 
  - Not use app.php un URI to access production environment
  - Remove Configurator route for production
@@ -50,14 +50,14 @@ Join zuzu38080@gmail.com or ludo.verrecchia@gmail.com
 
 ================================
 
-<h2>Architecture:</h2>
+<h2>Architecture</h2>
 
 he Symfony CMF is a content management framework on top of Symfony2 PHP framework.
 People can pick and choose the right approaches for their CMS without having to reimplement various bundles over again just because they for example use a different storage server. 
 
 ================================
 
-<h2>Features:</h2>
+<h2>Features</h2>
 
   - Dashboard multi views
   - AST Functions Custom
