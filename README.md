@@ -1,4 +1,4 @@
-<h2>Julovic 1.3</h2>
+<h2>Julovic 1.4</h2>
 
 CMF By Juju &amp; Lulu
 Open Source Project -- License MIT
@@ -35,7 +35,7 @@ Key development principles for the provided set of bundles are scalability, usab
 
 <h2>Get Involved</h2>
 
-Join zuzu38080@gmail.com
+Join zuzu38080@gmail.com or ludovic@wype.fr
 
 ================================
 
@@ -73,11 +73,14 @@ People can pick and choose the right approaches for their CMS without having to 
   - Administrateurs handler and configs
   - Nested Categories Structure
   - Visibility of Entities 
-  -  Sortable handlers
-  -  Quick actions 
-  -  Params of site to handle structure
- -   SuperControler to handle common actions
-
+  - Sortable handlers
+  - Quick actions 
+  - Params of site to handle structure
+  - SuperControler to handle common actions
+  - Categories & Links Nested
+  - Nested Behavior 
+  - Notifications
+  - Active behavior
 ================================
 <h2>Documentation</h2>
 
