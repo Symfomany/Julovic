@@ -71,7 +71,7 @@ People can pick and choose the right approaches for their CMS without having to 
   - Ajax & Autocomplete functions
   - Event & Suscribers
   - Tests Units & Fcts
-  - Administrateurs handler and configs
+  - Administrateurs handler and config
   - Nested Categories Structure
   - Visibility of Entities 
   - Sortable handlers
