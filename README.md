@@ -1,7 +1,8 @@
 <h2>Julovic 1.4</h2>
 
 CMF By Juju &amp; Lulu
-Open Source Project -- License MIT
+Open Source Project
+License MIT
 2012-2013
 
 ================================
