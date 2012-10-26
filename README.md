@@ -1,7 +1,8 @@
 <h2>Julovic 1.4</h2>
 
 CMF By Juju &amp; Lulu
-Open Source Project -- License MIT
+Open Source Project
+License MIT
 2012-2013
 
 ================================
@@ -35,7 +36,7 @@ Key development principles for the provided set of bundles are scalability, usab
 
 <h2>Get Involved</h2>
 
-Join zuzu38080@gmail.com or ludovic@wype.fr
+Join zuzu38080@gmail.com or ludo.verrecchia@gmail.com
 
 ================================
 
@@ -81,6 +82,8 @@ People can pick and choose the right approaches for their CMS without having to 
   - Nested Behavior 
   - Notifications
   - Active behavior
+  - View printable
+
 ================================
 <h2>Documentation</h2>
 
