@@ -35,7 +35,7 @@ Key development principles for the provided set of bundles are scalability, usab
 
 <h2>Get Involved</h2>
 
-Join zuzu38080@gmail.com or ludovic@wype.fr
+Join zuzu38080@gmail.com or ludo.verrecchia@gmail.com
 
 ================================
 
@@ -81,6 +81,8 @@ People can pick and choose the right approaches for their CMS without having to 
   - Nested Behavior 
   - Notifications
   - Active behavior
+  - View printable
+
 ================================
 <h2>Documentation</h2>
 
