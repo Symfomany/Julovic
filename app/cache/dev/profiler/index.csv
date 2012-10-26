@@ -273,3 +273,9 @@
 508a448630a23,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/,1351238790,508a448661118
 508a4486536f9,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/,1351238790,508a448661118
 508a448803a08,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/js/routing?callback=fos.Router.setData,1351238792,
+508a47a7561c0,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/?page=2,1351239591,
+508a47a71f576,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/?page=2,1351239591,508a47a7561c0
+508a47a72b571,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/?page=2,1351239591,508a47a7561c0
+508a47a736192,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/?page=2,1351239591,508a47a7561c0
+508a47a74d319,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/articles/?page=2,1351239591,508a47a7561c0
+508a47a85f82b,127.0.0.1,GET,http://www.bo.ju/app_dev.php/admin/js/routing?callback=fos.Router.setData,1351239592,
